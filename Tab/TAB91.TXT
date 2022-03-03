@@ -1,0 +1,52 @@
+OBJECT Modification "User Setup"(Table 91)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="User Setup"(Table 91);
+  }
+  CHANGES
+  {
+    { Insertion         ;Documentation=BEGIN
+
+                                         UNL-ASL3.60.01.009 (Santus) June 14, 2005
+                                         -> added new field "Pick Blocked Empl in Journal";
+                                       END;
+                                        }
+    { Insertion         ;InsertAfter="Service Resp. Ctr. Filter"(Field 5900);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50029;  ;Shortcut Dimension 1 Code;Code20   ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+                                                                          CaptionML=ENU=Shortcut Dimension 1 Code;
+                                                                          CaptionClass='1,2,1' }
+                           { 50317;  ;Global Dimension 2 Code;Code20     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                                          CaptionML=ENU=Global Dimension 2 Code;
+                                                                          CaptionClass='1,1,2' }
+                           { 50330;  ;Category            ;Option        ;OptionString=" ",Export,Local,Consumption;
+                                                                          Description=Categories for the Departments filter for View windows }
+                           { 50331;  ;Create Loan         ;Boolean        }
+                           { 50332;  ;Unblock Employee    ;Boolean        }
+                           { 50333;  ;Periodic Activits/SetUp Access;Boolean;
+                                                                          Description=Periodic Activities / Set Up Access }
+                           { 50334;  ;Pick Blocked Empl in Journal;Boolean }
+                           { 50335;  ;Job Catch           ;Boolean        }
+                           { 50336;  ;Confirm StockOutWarning;Boolean     }
+                           { 50337;  ;Edit Resource       ;Boolean        }
+                           { 50338;  ;JrnllineShowCRM-ASL ;Boolean        }
+                           { 50339;  ;Sales Price         ;Boolean        }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

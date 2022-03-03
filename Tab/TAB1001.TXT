@@ -1,0 +1,147 @@
+OBJECT Modification "Job Task"(Table 1001)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220216D;
+    Time=170102.150T;
+    Modified=true;
+    Version List=NAVW114.04;
+  }
+  PROPERTIES
+  {
+    Target="Job Task"(Table 1001);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=DropDown(FieldGroup 1);
+                         ChangedElements=FieldGroupCollection
+                         {
+                           { 2   ;Brick               ;Description,"Job Task No."               }
+                         }
+                          }
+    { PropertyDeletion  ;Target="Job No."(Field 1);
+                         Property=Editable;
+                         OriginalValue=false }
+    { Insertion         ;InsertAfter="End Date"(Field 67);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;Incentive           ;Decimal       ;OnValidate=BEGIN
+                                                                                       "Net Inc":=Incentive+"Hook Inc"+"Add/Ded";
+                                                                                     END;
+                                                                                      }
+                           { 50301;  ;Hook Inc            ;Decimal       ;OnValidate=BEGIN
+                                                                                       "Net Inc":=Incentive+"Hook Inc"+"Add/Ded";
+                                                                                     END;
+                                                                                      }
+                           { 50302;  ;Add/Ded             ;Decimal       ;OnValidate=BEGIN
+                                                                                       "Net Inc":=Incentive+"Hook Inc"+"Add/Ded";
+                                                                                     END;
+                                                                                      }
+                           { 50303;  ;Net Inc             ;Decimal       ;Editable=false }
+                           { 50305;  ;Alloted %           ;Decimal        }
+                           { 50308;  ;Allocation Quantity ;Decimal       ;OnValidate=BEGIN
+                                                                                       {
+                                                                                       IF "Allocation Quantity" = 0 THEN BEGIN
+                                                                                         "Allocation %" := 0;
+                                                                                         Amount := 0;
+                                                                                       END;
+                                                                                       UpdateAllocations(GenJnlLine);
+                                                                                       }
+                                                                                     END;
+
+                                                                          CaptionML=ENU=Allocation Quantity;
+                                                                          DecimalPlaces=0:5 }
+                           { 50309;  ;Allocation %        ;Decimal       ;OnValidate=BEGIN
+                                                                                       {
+                                                                                       "Allocation Quantity" := 0;
+                                                                                       IF "Allocation %" = 0 THEN
+                                                                                         Amount := 0;
+                                                                                       UpdateAllocations(GenJnlLine);
+                                                                                       }
+                                                                                     END;
+
+                                                                          CaptionML=ENU=Allocation %;
+                                                                          DecimalPlaces=2:2 }
+                           { 50310;  ;Amount              ;Decimal       ;OnValidate=BEGIN
+                                                                                       {IF ("Allocation Quantity" <> 0) OR ("Allocation %" <> 0) THEN BEGIN
+                                                                                         "Allocation Quantity" := 0;
+                                                                                         "Allocation %" := 0;
+                                                                                         UpdateAllocations(GenJnlLine);
+                                                                                       END ELSE BEGIN
+                                                                                         MODIFY;
+                                                                                         GenJnlLine.GET("Journal Template Name","Journal Batch Name","Journal Line No.");
+                                                                                         UpdateJnlBalance(GenJnlLine);
+                                                                                       END;
+                                                                                       }
+                                                                                     END;
+
+                                                                          CaptionML=ENU=Amount;
+                                                                          AutoFormatType=1 }
+                           { 50315;  ;Resource Group      ;Code20         }
+                           { 50316;  ;S/No.               ;Integer        }
+                           { 50317;  ;Counter             ;Integer       ;FieldClass=FlowField;
+                                                                          CalcFormula=Count("Job Task" WHERE ("Job No."=FIELD("Job No."),
+                                                                                                              "Job Task No."=FILTER(<>'"')));
+                                                                          Editable=false }
+                           { 50318;  ;Ended Voyage        ;Boolean        }
+                           { 50319;  ;Level               ;Integer        }
+                         }
+                          }
+    { Deletion          ;Target="Job Task No."(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"Job Task No."                           }
+                         }
+                          }
+    { Insertion         ;InsertAfter="Job No.","Job Task No."(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;Description,"Job Task No."               }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        LockTable;
+                                        Job.Get("Job No.");
+                                        if Job.Blocked = Job.Blocked::All then
+                                          Job.TestBlocked;
+                                        Job.TestField("Bill-to Customer No.");
+                                        Cust.Get(Job."Bill-to Customer No.");
+                                        #7..9
+                                        CalcFields("Schedule (Total Cost)","Usage (Total Cost)");
+                                        Job.UpdateOverBudgetValue("Job No.",true,"Usage (Total Cost)");
+                                        Job.UpdateOverBudgetValue("Job No.",false,"Schedule (Total Cost)");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        LockTable;
+                                        Job.Get("Job No.");
+                                        if Job.Blocked = Job.Blocked::Posting then
+                                        #4..12
+                                      END;
+
+                         Target=OnInsert }
+    { Insertion         ;InsertAfter=ClearTempDim(PROCEDURE 1);
+                         ChangedElements=PROCEDURECollection
+                         {
+                           [LineStart(54664)]
+                           PROCEDURE "------------------"@1000000001();
+                           BEGIN
+                           END;
+
+                         }
+                          }
+    { Insertion         ;InsertAfter=DimMgt(Variable 1001);
+                         ChangedElements=VariableCollection
+                         {
+                           Res@1004 : Record Resource;
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,43 @@
+OBJECT Modification "Resource Group"(Table 152)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20021219D;
+    Time=120000T;
+    Version List=NAVW114.08;
+  }
+  PROPERTIES
+  {
+    Target="Resource Group"(Table 152);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Qty. on Service Order"(Field 5900);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;IncentivePect       ;Decimal        }
+                           { 50301;  ;Crew(Juniour)       ;Boolean        }
+                           { 50302;  ;Level               ;Integer        }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        DimMgt.UpdateDefaultDim(
+                                          DATABASE::"Resource Group","No.",
+                                          "Global Dimension 1 Code","Global Dimension 2 Code");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        "Global Dimension 2 Code":='ATLANTIC';     //AAA - Oct 2002
+                                        #1..3
+                                      END;
+
+                         Target=OnInsert }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,156 @@
+OBJECT Modification "Gen. Journal Line"(Table 81)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220215D;
+    Time=080444.210T;
+    Modified=true;
+    Version List=NAVW114.27;
+  }
+  PROPERTIES
+  {
+    Target="Gen. Journal Line"(Table 81);
+  }
+  CHANGES
+  {
+    { Insertion         ;ChangedElements=FieldGroupCollection
+    {
+      { 1   ;Dropdown            ;                                         }
+    }
+     }
+    { PropertyModification;
+                         Target="Reason Code"(Field 52);
+                         Property=TableRelation;
+                         OriginalValue="Reason Code";
+                         ModifiedValue="Reason Code".Code WHERE (Type=FILTER(Import..)) }
+    { PropertyInsertion ;Target="External Document No."(Field 77);
+                         Property=TableRelation;
+                         ModifiedValue=IF ("Reason Code"=FILTER('ANCILLIARY'|'CISS'|'CLEARING'|'DUTY'|'ECOWAS'|'FREIGHT'|'INSURANCE'|'INTEREST'|'SURCHARGE')) "Purchase Header"."No." WHERE ("Document Type"=FILTER(>Quote),
+                                                                                                                                                                                             "Buy-from Vendor No."=FILTER(<>''))
+                                                                                                                                                                                             ELSE IF ("Account Type"=CONST("Fixed Asset"),
+                                                                                                                                                                                                      "FA Posting Type"=CONST(Maintenance),
+                                                                                                                                                                                                      "Maintenance Code"=CONST('MAINTE')) Item."No." WHERE ("Gen. Prod. Posting Group"=FILTER(<>'FIS'))
+                                                                                                                                                                                                      ELSE IF ("Reason Code"=CONST('USAGEFA')) "Fixed Asset" WHERE ("FA Class Code"=FILTER(<>'TRAWLER'))
+                                                                                                                                                                                                      ELSE IF ("Reason Code"=CONST('USAGERES')) Location WHERE ("Location Type"=FILTER(Residence))
+                                                                                                                                                                                                      ELSE IF ("Reason Code"=CONST('USAGEOTR')) "Standard Text" WHERE (Others=CONST(true))
+                                                                                                                                                                                                      ELSE IF ("Reason Code"=CONST('USAGEVES')) Location WHERE ("Location Type"=FILTER(Vessel))
+                                                                                                                                                                                                      ELSE IF ("Reason Code"=CONST('EMPLOYEE')) Employee }
+    { PropertyModification;
+                         Target="Maintenance Code"(Field 5609);
+                         Property=TableRelation;
+                         OriginalValue=Maintenance;
+                         ModifiedValue=Maintenance.Code WHERE (Type=CONST(ITGEN)) }
+    { Insertion         ;InsertAfter="Payment Method Id"(Field 8007);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Ready to Post       ;Boolean        }
+                           { 50300;  ;Loan ID             ;Code10        ;TableRelation="Loan." }
+                           { 50301;  ;Deposit ID          ;Code10        ;TableRelation=DEPOSIT."Deposit ID" }
+                           { 50302;  ;Description1        ;Text50         }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        GetCurrency;
+                                        if "Currency Code" = '' then
+                                          "Amount (LCY)" := Amount
+                                        #4..34
+                                          CreateTempJobJnlLine;
+                                          UpdatePricesFromJobJnlLine;
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        if ("External Document No."<>'') and ("Maintenance Code"<>'') and ("FA Posting Type"="FA Posting Type"::Maintenance)then
+                                        begin
+                                        if ItemRec.Get("External Document No.") then
+                                         begin
+                                           if ItemRec."Costing Method"=ItemRec."Costing Method"::Average then
+                                        begin
+                                          ItemRec.SetRange(ItemRec."No.");
+                                          ItemCostMgt.CalculateAverageCost(ItemRec,AverageCostLCY,AverageCostACY);
+                                          "Amount (LCY)":=Quantity*AverageCostLCY;
+                                        end else
+                                          "Amount (LCY)":=Quantity*ItemRec."Unit Cost";
+                                        end;
+                                        if ("Currency Code"<>'') then
+                                        Amount:= Round(CurrExchRate.ExchangeAmtLCYToFCY("Posting Date","Currency Code","Amount (LCY)","Currency Factor"))
+                                        else
+                                        Amount:="Amount (LCY)";
+                                        end;
+                                        #1..37
+                                      END;
+
+                         Target=ValidateAmount(PROCEDURE 223) }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if not FindSet then
+                                          Error(NothingToExportErr);
+                                        SetRange("Journal Template Name","Journal Template Name");
+                                        SetRange("Journal Batch Name","Journal Batch Name");
+                                        TestField("Check Printed",false);
+
+                                        CheckDocNoOnLines;
+                                        if IsExportedToPaymentFile then
+                                        #9..12
+                                          CODEUNIT.Run(BankAcc.GetPaymentExportCodeunitID,Rec)
+                                        else
+                                          CODEUNIT.Run(CODEUNIT::"Exp. Launcher Gen. Jnl.",Rec);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..4
+                                        #6..15
+                                      END;
+
+                         Target=ExportPaymentFile(PROCEDURE 81) }
+    { Insertion         ;InsertAfter=OnMoveGenJournalLine(PROCEDURE 93);
+                         ChangedElements=PROCEDURECollection
+                         {
+                           [LineStart(20642)]
+                           PROCEDURE "SALAD/IOU"@1000000000();
+                           BEGIN
+                             {IF "Reason Code"='SALAD' THEN
+                             BEGIN
+                               LoanRec.INIT;
+                               TESTFIELD("Account Type",2);
+                               LoanRec."Loan ID":='SLD'+"Account No.";
+                               LoanRec."Staff No.":="Account No.";
+                               LoanRec."Loan Type":='SALAD';
+                               LoanRec.Description:=
+                               LoanRec."Acct. Type":=
+                               LoanRec."Acct. No.":=
+                               LoanRec."Counter Acct. Type":=
+                               LoanRec."Counter Acct. No.":=
+                               LoanRec."Loan Amount":=
+                               LoanRec."Start Period":=
+                               LoanRec."Number of Payments":=1;
+                               LoanRec."Open(Y/N)":=TRUE;
+                               LoanRec."Loan ED":=
+                               LoanRec."Loan Created":=TRUE;
+                               LoanRec.MODIFY;
+                             END;
+                             }
+                           END;
+
+                         }
+                          }
+    { Insertion         ;InsertAfter=AccTypeNotSupportedErr(Variable 1031);
+                         ChangedElements=VariableCollection
+                         {
+                           "-------------------"@1076 : Integer;
+                           ItemCostMgt@1075 : Codeunit ItemCostManagement;
+                           ItemSetup@1074 : Record "Inventory Setup";
+                           ItemRec@1073 : Record Item;
+                           LoanRec@1072 : Record "Loan.";
+                           AverageCostLCY@1071 : Decimal;
+                           AverageCostACY@1070 : Decimal;
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

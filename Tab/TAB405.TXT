@@ -1,0 +1,50 @@
+OBJECT Modification "Change Log Entry"(Table 405)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Change Log Entry"(Table 405);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        // The culture neutral storage format was added simultaneously with the Record ID field
+                                        HasCultureNeutralValues := Format("Record ID") <> '';
+                                        AllObj.SetRange("Object Type",AllObj."Object Type"::Table);
+                                        AllObj.SetRange("Object ID","Table No.");
+
+                                        if not AllObj.IsEmpty and (Value <> '') and HasCultureNeutralValues then begin
+                                          RecordRef.Open("Table No.");
+                                          if RecordRef.FieldExist("Field No.") then begin
+                                            FieldRef := RecordRef.Field("Field No.");
+                                            if ChangeLogManagement.EvaluateTextToFieldRef(Value,FieldRef) then
+                                              exit(Format(FieldRef.Value,0,1));
+                                          end;
+                                        end;
+
+                                        exit(Value);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..7
+                                          FieldRef := RecordRef.Field("Field No.");
+                                          if ChangeLogManagement.EvaluateTextToFieldRef(Value,FieldRef) then
+                                            exit(Format(FieldRef.Value,0,1));
+                                        #13..15
+                                      END;
+
+                         Target=GetLocalValue(PROCEDURE 5) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

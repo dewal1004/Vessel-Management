@@ -1,0 +1,31 @@
+OBJECT Modification Currency(Table 4)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20260320D;
+    Time=120000T;
+    Version List=NAVW114.12;
+  }
+  PROPERTIES
+  {
+    Target=Currency(Table 4);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Id(Field 8000);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50201;  ;Old Numerical Code  ;Code10         }
+                           { 50202;  ;Text                ;Text30         }
+                           { 50203;  ;CurrUnit            ;Text30         }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

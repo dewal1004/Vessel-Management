@@ -1,0 +1,53 @@
+OBJECT Table 50040 IOU
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=142708T;
+    Modified=true;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    OnDelete=BEGIN
+               if ((UserId<>'VJM') and (UserId<>'AAA'))then Error('You may not delete the entered Line(s)');
+             END;
+
+  }
+  FIELDS
+  {
+    { 1   ;   ;Date                ;Date           }
+    { 2   ;   ;No.                 ;Code10         }
+    { 3   ;   ;Employee No.        ;Code10        ;TableRelation=Employee }
+    { 4   ;   ;Amount              ;Decimal        }
+    { 5   ;   ;Due Date            ;Date           }
+    { 16  ;   ;Global Dimension 1 Code;Code20     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+                                                   CaptionML=ENU=Global Dimension 1 Code;
+                                                   CaptionClass='1,1,1' }
+    { 17  ;   ;Redeemed            ;Boolean       ;InitValue=false }
+    { 18  ;   ;Redeemded by Voucher No.;Code10     }
+  }
+  KEYS
+  {
+    {    ;Date,"No."                              ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      Employee@1000000000 : Record Employee;
+
+    [LineStart(118152)]
+    PROCEDURE EmployeeName@1000000000() : Text[30];
+    BEGIN
+      if Employee.Get("Employee No.") then
+        exit(Employee.FullName);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,26 @@
+OBJECT Modification "Whse. Item Tracking Line"(Table 6550)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220519D;
+    Time=120000T;
+    Version List=NAVW114.01;
+  }
+  PROPERTIES
+  {
+    Target="Whse. Item Tracking Line"(Table 6550);
+  }
+  CHANGES
+  {
+    { PropertyInsertion ;Target="Source ID","Source Type","Source Subtype","Source Batch Name","Source Prod. Order Line","Source Ref. No.","Location Code"(Key);
+                         Property=MaintainSQLIndex;
+                         ModifiedValue=false }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

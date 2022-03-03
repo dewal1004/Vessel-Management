@@ -1,0 +1,45 @@
+OBJECT Modification "Item Journal Batch"(Table 233)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Item Journal Batch"(Table 233);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Recurring(Field 22);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;Transfer From       ;Code10        ;TableRelation=Location }
+                           { 50301;  ;Transfer To         ;Code10        ;TableRelation=Location }
+                           { 50302;  ;Document No.        ;Code20        ;FieldClass=FlowField;
+                                                                          CalcFormula=Max("Item Journal Line"."Document No." WHERE ("Journal Template Name"=FIELD("Journal Template Name"),
+                                                                                                                                    "Journal Batch Name"=FIELD(Name))) }
+                           { 50358;  ;Gen. Bus. Posting Group;Code10     ;TableRelation="Gen. Business Posting Group";
+                                                                          OnValidate=BEGIN
+                                                                                       if "Gen. Bus. Posting Group" <> xRec."Gen. Bus. Posting Group" then begin
+                                                                                         ItemJnlLine.SetRange("Journal Template Name","Journal Template Name");
+                                                                                         ItemJnlLine.SetRange("Journal Batch Name",Name);
+                                                                                         ItemJnlLine.ModifyAll("Gen. Bus. Posting Group","Gen. Bus. Posting Group");
+                                                                                         Modify;
+                                                                                       end;
+                                                                                     END;
+
+                                                                          CaptionML=ENU=Gen. Bus. Posting Group }
+                           { 50359;  ;Entry Type          ;Option        ;OptionString=Purchase,Sale,"Positive Adjmt.","Negative Adjmt.",Transfer,Consumption,Output }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

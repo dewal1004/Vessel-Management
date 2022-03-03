@@ -1,0 +1,47 @@
+OBJECT Modification "Standard General Journal"(Table 750)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Standard General Journal"(Table 750);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        GenJnlLine.Init;
+                                        GenJnlLine."Line No." := 0;
+                                        GenJnlManagement.CalcBalance(GenJnlLine,LastGenJnlLine,Balance,TotalBalance,ShowBalance,ShowTotalBalance);
+                                        #4..8
+
+                                        GenJnlLine.TransferFields(StdGenJnlLine,false);
+                                        GenJnlLine.UpdateLineBalance;
+                                        GenJnlLine."Currency Factor" := 0;
+                                        GenJnlLine.Validate("Currency Code");
+
+                                        if GenJnlLine."VAT Prod. Posting Group" <> '' then
+                                        #16..25
+                                        GenJnlLine.Insert(true);
+
+                                        LastGenJnlLine := GenJnlLine;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..11
+                                        #13..28
+                                      END;
+
+                         Target=CopyGenJnlFromStdJnl(PROCEDURE 3) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

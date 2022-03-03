@@ -1,0 +1,33 @@
+OBJECT Modification "Reminder Line"(Table 296)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20230819D;
+    Time=120000T;
+    Version List=NAVW114.04;
+  }
+  PROPERTIES
+  {
+    Target="Reminder Line"(Table 296);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target=InterestCalcDate(Variable 1018);
+                         Property=Id;
+                         OriginalValue=1018;
+                         ModifiedValue=10018 }
+    { PropertyModification;
+                         Target=CalcInterest(Variable 1019);
+                         Property=Id;
+                         OriginalValue=1019;
+                         ModifiedValue=10019 }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

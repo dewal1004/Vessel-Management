@@ -1,0 +1,37 @@
+OBJECT Modification "Purchases & Payables Setup"(Table 312)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Purchases & Payables Setup"(Table 312);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Exact Cost Reversing Mandatory"(Field 6602);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;BeingPaymentText    ;Text250        }
+                           { 50001;  ;PayToText           ;Text80         }
+                           { 50002;  ;Cheque No           ;Text30         }
+                           { 50003;  ;Bank                ;Text30         }
+                           { 50300;  ;Insurance%          ;Decimal        }
+                           { 50301;  ;Surchage Duty %     ;Decimal        }
+                           { 50302;  ;Ecowas Duty%        ;Decimal        }
+                           { 50303;  ;CISS%               ;Decimal        }
+                           { 50304;  ;VAT%                ;Decimal        }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,37 @@
+OBJECT Table 50043 P & L Rates
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=142355T;
+    Modified=true;
+    Version List=;
+  }
+  PROPERTIES
+  {
+  }
+  FIELDS
+  {
+    { 1   ;   ;Starting Date       ;Date           }
+    { 50331;  ;Fixed Salary Rate   ;Decimal       ;Description=Non Incentive: Salaries in cycle days multiplied with a daily salary in Naira }
+    { 50332;  ;Travelling Expenses Rate;Decimal   ;Description=Expatriate: Fixed rate per date }
+    { 50333;  ;License Fee Rate    ;Decimal        }
+    { 50334;  ;Clearing_Fwrd_NPA   ;Decimal        }
+    { 50335;  ;Shore Overheads     ;Decimal        }
+    { 50336;  ;Other Direct Cost   ;Decimal       ;Description=In exchange for Sal&Wages,Travellg Expenses,Clearing&FWRD & NPA }
+  }
+  KEYS
+  {
+    {    ;"Starting Date"                         ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

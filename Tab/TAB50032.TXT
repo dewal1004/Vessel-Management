@@ -1,0 +1,103 @@
+OBJECT Table 50032 Appr. Ledger Entry
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=143105T;
+    Modified=true;
+    Version List=NAVW13.00;
+  }
+  PROPERTIES
+  {
+    LookupPageID=Page50098;
+    DrillDownPageID=Page50098;
+  }
+  FIELDS
+  {
+    { 1   ;   ;Entry No.           ;Integer       ;CaptionML=ENU=Entry No. }
+    { 2   ;   ;Entry Type          ;Option        ;CaptionML=ENU=Entry Type;
+                                                   OptionCaptionML=ENU=Usage,Sale;
+                                                   OptionString=Usage,Sale }
+    { 3   ;   ;Document No.        ;Code20        ;CaptionML=ENU=Document No. }
+    { 4   ;   ;Posting Date        ;Date          ;CaptionML=ENU=Posting Date }
+    { 5   ;   ;Resource No.        ;Code20        ;TableRelation=Resource;
+                                                   CaptionML=ENU=Resource No. }
+    { 6   ;   ;Resource Group No.  ;Code20        ;TableRelation="Resource Group";
+                                                   CaptionML=ENU=Resource Group No. }
+    { 7   ;   ;Description         ;Text150       ;CaptionML=ENU=Description }
+    { 8   ;   ;Work Type Code      ;Code10        ;TableRelation="Work Type";
+                                                   CaptionML=ENU=Work Type Code }
+    { 9   ;   ;Job No.             ;Code20        ;TableRelation=Job;
+                                                   CaptionML=ENU=Job No. }
+    { 10  ;   ;Unit of Measure Code;Code10        ;TableRelation="Unit of Measure";
+                                                   CaptionML=ENU=Unit of Measure Code }
+    { 11  ;   ;Quantity            ;Decimal       ;CaptionML=ENU=Quantity;
+                                                   DecimalPlaces=0:5 }
+    { 12  ;   ;Direct Unit Cost    ;Decimal       ;CaptionML=ENU=Direct Unit Cost;
+                                                   AutoFormatType=2 }
+    { 13  ;   ;Unit Cost           ;Decimal       ;CaptionML=ENU=Unit Cost;
+                                                   AutoFormatType=2 }
+    { 14  ;   ;Total Cost          ;Decimal       ;CaptionML=ENU=Total Cost;
+                                                   AutoFormatType=1 }
+    { 15  ;   ;Unit Price          ;Decimal       ;CaptionML=ENU=Unit Price;
+                                                   AutoFormatType=2 }
+    { 16  ;   ;Total Price         ;Decimal       ;CaptionML=ENU=Total Price;
+                                                   AutoFormatType=1 }
+    { 17  ;   ;Global Dimension 1 Code;Code20     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+                                                   CaptionML=ENU=Global Dimension 1 Code;
+                                                   CaptionClass='1,1,1' }
+    { 18  ;   ;Global Dimension 2 Code;Code20     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                   CaptionML=ENU=Global Dimension 2 Code;
+                                                   CaptionClass='1,1,2' }
+    { 20  ;   ;User ID             ;Code20        ;TableRelation=Table2000000002;
+                                                   OnLookup=VAR
+                                                              LoginMgt@1000 : Codeunit "User Management";
+                                                            BEGIN
+                                                              //LoginMgt.LookupUserID("Birth Date");
+                                                            END;
+
+                                                   TestTableRelation=false;
+                                                   CaptionML=ENU=User ID }
+    { 21  ;   ;Source Code         ;Code10        ;TableRelation="Source Code";
+                                                   CaptionML=ENU=Source Code }
+    { 22  ;   ;Chargeable          ;Boolean       ;InitValue=true;
+                                                   CaptionML=ENU=Chargeable }
+    { 23  ;   ;Journal Batch Name  ;Code10        ;CaptionML=ENU=Journal Batch Name }
+    { 24  ;   ;Reason Code         ;Code10        ;TableRelation="Reason Code";
+                                                   CaptionML=ENU=Reason Code }
+    { 25  ;   ;Gen. Bus. Posting Group;Code10     ;TableRelation="Gen. Business Posting Group";
+                                                   CaptionML=ENU=Gen. Bus. Posting Group }
+    { 26  ;   ;Gen. Prod. Posting Group;Code10    ;TableRelation="Gen. Product Posting Group";
+                                                   CaptionML=ENU=Gen. Prod. Posting Group }
+    { 27  ;   ;Document Date       ;Date          ;CaptionML=ENU=Document Date }
+    { 28  ;   ;External Document No.;Code20       ;CaptionML=ENU=External Document No. }
+    { 29  ;   ;No. Series          ;Code10        ;TableRelation="No. Series";
+                                                   CaptionML=ENU=No. Series }
+    { 50301;  ;Comment             ;Text100        }
+    { 50302;  ;Type                ;Option        ;CaptionML=ENU=Type;
+                                                   OptionCaptionML=ENU=" ,Account (G/L),Item,Resource,Fixed Asset,Charge (Item),Skill,Performance";
+                                                   OptionString=" ","Account (G/L)",Item,Resource,"Fixed Asset","Charge (Item)",Skill,Performance }
+  }
+  KEYS
+  {
+    {    ;"Entry No."                             ;Clustered=true }
+    {    ;"Resource No.","Posting Date"            }
+    {    ;"Entry Type",Chargeable,"Unit of Measure Code","Resource No.","Posting Date";
+                                                   SumIndexFields=Quantity,"Total Cost","Total Price" }
+    {    ;"Entry Type",Chargeable,"Unit of Measure Code","Resource Group No.","Posting Date";
+                                                   SumIndexFields=Quantity,"Total Cost","Total Price" }
+    {    ;"Document No.","Posting Date"            }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      DimMgt@1000 : Codeunit DimensionManagement;
+
+    BEGIN
+    END.
+  }
+}
+

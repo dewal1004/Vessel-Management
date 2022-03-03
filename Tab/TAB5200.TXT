@@ -1,0 +1,531 @@
+OBJECT Modification Employee(Table 5200)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220216D;
+    Time=182047.703T;
+    Modified=true;
+    Version List=NAVW114.08;
+  }
+  PROPERTIES
+  {
+    Target=Employee(Table 5200);
+  }
+  CHANGES
+  {
+    { PropertyInsertion ;Target="No."(Field 1);
+                         Property=ValidateTableRelation;
+                         ModifiedValue=false }
+    { Insertion         ;OnValidate=BEGIN
+
+                                       //Univision Insert 6/11/01
+                                      if ("Search Name" = '') then
+                                        "Search Name" := "First Name";
+
+                                      //Univision Finish 6/11/01
+                                    END;
+
+                         Target="First Name"(Field 2) }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        PostCode.ValidatePostCode(City,"Post Code",County,"Country/Region Code",(CurrFieldNo <> 0) and GuiAllowed);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        PostCode.ValidatePostCode(City,"Post Code",County,"Country/Region Code",(CurrFieldNo <> 0) and GuiAllowed);
+
+                                        if PostCode.Get("Post Code") then
+                                          City := PostCode.City;
+                                      END;
+
+                         Target="Post Code"(Field 11).OnValidate }
+    { PropertyModification;
+                         Target=Picture(Field 19);
+                         Property=CaptionML;
+                         OriginalValue=ENU=Picture;
+                         ModifiedValue=[ENU=Picture;
+                                        ENN=Picture] }
+    { PropertyModification;
+                         Target="Emplymt. Contract Code"(Field 27);
+                         Property=Data type;
+                         OriginalValue=Code10;
+                         ModifiedValue=Code30 }
+    { PropertyDeletion  ;Target="Emplymt. Contract Code"(Field 27);
+                         Property=TableRelation;
+                         OriginalValue="Employment Contract" }
+    { Insertion         ;InsertAfter=Id(Field 8000);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Region Code         ;Code10        ;TableRelation="Business Unit".Code }
+                           { 50001;  ;Employment Group    ;Code10         }
+                           { 50002;  ;Security            ;Boolean        }
+                           { 50003;  ;No.2                ;Code20         }
+                           { 50004;  ;Bar Code ID         ;Code10         }
+                           { 50013;  ;Bank                ;Code20        ;TableRelation=IF ("Mode of payment"=CONST(Bank)) "Payroll-Banks.".Code }
+                           { 50014;  ;Bank Account        ;Text30         }
+                           { 50015;  ;Posting Group       ;Code20        ;TableRelation="Payroll-Posting Group Header."."Posting Group Code";
+                                                                          OnValidate=BEGIN
+                                                                                       //Univision Start 6/11/01
+                                                                                       if (PostGrp.Get("Posting Group") and (PostGrp.Management)) then
+                                                                                         Manager := true
+                                                                                       else
+                                                                                         Manager := false;
+                                                                                       //Univision Finish 6/11/01
+                                                                                     END;
+                                                                                      }
+                           { 50016;  ;Employee Group      ;Code20        ;TableRelation="Payroll-Employee Group Header.";
+                                                                          OnValidate=BEGIN
+                                                                                        {EmpGrpRec.SETRANGE(Code,"Employee Group");
+                                                                                        IF EmpGrpRec.FIND('-') THEN
+                                                                                          BEGIN
+                                                                                           Grade:= EmpGrpRec.Grade;
+                                                                                           Step:=EmpGrpRec.Step;
+                                                                                           EmpGrpRec.CALCFIELDS(EmpGrpRec."Gross Pay");
+                                                                                           EDAmount:=EmpGrpRec."Gross Pay";
+
+                                                                                          END;
+                                                                                       CheckMod;}
+                                                                                     END;
+                                                                                      }
+                           { 50020;  ;SAM Number          ;Code20        ;TableRelation=Customer }
+                           { 50021;  ;Pay Station         ;Code20         }
+                           { 50022;  ;P.I.N               ;Code20         }
+                           { 50023;  ;Mode of payment     ;Option        ;OptionString=Cash,Cheque,Bank }
+                           { 50024;  ;Period Filter       ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation="Payroll-Periods." }
+                           { 50025;  ;EDAmount            ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Payroll-Payslip Lines.".Amount WHERE ("Payroll Period"=FIELD("Period Filter"),
+                                                                                                                                 "Employee No"=FIELD("No."),
+                                                                                                                                 "E/D Code"=FIELD("ED Filter")));
+                                                                          DecimalPlaces=0:5 }
+                           { 50026;  ;ED Filter           ;Code20        ;FieldClass=FlowFilter;
+                                                                          TableRelation="Payroll-E/D Codes." }
+                           { 50027;  ;Designation         ;Code10         }
+                           { 50028;  ;National ID Number  ;Code20         }
+                           { 50029;  ;NSITF Number        ;Code20         }
+                           { 50034;  ;Acct. type          ;Option        ;OptionString=Finance,Customer,Supplier }
+                           { 50035;  ;Acct. No            ;Code20        ;TableRelation=IF ("Acct. type"=CONST(Finance)) "G/L Account"."No."
+                                                                                        ELSE IF ("Acct. type"=CONST("18")) Customer."No."
+                                                                                        ELSE IF ("Acct. type"=CONST("23")) Vendor."No." }
+                           { 50037;  ;No of Days          ;Integer       ;OnValidate=BEGIN
+                                                                                       //Univision Start 6/11/01
+                                                                                       if "No of Days" > 30 then
+                                                                                       begin
+                                                                                       if (Date2DMY("Employment Date",2)+1) = Date2DMY(Today,2) then
+                                                                                       "day Employeed" := DMY2Date(1,(Date2DMY(Today,2))) - "Employment Date";
+                                                                                       if "No of Days" > (30 + "day Employeed") then Error('You Can Not Pay staff for this Number of Days');
+                                                                                       end;
+                                                                                       //Univision 6/11/01
+                                                                                     END;
+                                                                                      }
+                           { 50039;  ;No2.                ;Code20         }
+                           { 50040;  ;NPF Number          ;Code20         }
+                           { 50041;  ;NHF Number          ;Code20         }
+                           { 50071;  ;Blocked             ;Boolean       ;OnValidate=BEGIN
+                                                                                       userrec.Get(UserId);
+                                                                                       if not userrec."Unblock Employee" then Error('You may not edit Field');
+
+                                                                                       "Blocked Modified By":=UserId;
+                                                                                       "Blocked Modified Date":=Today;
+                                                                                     END;
+                                                                                      }
+                           { 50073;  ;Modified By         ;Code10        ;Editable=false }
+                           { 50074;  ;Pension Scheme      ;Boolean        }
+                           { 50075;  ;Work Status         ;Code10        ;TableRelation="Monthly Variables Lines."."Payroll Period" }
+                           { 50076;  ;Class               ;Code10        ;TableRelation="Skill Appraisal"."Skill code" }
+                           { 50077;  ;Overall Medical Cost;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Medical Record".Amount WHERE ("Employee No"=FIELD("No."),
+                                                                                                                         "Transaction Date"=FIELD("Date Filter"),
+                                                                                                                         Beneficiary=FIELD("Beneficiary Filter"),
+                                                                                                                         "Transaction Type"=FIELD("Medical Trans Type Filter")));
+                                                                          BlankZero=true;
+                                                                          Editable=false }
+                           { 50078;  ;Hospital Cost       ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Medical Record".Amount WHERE ("Employee No"=FIELD("No."),
+                                                                                                                         "Transaction Date"=FIELD("Date Filter"),
+                                                                                                                         "Transaction Type"=CONST(H),
+                                                                                                                         Beneficiary=FIELD("Beneficiary Filter")));
+                                                                          BlankZero=true;
+                                                                          Editable=false }
+                           { 50079;  ;Clinic Cost         ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Medical Record".Amount WHERE ("Employee No"=FIELD("No."),
+                                                                                                                         "Transaction Date"=FIELD("Date Filter"),
+                                                                                                                         "Transaction Type"=CONST(C),
+                                                                                                                         Beneficiary=FIELD("Beneficiary Filter")));
+                                                                          BlankZero=true;
+                                                                          Editable=false }
+                           { 50080;  ;Medical Reimbursed Cost;Decimal    ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Medical Record".Amount WHERE ("Employee No"=FIELD("No."),
+                                                                                                                         "Transaction Date"=FIELD("Date Filter"),
+                                                                                                                         "Transaction Type"=CONST(R),
+                                                                                                                         Beneficiary=FIELD("Beneficiary Filter")));
+                                                                          BlankZero=true;
+                                                                          Editable=false }
+                           { 50084;  ;Medical Trans Type Filter;Option   ;FieldClass=FlowFilter;
+                                                                          OptionString=" ",C,R,H }
+                           { 50085;  ;Sam No.             ;Code10        ;TableRelation=Customer."No." }
+                           { 50100;  ;Place of Birth      ;Text30         }
+                           { 50101;  ;Leave Type Filter   ;Option        ;FieldClass=FlowFilter;
+                                                                          OptionString=PLAN,ACTUAL }
+                           { 50102;false;Leave Days Taken ;Integer       ;BlankZero=true }
+                           { 50103;  ;Leave Category Filter;Code50       ;FieldClass=FlowFilter;
+                                                                          TableRelation=Table60016.Field1 }
+                           { 50104;  ;Leave Days          ;Integer       ;FieldClass=FlowField;
+                                                                          CalcFormula=Count(Table60009 WHERE (Field1=FIELD("No."),
+                                                                                                              Field5=FIELD("Date Filter"),
+                                                                                                              Field2=FIELD("Leave Type Filter"),
+                                                                                                              Field8=FIELD("Region Code")));
+                                                                          BlankZero=true }
+                           { 50105;  ;Region Filter       ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation="Business Unit" }
+                           { 50106;  ;Training Cost       ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Course Attendance".Cost WHERE ("Employee No"=FIELD("No.")));
+                                                                          BlankZero=true;
+                                                                          Editable=false }
+                           { 50107;  ;Course Filter       ;Code30         }
+                           { 50108;  ;Scholarship Cost    ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum(Table60033.Field4 WHERE (Field2=FIELD("No.")));
+                                                                          BlankZero=true }
+                           { 50109;  ;Hospital Filter     ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation=Vendor."No." WHERE (Hospital=CONST(true)) }
+                           { 50110;  ;Beneficiary Filter  ;Option        ;FieldClass=FlowFilter;
+                                                                          OptionString=" ",Dependent,Self }
+                           { 50111;  ;Sam                 ;Boolean       ;OnValidate=BEGIN
+                                                                                       //Univision Start 6/11/01
+                                                                                       if not(Sam) and (xRec.Sam) then
+                                                                                         if Confirm('Do you want to Remove Sam Account for %1',true,FullName) then
+                                                                                           begin
+                                                                                             if CustRec.Get("No.") then
+                                                                                               begin
+                                                                                                 CustRec.CalcFields(CustRec.Balance);
+                                                                                                 SamBalance := CustRec.Balance;
+                                                                                                 if (SamBalance = 0)then
+                                                                                                   begin
+                                                                                                     "SAM Number" := '';
+                                                                                                     Modify;
+                                                                                                     CustRec.Delete;
+                                                                                                     CustLdgRec.SetRange(CustLdgRec."Customer No.","No.");
+                                                                                                     CustLdgRec.DeleteAll;
+                                                                                                     Message('Sam Account for %1 has been Deleted',FullName);
+                                                                                                   end
+                                                                                                 else
+                                                                                                   Error('%1 has a Balance of %2 in his account\\' +
+                                                                                                         'This Balance MUST be ZERO before\' +
+                                                                                                         'you can delete his Sam Account',FullName,Format(SamBalance));
+                                                                                               end;
+                                                                                           end
+                                                                                         else
+                                                                                           Sam := true;
+                                                                                       //Univision Finish 6/11/01
+                                                                                     END;
+                                                                                      }
+                           { 50112;  ;State               ;Code3         ;TableRelation=States.code }
+                           { 50113;  ;Annual Tax Freepay  ;Decimal        }
+                           { 50114;  ;Manager             ;Boolean       ;Editable=false }
+                           { 50115;  ;Married             ;Boolean        }
+                           { 50301;  ;PositionApplied     ;Code10        ;TableRelation="Class Information";
+                                                                          OnValidate=BEGIN
+                                                                                       if Posit.Get(PositionApplied) then
+                                                                                         "Job Title" := Posit.Description;
+                                                                                     END;
+                                                                                      }
+                           { 50302;  ;Grade               ;Code2          }
+                           { 50303;  ;Step                ;Code2          }
+                           { 50304;  ;MP Status           ;Option        ;OptionString=Permanent,"Contract A","Contract B";
+                                                                          Description=Man Power Status }
+                           { 50307;  ;Working day         ;Integer        }
+                           { 50308;  ;Inactive Date End   ;Date           }
+                           { 50309;  ;Empl Contr Uni Code ;Code10        ;TableRelation="Employment Contract" WHERE ("Global Dimension 1 Code"=FIELD("Global Dimension 1 Code"));
+                                                                          OnValidate=BEGIN
+                                                                                       employcontr.Get("Empl Contr Uni Code");
+                                                                                       "Emplymt. Contract Code":=employcontr.Description;
+                                                                                       {
+                                                                                       //IF ECont.GET(Empl Contr Uni Code") THEN
+                                                                                       IF "Global Dimension 1 Code"='FLST' THEN
+                                                                                         MakeRes(Rec)
+                                                                                       ELSE RemovRes(Rec);
+                                                                                       }
+                                                                                     END;
+
+                                                                          NotBlank=true }
+                           { 50310;  ;Checked             ;Boolean        }
+                           { 50319;  ;Address 3           ;Text30         }
+                           { 50359;  ;Balance (LCY)       ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Detailed Cust. Ledg. Entry"."Amount (LCY)" WHERE ("Customer No."=FIELD("Acct. No"),
+                                                                                                                                             "Initial Entry Global Dim. 1"=FIELD("Global Dimension 1 Filter"),
+                                                                                                                                             "Initial Entry Global Dim. 2"=FIELD("Global Dimension 2 Filter"),
+                                                                                                                                             "Currency Code"=FIELD("Currency Filter")));
+                                                                          CaptionML=ENU=Balance (LCY);
+                                                                          Editable=false;
+                                                                          AutoFormatType=1 }
+                           { 50360;  ;Currency Filter     ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation=Currency;
+                                                                          CaptionML=ENU=Currency Filter }
+                           { 50362;  ;Deductible Filter   ;Boolean       ;FieldClass=FlowFilter }
+                           { 50364;  ;Deductible Absence  ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Employee Absence".Quantity WHERE ("Employee No."=FIELD("No."),
+                                                                                                                             "Deduct from Payroll"=CONST(true),
+                                                                                                                             "From Date"=FIELD("Date Filter"))) }
+                           { 50366;  ;Deducted Absence    ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Monthly Variables Lines.".Quantity WHERE ("Employee No"=FIELD("No."),
+                                                                                                                                     "E/D Code"=CONST('6150'))) }
+                           { 50369;  ;IOU Balance         ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Detailed Cust. Ledg. Entry"."Amount (LCY)" WHERE ("Customer No."=FIELD("Acct. No"),
+                                                                                                                                             "Initial Entry Global Dim. 1"=FIELD("Global Dimension 1 Filter"),
+                                                                                                                                             "Initial Entry Global Dim. 2"=FIELD("Global Dimension 2 Filter"),
+                                                                                                                                             "Currency Code"=FIELD("Currency Filter")));
+                                                                          CaptionML=ENU=IOU Balance;
+                                                                          Editable=false;
+                                                                          AutoFormatType=1 }
+                           { 50400;  ;Passport no         ;Code10         }
+                           { 50401;  ;Place of Issue      ;Text30         }
+                           { 50402;  ;Date Issued         ;Date           }
+                           { 50403;  ;Expiry date         ;Date           }
+                           { 50404;  ;Cerpac No/Code      ;Code10         }
+                           { 50405;  ;Cerpac Expiry date  ;Date           }
+                           { 50406;  ;Suspended           ;Boolean       ;OnValidate=BEGIN
+                                                                                       "Suspension Modified By":=UserId;
+                                                                                       "Suspension Modified Date":=Today;
+                                                                                     END;
+                                                                                      }
+                           { 50407;  ;Suspension Modified By;Code20      ;OnValidate=BEGIN
+                                                                                       "Suspension Modified By":=UserId;
+                                                                                       "Suspension Modified Date":=Today;
+                                                                                     END;
+
+                                                                          Editable=false }
+                           { 50408;  ;Suspension Modified Date;Date      ;Editable=false }
+                           { 50409;  ;Blocked Modified By ;Code20        ;Editable=false }
+                           { 50410;  ;Blocked Modified Date;Date         ;Editable=false }
+                           { 50411;  ;Country Code        ;Code10         }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        "Last Modified Date Time" := CurrentDateTime;
+                                        HumanResSetup.Get;
+                                        if "No." = '' then begin
+                                        #4..17
+                                        DimMgt.UpdateDefaultDim(
+                                          DATABASE::Employee,"No.",
+                                          "Global Dimension 1 Code","Global Dimension 2 Code");
+                                        UpdateSearchName;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..20
+                                         //Univision Insert 6/11/01
+                                        "Acct. No" :='EC'+CopyStr("No.",2);
+                                        "Acct. type":=Rec."Acct. type"::Customer;
+                                        UpdateSearchName;
+                                      END;
+
+                         Target=OnInsert }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        DimMgt.RenameDefaultDim(DATABASE::Employee,xRec."No.","No.");
+                                        "Last Modified Date Time" := CurrentDateTime;
+                                        "Last Date Modified" := Today;
+                                        UpdateSearchName;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..3
+                                        "Modified By" := UserId; //Univision Insert 6/11/01
+                                        UpdateSearchName;
+                                      END;
+
+                         Target=OnRename }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        OnBeforeGetFullName(Rec,NewFullName,Handled);
+                                        if Handled then
+                                          exit(NewFullName);
+
+                                        if "Middle Name" = '' then
+                                          exit("First Name" + ' ' + "Last Name");
+
+                                        exit("First Name" + ' ' + "Middle Name" + ' ' + "Last Name");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..3
+                                        if "Middle Name" = '' then
+                                          exit("First Name" + ' ' + "Last Name")
+                                        else
+                                          exit("First Name" + ' ' + "Middle Name" + ' ' + "Last Name");
+                                      END;
+
+                         Target=FullName(PROCEDURE 1) }
+    { Insertion         ;InsertAfter=DisplayMap(PROCEDURE 7);
+                         ChangedElements=PROCEDURECollection
+                         {
+                           [LineStart(77456)]
+                           PROCEDURE "---------"@1000000002();
+                           VAR
+                             GenSetUp@1000 : Record "General Ledger Setup";
+                             Text001@1002 : TextConst 'ENU=You are not permitted to modify this field';
+                             Text002@1001 : TextConst 'ENU=You can only edit Record on %1';
+                           BEGIN
+                           END;
+
+                           [LineStart(77459)]
+                           PROCEDURE ResCode@1000000000() : Text[100];
+                           BEGIN
+                             //AAA-July 03/02-Sta
+                             if Res.Get("First Name") then
+                             begin
+                                 if not Res.Rename("First Name" + CopyStr("Last Name",1,1))
+                                  then
+                                   if not Res.Rename("First Name" + CopyStr("Last Name",1,2))
+                                     then
+                                     begin
+                                        Res2.Init;
+                                        Res2."No.":="First Name" + CopyStr("Last Name",1,2)+'1';
+                                        if not Res2.Insert() then Res2.Modify();
+                                        exit("First Name" + CopyStr("Last Name",1,2)+'1')
+                                     end;
+                                     exit("First Name" + CopyStr("Last Name",1,2));
+                                  exit("First Name" + CopyStr("Last Name",1,1));
+                             end;
+                             //AAA-July 03/02-Sto
+                           END;
+
+                           [LineStart(77478)]
+                           PROCEDURE MakeRes@1000000001(empl@1000000000 : Record Employee);
+                           BEGIN
+                           END;
+
+                           [LineStart(77481)]
+                           PROCEDURE RemovRes@1000000003(empl@1000000000 : Record Employee);
+                           BEGIN
+                             if Res.Get("Resource No.") then
+                             begin
+                               Res.Delete;
+                               Message('Employee no longer a resource');
+                             end
+                             else
+                               Message('Resource does not Exist');
+                             "Resource No.":='';
+                             Modify;
+                           END;
+
+                           [LineStart(77492)]
+                           PROCEDURE TagName@1000000005() : Text[100];
+                           BEGIN
+                             //AAA-Feb 24, 2003
+                             //EXIT("First Name" + ' ' + UPPERCASE("Last Name"))
+                             exit("First Name" + ' ' + ("Last Name"))
+                           END;
+
+                           [LineStart(77497)]
+                           PROCEDURE GetED@1000000004(VAR EDCd@1000000001 : Code[10]) : Decimal;
+                           BEGIN
+                             GrpLinesRec.SetRange(GrpLinesRec."Employee Group","Employee Group");
+                             GrpLinesRec.SetRange(GrpLinesRec."E/D Code",EDCd);
+                             if GrpLinesRec.Find('-') then
+                               exit(GrpLinesRec."Default Amount")
+                             else
+                               exit(0);
+                           END;
+
+                           [LineStart(77505)]
+                           PROCEDURE GetBasic@12(EmpNo@1000000000 : Code[10]) : Decimal;
+                           BEGIN
+                             Employee.Reset;
+                             EDRec.SetRange(EDRec."Control Type",EDRec."Control Type"::Basic);
+                             EDRec.Find('-');
+                             BasicEDCode := EDRec."E/D Code";
+                             Employee.Get(EmpNo);
+                             EmpGrpCode := Employee."Employee Group";
+
+                             GrpLinesRec.SetRange(GrpLinesRec."Employee Group",EmpGrpCode);
+                             GrpLinesRec.SetRange(GrpLinesRec."E/D Code",BasicEDCode);
+                             if GrpLinesRec.Find('-') then
+                               exit(GrpLinesRec."Default Amount")
+                             else
+                               exit(0);
+                           END;
+
+                           [LineStart(77520)]
+                           PROCEDURE CheckMod@1000000006();
+                           VAR
+                             GenSetUp@1000000000 : Record "General Ledger Setup";
+                             Text001@1000000001 : TextConst 'ENU=You are not permitted to modify this field';
+                             Text002@1000000002 : TextConst 'ENU=You can only edit Record on %1';
+                           BEGIN
+                             GenSetUp.Get;payrsetup.Get('LOAN');
+                             if xRec."Employee Group"<>"Employment Group" then
+                             begin
+                              if (UserId<>GenSetUp.Administrator) and (UserId<>payrsetup."HR Officer") then Error(Text001);
+                              if (UserId=payrsetup."HR Officer") and (Today<>payrsetup."Allow HR Edit on") then Error(Text002);
+                             end;
+                           END;
+
+                         }
+                          }
+    { PropertyModification;
+                         Target=BlockedEmplForJnrlPostingErr(Variable 1017);
+                         Property=Id;
+                         OriginalValue=1017;
+                         ModifiedValue=10017 }
+    { PropertyModification;
+                         Target=EmployeeLinkedToResourceErr(Variable 1018);
+                         Property=Id;
+                         OriginalValue=1018;
+                         ModifiedValue=10018 }
+    { Insertion         ;InsertAfter=Text000(Variable 1016);
+                         ChangedElements=VariableCollection
+                         {
+                           PostGrp@1017 : Record "Payroll-Posting Group Header.";
+                           Posit@1054 : Record "Employment Contract";
+                           approv@1053 : Record Object;
+                           EmpGrpRec@1052 : Record "Payroll-Employee Group Header.";
+                           GrpLinesRec@1051 : Record "Payroll-Employee Group Lines.";
+                           RegRec@1050 : Record "Business Unit";
+                           CustRec@1049 : Record Customer;
+                           VendRec@1048 : Record Vendor;
+                           CustLdgRec@1047 : Record "Cust. Ledger Entry";
+                           DesigRec@1046 : Record Designation;
+                           EDRec@1044 : Record "Payroll-E/D Codes.";
+                           DepartRec@1043 : Record Dimension;
+                           BCRec@1042 : Record Dimension;
+                           CCRec@1041 : Record Dimension;
+                           DepartRec1@1040 : Record "Dimension Value";
+                           BCRec1@1039 : Record "Dimension Value";
+                           CCRec1@1038 : Record "Dimension Value";
+                           approved@1037 : Boolean;
+                           "day Employeed"@1036 : Integer;
+                           SamBalance@1035 : Decimal;
+                           EmpDesignation@1034 : Code[10];
+                           PGrp@1033 : Code[10];
+                           EmpGrpCode@1032 : Code[10];
+                           BasicEDCode@1031 : Code[10];
+                           payrsetup@1030 : Record "ASL Payroll Setup";
+                           employcontr@1029 : Record "Employment Contract";
+                           ECont@1028 : Record "Employment Contract";
+                           Res2@1027 : Record Resource;
+                           "--------------------"@1026 : Integer;
+                           I@1025 : Integer;
+                           Eval@1024 : Boolean;
+                           Answ@1023 : Boolean;
+                           EmpContra@1022 : Record "Employment Contract";
+                           ResGroup@1021 : Record "Resource Group";
+                           ResCopy@1020 : Record Resource;
+                           StaffNo@1019 : Code[10];
+                           userrec@1018 : Record "User Setup";
+                           "----------------------"@1055 : Integer;
+                           Answ2@1045 : Boolean;
+                         }
+                          }
+    { Insertion         ;InsertAfter=EmployeeLinkedToResourceErr(Variable 1018);
+                         ChangedElements=VariableCollection
+                         {
+                           Employee@1056 : Record Employee;
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

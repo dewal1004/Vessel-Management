@@ -1,0 +1,118 @@
+OBJECT Table 50028 Course Attendance
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=144146T;
+    Modified=true;
+    Version List=HR Ver 1.0;
+  }
+  PROPERTIES
+  {
+    OnInsert=BEGIN
+
+               if CAtRec.Find('+') then
+                 "Rec No." := CAtRec."Rec No." + 1
+               else
+                 "Rec No." := 1;
+
+               CAtRec.Reset;
+               CAtRec.SetCurrentKey("Training Group","Training Course Code","Course Line No.");
+               CAtRec.SetRange("Training Course Code","Training Course Code");
+
+               if CAtRec.Find('+') then
+                 "Course Line No." := CAtRec."Course Line No." + 10
+               else
+                 "Course Line No." := 10;
+
+               CalcAvgCost(1);
+             END;
+
+    OnDelete=BEGIN
+               CalcAvgCost(-1);
+             END;
+
+    LookupPageID="Course Attendance List";
+    DrillDownPageID="Course Attendance List";
+  }
+  FIELDS
+  {
+    { 1   ;   ;Rec No.             ;Integer        }
+    { 2   ;   ;Training Course Code;Code10        ;TableRelation="Training Courses"."Courses Code";
+                                                   OnValidate=BEGIN
+                                                                if TCourseRec.Get("Training Course Code") then
+                                                                  begin
+                                                                    "Training Group" := TCourseRec."Training Group";
+                                                                    "Course name" := TCourseRec."Course Name";
+                                                                    "Start Date" := TCourseRec."Course Start Date";
+                                                                  end;
+                                                              END;
+                                                               }
+    { 3   ;   ;Course name         ;Text30        ;Editable=false }
+    { 4   ;   ;Employee No         ;Code10        ;TableRelation=Employee;
+                                                   OnValidate=BEGIN
+                                                                EmploRec.Get("Employee No");
+                                                                 "Employee Name" := EmploRec.FullName;
+                                                                 "Region Code" := EmploRec."Region Code";
+                                                                 "Global Dimension 1 Code" := EmploRec."Global Dimension 1 Code";
+                                                                 "Global Dimension 2 Code" := EmploRec."Global Dimension 2 Code";
+                                                              END;
+                                                               }
+    { 5   ;   ;Employee Name       ;Text100       ;Editable=false }
+    { 6   ;   ;Region Code         ;Code10        ;Editable=false }
+    { 7   ;   ;Global Dimension 1 Code;Code10     ;Editable=false }
+    { 8   ;   ;Global Dimension 2 Code;Code10     ;Editable=false }
+    { 9   ;   ;Start Date          ;Date          ;Editable=false }
+    { 10  ;   ;Cost                ;Decimal       ;BlankZero=true;
+                                                   Editable=false }
+    { 11  ;   ;Comments            ;Text100        }
+    { 12  ;   ;Course Line No.     ;Integer       ;Editable=false }
+    { 13  ;   ;Training Group      ;Option        ;OptionString=" ",Mixed,Outdoor,"In-House" }
+  }
+  KEYS
+  {
+    {    ;"Training Course Code","Employee No"    ;SumIndexFields=Cost;
+                                                   Clustered=true }
+    {    ;"Training Group","Training Course Code","Course Line No.";
+                                                   SumIndexFields=Cost }
+    {    ;"Employee No","Training Course Code"    ;SumIndexFields=Cost }
+    {    ;"Training Course Code","Course Line No." }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      CAtRec@1000000000 : Record "Course Attendance";
+      HumanResSetup@1000000001 : Record "Human Resources Setup";
+      NoSeriesMgt@1000000002 : Codeunit NoSeriesManagement;
+      TCourseRec@1000000003 : Record "Training Courses";
+      EmploRec@1000000004 : Record Employee;
+      TotalCost@1000000005 : Decimal;
+      AvgCost@1000000006 : Decimal;
+      RecCount@1000000007 : Integer;
+
+    [LineStart(118062)]
+    PROCEDURE CalcAvgCost@9(Normalizer@1000000000 : Integer);
+    BEGIN
+      TCourseRec.Get("Training Course Code");
+
+      CAtRec.SetCurrentKey("Training Course Code");
+      CAtRec.SetRange("Training Course Code","Training Course Code");
+      RecCount := CAtRec.Count+Normalizer;
+      TotalCost := TCourseRec."Total Cost";
+      if RecCount<>0 then begin
+      AvgCost := TotalCost/RecCount;
+      CAtRec.ModifyAll(CAtRec.Cost,AvgCost);
+
+      if Normalizer=1 then
+         Validate(Cost,AvgCost);
+      end;
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

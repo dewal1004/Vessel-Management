@@ -1,0 +1,396 @@
+OBJECT Modification Item(Table 27)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291220D;
+    Time=120000T;
+    Version List=NAVW114.21;
+  }
+  PROPERTIES
+  {
+    Target=Item(Table 27);
+  }
+  CHANGES
+  {
+    { PropertyInsertion ;Target="Costing Method"(Field 21);
+                         Property=InitValue;
+                         ModifiedValue=Average }
+    { PropertyModification;
+                         Target="Indirect Cost %"(Field 28);
+                         Property=MinValue;
+                         OriginalValue=0;
+                         ModifiedValue=-100 }
+    { Insertion         ;OnValidate=BEGIN
+
+                                      if "Order Multiple" <>0 then Modus:="Reorder Quantity"/"Order Multiple";
+                                      if Modus>Round(Modus, 0.001, '<') then
+                                      Message('The entry in not a multiple of order multiple');
+                                    END;
+
+                         Target="Reorder Quantity"(Field 36) }
+    { PropertyDeletion  ;Target=Inventory(Field 68);
+                         Property=CaptionML;
+                         OriginalValue=ENU=Inventory }
+    { PropertyModification;
+                         Target="Transferred (Qty.)"(Field 93);
+                         Property=CalcFormula;
+                         OriginalValue=Sum("Item Ledger Entry"."Invoiced Quantity" WHERE ("Entry Type"=CONST(Transfer),
+                                                                                          "Item No."=FIELD("No."),
+                                                                                          "Global Dimension 1 Code"=FIELD("Global Dimension 1 Filter"),
+                                                                                          "Global Dimension 2 Code"=FIELD("Global Dimension 2 Filter"),
+                                                                                          "Location Code"=FIELD("Location Filter"),
+                                                                                          "Drop Shipment"=FIELD("Drop Shipment Filter"),
+                                                                                          "Variant Code"=FIELD("Variant Filter"),
+                                                                                          "Posting Date"=FIELD("Date Filter"),
+                                                                                          "Lot No."=FIELD("Lot No. Filter"),
+                                                                                          "Serial No."=FIELD("Serial No. Filter")));
+                         ModifiedValue=Sum("Item Ledger Entry"."Invoiced Quantity" WHERE ("Entry Type"=CONST(Transfer),
+                                                                                          "Item No."=FIELD("No."),
+                                                                                          "Global Dimension 1 Code"=FIELD("Global Dimension 1 Filter"),
+                                                                                          "Global Dimension 2 Code"=FIELD("Global Dimension 2 Filter"),
+                                                                                          "Location Code"=FIELD("Location Filter"),
+                                                                                          "Drop Shipment"=FIELD("Drop Shipment Filter"),
+                                                                                          "Variant Code"=FIELD("Variant Filter"),
+                                                                                          "Posting Date"=FIELD("Date Filter"))) }
+    { PropertyModification;
+                         Target="Transferred (Qty.)"(Field 93);
+                         Property=Editable;
+                         OriginalValue=false;
+                         ModifiedValue=true }
+    { Insertion         ;OnValidate=BEGIN
+
+                                      if "Order Multiple" <>0 then Modus:="Reorder Quantity"/"Order Multiple";
+                                      if Modus>Round(Modus, 0.001, '<') then
+                                      Message('The entry in not a factor of reorder quatity');
+                                    END;
+
+                         Target="Order Multiple"(Field 5414) }
+    { PropertyInsertion ;Target="Product Group Code"(Field 5704);
+                         Property=ValidateTableRelation;
+                         ModifiedValue=false }
+    { PropertyInsertion ;Target="Substitutes Exist"(Field 5706);
+                         Property=Enabled;
+                         ModifiedValue=false }
+    { PropertyInsertion ;Target="Service Item Group"(Field 5900);
+                         Property=Enabled;
+                         ModifiedValue=false }
+    { PropertyInsertion ;Target="Qty. on Service Order"(Field 5901);
+                         Property=Enabled;
+                         ModifiedValue=false }
+    { PropertyInsertion ;Target="Planning Issues (Qty.)"(Field 99000761);
+                         Property=Enabled;
+                         ModifiedValue=false }
+    { PropertyInsertion ;Target="Prod. Forecast Quantity (Base)"(Field 99000774);
+                         Property=Enabled;
+                         ModifiedValue=false }
+    { Insertion         ;InsertAfter="Item Category Id"(Field 8005);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Responsibility Center;Text30        }
+                           { 50001;  ;Last Direct Cost2   ;Decimal        }
+                           { 50002;  ;Last Direct Cost3   ;Decimal        }
+                           { 50099;  ;Monthly Consumption ;Decimal       ;DecimalPlaces=0:5 }
+                           { 50293;  ;Transferred (Qty.) From Loc;Decimal;DecimalPlaces=0:5;
+                                                                          Description=Transfer from Location;
+                                                                          Editable=false }
+                           { 50294;  ;Inventory Value     ;Decimal       ;DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 50300;  ;Last Imported Cost  ;Decimal        }
+                           { 50301;  ;Last Local Cost     ;Decimal        }
+                           { 50302;  ;FOB                 ;Decimal        }
+                           { 50303;  ;Freight             ;Decimal        }
+                           { 50304;  ;Ancillary Charges   ;Decimal        }
+                           { 50305;  ;Insurance           ;Decimal        }
+                           { 50306;  ;Duty Rate%          ;Decimal        }
+                           { 50307;  ;Surcharge On Duty   ;Decimal        }
+                           { 50308;  ;Ecowas Duty         ;Decimal        }
+                           { 50309;  ;CISS                ;Decimal        }
+                           { 50310;  ;Vat                 ;Decimal        }
+                           { 50311;  ;Clearing            ;Decimal        }
+                           { 50312;  ;Interest Expense    ;Decimal        }
+                           { 50313;  ;Total Qty Shipped   ;Decimal        }
+                           { 50315;  ;Last Purchase Cost  ;Decimal       ;FieldClass=Normal;
+                                                                          OnValidate=VAR
+                                                                                       ItemLedgerEntry@1000 : Record "Item Ledger Entry";
+                                                                                       Lastpurchasecost@1001 : Decimal;
+                                                                                     BEGIN
+                                                                                       {
+                                                                                       Lastpurchasecost := ROUND(
+                                                                                                 (ItemJnlLine.Amount + ItemJnlLine."Discount Amount") / ItemJnlLine."Invoiced Quantity",
+                                                                                                 GLSetup."Unit-Amount Rounding Precision");
+                                                                                       IF "Last Purchase Cost" <> 0 THEN BEGIN
+                                                                                               "Last Purchase Cost" := Lastpurchasecost;
+                                                                                               MODIFY;
+                                                                                       END
+                                                                                       } //Sa
+                                                                                     END;
+                                                                                      }
+                           { 50321;  ;Order Fillter       ;Code20        ;FieldClass=FlowFilter;
+                                                                          TableRelation="Purch. Rcpt. Header"."No.";
+                                                                          Description=Set Filter on Order X to be able to see the Next Three values }
+                           { 50322;  ;Inventory Entry Type Filter;Option ;FieldClass=FlowFilter;
+                                                                          OptionString=Purchase,Sale,"Positive Adjmt.","Negative Adjmt.",Transfer,Consumption,Output }
+                           { 50323;  ;Fishing Area Filter ;Code10        ;FieldClass=FlowFilter }
+                           { 50325;  ;VReceived Qty       ;Decimal       ;Description=Quantity Received from an Order X;
+                                                                          Editable=false }
+                           { 50326;  ;VSupplimentary Qty  ;Decimal       ;Description=Additional Quatity supplied on the Order X;
+                                                                          Editable=false }
+                           { 50327;  ;VOrdered Qty        ;Decimal       ;Description=Original Quantity requested for on the Order X;
+                                                                          Editable=false }
+                           { 50368;  ;Inventory Total     ;Decimal       ;CaptionML=ENU=Inventory Total;
+                                                                          DecimalPlaces=0:5;
+                                                                          Description=Excluding Cold room;
+                                                                          Editable=false }
+                           { 50369;  ;Inventory Total2    ;Decimal       ;DecimalPlaces=0:5;
+                                                                          Description=Excluding Cold room & Source Code <>'';
+                                                                          Editable=false }
+                           { 50400;  ;Points              ;Decimal       ;DecimalPlaces=0:4;
+                                                                          Description=Catch points for the fish }
+                           { 50405;  ;CRM / STR           ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Item Ledger Entry".Quantity WHERE ("Item No."=FIELD("No."),
+                                                                                                                              "Global Dimension 1 Code"=FIELD("Global Dimension 1 Filter"),
+                                                                                                                              "Global Dimension 2 Code"=FIELD("Global Dimension 2 Filter"),
+                                                                                                                              "Location Code"=FIELD("Location Filter"),
+                                                                                                                              "Drop Shipment"=FIELD("Drop Shipment Filter"),
+                                                                                                                              "Variant Code"=FIELD("Variant Filter"),
+                                                                                                                              "Lot No."=FIELD("Lot No. Filter"),
+                                                                                                                              "Serial No."=FIELD("Serial No. Filter"),
+                                                                                                                              "Location Code"=FILTER('STORE MAIN')));
+                                                                          DecimalPlaces=0:5;
+                                                                          Description=Inventory of items in Cold Room/Store;
+                                                                          Editable=true }
+                           { 50410;  ;Oldest Stock        ;Decimal        }
+                           { 50411;  ;Oldest Open Date    ;Date           }
+                           { 50500;  ;Vessel Consumption rate;Option     ;InitValue=Total;
+                                                                          OptionString=Total,Partial;
+                                                                          Description=Rate at which Item is consumed on the Vessel }
+                           { 50501;  ;Item Category No.   ;Integer        }
+                           { 50523;  ;Source No. Filter   ;Code10        ;FieldClass=FlowFilter }
+                           { 55427;  ;S/No.               ;Integer        }
+                           { 55500;  ;Brand               ;Code1          }
+                           { 55501;  ;Pack                ;Code2          }
+                           { 55502;  ;ProdCd              ;Code3          }
+                           { 55505;  ;Pack Size (Kg).     ;Decimal        }
+                           { 55510;  ;SF Cat              ;Code20         }
+                           { 55560;  ;Monthly Ave. Dem    ;Decimal       ;DecimalPlaces=0:5;
+                                                                          Description=Monthly Average Demand;
+                                                                          Editable=false }
+                           { 55561;  ;Monthly Ave. Dem Val;Decimal       ;Description=Monthly Average Demand }
+                           { 55562;  ;Cover Period        ;Decimal        }
+                           { 55570;  ;Issues Filter       ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation="Standard Text" WHERE (Others=CONST(true),
+                                                                                                               Type=CONST(crmissue)) }
+                           { 55571;  ;Transfered (Qty.)   ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Item Ledger Entry"."Invoiced Quantity" WHERE ("Entry Type"=CONST(Transfer),
+                                                                                                                                         "Item No."=FIELD("No."),
+                                                                                                                                         "Global Dimension 1 Code"=FIELD("Global Dimension 1 Filter"),
+                                                                                                                                         "Global Dimension 2 Code"=FIELD("Global Dimension 2 Filter"),
+                                                                                                                                         "Location Code"=FIELD("Location Filter"),
+                                                                                                                                         "Drop Shipment"=FIELD("Drop Shipment Filter"),
+                                                                                                                                         "Variant Code"=FIELD("Variant Filter"),
+                                                                                                                                         "Posting Date"=FIELD("Date Filter")));
+                                                                          CaptionML=ENU=Transfered (Qty.);
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 55573;  ;Posve Adjmt. (Qty.) ;Decimal       ;CaptionML=ENU=Positive Adjmt. (Qty.);
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 55574;  ;Negve Adjmt. (Qty.) ;Decimal       ;DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 55575;  ;Sales Value         ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=-Sum("Sales Invoice Line".Amount WHERE ("No."=FIELD("No."),
+                                                                                                                              "Location Code"=FIELD("Location Filter"),
+                                                                                                                              "Shipment Date"=FIELD("Date Filter")));
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 55601;  ;Ves Budg Type 1     ;Decimal       ;DecimalPlaces=0:2 }
+                           { 55602;  ;Ves Budg Type 2     ;Decimal       ;DecimalPlaces=0:2 }
+                           { 55603;  ;Ves Budg Type 3     ;Decimal       ;DecimalPlaces=0:2 }
+                           { 55610;  ;Annual Budget Method;Boolean        }
+                           { 55611;  ;Starting Date       ;Date           }
+                           { 55612;  ;Class               ;Code10        ;CaptionML=ENU=Class;
+                                                                          Description=(L)ocal,(I)nternational Purchase,(C)atch,(S)ample }
+                           { 55613;  ;Foreign Posting Group;Code10       ;TableRelation="Inventory Posting Group";
+                                                                          CaptionML=ENU=Foreign Posting Group }
+                           { 55614;  ;Local Posting Group ;Code10        ;TableRelation="Inventory Posting Group";
+                                                                          CaptionML=ENU=Local Posting Group }
+                         }
+                          }
+    { Deletion          ;Target="Service Item Group"(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"Service Item Group"                     }
+                         }
+                          }
+    { Insertion         ;InsertAfter=Type(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"Item Category Code","No. 2"             }
+                           {    ;"SF Cat","No. 2"                         }
+                           {    ;"Statistics Group","Inventory Posting Group","Cover Period" }
+                           {    ;"S/No.","Gen. Prod. Posting Group"       }
+                           {    ;"Oldest Stock","Oldest Open Date"        }
+                           {    ;"Oldest Open Date"                       }
+                           {    ;"Product Group Code"                     }
+                           {    ;"Statistics Group","S/No.","Inventory Posting Group" }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        ApprovalsMgmt.OnCancelItemApprovalRequest(Rec);
+
+                                        CheckJournalsAndWorksheets(0);
+                                        CheckDocuments(0);
+
+                                        MoveEntries.MoveItemEntries(Rec);
+
+                                        ServiceItem.Reset;
+                                        ServiceItem.SetRange("Item No.","No.");
+                                        if ServiceItem.Find('-') then
+                                          repeat
+                                            ServiceItem.Validate("Item No.",'');
+                                            ServiceItem.Modify(true);
+                                          until ServiceItem.Next = 0;
+
+                                        DeleteRelatedData;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                                ApprovalsMgmt.OnCancelItemApprovalRequest(Rec);
+                                        #2..7
+                                         ServiceItem.Reset;
+                                         ServiceItem.SetRange("Item No.","No.");
+                                         if ServiceItem.Find('-') then
+                                        #11..16
+                                      END;
+
+                         Target=OnDelete }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "No." = '' then begin
+                                          GetInvtSetup;
+                                          InvtSetup.TestField("Item Nos.");
+                                          NoSeriesMgt.InitSeries(InvtSetup."Item Nos.",xRec."No. Series",0D,"No.","No. Series");
+                                          "Costing Method" := InvtSetup."Default Costing Method";
+                                        end;
+
+                                        DimMgt.UpdateDefaultDim(
+                                          DATABASE::Item,"No.",
+                                          "Global Dimension 1 Code","Global Dimension 2 Code");
+
+                                        UpdateReferencedIds;
+                                        SetLastDateTimeModified;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..6
+                                        "Global Dimension 2 Code":='ATLANTIC';     //AAA - Oct 2002  //>>
+                                        #7..13
+                                      END;
+
+                         Target=OnInsert }
+    { Insertion         ;InsertAfter=CalcUnitPriceExclVAT(PROCEDURE 41);
+                         ChangedElements=PROCEDURECollection
+                         {
+                           [LineStart(3849)]
+                           PROCEDURE "------------------------"@1000000000();
+                           BEGIN
+                           END;
+
+                           [LineStart(3852)]
+                           PROCEDURE MthlyAveDemand@1000000021(ItemNo@1000000006 : Code[20];DateFilter@1000000004 : Text[100];LocFilter@1000000003 : Text[100]) : Decimal;
+                           VAR
+                             ItemLedgEntry@1000000007 : Record "Item Ledger Entry";
+                             Qty@1000000009 : Decimal;
+                           BEGIN
+                             Qty := 0;
+                             ItemLedgEntry.SetCurrentKey("Entry Type","Item No.","Posting Date","Location Code");
+                             ItemLedgEntry.SetFilter("Item No.",ItemNo);
+                             if LocFilter <> '' then
+                               ItemLedgEntry.SetFilter("Location Code",LocFilter);
+                             if DateFilter <> '' then
+                               ItemLedgEntry.SetFilter("Posting Date",DateFilter);
+                             ItemLedgEntry.SetFilter("Entry Type",'%1|%2|%3',1,3,4);
+                             if ItemLedgEntry.Find('-') then begin
+                               repeat
+                                 Qty := Qty + ItemLedgEntry.Quantity;
+                               until ItemLedgEntry.Next = 0;
+                               exit(Qty);
+                             end else
+                               exit(0);
+                           END;
+
+                           [LineStart(3869)]
+                           PROCEDURE PosAdjmtQty@1000000007(ItemNo@1000000006 : Code[20];DateFilter@1000000004 : Text[100];LocFilter@1000000003 : Text[100];ExtDocFilter@1000000001 : Text[100]) : Decimal;
+                           VAR
+                             ItemLedgEntry@1000000007 : Record "Item Ledger Entry";
+                             Qty@1000000009 : Decimal;
+                           BEGIN
+                             Qty := 0;
+                             ItemLedgEntry.SetCurrentKey("Entry Type","Item No.","Posting Date","Location Code");
+                             ItemLedgEntry.SetRange("Entry Type",ItemLedgEntry."Entry Type"::"Positive Adjmt.");
+                             ItemLedgEntry.SetFilter("Item No.",ItemNo);
+                             if LocFilter <> '' then
+                               ItemLedgEntry.SetFilter("Location Code",LocFilter);
+                             if DateFilter <> '' then
+                               ItemLedgEntry.SetFilter("Posting Date",DateFilter);
+                             if ExtDocFilter <> '' then
+                               ItemLedgEntry.SetFilter("External Document No.",ExtDocFilter);
+                             ItemLedgEntry.SetFilter("Source No.",'<>%1','');
+                             if ItemLedgEntry.Find('-') then begin
+                               repeat
+                                 Qty := Qty + ItemLedgEntry."Invoiced Quantity";
+                               until ItemLedgEntry.Next = 0;
+                               exit(Qty);
+                             end else
+                               exit(0);
+                           END;
+
+                           [LineStart(3889)]
+                           PROCEDURE NegAdjmtQty@1000000011(ItemNo@1000000006 : Code[20];DateFilter@1000000004 : Text[100];LocFilter@1000000003 : Text[100];ExtDocFilter@1000000001 : Text[100]) : Decimal;
+                           VAR
+                             ItemLedgEntry@1000000007 : Record "Item Ledger Entry";
+                             Qty@1000000009 : Decimal;
+                           BEGIN
+                             Qty := 0;
+                             ItemLedgEntry.SetCurrentKey("Entry Type","Item No.","Posting Date","Location Code");
+                             ItemLedgEntry.SetRange("Entry Type",ItemLedgEntry."Entry Type"::"Negative Adjmt.");
+                             ItemLedgEntry.SetFilter("Item No.",ItemNo);
+                             if LocFilter <> '' then
+                               ItemLedgEntry.SetFilter("Location Code",LocFilter);
+                             if DateFilter <> '' then
+                               ItemLedgEntry.SetFilter("Posting Date",DateFilter);
+                             if ExtDocFilter <> '' then
+                               ItemLedgEntry.SetFilter("External Document No.",ExtDocFilter);
+                             ItemLedgEntry.SetFilter("Source No.",'<>%1','');
+                             if ItemLedgEntry.Find('-') then begin
+                               repeat
+                                 Qty := Qty + ItemLedgEntry."Invoiced Quantity";
+                               until ItemLedgEntry.Next = 0;
+                               exit(-Qty);
+                             end else
+                               exit(0);
+                           END;
+
+                         }
+                          }
+    { PropertyModification;
+                         Target=SelectItemErr(Variable 1083);
+                         Property=Id;
+                         OriginalValue=1083;
+                         ModifiedValue=1088 }
+    { Insertion         ;InsertAfter=OpenDocumentTrackingErr(Variable 1082);
+                         ChangedElements=VariableCollection
+                         {
+                           "----"@1087 : Text[30];
+                           Modus@1086 : Decimal;
+                           ItCat@1083 : Record "Item Category";
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

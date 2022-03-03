@@ -1,0 +1,31 @@
+OBJECT Modification "Unit of Measure"(Table 204)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20230719D;
+    Time=120000T;
+    Version List=NAVW114.03;
+  }
+  PROPERTIES
+  {
+    Target="Unit of Measure"(Table 204);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Id(Field 8000);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;In Use              ;Boolean       ;InitValue=true }
+                           { 50301;  ;Catch Code          ;Code10         }
+                           { 50302;  ;UOMTYPE             ;Option        ;OptionString=Standard,Operation }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

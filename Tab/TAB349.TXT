@@ -1,0 +1,112 @@
+OBJECT Modification "Dimension Value"(Table 349)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20190918D;
+    Time=120000T;
+    Version List=NAVW113.00;
+  }
+  PROPERTIES
+  {
+    Target="Dimension Value"(Table 349);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        TestField("Dimension Code");
+                                        TestField(Code);
+                                        "Global Dimension No." := GetGlobalDimensionNo;
+
+                                        if CostAccSetup.Get then begin
+                                          CostAccMgt.UpdateCostCenterFromDim(Rec,Rec,0);
+                                          CostAccMgt.UpdateCostObjectFromDim(Rec,Rec,0);
+                                        end;
+
+                                        SetLastModifiedDateTime;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        TestField("Dimension Code");
+                                        TestField(Code);
+                                        GLSetup.Get;
+                                        "Global Dimension No." := 0;
+                                        if GLSetup."Global Dimension 1 Code" = "Dimension Code" then
+                                          "Global Dimension No." := 1;
+                                        if GLSetup."Global Dimension 2 Code" = "Dimension Code" then
+                                          "Global Dimension No." := 2;
+                                        #4..10
+                                      END;
+
+                         Target=OnInsert }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "Dimension Code" <> xRec."Dimension Code" then
+                                          "Global Dimension No." := GetGlobalDimensionNo;
+                                        if CostAccSetup.Get then begin
+                                          CostAccMgt.UpdateCostCenterFromDim(Rec,xRec,1);
+                                          CostAccMgt.UpdateCostObjectFromDim(Rec,xRec,1);
+                                        end;
+
+                                        SetLastModifiedDateTime;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        if "Dimension Code" <> xRec."Dimension Code" then begin
+                                          GLSetup.Get;
+                                          "Global Dimension No." := 0;
+                                          if GLSetup."Global Dimension 1 Code" = "Dimension Code" then
+                                            "Global Dimension No." := 1;
+                                          if GLSetup."Global Dimension 2 Code" = "Dimension Code" then
+                                            "Global Dimension No." := 2;
+                                        end;
+                                        #3..8
+                                      END;
+
+                         Target=OnModify }
+    { Deletion          ;Target=GetGlobalDimensionNo(PROCEDURE 8);
+                         ChangedElements=PROCEDURECollection
+                         {
+                           [LineStart(41635)]
+                           LOCAL PROCEDURE GetGlobalDimensionNo@8() : Integer;
+                           VAR
+                             GeneralLedgerSetup@1000 : Record "General Ledger Setup";
+                           BEGIN
+                             GeneralLedgerSetup.Get;
+                             case "Dimension Code" of
+                               GeneralLedgerSetup."Global Dimension 1 Code":
+                                 exit(1);
+                               GeneralLedgerSetup."Global Dimension 2 Code":
+                                 exit(2);
+                               GeneralLedgerSetup."Shortcut Dimension 3 Code":
+                                 exit(3);
+                               GeneralLedgerSetup."Shortcut Dimension 4 Code":
+                                 exit(4);
+                               GeneralLedgerSetup."Shortcut Dimension 5 Code":
+                                 exit(5);
+                               GeneralLedgerSetup."Shortcut Dimension 6 Code":
+                                 exit(6);
+                               GeneralLedgerSetup."Shortcut Dimension 7 Code":
+                                 exit(7);
+                               GeneralLedgerSetup."Shortcut Dimension 8 Code":
+                                 exit(8);
+                               else
+                                 exit(0);
+                             end;
+                           END;
+
+                         }
+                          }
+    { Insertion         ;InsertAfter=AnalysisSelectedDim(Variable 1021);
+                         ChangedElements=VariableCollection
+                         {
+                           GLSetup@1020 : Record "General Ledger Setup";
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

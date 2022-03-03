@@ -1,0 +1,56 @@
+OBJECT Modification "Human Resources Setup"(Table 5218)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20230719D;
+    Time=120000T;
+    Version List=NAVW114.03;
+  }
+  PROPERTIES
+  {
+    Target="Human Resources Setup"(Table 5218);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Automatically Create Resource"(Field 4);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Application Nos.    ;Code10        ;TableRelation="No. Series".Code }
+                           { 50001;  ;Overtime Register Nos.;Code10      ;TableRelation="No. Series".Code }
+                           { 50002;  ;Overtime Rate Normal;Decimal        }
+                           { 50003;  ;Overtime Rate Saturday;Decimal      }
+                           { 50004;  ;Overtime Rate Sunday;Decimal        }
+                           { 50005;  ;Overtime Rate Public Holiday;Decimal }
+                           { 50006;  ;Other Overtimes Rate;Decimal        }
+                           { 50007;  ;Security Overtime Normal Val;Decimal;
+                                                                          Description=This is Hourly Attracted Value For Security Men Only }
+                           { 50008;  ;Security Overtime Saturday Val;Decimal;
+                                                                          Description=This is Hourly Attracted Value For Security Men Only }
+                           { 50009;  ;Security Overtime Sunday Val;Decimal;
+                                                                          Description=This is Hourly Attracted Value For Security Men Only }
+                           { 50010;  ;Security Overtime P. H. Val;Decimal;Description=This is Hourly Attracted Value For Security Men Only }
+                           { 50011;  ;Security Other Overtime  Val;Decimal;
+                                                                          Description=This is Hourly Attracted Value For Security Men Only }
+                           { 50012;  ;Medical Rec Nos.    ;Code10        ;TableRelation="No. Series".Code }
+                           { 50013;  ;General Overtime E/D;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code";
+                                                                          Description=To store Overtime Payroll Related Code }
+                           { 50014;  ;Security Overtime E/D;Code10       ;TableRelation="Payroll-E/D Codes."."E/D Code";
+                                                                          Description=To store Overtime Payroll Related Code for security men ordinary day }
+                           { 50015;  ;Security O.T. Sun/P.H;Code10       ;TableRelation="Payroll-E/D Codes."."E/D Code";
+                                                                          Description=To store Overtime Payroll Related Code for security men SunDay or Public Holidays }
+                           { 50016;  ;Leave Plan No       ;Code10        ;TableRelation="No. Series".Code }
+                           { 50017;  ;Course Attendance No;Code10        ;TableRelation="No. Series" }
+                           { 50018;  ;Hospital Code       ;Code10        ;TableRelation="No. Series" }
+                           { 50019;  ;Training Company Code;Code10       ;TableRelation="No. Series" }
+                           { 50020;  ;Casual Employees No.;Code10        ;TableRelation="No. Series".Code }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

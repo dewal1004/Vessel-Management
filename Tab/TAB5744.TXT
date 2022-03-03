@@ -1,0 +1,61 @@
+OBJECT Modification "Transfer Shipment Header"(Table 5744)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Transfer Shipment Header"(Table 5744);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Dimension Set ID"(Field 480);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Voyage No.          ;Code10        ;Editable=false }
+                           { 50001;  ;Req. Type           ;Option        ;OptionString=" ",DECK,ELEC,LSFF,"FISHING GEAR",PACKING,ENGR,LUBS;
+                                                                          Editable=false }
+                           { 50002;  ;New Shortcut Dimension 2 Code;Code20;
+                                                                          TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                                          CaptionML=ENU=Shortcut Dimension 2 Code;
+                                                                          CaptionClass='1,2,2' }
+                           { 50300;  ;Transfer From Voy. No.;Code10      ;Editable=false }
+                           { 50301;  ;Transfer To Voy. No.;Code10        ;Editable=false }
+                           { 50311;  ;Requested By        ;Code30        ;Editable=false }
+                           { 50312;  ;Received By         ;Code30        ;Editable=false }
+                           { 50314;  ;Issued By           ;Code30        ;Editable=false }
+                           { 50315;  ;Approved By         ;Code30        ;Editable=false }
+                           { 50316;  ;Transfer Type       ;Option        ;OptionString=Regular,Repairs,"Dry Dock","Over Hauling";
+                                                                          Editable=false }
+                           { 50321;  ;Posting Date Old    ;Date           }
+                           { 50345;  ;Gen. Prod. Posting Grp. Filter;Code10;
+                                                                          FieldClass=FlowFilter;
+                                                                          TableRelation="Gen. Product Posting Group";
+                                                                          OnValidate=VAR
+                                                                                       GenProdPostingGrp@1000 : Record "Gen. Product Posting Group";
+                                                                                     BEGIN
+                                                                                     END;
+
+                                                                          CaptionML=ENU=Gen. Prod. Posting Group }
+                           { 50399;  ;Transfer Value      ;Decimal       ;FieldClass=Normal }
+                         }
+                          }
+    { Insertion         ;InsertAfter="No."(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"Transfer Order No."                     }
+                           {    ;"Transfer-to Code","Shipment Date"       }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

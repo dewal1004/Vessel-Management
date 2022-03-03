@@ -1,0 +1,28 @@
+OBJECT Modification "Posted Payment Recon. Line"(Table 1296)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20260320D;
+    Time=120000T;
+    Version List=NAVW114.12;
+  }
+  PROPERTIES
+  {
+    Target="Posted Payment Recon. Line"(Table 1296);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Related-Party Name"(Field 15);
+                         Property=Data type;
+                         OriginalValue=Text250;
+                         ModifiedValue=Text50 }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

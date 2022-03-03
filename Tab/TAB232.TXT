@@ -1,0 +1,63 @@
+OBJECT Modification "Gen. Journal Batch"(Table 232)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Gen. Journal Batch"(Table 232);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=BalAccountId(Field 8002);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50329;  ;Shortcut Dimension 1 Code;Code20   ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+                                                                          CaptionClass='1,2,1' }
+                           { 50330;  ;Shortcut Dimension 2 Code;Code20   ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                                          CaptionClass='1,2,2' }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        Balance := GetBalance;
+
+                                        if Balance = 0 then
+                                          OnGeneralJournalBatchBalanced
+                                        else
+                                          OnGeneralJournalBatchNotBalanced;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        Balance := GetBalance;
+                                      END;
+
+                         Target=CheckBalance(PROCEDURE 11) }
+    { PropertyModification;
+                         Target=CannotBeSpecifiedForRecurrJnlErr(Variable 1007);
+                         Property=Id;
+                         OriginalValue=1007;
+                         ModifiedValue=10007 }
+    { PropertyModification;
+                         Target=BalAccountIdDoesNotMatchAGLAccountErr(Variable 1008);
+                         Property=Id;
+                         OriginalValue=1008;
+                         ModifiedValue=10008 }
+    { Insertion         ;InsertAfter=ApprovalsMgmt(Variable 1006);
+                         ChangedElements=VariableCollection
+                         {
+                           "--------------------"@1008 : Text[30];
+                           DimMgt@1007 : Codeunit DimensionManagement;
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

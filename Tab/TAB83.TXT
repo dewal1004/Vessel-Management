@@ -1,0 +1,309 @@
+OBJECT Modification "Item Journal Line"(Table 83)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20260321D;
+    Time=120000T;
+    Version List=NAVW114.24;
+  }
+  PROPERTIES
+  {
+    Target="Item Journal Line"(Table 83);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "Item No." <> xRec."Item No." then begin
+                                          "Variant Code" := '';
+                                          "Bin Code" := '';
+                                        #4..136
+
+                                        OnBeforeVerifyReservedQty(Rec,xRec,FieldNo("Item No."));
+                                        ReserveItemJnlLine.VerifyChange(Rec,xRec);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..139
+
+                                        // //AAA-July 12 2002
+                                        // IF "Journal Template Name"<>'PHYS. INVE' THEN
+                                        // BEGIN
+                                        //  "Shortcut Dimension 2 Code":='ATLANTIC';
+                                        //  "Location Code":='GNRL ASL';
+                                        // END;
+                                        // //"Gen. Bus. Posting Group":='LOCAL';
+                                      END;
+
+                         Target="Item No."(Field 3).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if ("Entry Type" <= "Entry Type"::Transfer) and (Quantity <> 0) then
+                                          TestField("Item No.");
+
+                                        #4..42
+
+                                        if Item."Item Tracking Code" <> '' then
+                                          ReserveItemJnlLine.VerifyQuantity(Rec,xRec);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..45
+                                        //VALIDATE("BOM EXPLODED",TRUE);
+                                      END;
+
+                         Target=Quantity(Field 13).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "Applies-to Entry" <> 0 then begin
+                                          ItemLedgEntry.Get("Applies-to Entry");
+
+                                          if "Value Entry Type" = "Value Entry Type"::Revaluation then begin
+                                            if "Inventory Value Per" <> "Inventory Value Per"::" " then
+                                              Error(Text006,FieldCaption("Applies-to Entry"));
+
+                                            if "Inventory Value Per" = "Inventory Value Per"::" " then
+                                              if not RevaluationPerEntryAllowed("Item No.") then
+                                                Error(RevaluationPerEntryNotAllowedErr);
+
+                                            InitRevalJnlLine(ItemLedgEntry);
+                                        #13..16
+                                              if Quantity > 0 then
+                                                FieldError(Quantity,Text030);
+                                              if Quantity < 0 then
+                                                FieldError(Quantity,Text029);
+                                            end;
+                                            if ItemLedgEntry.TrackingExists then
+                                              Error(Text033,FieldCaption("Applies-to Entry"),ItemTrackingLines.Caption);
+                                        #24..39
+                                            Validate("Unit Amount",0);
+                                            Validate(Quantity,0);
+                                            "Inventory Value (Calculated)" := 0;
+                                            "Inventory Value (Revalued)" := 0;
+                                            "Location Code" := '';
+                                            "Variant Code" := '';
+                                            "Bin Code" := '';
+                                          end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..4
+                                           if "Inventory Value Per" <> "Inventory Value Per"::" " then
+                                        #6..8
+                                             if not RevaluationPerEntryAllowed("Item No.") then
+                                        #10..19
+                                                 FieldError(Quantity,Text029);
+                                        #21..42
+                                           "Inventory Value (Revalued)" := 0;
+                                        #44..47
+                                      END;
+
+                         Target="Applies-to Entry"(Field 29).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
+                                        //VALIDATE("Variant Code","Shortcut Dimension 2 Code");
+                                      END;
+
+                         Target="Shortcut Dimension 2 Code"(Field 35).OnValidate }
+    { Insertion         ;OnValidate=BEGIN
+                                      if "Reason Code" <> xRec."Reason Code" then
+                                        "External Document No." := '';
+                                    END;
+
+                         Target="Reason Code"(Field 42) }
+    { PropertyModification;
+                         Target="Reason Code"(Field 42);
+                         Property=TableRelation;
+                         OriginalValue="Reason Code";
+                         ModifiedValue=Dimension.Code }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        TestField("Entry Type","Entry Type"::Transfer);
+                                        if "New Location Code" <> xRec."New Location Code" then begin
+                                          "New Bin Code" := '';
+                                        #4..6
+                                              WMSManagement.GetDefaultBin("Item No.","Variant Code","New Location Code","New Bin Code")
+                                          end;
+                                        end;
+
+                                        ReserveItemJnlLine.VerifyChange(Rec,xRec);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..9
+                                        //VALIDATE("BOM EXPLODED",TRUE);
+                                        ReserveItemJnlLine.VerifyChange(Rec,xRec);
+                                      END;
+
+                         Target="New Location Code"(Field 50).OnValidate }
+    { Insertion         ;OnValidate=BEGIN
+
+                                      //AAA Feb 2002
+                                      if "Reason Code"='USAGE' then
+                                        if FixAs.Get("External Document No.") then
+                                          Validate("Shortcut Dimension 2 Code",FixAs."Global Dimension 2 Code");
+                                    END;
+
+                         Target="External Document No."(Field 62) }
+    { PropertyInsertion ;Target="External Document No."(Field 62);
+                         Property=TableRelation;
+                         ModifiedValue=IF ("Reason Code"=FILTER('BARGE')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('BARGE'))
+                                       ELSE IF ("Reason Code"=FILTER('BORE HOLES')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('BORE HOLES'))
+                                       ELSE IF ("Reason Code"=FILTER('DEPARTMENT')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('DEPARTMENT'))
+                                       ELSE IF ("Reason Code"=FILTER('FARM')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('FARM'))
+                                       ELSE IF ("Reason Code"=FILTER('GENERATOR')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('GENERATOR'))
+                                       ELSE IF ("Reason Code"=FILTER('HATCHERY')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('HATCHERY'))
+                                       ELSE IF ("Reason Code"=FILTER('MOTOR BOAT')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('MOTOR BOAT'))
+                                       ELSE IF ("Reason Code"=FILTER('MOTOR VEH.')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('MOTOR VEH.'))
+                                       ELSE IF ("Reason Code"=FILTER('PUMP ROOM')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('PUMP ROOM'))
+                                       ELSE IF ("Reason Code"=FILTER('RESIDENT')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('RESIDENT'))
+                                       ELSE IF ("Reason Code"=FILTER('LAB')) "Dimension Value".Code WHERE ("Dimension Code"=FILTER('LAB')) }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "Entry Type" in ["Entry Type"::Consumption,"Entry Type"::Output] then
+                                          WhseValidateSourceLine.ItemLineVerifyChange(Rec,xRec);
+
+                                        #4..28
+                                        end else begin
+                                          GetItem;
+                                          Description := Item.Description;
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..31
+                                            //Description := ItemVariant.Description;  //previous Location
+
+
+                                          // AAA/BRP-2001
+                                          //Description := ItemVariant.Description; //OLD
+                                          if Description ='' then Description := ItemVariant.Description;
+                                        end;
+                                      END;
+
+                         Target="Variant Code"(Field 5402).OnValidate }
+    { Insertion         ;InsertAfter="Phys Invt Counting Period Type"(Field 7381);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;BOM EXPLODED        ;Boolean       ;OnValidate=BEGIN
+                                                                                       //AAA
+                                                                                       ItemSetup.Get;
+                                                                                       if ItemSetup."Automatic BOM Explosion" then ExplodeBom.Run(Rec)
+                                                                                       else "BOM EXPLODED":=false;
+                                                                                     END;
+                                                                                      }
+                           { 50001;  ;Item List Cat       ;Code10        ;TableRelation="Gen. Product Posting Group" }
+                           { 50316;  ;Issue Type          ;Option        ;OptionString=Mainte,Fuel;
+                                                                          Description=From Regular,Repairs,Dry Dock,Over Hauling to }
+                           { 50405;  ;CRM / STR           ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Item Ledger Entry".Quantity WHERE ("Item No."=FIELD("Item No."),
+                                                                                                                              "Location Code"=FILTER('GNRL ASL'|'GNRL COS'|'GNRL ICF'|'GNRL SSC'|'CRM-ASL'|'CRM-COS'|'CRM-ICF'|'CRM-SSC')));
+                                                                          DecimalPlaces=0:5;
+                                                                          Description=Inventory of items in Cold Room/Store;
+                                                                          Editable=false }
+                         }
+                          }
+    { Insertion         ;InsertAfter="Item No.","Posting Date"(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"Document No."                           }
+                           {    ;"Item No."                               }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        LockTable;
+                                        ItemJnlTemplate.Get("Journal Template Name");
+                                        ItemJnlBatch.Get("Journal Template Name","Journal Batch Name");
+
+                                        ValidateShortcutDimCode(1,"Shortcut Dimension 1 Code");
+                                        ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
+                                        ValidateNewShortcutDimCode(1,"New Shortcut Dimension 1 Code");
+                                        ValidateNewShortcutDimCode(2,"New Shortcut Dimension 2 Code");
+
+                                        CheckPlanningAssignment;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        CheckPlanningAssignment;
+                                      END;
+
+                         Target=OnInsert }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        MfgSetup.Get;
+                                        ItemJnlTemplate.Get("Journal Template Name");
+                                        ItemJnlBatch.Get("Journal Template Name","Journal Batch Name");
+                                        #4..32
+                                        "Entry Type" := LastItemJnlLine."Entry Type";
+                                        "Source Code" := ItemJnlTemplate."Source Code";
+                                        "Reason Code" := ItemJnlBatch."Reason Code";
+                                        "Posting No. Series" := ItemJnlBatch."Posting No. Series";
+                                        if ItemJnlTemplate.Type = ItemJnlTemplate.Type::Revaluation then begin
+                                          "Value Entry Type" := "Value Entry Type"::Revaluation;
+                                          "Entry Type" := "Entry Type"::"Positive Adjmt.";
+                                        #40..45
+                                            "Location Code" := UserMgt.GetLocation(0,'',UserMgt.GetSalesFilter);
+                                          "Entry Type"::Output:
+                                            Clear(DimMgt);
+                                        end;
+
+                                        if Location.Get("Location Code") then
+                                          if  Location."Directed Put-away and Pick" then
+                                            "Location Code" := '';
+
+                                        OnAfterSetupNewLine(Rec,LastItemJnlLine,ItemJnlTemplate);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..35
+                                         "Gen. Bus. Posting Group":=ItemJnlBatch."Gen. Bus. Posting Group";
+                                        "Posting No. Series" := ItemJnlBatch."Posting No. Series";
+                                         //AAA
+                                              if CopyStr(ItemJnlBatch."Transfer To",1,3)='RES' then
+                                                  "External Document No.":=ItemJnlBatch."Transfer To";
+                                              "Shortcut Dimension 2 Code":='ATLANTIC';
+                                        #37..48
+                                          //AAA
+                                        #49..55
+                                      END;
+
+                         Target=SetUpNewLine(PROCEDURE 8) }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        "Single-Level Material Cost" := "Unit Cost (Revalued)";
+                                        "Single-Level Capacity Cost" := 0;
+                                        "Single-Level Subcontrd. Cost" := 0;
+                                        #4..7
+                                        "Rolled-up Subcontracted Cost" := 0;
+                                        "Rolled-up Mfg. Ovhd Cost" := 0;
+                                        "Rolled-up Cap. Overhead Cost" := 0;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..10
+                                         {
+                                              //AAA
+                                              COMMIT;
+                                              ItemSetup.GET;
+                                              IF ItemSetup."Automatic BOM Explosion" THEN ExplodeBom.RUN(Rec);
+                                            }
+                                      END;
+
+                         Target=ClearSingleAndRolledUpCosts(PROCEDURE 4) }
+    { Insertion         ;InsertAfter=BlockedErr(Variable 1015);
+                         ChangedElements=VariableCollection
+                         {
+                           "--------"@1017 : Text[30];
+                           ItemSetup@10015 : Record "Inventory Setup";
+                           ItemLedEnt@10013 : Record "Item Ledger Entry";
+                           FixAs@10011 : Record "Fixed Asset";
+                           ExplodeBom@10004 : Codeunit "Item Jnl.-Explode BOM";
+                           RC@10003 : Code[10];
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

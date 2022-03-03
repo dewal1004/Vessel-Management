@@ -1,0 +1,39 @@
+OBJECT Table 50046 Revenue Table VJ
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20151215D;
+    Time=225453T;
+    Modified=true;
+    Version List=;
+  }
+  PROPERTIES
+  {
+  }
+  FIELDS
+  {
+    { 1   ;   ;Job No.             ;Code30         }
+    { 2   ;   ;Vessel              ;Text50         }
+    { 3   ;   ;Export Revenue      ;Decimal        }
+    { 4   ;   ;Local Revenue       ;Decimal        }
+    { 5   ;   ;Budget Export       ;Decimal        }
+    { 6   ;   ;Budget Local        ;Decimal        }
+    { 7   ;   ;ETD                 ;Date           }
+    { 8   ;   ;ETA                 ;Date           }
+    { 9   ;   ;Sea Days            ;Integer        }
+  }
+  KEYS
+  {
+    {    ;"Job No."                               ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

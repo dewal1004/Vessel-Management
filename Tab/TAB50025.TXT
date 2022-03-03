@@ -1,0 +1,47 @@
+OBJECT Table 50025 Holidays
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=144538T;
+    Modified=true;
+    Version List=HR Ver 1.0;
+  }
+  PROPERTIES
+  {
+    OnInsert=BEGIN
+               HCounter := HRec.Count + 1;
+               "Serial No." := HCounter;
+             END;
+
+  }
+  FIELDS
+  {
+    { 1   ;   ;Serial No.          ;Integer        }
+    { 2   ;   ;Date                ;Date           }
+    { 3   ;   ;Month               ;Integer       ;MinValue=0;
+                                                   MaxValue=12 }
+    { 4   ;   ;Day                 ;Integer       ;MinValue=0;
+                                                   MaxValue=31 }
+    { 5   ;   ;Day Of Week         ;Text10        ;Title=true }
+    { 6   ;   ;Description         ;Text50         }
+  }
+  KEYS
+  {
+    {    ;"Serial No."                            ;Clustered=true }
+    {    ;Date                                     }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      HRec@1000000000 : Record Holidays;
+      HCounter@1000000001 : Integer;
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,83 @@
+OBJECT Table 50000 ASL Payroll Setup
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20091215D;
+    Time=145524T;
+    Modified=true;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    OnModify=BEGIN
+               GenSetup.Get;if UserId<> GenSetup.Administrator then Error(Text001);
+             END;
+
+  }
+  FIELDS
+  {
+    { 1   ;   ;Loan Nos.           ;Code10        ;TableRelation="No. Series".Code }
+    { 2   ;   ;Employee Nos.       ;Code10        ;TableRelation="No. Series".Code }
+    { 3   ;   ;Overtime Nos.       ;Code10        ;TableRelation="No. Series".Code }
+    { 4   ;   ;OT Rate Ordinary Jnr;Decimal       ;BlankZero=true }
+    { 5   ;   ;OT Rate Special Jnr ;Decimal       ;BlankZero=true }
+    { 6   ;   ;OT Rate Ordinary Grd3;Decimal      ;BlankZero=true }
+    { 7   ;   ;OT Rate Special Grd3;Decimal       ;BlankZero=true }
+    { 8   ;   ;OT Rate Ordinary Grd2;Decimal      ;BlankZero=true }
+    { 9   ;   ;OT Rate Special Grd2;Decimal       ;BlankZero=true }
+    { 10  ;   ;OT ED Ordinary Jnr  ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 11  ;   ;OT ED Special Jnr   ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 12  ;   ;OT ED Ordinary Grd3 ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 13  ;   ;OT ED Special Grd3  ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 14  ;   ;OT ED Ordinary Grd2 ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 15  ;   ;OT ED Special Grd2  ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 16  ;   ;Staff Loans Control Account;Code10 ;TableRelation="G/L Account"."No." }
+    { 17  ;   ;Taxfree Pay ED      ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 18  ;   ;Night Shift ED      ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 19  ;   ;Day Shift ED        ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 20  ;   ;Night Shift Rate    ;Decimal       ;BlankZero=true }
+    { 21  ;   ;Day Shift Rate      ;Decimal       ;BlankZero=true }
+    { 22  ;   ;Lost Hours ED       ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 23  ;   ;Lost Hours Rate     ;Decimal       ;BlankZero=true }
+    { 24  ;   ;Commission ED       ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 25  ;   ;Monthly Working Days;Integer       ;OnValidate=BEGIN
+                                                                "Daily Working Hours" := "Monthly Working Days" * 8;
+                                                              END;
+                                                               }
+    { 26  ;   ;Productivity Bonus  ;Decimal        }
+    { 27  ;   ;Productivity Bonus ED;Code10       ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 28  ;   ;Daily Working Hours ;Integer        }
+    { 29  ;   ;Total Taxable ED    ;Code10        ;TableRelation="Payroll-E/D Codes."."E/D Code" }
+    { 30  ;   ;Staff Loans Interest Account;Code10;TableRelation="G/L Account"."No." }
+    { 31  ;   ;MD ID               ;Code10        ;TableRelation=User }
+    { 32  ;   ;Accountant 1        ;Code10        ;TableRelation=User }
+    { 33  ;   ;Accountant 2        ;Code10        ;TableRelation=User }
+    { 34  ;   ;Accountant 3        ;Code10        ;TableRelation=User }
+    { 35  ;   ;HR Officer          ;Code10        ;TableRelation=User;
+                                                   Description=To be able to modify the Staff Grade and Scale at the end of the year }
+    { 36  ;   ;Allow HR Edit on    ;Date          ;Description=Date on which Grade and Scale can be edited }
+    { 40  ;   ;Total Monthly Hours ;Decimal        }
+    { 50000;  ;Basic+Hous+Transp   ;Code10        ;TableRelation="Payroll-E/D Codes." }
+    { 50001;  ;NSITF(Employee)     ;Code10        ;TableRelation="Payroll-E/D Codes." }
+    { 50002;  ;NSITF(Employer)     ;Code10        ;TableRelation="Payroll-E/D Codes." }
+    { 50003;  ;Seniority           ;Code10        ;TableRelation="Payroll-E/D Codes." }
+  }
+  KEYS
+  {
+    {    ;"Loan Nos."                             ;Clustered=true }
+    {    ;"Employee Nos."                          }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      Text001@1000000000 : TextConst 'ENU="You are not permitted to modify the set up;"';
+      GenSetup@1000000001 : Record "General Ledger Setup";
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,552 @@
+OBJECT Table 50047 Excel Buffer 4 P&L
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20221215D;
+    Time=133054T;
+    Modified=true;
+    Version List=NAVW13.60;
+  }
+  PROPERTIES
+  {
+    CaptionML=ENU=Excel Buffer;
+  }
+  FIELDS
+  {
+    { 1   ;   ;Row No.             ;Integer       ;OnValidate=BEGIN
+
+                                                                xlRowID := '';
+                                                                if "Row No." <> 0 then
+                                                                  xlRowID := Format("Row No.");
+                                                              END;
+
+                                                   CaptionML=ENU=Row No. }
+    { 2   ;   ;xlRowID             ;Text10        ;CaptionML=ENU=xlRowID }
+    { 3   ;   ;Column No.          ;Integer       ;OnValidate=VAR
+                                                                x@1000 : Integer;
+                                                                i@1001 : Integer;
+                                                                c@1002 : Char;
+                                                              BEGIN
+                                                                xlColID := '';
+                                                                if "Column No." <> 0 then begin
+                                                                  x := "Column No." - 1;
+                                                                  c := 65 + x mod 26;
+                                                                  xlColID[10] := c;
+                                                                  i := 10;
+                                                                  while x > 25 do begin
+                                                                    x := x div 26;
+                                                                    i := i - 1;
+                                                                    c := 64 + x mod 26;
+                                                                    xlColID[i] := c;
+                                                                  end;
+                                                                  for x := i to 10 do
+                                                                    xlColID[1+x-i] := xlColID[x];
+                                                                end;
+                                                              END;
+
+                                                   CaptionML=ENU=Column No. }
+    { 4   ;   ;xlColID             ;Text10        ;CaptionML=ENU=xlColID }
+    { 5   ;   ;Cell Value as Text  ;Text250       ;CaptionML=ENU=Cell Value as Text }
+    { 6   ;   ;Comment             ;Text250       ;CaptionML=ENU=Comment }
+    { 7   ;   ;Formula             ;Text250       ;CaptionML=ENU=Formula }
+    { 8   ;   ;Bold                ;Boolean       ;CaptionML=ENU=Bold }
+    { 9   ;   ;Italic              ;Boolean       ;CaptionML=ENU=Italic }
+    { 10  ;   ;Underline           ;Boolean       ;CaptionML=ENU=Underline }
+    { 11  ;   ;NumberFormat        ;Text30        ;CaptionML=ENU=NumberFormat }
+  }
+  KEYS
+  {
+    {    ;"Row No.","Column No."                  ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      Text000@1000 : TextConst 'ENU=Excel not found.';
+      Text001@1001 : TextConst 'ENU=You must enter a file name.';
+      Text002@1002 : TextConst 'ENU=You must enter an Excel worksheet name.';
+      Text003@1003 : TextConst 'ENU=The file %1 does not exist.';
+      Text004@1004 : TextConst 'ENU=The Excel worksheet %1 does not exist.';
+      Text005@1005 : TextConst 'ENU=Creating Excel worksheet...\\';
+      Text006@1006 : TextConst 'ENU=%1%3%4%3Page %2';
+      Text007@1007 : TextConst 'ENU=Reading Excel worksheet...\\';
+      Text008@1008 : TextConst 'ENU=": Filter "';
+      Text009@1009 : TextConst 'ENU=" can not be converted into an Excel formula."';
+      Text010@1010 : TextConst 'ENU=": Operator "';
+      Text011@1011 : TextConst 'ENU=" is not valid."';
+      Text012@1012 : TextConst 'ENU=: Filter containing more than 1 comparison operator can not be converted into an Excel formula.';
+      Text013@1013 : TextConst 'ENU=&B';
+      Text014@1014 : TextConst 'ENU=&D';
+      Text015@1015 : TextConst 'ENU=&P';
+      Text016@1016 : TextConst 'ENU=A1';
+      Text017@1017 : TextConst 'ENU=SUMIF';
+      Text018@1018 : TextConst 'ENU=#N/A';
+      Text019@1019 : TextConst 'ENU=GLAcc';
+      Text020@1020 : TextConst 'ENU=Period';
+      Text021@1021 : TextConst 'ENU=Budget';
+      XlApplication@1022 : Automation "'{00020813-0000-0000-C000-000000000046}' 1.2:'{00024500-0000-0000-C000-000000000046}':''{00020813-0000-0000-C000-000000000046}' 1.2'.Application";
+      XlWorkBook@1023 : Automation "'{00020813-0000-0000-C000-000000000046}' 1.2:'{00020819-0000-0000-C000-000000000046}':''{00020813-0000-0000-C000-000000000046}' 1.2'.Workbook";
+      XlWorkSheet@1024 : Automation "'{00020813-0000-0000-C000-000000000046}' 1.2:'{00020820-0000-0000-C000-000000000046}':''{00020813-0000-0000-C000-000000000046}' 1.2'.Worksheet";
+      XlWorksheets@1025 : Automation "'{00020813-0000-0000-C000-000000000046}' 1.2:'{000208D8-0000-0000-C000-000000000046}':''{00020813-0000-0000-C000-000000000046}' 1.2'._Worksheet";
+      XlRange@1026 : Automation "'{00020813-0000-0000-C000-000000000046}' 1.2:'{00020846-0000-0000-C000-000000000046}':''{00020813-0000-0000-C000-000000000046}' 1.2'.Range";
+      FormulaUnitErr@1027 : Text[250];
+      ReportedLns@1000000000 : Record "Excel Buffer 4 P&L";
+
+    [LineStart(118191)]
+    PROCEDURE CreateBook@1();
+    BEGIN
+      {IF NOT CREATE(XlApplication,TRUE) THEN
+        ERROR(Text000);
+      XlApplication.Visible(FALSE);
+      XlWorkBook := XlApplication.Workbooks.Add;
+      XlWorkSheet := XlWorkBook.Worksheets.Add;
+      }
+    END;
+
+    [LineStart(118199)]
+    PROCEDURE OpenBook@2(FileName@1000 : Text[250];SheetName@1001 : Text[250]);
+    VAR
+      i@1002 : Integer;
+      EndOfLoop@1003 : Integer;
+      Found@1004 : Boolean;
+    BEGIN
+      {IF FileName = '' THEN
+        ERROR(Text001);
+
+      IF SheetName = '' THEN
+        ERROR(Text002);
+
+      IF NOT EXISTS(FileName) THEN
+        ERROR(Text003,FileName);
+
+      IF NOT CREATE(XlApplication,TRUE) THEN
+        ERROR(Text000);
+
+      XlApplication.Workbooks._Open(FileName);
+      XlWorkBook := XlApplication.ActiveWorkbook;
+      i := 1;
+      EndOfLoop := XlWorkBook.Worksheets.Count;
+      WHILE (i <= EndOfLoop) AND (NOT Found) DO BEGIN
+        XlWorksheets := XlWorkBook.Worksheets.Item(i);
+        IF SheetName = XlWorksheets.Name THEN
+          Found := TRUE;
+        i := i + 1;
+      END;
+      IF Found THEN
+        XlWorkSheet := XlWorkBook.Worksheets.Item(SheetName)
+      ELSE BEGIN
+        XlWorkBook.Close(FALSE);
+        XlApplication.Quit;
+        CLEAR(XlApplication);
+        ERROR(Text004,SheetName);
+      END;
+      }
+    END;
+
+    [LineStart(118232)]
+    PROCEDURE CreateSheet@5(SheetName@1000 : Text[250];ReportHeader@1001 : Text[80];CompanyName@1002 : Text[30];UserID2@1003 : Text[30]);
+    VAR
+      XlEdgeBottom@1004 : Integer;
+      XlContinuous@1005 : Integer;
+      XlLineStyleNone@1006 : Integer;
+      XlLandscape@1007 : Integer;
+      CRLF@1008 : Char;
+      Window@1009 : Dialog;
+      RecNo@1010 : Integer;
+      TotalRecNo@1011 : Integer;
+    BEGIN
+      Window.Open(
+        Text005 +
+        '@1@@@@@@@@@@@@@@@@@@@@@@@@@\');
+      Window.Update(1,0);
+
+      XlEdgeBottom := 9;
+      XlContinuous := 1;
+      XlLineStyleNone := -4142;
+      XlLandscape := 2;
+      CRLF := 10;
+      RecNo := 1;
+      //TotalRecNo := COUNTAPPROX;
+      TotalRecNo := Count;
+      RecNo := 0;
+
+      XlWorkSheet.Name := SheetName;
+      if ReportHeader <> '' then
+        XlWorkSheet.PageSetup.LeftHeader :=
+          StrSubstNo('%1%2%1%3%4',GetExcelReference(1),ReportHeader,CRLF,CompanyName);
+      XlWorkSheet.PageSetup.RightHeader :=
+        StrSubstNo(Text006,GetExcelReference(2),GetExcelReference(3),CRLF,UserID2);
+      XlWorkSheet.PageSetup.Orientation := XlLandscape;
+      if Find('-') then
+        repeat
+          RecNo := RecNo + 1;
+          Window.Update(1,Round(RecNo / TotalRecNo * 10000,1));
+          if NumberFormat <> '' then
+            XlWorkSheet.Range(xlColID + xlRowID).NumberFormat := NumberFormat;
+          if Formula = '' then
+            XlWorkSheet.Range(xlColID + xlRowID).Value := "Cell Value as Text"
+          else
+            XlWorkSheet.Range(xlColID + xlRowID).Formula := Formula;
+          if Comment <> '' then
+            XlWorkSheet.Range(xlColID + xlRowID).AddComment := Comment;
+          if Bold then
+            XlWorkSheet.Range(xlColID + xlRowID).Font.Bold := Bold;
+          if Italic then
+            XlWorkSheet.Range(xlColID + xlRowID).Font.Italic := Italic;
+          XlWorkSheet.Range(xlColID + xlRowID).Borders.LineStyle := XlLineStyleNone;
+          if Underline then
+            XlWorkSheet.Range(xlColID + xlRowID).Borders.Item(XlEdgeBottom).LineStyle := XlContinuous;
+        until Next = 0;
+      //XlWorkSheet.Range(GetExcelReference(5) + ':' + xlColID + xlRowID).Columns.AutoFit;
+
+      Window.Close;
+    END;
+
+    [LineStart(118279)]
+    PROCEDURE CreateRangeName@9(RangeName@1000 : Text[30];FromColumnNo@1001 : Integer;FromRowNo@1002 : Integer);
+    VAR
+      TempExcelBuf@1003 : TEMPORARY Record "Excel Buffer";
+      ToxlRowID@1004 : Text[10];
+    BEGIN
+
+      SetCurrentKey("Row No.","Column No.");
+      if Find('+') then
+        ToxlRowID := xlRowID;
+      TempExcelBuf.Validate("Row No.",FromRowNo);
+      TempExcelBuf.Validate("Column No.",FromColumnNo);
+      XlWorkSheet.Names.Add(
+        RangeName,
+        '=' + GetExcelReference(4) + TempExcelBuf.xlColID + GetExcelReference(4) + TempExcelBuf.xlRowID +
+        ':' + GetExcelReference(4) + TempExcelBuf.xlColID + GetExcelReference(4) + ToxlRowID);
+    END;
+
+    [LineStart(118291)]
+    PROCEDURE GiveUserControl@3();
+    BEGIN
+      XlApplication.Visible(true);
+      XlApplication.UserControl(true);
+      Clear(XlApplication);
+    END;
+
+    [LineStart(118296)]
+    PROCEDURE ReadSheet@4();
+    VAR
+      i@1000 : Integer;
+      j@1001 : Integer;
+      Maxi@1002 : Integer;
+      Maxj@1003 : Integer;
+      Window@1004 : Dialog;
+    BEGIN
+
+      Window.Open(
+        Text007 +
+        '@1@@@@@@@@@@@@@@@@@@@@@@@@\');
+      Window.Update(1,0);
+
+      DeleteAll;
+      XlRange := XlWorkSheet.Range(GetExcelReference(5)).SpecialCells(11);
+      Maxi := XlRange.Row;
+      Maxj := XlRange.Column;
+      i := 1;
+      repeat
+        j := 1;
+        Validate("Row No.",i);
+        repeat
+          Validate("Column No.",j);
+          "Cell Value as Text" := DelChr(Format(XlWorkSheet.Range(xlColID + xlRowID).Value),'<',' ');
+          if "Cell Value as Text" <> '' then begin
+            Insert;
+          end;
+          j := j + 1;
+        until j > Maxj;
+        i := i + 1;
+        Window.Update(1,Round(i / Maxi * 10000,1));
+      until i > Maxi;
+      XlWorkBook.Close(false);
+      XlApplication.Quit;
+      Clear(XlApplication);
+      Window.Close;
+    END;
+
+    [LineStart(118327)]
+    PROCEDURE SelectSheetsName@6(FileName@1000 : Text[250]) : Text[250];
+    VAR
+      i@1001 : Integer;
+      SheetName@1002 : Text[250];
+      EndOfLoop@1003 : Integer;
+      SheetsList@1004 : Text[250];
+      OptionNo@1005 : Integer;
+    BEGIN
+      {
+      IF FileName <> '' THEN BEGIN
+        IF NOT EXISTS(FileName) THEN
+          ERROR(Text003,FileName);
+      END ELSE
+        EXIT('');
+
+      IF NOT CREATE(XlApplication,TRUE) THEN
+        ERROR(Text000);
+      XlApplication.Workbooks._Open(FileName);
+      XlWorkBook := XlApplication.ActiveWorkbook;
+      i := 1;
+      EndOfLoop := XlWorkBook.Worksheets.Count;
+      WHILE i <= EndOfLoop DO BEGIN
+        XlWorksheets := XlWorkBook.Worksheets.Item(i);
+        SheetName := XlWorksheets.Name;
+        IF (SheetName <> '') AND (STRLEN(SheetsList) + STRLEN(SheetName) < 250) THEN
+          SheetsList := SheetsList + SheetName + ','
+        ELSE
+          i := EndOfLoop;
+        i := i + 1;
+      END;
+      XlWorkBook.Close(FALSE);
+      XlApplication.Quit;
+      CLEAR(XlApplication);
+      OptionNo := STRMENU(SheetsList,1);
+      IF OptionNo <> 0 THEN
+        EXIT(SELECTSTR(OptionNo,SheetsList))
+      ELSE
+        EXIT('');
+       }
+    END;
+
+    [LineStart(118360)]
+    PROCEDURE FilterToFormula@7(Filter@1001 : Text[250];Ref1@1002 : Text[250];Ref2@1003 : Text[250]) Formula@1000 : Text[250];
+    VAR
+      FormulaUnit@1004 : ARRAY [250] OF Code[20];
+      IsValue@1005 : ARRAY [250] OF Boolean;
+      i@1006 : Integer;
+      j@1007 : Integer;
+      CountComparison@1008 : Integer;
+    BEGIN
+
+      i := 1;
+      j := 2;
+      repeat
+        if StrPos('|&>.<()*/+-?@',CopyStr(Filter,i,1)) > 0 then begin
+          if FormulaUnit[j] <> '' then
+            j := j + 1;
+          FormulaUnit[j] := FormulaUnit[j] + CopyStr(Filter,i,1);
+          if CopyStr(Filter,i,2) = '..' then begin //Case: X..Y
+            FormulaUnit[j] :=  FormulaUnit[j] + '.';
+            i := i + 1;
+          end;
+          if (StrPos('><',CopyStr(Filter,i,1)) > 0) then begin
+            if (StrPos('>=',CopyStr(Filter,i + 1,1)) > 0) then begin //Case: <>X, <=X, >=X
+              FormulaUnit[j] := FormulaUnit[j] + CopyStr(Filter,i + 1,1);
+              i := i + 1;
+            end;
+          end;
+          j := j + 1;
+        end else begin
+          FormulaUnit[j] := FormulaUnit[j] + CopyStr(Filter,i,1);
+          IsValue[j] := true;
+        end;
+        i := i + 1;
+      until CopyStr(Filter,i,1) = '';
+
+      j := 1;
+      Formula := '=';
+      while NextValue(FormulaUnit,IsValue,j) do begin
+        case FormulaUnit[j] of
+          '..':
+            begin
+              case true of
+                IsValue[j - 1] and IsValue[j + 1]:
+                  begin
+                    if FormulaUnit[j - 1] > FormulaUnit[j + 1] then begin
+                      Formula := '';
+                      FormulaUnitErr := Filter + Text008 + FormulaUnit[j - 1] + '..' + FormulaUnit[j + 1] +
+                        Text009;
+                      exit;
+                    end else begin
+                      Formula := Formula + SumIf(Ref1,'>=',FormulaUnit[j - 1],Ref2) + '-' +
+                        SumIf(Ref1,'>=',FormulaUnit[j + 1],Ref2);
+                      FormulaUnit[j - 1] := '';
+                      FormulaUnit[j + 1] := '';
+                    end;
+                  end;
+                IsValue[j - 1] and not IsValue[j + 1] :
+                  begin
+                    Formula := Formula + SumIf(Ref1,'>=',FormulaUnit[j - 1],Ref2);
+                    FormulaUnit[j - 1] := '';
+                  end;
+                not IsValue[j - 1] and IsValue[j + 1]:
+                  begin
+                    Formula := Formula + SumIf(Ref1,'<=',FormulaUnit[j + 1],Ref2);
+                    FormulaUnit[j + 1] := '';
+                  end;
+              end;
+            end;
+          '>':
+            begin
+              Formula := Formula + SumIf(Ref1,'>',FormulaUnit[j + 1],Ref2);
+              CountComparison := CountComparison + 1;
+              FormulaUnit[j + 1] := '';
+            end;
+          '<':
+            begin
+              Formula := Formula + SumIf(Ref1,'<',FormulaUnit[j + 1],Ref2);
+              CountComparison := CountComparison + 1;
+              FormulaUnit[j + 1] := '';
+            end;
+          '>=':
+            begin
+              Formula := Formula + SumIf(Ref1,'>=',FormulaUnit[j + 1],Ref2);
+              CountComparison := CountComparison + 1;
+              FormulaUnit[j + 1] := '';
+            end;
+          '<=':
+            begin
+              Formula := Formula + SumIf(Ref1,'<=',FormulaUnit[j + 1],Ref2);
+              CountComparison := CountComparison + 1;
+              FormulaUnit[j + 1] := '';
+            end;
+          '<>','&','+','-','/','*','?','@':
+            begin
+              Formula := '';
+              FormulaUnitErr := Filter + Text010 + FormulaUnit[j] + Text009;
+              exit;
+            end;
+          '|':
+            begin
+              if IsValue[j - 1]  and (FormulaUnit[j - 1] <> '') then begin
+                Formula := Formula + SumIf(Ref1,'=',FormulaUnit[j - 1],Ref2);
+                FormulaUnit[j - 1] := '';
+              end;
+              Formula := Formula + '+';
+            end;
+          '(',')':
+            begin
+              Formula := Formula + FormulaUnit[j];
+            end;
+          else begin
+            Formula := '';
+            FormulaUnitErr := Filter + Text010 + FormulaUnit[j] + Text011;
+            exit;
+          end;
+        end;
+        if CountComparison > 1 then begin
+          Formula := '';
+          FormulaUnitErr := Filter + Text012;
+          exit;
+        end;
+        FormulaUnit[j] := '';
+      end;
+      if IsValue[j - 1] and (FormulaUnit[j - 1] <> '') then
+        Formula := Formula + SumIf(Ref1,'=',FormulaUnit[j - 1],Ref2);
+    END;
+
+    [LineStart(118478)]
+    LOCAL PROCEDURE NextValue@8(FormulaUnit@1000 : ARRAY [250] OF Code[20];IsValue@1001 : ARRAY [250] OF Boolean;VAR j@1002 : Integer) : Boolean;
+    BEGIN
+
+      repeat
+        j := j + 1;
+      until not IsValue[j];
+      if FormulaUnit[j] <> '' then
+        exit(true)
+      else
+        exit(false);
+    END;
+
+    [LineStart(118488)]
+    LOCAL PROCEDURE SumIf@15(Ref1@1000 : Text[250];Operator@1001 : Text[250];Value@1002 : Code[20];Ref2@1003 : Text[250]) : Text[250];
+    VAR
+      Symbol@1004 : Char;
+      IsNumeric@1005 : Integer;
+    BEGIN
+
+      Symbol := 34;
+      exit(
+        GetExcelReference(6) + '(' + Ref1 + ';' +
+        Format(Symbol) + Operator + '''' + Value + '''' + Format(Symbol) + ';' +
+        Ref2 + ')');
+    END;
+
+    [LineStart(118496)]
+    PROCEDURE GetFormulaUnitErr@21() : Text[250];
+    BEGIN
+      exit(FormulaUnitErr);
+    END;
+
+    [LineStart(118499)]
+    PROCEDURE GetExcelReference@10(Which@1000 : Integer) : Text[250];
+    BEGIN
+
+      case Which of
+        1:exit(Text013);
+          // DO NOT TRANSLATE: &B is the Excel code to turn bold printing on or off for customized Header/Footer.
+        2:exit(Text014);
+          // DO NOT TRANSLATE: &D is the Excel code to print the current date in customized Header/Footer.
+        3:exit(Text015);
+          // DO NOT TRANSLATE: &P is the Excel code to print the page number in customized Header/Footer.
+        4:exit('$');
+          // DO NOT TRANSLATE: $ is the Excel code for absolute reference to cells.
+        5:exit(Text016);
+          // DO NOT TRANSLATE: A1 is the Excel reference of the first cell.
+        6:exit(Text017);
+          // DO NOT TRANSLATE: SUMIF is the name of the Excel function used to summarize values according to some conditions.
+        7:exit(Text018);
+          // DO NOT TRANSLATE: The #N/A Excel error value occurs when a value is not available to a function or formula.
+        8:exit(Text019);
+          // DO NOT TRANSLATE: GLAcc is used to define an Excel range name. You must refer to Excel rules to change this term.
+        9:exit(Text020);
+          // DO NOT TRANSLATE: Period is used to define an Excel range name. You must refer to Excel rules to change this term.
+        10:exit(Text021);
+          // DO NOT TRANSLATE: Budget is used to define an Excel worksheet name. You must refer to Excel rules to change this term.
+      end;
+    END;
+
+    [LineStart(118524)]
+    PROCEDURE CreateSheet2@1000000000(SheetName@1000 : Text[250];ReportHeader@1001 : Text[80];CompanyName@1002 : Text[30];UserID2@1003 : Text[30]);
+    VAR
+      XlEdgeBottom@1004 : Integer;
+      XlContinuous@1005 : Integer;
+      XlLineStyleNone@1006 : Integer;
+      XlLandscape@1007 : Integer;
+      CRLF@1008 : Char;
+      Window@1009 : Dialog;
+      RecNo@1010 : Integer;
+      TotalRecNo@1011 : Integer;
+    BEGIN
+      Window.Open(
+        Text005 +
+        '@1@@@@@@@@@@@@@@@@@@@@@@@@@\');
+      Window.Update(1,0);
+
+      XlEdgeBottom := 9;
+      XlContinuous := 1;
+      XlLineStyleNone := -4142;
+      XlLandscape := 2;
+      CRLF := 10;
+      RecNo := 1;
+      //TotalRecNo := COUNTAPPROX;
+      TotalRecNo := ReportedLns.Count;
+      //MESSAGE('I counted %1',ReportedLns.COUNT);
+      RecNo := 0;
+
+      XlWorkSheet.Name := SheetName;
+      if ReportHeader <> '' then
+        XlWorkSheet.PageSetup.LeftHeader :=
+          StrSubstNo('%1%2%1%3%4',GetExcelReference(1),ReportHeader,CRLF,CompanyName);
+      XlWorkSheet.PageSetup.RightHeader :=
+        StrSubstNo(Text006,GetExcelReference(2),GetExcelReference(3),CRLF,UserID2);
+      XlWorkSheet.PageSetup.Orientation := XlLandscape;
+      if ReportedLns.Find('-') then
+        repeat
+          XlWorkSheet.Range(ReportedLns.xlColID+ ReportedLns.xlRowID).Value  :=ReportedLns."Cell Value as Text";
+          //MESSAGE('Value in %1%2 is %3',ReportedLns.xlColID,ReportedLns.xlRowID,ReportedLns."Cell Value as Text")
+        until ReportedLns.Next = 0
+       else Message('Records not Found but Value is ');
+      //XlWorkSheet.Range(GetExcelReference(5) + ':' + xlColID + xlRowID).Columns.AutoFit;
+      Window.Close;
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

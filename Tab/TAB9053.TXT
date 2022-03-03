@@ -1,0 +1,88 @@
+OBJECT Modification "Sales Cue"(Table 9053)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Sales Cue"(Table 9053);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Partially Shipped"(Field 8);
+                         Property=CalcFormula;
+                         OriginalValue=Count("Sales Header" WHERE ("Document Type"=FILTER(Order),
+                                                                   Status=FILTER(Released),
+                                                                   Shipped=FILTER(true),
+                                                                   "Completely Shipped"=FILTER(false),
+                                                                   "Shipment Date"=FIELD("Date Filter2"),
+                                                                   "Responsibility Center"=FIELD("Responsibility Center Filter")));
+                         ModifiedValue=Count("Sales Header" WHERE ("Document Type"=FILTER(Order),
+                                                                   Status=FILTER(Released),
+                                                                   Ship=FILTER(true),
+                                                                   "Completely Shipped"=FILTER(false),
+                                                                   "Shipment Date"=FIELD("Date Filter2"),
+                                                                   "Responsibility Center"=FIELD("Responsibility Center Filter"))) }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        CountSalesOrders.SetRange(Status,CountSalesOrders.Status::Released);
+                                        CountSalesOrders.SetRange(Completely_Shipped,false);
+                                        FilterGroup(2);
+                                        #4..11
+                                            end;
+                                          FieldNo("Partially Shipped"):
+                                            begin
+                                              CountSalesOrders.SetRange(Shipped,true);
+                                              CountSalesOrders.SetFilter(Shipment_Date,GetFilter("Date Filter2"));
+                                            end;
+                                          FieldNo(Delayed):
+                                        #19..24
+                                        CountSalesOrders.Open;
+                                        CountSalesOrders.Read;
+                                        exit(CountSalesOrders.Count_Orders);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..14
+                                              CountSalesOrders.SetRange(Ship,true);
+                                        #16..27
+                                      END;
+
+                         Target=CountOrders(PROCEDURE 9) }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        SalesHeader.SetRange("Document Type",SalesHeader."Document Type"::Order);
+                                        SalesHeader.SetRange(Status,SalesHeader.Status::Released);
+                                        SalesHeader.SetRange("Completely Shipped",false);
+                                        #4..8
+                                            end;
+                                          FieldNo("Partially Shipped"):
+                                            begin
+                                              SalesHeader.SetRange(Shipped,true);
+                                              SalesHeader.SetFilter("Shipment Date",GetFilter("Date Filter2"));
+                                            end;
+                                          FieldNo(Delayed):
+                                        #16..21
+                                        FilterGroup(2);
+                                        SalesHeader.SetFilter("Responsibility Center",GetFilter("Responsibility Center Filter"));
+                                        FilterGroup(0);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..11
+                                              SalesHeader.SetRange(Ship,true);
+                                        #13..24
+                                      END;
+
+                         Target=FilterOrders(PROCEDURE 11) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

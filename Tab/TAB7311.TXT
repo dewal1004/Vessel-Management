@@ -1,0 +1,42 @@
+OBJECT Modification "Warehouse Journal Line"(Table 7311)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20290520D;
+    Time=120000T;
+    Version List=NAVW114.14;
+  }
+  PROPERTIES
+  {
+    Target="Warehouse Journal Line"(Table 7311);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        WhseJnlTemplate.Get("Journal Template Name");
+                                        if WhseJnlTemplate.Type = WhseJnlTemplate.Type::Reclassification then
+                                          exit;
+
+                                        Location.Get("Location Code");
+                                        #6..16
+                                              "To Bin Code" := Bin.Code;
+                                            end;
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        WhseJnlTemplate.Get("Journal Template Name");
+                                        if WhseJnlTemplate.Type <> WhseJnlTemplate.Type::Item then
+                                        #3..19
+                                      END;
+
+                         Target=SetUpAdjustmentBin(PROCEDURE 100) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

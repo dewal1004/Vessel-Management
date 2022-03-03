@@ -1,0 +1,29 @@
+OBJECT Modification "Bank Account Posting Group"(Table 277)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220519D;
+    Time=120000T;
+    Version List=NAVW114.01;
+  }
+  PROPERTIES
+  {
+    Target="Bank Account Posting Group"(Table 277);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="G/L Bank Account No."(Field 2);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50001;  ;Category            ;Option        ;OptionString="Cash/Cheques","Local Bank","Foreign Bank" }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

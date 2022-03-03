@@ -1,0 +1,33 @@
+OBJECT Modification "Prod. Order Line"(Table 5406)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20021219D;
+    Time=120000T;
+    Version List=NAVW114.08;
+  }
+  PROPERTIES
+  {
+    Target="Prod. Order Line"(Table 5406);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Production BOM Version Code"(Field 99000750);
+                         Property=Data type;
+                         OriginalValue=Code20;
+                         ModifiedValue=Code10 }
+    { PropertyModification;
+                         Target="Routing Version Code"(Field 99000751);
+                         Property=Data type;
+                         OriginalValue=Code20;
+                         ModifiedValue=Code10 }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,99 @@
+OBJECT Modification "Bank Account"(Table 270)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20021219D;
+    Time=120000T;
+    Version List=NAVW114.08;
+  }
+  PROPERTIES
+  {
+    Target="Bank Account"(Table 270);
+  }
+  CHANGES
+  {
+    { Insertion         ;OnValidate=BEGIN
+                                      if BankPGrp.Get("Bank Acc. Posting Group") then
+                                        Category := BankPGrp.Category;
+                                    END;
+
+                         Target="Bank Acc. Posting Group"(Field 21) }
+    { Insertion         ;InsertAfter="Positive Pay Export Code"(Field 1260);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50001;  ;Category            ;Option        ;OptionString="Cash/Cheques","Local Bank","Foreign Bank","Term Deposit" }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "No." = '' then begin
+                                          GLSetup.Get;
+                                          GLSetup.TestField("Bank Account Nos.");
+                                          NoSeriesMgt.InitSeries(GLSetup."Bank Account Nos.",xRec."No. Series",0D,"No.","No. Series");
+                                        end;
+
+                                        if not InsertFromContact then
+                                          UpdateContFromBank.OnInsert(Rec);
+
+                                        DimMgt.UpdateDefaultDim(
+                                          DATABASE::"Bank Account","No.",
+                                          "Global Dimension 1 Code","Global Dimension 2 Code");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..8
+                                        "Global Dimension 2 Code":='ATLANTIC';     //AAA - Oct 2002
+                                        #10..12
+                                      END;
+
+                         Target=OnInsert }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        "Last Date Modified" := Today;
+
+                                        if IsContactUpdateNeeded then begin
+                                          Modify;
+                                          UpdateContFromBank.OnModify(Rec);
+                                          if not Find then begin
+                                            Reset;
+                                            if Find then;
+                                          end;
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..5
+                                        end;
+                                      END;
+
+                         Target=OnModify }
+    { PropertyModification;
+                         Target=DataExchNotSetErr(Variable 1016);
+                         Property=Id;
+                         OriginalValue=1016;
+                         ModifiedValue=10016 }
+    { PropertyModification;
+                         Target=BankStmtScheduledDownloadDescTxt(Variable 1018);
+                         Property=Id;
+                         OriginalValue=1018;
+                         ModifiedValue=10018 }
+    { PropertyModification;
+                         Target=CancelTxt(Variable 1017);
+                         Property=Id;
+                         OriginalValue=1017;
+                         ModifiedValue=10017 }
+    { Insertion         ;InsertAfter=InvalidValueErr(Variable 1015);
+                         ChangedElements=VariableCollection
+                         {
+                           BankPGrp@1016 : Record "Bank Account Posting Group";
+                           Text001@1017 : TextConst 'ENU=There may be a statement using the %1.\\';
+                           Text002@1018 : TextConst 'ENU=Do you want to change %1?';
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

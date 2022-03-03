@@ -1,0 +1,80 @@
+OBJECT Modification "Item Ledger Entry"(Table 32)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20230719D;
+    Time=120000T;
+    Version List=NAVW114.03;
+  }
+  PROPERTIES
+  {
+    Target="Item Ledger Entry"(Table 32);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Return Reason Code"(Field 6602);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50025;  ;Source Code         ;Code10        ;CaptionML=ENU=Source Code }
+                           { 50026;  ;Old External Document No.;Code20   ;CaptionML=ENU=Old External Document No. }
+                           { 50027;  ;Applied Negative    ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=-Sum("Item Application Entry".Quantity WHERE ("Outbound Item Entry No."=FIELD("Entry No."),
+                                                                                                                                    "Inbound Item Entry No."=FILTER(<>0),
+                                                                                                                                    Quantity=FILTER(<0)));
+                                                                          Editable=false }
+                           { 50028;  ;Applied Positive    ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Item Application Entry".Quantity WHERE ("Inbound Item Entry No."=FIELD("Entry No."),
+                                                                                                                                   "Outbound Item Entry No."=FILTER(<>0),
+                                                                                                                                   Quantity=FILTER(<0)));
+                                                                          Editable=false }
+                           { 50029;  ;Changed             ;Boolean        }
+                           { 50030;  ;Old Quantity        ;Decimal        }
+                           { 50031;  ;Value Entry Qty     ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Value Entry"."Item Ledger Entry Quantity" WHERE ("Item Ledger Entry No."=FIELD("Entry No."),
+                                                                                                                                            Adjustment=CONST(false),
+                                                                                                                                            "Entry Type"=CONST("Direct Cost"))) }
+                         }
+                          }
+    { Insertion         ;InsertAfter="Serial No."(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"Document No.","Posting Date","Entry Type";
+                                                                          SumIndexFields=Quantity }
+                           {    ;"Entry Type",Nonstock,"Item No.","Posting Date","Location Code" }
+                           {    ;"Entry Type","Item No.","Posting Date","Location Code" }
+                           {    ;"Item No.","Location Code","Posting Date","Entry Type" }
+                           {    ;"Location Code","Source Code","Item No." }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "Entry Type" <> "Entry Type"::Transfer then
+                                          exit(false);
+
+                                        ItemApplnEntry.SetCurrentKey("Item Ledger Entry No.");
+                                        ItemApplnEntry.SetRange("Item Ledger Entry No.","Entry No.");
+                                        ItemApplnEntry.Find('-');
+                                        if not "Completely Invoiced" then begin
+                                          CompletelyInvoiced := true;
+                                          repeat
+                                        #10..17
+                                          end;
+                                        end;
+                                        exit(false);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..5
+                                        if ItemApplnEntry.Find('-') then
+                                        #7..20
+                                      END;
+
+                         Target=SetAvgTransCompletelyInvoiced(PROCEDURE 80) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

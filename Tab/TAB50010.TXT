@@ -1,0 +1,83 @@
+OBJECT Table 50010 Payroll-Posting Group Line.
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20050202D;
+    Time=113512T;
+    Modified=true;
+    Version List=CBU Ver. 1.00;
+  }
+  PROPERTIES
+  {
+  }
+  FIELDS
+  {
+    { 1   ;   ;Posting Group       ;Code20        ;NotBlank=true;
+                                                   Editable=true }
+    { 2   ;   ;E/D Code            ;Code20        ;TableRelation="Payroll-E/D Codes.";
+                                                   OnValidate=BEGIN
+                                                                 EDFileRec.Get( "E/D Code");
+                                                              END;
+
+                                                   NotBlank=true }
+    { 3   ;   ;Debit Account No.   ;Code20        ;TableRelation=IF ("Debit Acc. Type"=CONST(Finance)) "G/L Account"
+                                                                 ELSE IF ("Debit Acc. Type"=CONST(Customer)) Customer
+                                                                 ELSE IF ("Debit Acc. Type"=CONST(Supplier)) Vendor;
+                                                   OnValidate=BEGIN
+                                                                if "Debit Account No." <> '' then
+                                                                  if "Debit Acc. Type" = 0 then
+                                                                     FinanceAccRec.Get( "Debit Account No.")
+                                                                  else
+                                                                     CustomerAccRec.Get( "Debit Account No.");
+                                                              END;
+                                                               }
+    { 4   ;   ;Credit Account No.  ;Code20        ;TableRelation=IF ("Credit Acc. Type"=CONST(Finance)) "G/L Account"
+                                                                 ELSE IF ("Credit Acc. Type"=CONST(Customer)) Customer
+                                                                 ELSE IF ("Credit Acc. Type"=CONST(Supplier)) Vendor;
+                                                   OnValidate=BEGIN
+                                                                if "Credit Account No." <> '' then
+                                                                  if "Credit Acc. Type" = 0 then
+                                                                     FinanceAccRec.Get( "Credit Account No.")
+                                                                  else
+                                                                     CustomerAccRec.Get( "Credit Account No.");
+                                                              END;
+                                                               }
+    { 5   ;   ;Debit Acc. Type     ;Option        ;OptionString=Finance,Customer,Supplier }
+    { 6   ;   ;Credit Acc. Type    ;Option        ;OptionString=Finance,Customer,Supplier }
+    { 7   ;   ;Global Dimension 1 Code;Code10     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+                                                   CaptionClass='1,1,1' }
+    { 8   ;   ;Global Dimension 2 Code;Code10     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                   CaptionClass='1,1,2' }
+    { 9   ;   ;Transfer Department ;Boolean       ;InitValue=true }
+    { 10  ;   ;Transfer Business Units;Boolean    ;InitValue=true }
+  }
+  KEYS
+  {
+    {    ;"Posting Group","E/D Code"              ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      EDFileRec@1000000000 : Record "Payroll-E/D Codes.";
+      CustomerAccRec@1000000001 : Record Customer;
+      FinanceAccRec@1000000002 : Record "G/L Account";
+
+    BEGIN
+    {
+      Created           : FTN, 14/3/93
+      File name         : KI03 P.BookGrps Line
+      Comments          : The Header card that is to be used to enter the detail
+                          lines for booking groups
+      File details      : Primary Key is;
+                           Booking Group, E/D Code
+                        : Relations;
+                           To E/D File
+                           To Finance Account
+    }
+    END.
+  }
+}
+

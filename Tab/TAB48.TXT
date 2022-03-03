@@ -1,0 +1,37 @@
+OBJECT Modification "Invt. Posting Buffer"(Table 48)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20190918D;
+    Time=120000T;
+    Version List=NAVW113.00;
+  }
+  PROPERTIES
+  {
+    Target="Invt. Posting Buffer"(Table 48);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Dimension Set ID"(Field 480);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50362;  ;External Document No.;Code20       ;CaptionML=ENU=External Document No. }
+                           { 50364;  ;Reason Code         ;Code10        ;TableRelation="Reason Code";
+                                                                          OnValidate=BEGIN
+                                                                                       // AAA -Feb 2002
+                                                                                       //IF "Reason Code"='USAGE' THEN "Gen. Bus. Posting Group":='LOCAL';
+                                                                                     END;
+
+                                                                          CaptionML=ENU=Reason Code }
+                           { 50365;  ;Maintenance Code    ;Code10         }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

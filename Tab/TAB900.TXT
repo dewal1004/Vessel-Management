@@ -1,0 +1,43 @@
+OBJECT Modification "Assembly Header"(Table 900)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220919D;
+    Time=120000T;
+    Version List=NAVW114.06;
+  }
+  PROPERTIES
+  {
+    Target="Assembly Header"(Table 900);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        "Due Date" := NewDueDate;
+                                        CheckIsNotAsmToOrder;
+                                        TestStatusOpen;
+
+                                        if CallValidateOnOtherDates then
+                                          ValidateDates(FieldNo("Due Date"),false);
+                                        if (xRec."Due Date" <> "Due Date") and (Quantity <> 0) then
+                                          ReservationCheckDateConfl.AssemblyHeaderCheck(Rec,(CurrFieldNo <> 0) or TestReservationDateConflict);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..4
+                                        if (xRec."Due Date" <> "Due Date") and (Quantity <> 0) then
+                                          ReservationCheckDateConfl.AssemblyHeaderCheck(Rec,(CurrFieldNo <> 0) or TestReservationDateConflict);
+                                        if CallValidateOnOtherDates then
+                                          ValidateDates(FieldNo("Due Date"),false);
+                                      END;
+
+                         Target=ValidateDueDate(PROCEDURE 35) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

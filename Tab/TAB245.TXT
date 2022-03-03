@@ -1,0 +1,62 @@
+OBJECT Modification "Requisition Wksh. Name"(Table 245)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Requisition Wksh. Name"(Table 245);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Recurring(Field 22);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50001;  ;Approved            ;Boolean        }
+                           { 50002;  ;Requested By        ;Code10        ;FieldClass=FlowField;
+                                                                          CalcFormula=Min("Requisition Line"."Requester ID" WHERE ("Worksheet Template Name"=FIELD("Worksheet Template Name"),
+                                                                                                                                   "Journal Batch Name"=FIELD(Name))) }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        ReqLine.SetRange("Worksheet Template Name","Worksheet Template Name");
+                                        ReqLine.SetRange("Journal Batch Name",Name);
+                                        ReqLine.DeleteAll(true);
+
+                                        PlanningErrorLog.SetRange("Worksheet Template Name","Worksheet Template Name");
+                                        PlanningErrorLog.SetRange("Journal Batch Name",Name);
+                                        PlanningErrorLog.DeleteAll;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..7
+
+                                        //AAA Dec 2001
+
+                                        //IF USERID
+                                        HR:='HRR';
+                                        if GLSetUp.Find('-') then ;
+                                        if HR<>GLSetUp.Administrator then
+                                        Error('You cannot delete anything');
+                                      END;
+
+                         Target=OnDelete }
+    { Insertion         ;InsertAfter=PlanningErrorLog(Variable 1002);
+                         ChangedElements=VariableCollection
+                         {
+                           GLSetUp@1004 : Record "General Ledger Setup";
+                           HR@1003 : Code[10];
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

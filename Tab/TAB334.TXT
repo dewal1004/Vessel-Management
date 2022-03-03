@@ -1,0 +1,31 @@
+OBJECT Modification "Column Layout"(Table 334)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Column Layout"(Table 334);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Comparison Period Formula LCID"(Field 30);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Ledger Entry Sub Type;Code15        }
+                           { 50001;  ;SubType Head        ;Code15         }
+                           { 50013;  ;Include Closing Date;Boolean        }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

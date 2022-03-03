@@ -1,0 +1,29 @@
+OBJECT Modification "Return Shipment Line"(Table 6651)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220919D;
+    Time=120000T;
+    Version List=NAVW114.06;
+  }
+  PROPERTIES
+  {
+    Target="Return Shipment Line"(Table 6651);
+  }
+  CHANGES
+  {
+    { PropertyInsertion ;Target=ShowItemPurchCrMemoLines(PROCEDURE 9);
+                         Property=Local;
+                         ModifiedValue=Yes }
+    { PropertyInsertion ;Target=ShowLineComments(PROCEDURE 5);
+                         Property=Local;
+                         ModifiedValue=Yes }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

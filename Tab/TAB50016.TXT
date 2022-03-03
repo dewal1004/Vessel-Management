@@ -1,0 +1,34 @@
+OBJECT Table 50016 Class Information
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=145051T;
+    Modified=true;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    LookupPageID="Class Information List";
+    DrillDownPageID="Class Information List";
+  }
+  FIELDS
+  {
+    { 1   ;   ;Code                ;Code10         }
+    { 2   ;   ;Description         ;Text30         }
+  }
+  KEYS
+  {
+    {    ;Code                                    ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

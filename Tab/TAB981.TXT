@@ -1,0 +1,67 @@
+OBJECT Modification "Payment Registration Buffer"(Table 981)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20230819D;
+    Time=120000T;
+    Version List=NAVW114.04;
+  }
+  PROPERTIES
+  {
+    Target="Payment Registration Buffer"(Table 981);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if not "Payment Made" then begin
+                                          "Amount Received" := 0;
+                                          "Date Received" := 0D;
+                                        #4..6
+                                        end;
+
+                                        AutoFillDate;
+                                        if "Amount Received" = 0 then
+                                          SuggestAmountReceivedBasedOnDate;
+                                        UpdateRemainingAmount;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..9
+
+                                        SuggestAmountReceivedBasedOnDate;
+                                        UpdateRemainingAmount;
+                                      END;
+
+                         Target="Payment Made"(Field 9).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if TempSavePmtRegnBuf.FindSet then
+                                          repeat
+                                            if Get(TempSavePmtRegnBuf."Ledger Entry No.") then begin
+                                              "Payment Made" := TempSavePmtRegnBuf."Payment Made";
+                                              "Date Received" := TempSavePmtRegnBuf."Date Received";
+                                              "Pmt. Discount Date" := TempSavePmtRegnBuf."Pmt. Discount Date";
+                                              SuggestAmountReceivedBasedOnDate;
+                                              "Remaining Amount" := TempSavePmtRegnBuf."Remaining Amount";
+                                              "Amount Received" := TempSavePmtRegnBuf."Amount Received";
+                                              "External Document No." := TempSavePmtRegnBuf."External Document No.";
+                                              Modify;
+                                            end;
+                                          until TempSavePmtRegnBuf.Next = 0;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..6
+                                              "Amount Received" := TempSavePmtRegnBuf."Amount Received";
+                                        #8..13
+                                      END;
+
+                         Target=RestoreUserValues(PROCEDURE 13) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

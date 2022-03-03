@@ -1,0 +1,59 @@
+OBJECT Modification "Sales Invoice Line"(Table 113)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220919D;
+    Time=120000T;
+    Version List=NAVW114.06;
+  }
+  PROPERTIES
+  {
+    Target="Sales Invoice Line"(Table 113);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Description 2"(Field 12);
+                         Property=Data type;
+                         OriginalValue=Text50;
+                         ModifiedValue=Text100 }
+    { Insertion         ;InsertAfter="Price description"(Field 7004);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;Grade               ;Option        ;OptionString=" ",Excellent,Good,Average,Poor;
+                                                                          Description=,Excellent,Good,Average,Poor }
+                           { 50301;  ;Comment             ;Text80         }
+                           { 50302;  ;quantity1           ;Decimal       ;Description=Used by Performance score for sum }
+                           { 50303;  ;TTSkill             ;Decimal       ;Description=Used by skill score for sum }
+                           { 50304;  ;TTPerformance       ;Decimal       ;Description=used by performance total for sum }
+                           { 50350;  ;Numbers             ;Decimal       ;Description=factor of Quantity }
+                           { 50351;  ;Packing             ;Decimal       ;Description=factor of Quantity }
+                         }
+                          }
+    { Insertion         ;InsertAfter="Bill-to Customer No."(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"Document No.",Type,"No."               ;SumIndexFields=Quantity }
+                           {    ;"Document No.",Type,"Item Category Code","Posting Group";
+                                                                          SumIndexFields=Quantity,Packing }
+                           {    ;"Location Code","Shipment Date","No."   ;SumIndexFields=Amount }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        SalesCommentLine.ShowComments(SalesCommentLine."Document Type"::"Posted Invoice","Document No.","Line No.");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        SalesCommentLine.ShowComments(SalesCommentLine."Document Type"::Shipment,"Document No.","Line No.");
+                                      END;
+
+                         Target=ShowLineComments(PROCEDURE 8) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

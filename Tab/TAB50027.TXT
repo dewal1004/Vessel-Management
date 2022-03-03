@@ -1,0 +1,108 @@
+OBJECT Table 50027 Training Courses
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=144528T;
+    Modified=true;
+    Version List=HR Ver 1.0;
+  }
+  PROPERTIES
+  {
+    OnInsert=BEGIN
+
+               if "Courses Code" = '' then begin
+                 HumanResSetup.Get;
+                 HumanResSetup.TestField("Course Attendance No");
+                 NoSeriesMgt.InitSeries(HumanResSetup."Course Attendance No",xRec."No Series",0D,"Courses Code","No Series");
+               end;
+
+               "Course Start Date" := Today;
+             END;
+
+    OnDelete=BEGIN
+               LockTable;
+               CattRec.SetRange("Training Course Code","Courses Code");
+               CattRec.DeleteAll;
+             END;
+
+    LookupPageID="Training Courses List";
+    DrillDownPageID="Training Courses List";
+  }
+  FIELDS
+  {
+    { 1   ;   ;Courses Code        ;Code10         }
+    { 2   ;   ;Course Type         ;Code10        ;TableRelation="Course Types"."Course Type Code";
+                                                   OnValidate=BEGIN
+                                                                if CTypeRec.Get("Course Type") then
+                                                                  "Course Name" := CTypeRec.Description
+                                                                else
+                                                                  "Course Name" := '';
+                                                              END;
+                                                               }
+    { 3   ;   ;Course Name         ;Text100       ;Editable=false }
+    { 4   ;   ;Vendor Code         ;Code10        ;TableRelation=IF ("Training Group"=FILTER(Mixed|Outdoor)) Vendor."No." WHERE (Trainer=CONST(true));
+                                                   OnValidate=BEGIN
+                                                                if VendRec.Get("Vendor Code") then
+                                                                  "Vendor name" := VendRec.Name
+                                                                else
+                                                                  "Vendor name" := '';
+                                                              END;
+                                                               }
+    { 5   ;   ;Vendor name         ;Text30        ;Editable=false }
+    { 6   ;   ;Time                ;Time           }
+    { 7   ;   ;Course Start Date   ;Date           }
+    { 8   ;   ;Course Duration     ;Code10        ;DateFormula=true }
+    { 9   ;   ;Total Cost          ;Decimal       ;OnValidate=BEGIN
+                                                                CattRec.SetRange(CattRec."Training Course Code","Courses Code");
+                                                                CCount := CattRec.Count;
+                                                                if (CCount<>0) then CattRec.ModifyAll(CattRec.Cost,"Total Cost"/CCount);
+                                                              END;
+
+                                                   DecimalPlaces=2:2;
+                                                   BlankZero=true }
+    { 10  ;   ;Unit Cost           ;Decimal       ;FieldClass=FlowField;
+                                                   CalcFormula=Average("Course Attendance".Cost WHERE ("Training Course Code"=FIELD("Courses Code")));
+                                                   OnValidate=BEGIN
+                                                                Validate("Total Vendor Cost","Unit Cost");
+                                                              END;
+
+                                                   BlankZero=true }
+    { 11  ;   ;Comment             ;Text250        }
+    { 12  ;   ;No Series           ;Code10         }
+    { 13  ;   ;Region Code         ;Code10         }
+    { 14  ;   ;Global Dimension 1 Code;Code10      }
+    { 15  ;   ;Global Dimension 2 Code;Code10      }
+    { 16  ;   ;Total Vendor Cost   ;Decimal       ;FieldClass=Normal }
+    { 17  ;   ;Class Size          ;Integer       ;FieldClass=FlowField;
+                                                   CalcFormula=Count("Course Attendance" WHERE ("Training Course Code"=FIELD("Courses Code")));
+                                                   Editable=false }
+    { 18  ;   ;Course Description  ;Text100        }
+    { 19  ;   ;Training Group      ;Option        ;OptionString=" ",Mixed,Outdoor,"In-House" }
+  }
+  KEYS
+  {
+    {    ;"Courses Code"                          ;SumIndexFields="Total Vendor Cost","Total Cost";
+                                                   Clustered=true }
+    {    ;"Vendor Code"                           ;SumIndexFields="Total Cost" }
+    {    ;"Training Group","Courses Code"         ;SumIndexFields="Total Vendor Cost","Total Cost" }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      TCourseRec@1000000000 : Record "Training Courses";
+      HumanResSetup@1000000001 : Record "Human Resources Setup";
+      NoSeriesMgt@1000000002 : Codeunit NoSeriesManagement;
+      VendRec@1000000003 : Record Vendor;
+      CattRec@1000000004 : Record "Course Attendance";
+      CTypeRec@1000000005 : Record "Course Types";
+      CCount@1000000006 : Integer;
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,244 @@
+OBJECT Table 50009 Payroll-Employee Group Header.
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20160316D;
+    Time=111146T;
+    Modified=true;
+    Version List=CBU Ver. 1.00;
+  }
+  PROPERTIES
+  {
+    OnModify=BEGIN
+               if (GrpCodeRec.Code <> Code) and
+                    (GrpCodeRec.Code <> '') then begin
+                   if Confirm(StrSubstNo('Do you want to change %1?',FieldName(Code)),false) then begin
+                       GrpCodeRec.SetRange(Code,GrpCodeRec.Code);
+                       "Search Name" := GrpCodeRec."Search Name";
+                   end;
+               end;
+             END;
+
+    OnDelete=BEGIN
+
+               { Confirm }
+               if not Confirm ('All entries for this employee group '+
+                               'will be deleted!'+
+                               'Proceed with Deletion?    ')
+               then
+                 Error ('Nothing was deleted');
+
+               { Lock 'parent' and 'child' files}
+               { LOCKTABLE( FALSE); AAA Nov 2002}
+               { GrpLinesRec.LOCKTABLE( FALSE);}
+
+               { First delete the detail lines }
+                GrpLinesRec.SetRange("Employee Group", Code);
+                GrpLinesRec.DeleteAll;
+
+               { Delete the 'parent record'}
+                Delete;
+
+               { Disable the locking effect }
+               Commit ;
+             END;
+
+    LookupPageID="Employee Groups Survey.";
+  }
+  FIELDS
+  {
+    { 1   ;   ;Code                ;Code10        ;AltSearchField=Search Name;
+                                                   OnValidate=BEGIN
+                                                                if (1 < CursorPos) and (CursorPos < MaxStrLen("Search Name")) then
+                                                                begin
+                                                                  "Search Name" := DelChr (CopyStr(Code, CursorPos),'<>');
+                                                                  "Search Name" := PadStr ("Search Name" + ' ' + DelChr (CopyStr(Code, 1, CursorPos-1), '<>'), MaxStrLen("Search Name"));
+                                                                end
+                                                                else
+                                                                   "Search Name" := Code;
+                                                                   "Search Name" := DelChr ("Search Name", '<');
+                                                              END;
+
+                                                   NotBlank=true }
+    { 2   ;   ;Search Name         ;Code10         }
+    { 5   ;   ;Gross Pay           ;Decimal       ;FieldClass=FlowField;
+                                                   CalcFormula=Sum("Payroll-Employee Group Lines."."Default Amount" WHERE ("Employee Group"=FIELD(Code),
+                                                                                                                           "Payslip Group ID"=FILTER("GROSS PAY")));
+                                                   DecimalPlaces=0:5;
+                                                   Editable=false }
+    { 6   ;   ;Tax Charged         ;Decimal       ;FieldClass=FlowField;
+                                                   CalcFormula=Sum("Payroll-Employee Group Lines."."Default Amount" WHERE ("Employee Group"=FIELD(Code),
+                                                                                                                           "Payslip Group ID"=FILTER("TAX CHARGED")));
+                                                   DecimalPlaces=0:5;
+                                                   Editable=false }
+    { 7   ;   ;Tax Deducted        ;Decimal       ;FieldClass=FlowField;
+                                                   CalcFormula=Sum("Payroll-Employee Group Lines."."Default Amount" WHERE ("Employee Group"=FIELD(Code),
+                                                                                                                           "Payslip Group ID"=FILTER("TAX DEDUCTED")));
+                                                   DecimalPlaces=0:5;
+                                                   Editable=false }
+    { 8   ;   ;Taxable Pay         ;Decimal       ;FieldClass=FlowField;
+                                                   CalcFormula=Sum("Payroll-Employee Group Lines."."Default Amount" WHERE ("Employee Group"=FIELD(Code),
+                                                                                                                           "Payslip Group ID"=FILTER("TAXABLE PAY")));
+                                                   DecimalPlaces=0:5;
+                                                   Editable=false }
+    { 9   ;   ;Total Deductions    ;Decimal       ;FieldClass=FlowField;
+                                                   CalcFormula=Sum("Payroll-Employee Group Lines."."Default Amount" WHERE ("Employee Group"=FIELD(Code),
+                                                                                                                           "Payslip Group ID"=FILTER("TOTAL DEDUCTIONS")));
+                                                   DecimalPlaces=0:5;
+                                                   Editable=false }
+    { 10  ;   ;Net Pay Due         ;Decimal       ;FieldClass=FlowField;
+                                                   CalcFormula=Sum("Payroll-Employee Group Lines."."Default Amount" WHERE ("Employee Group"=FIELD(Code),
+                                                                                                                           "Payslip Group ID"=FILTER("NET PAY DUE")));
+                                                   DecimalPlaces=0:5;
+                                                   BlankZero=true;
+                                                   Editable=false }
+    { 11  ;   ;Posting Group Code  ;Code10        ;TableRelation="Payroll-Posting Group Header."."Posting Group Code" }
+    { 12  ;   ;Grade               ;Code2          }
+    { 13  ;   ;Step                ;Code2          }
+    { 14  ;   ;Management          ;Boolean        }
+  }
+  KEYS
+  {
+    {    ;Code                                    ;Clustered=true }
+    {    ;"Posting Group Code"                     }
+    {    ;Grade,Step                               }
+    {    ;Grade                                    }
+    {    ;Step                                     }
+    {    ;Management                               }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      GrpCodeRec@1000000000 : Record "Payroll-Employee Group Header.";
+      GrpLinesRec@1000000001 : Record "Payroll-Employee Group Lines.";
+      CursorPos@1000000002 : Integer;
+      Ok@1000000003 : Boolean;
+      PostGrpRec@1000000004 : Record "Payroll-Posting Group Header.";
+      PGrpCode@1000000005 : Code[10];
+      EDRec@1000000006 : Record "Payroll-E/D Codes.";
+      GrossEDCode@1000000007 : Code[20];
+      GenPCode@1000000008 : Codeunit "General Purpose Codeunit";
+      EDType@1000000009 : '" ","NSITF Employee","NSITF Employer","Gross Salary","Pension Employee","Pension Employer"';
+      EmpContRec@1000000010 : Record "Employment Contract";
+      EmpGrp@1000000011 : Code[10];
+      gg@1000000012 : Decimal;
+      GrossFilter@1000000013 : Text[30];
+      EmpGrpStep@1000000014 : Code[10];
+      BasicEDCode@1000000015 : Code[10];
+
+    [LineStart(116751)]
+    PROCEDURE GetGross@1(EmpGrpCode@1000000000 : Code[10]) : Decimal;
+    BEGIN
+      //GrossEDCode := GenPCode.GetGrossED(EDType::"Gross Salary");
+
+      if not(EmpContRec.Get(EmpGrpCode)) then exit(0);
+
+      EmpGrp := EmpContRec.Category;
+      if GrpCodeRec.Get(EmpGrp) then
+        begin
+          GrpCodeRec.CalcFields(GrpCodeRec."Gross Pay");
+          exit(GrpCodeRec."Gross Pay");
+        end
+      else
+        exit(0);
+
+
+      {
+      IF EmpContRec.GET(EmpGrpCode) THEN
+        BEGIN
+          EmpGrp := EmpContRec.Category;
+
+          GrpLinesRec.SETRANGE(GrpLinesRec."Employee Group",EmpGrpCode);
+          IF GrpLinesRec.FIND('-') THEN
+            BEGIN
+              GrpLinesRec.SETRANGE(GrpLinesRec."E/D Code",GrossEDCode);
+              GrpLinesRec.FIND('-');
+      //        GrpLinesRec.CALCFIELDS(GrpLinesRec."Default Amount");
+              EXIT(GrpLinesRec."Default Amount");
+            END
+         END
+      ELSE
+        EXIT(0);
+      }
+    END;
+
+    [LineStart(116784)]
+    PROCEDURE GetGrade@2(GrpCode@1000000000 : Code[10]) : Code[2];
+    BEGIN
+      if GrpCodeRec.Get(GrpCode) then exit(GrpCodeRec.Grade);
+    END;
+
+    [LineStart(116787)]
+    PROCEDURE GetStep@3(GrpCode@1000000000 : Code[10]) : Code[2];
+    BEGIN
+      if GrpCodeRec.Get(GrpCode) then exit(GrpCodeRec.Step);
+    END;
+
+    [LineStart(116790)]
+    PROCEDURE GetGrpCode@4(Grd@1000000000 : Code[2];Stp@1000000001 : Code[2]) : Code[10];
+    BEGIN
+      GrpCodeRec.SetRange(Grade,Grd);
+      GrpCodeRec.SetRange(Step,Stp);
+      if GrpCodeRec.Find('-') then exit(GrpCodeRec.Code);
+    END;
+
+    [LineStart(116795)]
+    PROCEDURE GetGroupFromGross@5(GrossAmount@1000000000 : Decimal;Criteria@1000000001 : 'LT,GT,EQ,LE,GE,NE') : Code[10];
+    BEGIN
+      GrossEDCode := GenPCode.GetGrossED(EDType::"Gross Salary");
+
+      case Criteria of
+        Criteria::LT: GrossFilter := '<'  + Format(GrossAmount);
+        Criteria::GT: GrossFilter := '>'  + Format(GrossAmount);
+        Criteria::EQ: GrossFilter := '='  + Format(GrossAmount);
+        Criteria::LE: GrossFilter := '<=' + Format(GrossAmount);
+        Criteria::GE: GrossFilter := '>=' + Format(GrossAmount);
+        Criteria::NE: GrossFilter := '<>' + Format(GrossAmount);
+      end;
+
+      GrpLinesRec.Reset;
+      GrpLinesRec.SetRange(GrpLinesRec."E/D Code",GrossEDCode);
+      GrpLinesRec.SetCurrentKey(GrpLinesRec."Default Amount");
+      GrpLinesRec.SetFilter(GrpLinesRec."Default Amount",GrossFilter);
+
+      if GrpLinesRec.Find('+') then
+        exit(GrpLinesRec."Employee Group")
+      else
+        exit(GrossEDCode);
+    END;
+
+    [LineStart(116817)]
+    PROCEDURE GetBasic@6(EmpGrpCode@1000000000 : Code[10]) : Decimal;
+    BEGIN
+
+      EDRec.SetRange(EDRec."Control Type",EDRec."Control Type"::Basic);
+      EDRec.Find('-');
+      BasicEDCode := EDRec."E/D Code";
+
+      GrpLinesRec.SetRange(GrpLinesRec."Employee Group",EmpGrpCode);
+      GrpLinesRec.SetRange(GrpLinesRec."E/D Code",BasicEDCode);
+      if GrpLinesRec.Find('-') then
+        exit(GrpLinesRec."Default Amount")
+      else
+        exit(0);
+    END;
+
+    BEGIN
+    {
+      Description
+      Created           : FTN, 12/3/93
+      File name         : KI03 P.Roll Header
+      Comments          : The Header card that is to be used to enter employee
+                          groups
+      File details      : Primary Key is;
+                           Code
+                        : Relations;
+                           None
+    }
+    END.
+  }
+}
+

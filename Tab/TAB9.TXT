@@ -1,0 +1,41 @@
+OBJECT Modification "Country/Region"(Table 9)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220221D;
+    Time=084030.120T;
+    Modified=true;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Country/Region"(Table 9);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Address Format"(Field 8);
+                         Property=OptionCaptionML;
+                         OriginalValue=ENU=Post Code+City,City+Post Code,City+County+Post Code,Blank Line+Post Code+City,,,,,,,,,,Custom;
+                         ModifiedValue=ENU=Post Code+City,City+Post Code,City+County+Post Code,Blank Line+Post Code+City,,,,,,,,,,Custom,City Only }
+    { PropertyModification;
+                         Target="Address Format"(Field 8);
+                         Property=OptionString;
+                         OriginalValue="Post Code+City","City+Post Code","City+County+Post Code","Blank Line+Post Code+City",,,,,,,,,,Custom;
+                         ModifiedValue="Post Code+City","City+Post Code","City+County+Post Code","Blank Line+Post Code+City",,,,,,,,,,Custom,"City Only" }
+    { Insertion         ;InsertAfter=Id(Field 8000);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;License Fees Rate   ;Decimal       ;Description=For Allowing the Vessel to fish : For Voyage P&L Rep. }
+                           { 50301;  ;Country Code        ;Integer        }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

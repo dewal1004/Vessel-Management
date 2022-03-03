@@ -1,0 +1,62 @@
+OBJECT Modification "Employee Relative"(Table 5205)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20070912D;
+    Time=120000T;
+    Version List=NAVW17.00;
+  }
+  PROPERTIES
+  {
+    Target="Employee Relative"(Table 5205);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Employee No."(Field 1);
+                         Property=TableRelation;
+                         OriginalValue=Employee;
+                         ModifiedValue=IF (Source=CONST(" ")) Employee
+                                       ELSE IF (Source=CONST(Applicant)) Applicants }
+    { Insertion         ;InsertAfter=Comment(Field 10);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Source              ;Option        ;OptionString=" ",Applicant }
+                           { 50001;  ;Address             ;Text80         }
+                         }
+                          }
+    { Insertion         ;OnInsert=BEGIN
+
+                                    //Univision Insert 31/10/01
+                                    if Source=Source::" " then
+                                    begin
+
+                                      employee.Get("Employee No.");
+                                    //  Name := Employee."Last Name";
+                                    //  "Employee Status" := Employee.Status;
+                                    end
+                                      else
+                                        begin
+                                          Applicant.Get("Employee No.");
+                                    //      Name := Applicant."Last Name";
+                                    //      "Application Status" := Applicant."Application Status";
+                                        end;
+
+                                    //Univision Finish 31/10/01
+                                  END;
+                                   }
+    { Insertion         ;ChangedElements=VariableCollection
+    {
+      employee@1001 : Record Employee;
+      Applicant@1000 : Record Applicants;
+    }
+     }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

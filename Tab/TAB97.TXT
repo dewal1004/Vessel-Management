@@ -1,0 +1,292 @@
+OBJECT Modification "Comment Line"(Table 97)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220216D;
+    Time=162117.987T;
+    Modified=true;
+    Version List=NAVW114.01;
+  }
+  PROPERTIES
+  {
+    Target="Comment Line"(Table 97);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Table Name"(Field 1);
+                         Property=OptionCaptionML;
+                         OriginalValue=ENU=G/L Account,Customer,Vendor,Item,Resource,Job,,Resource Group,Bank Account,Campaign,Fixed Asset,Insurance,Nonstock Item,IC Partner;
+                         ModifiedValue=ENU=G/L Account,Customer,Vendor,Item,Resource,Job,,Resource Group,Bank Account,Campaign,Fixed Asset,Insurance,Nonstock Item,IC Partner,Job Journal Line }
+    { PropertyModification;
+                         Target="Table Name"(Field 1);
+                         Property=OptionString;
+                         OriginalValue="G/L Account",Customer,Vendor,Item,Resource,Job,,"Resource Group","Bank Account",Campaign,"Fixed Asset",Insurance,"Nonstock Item","IC Partner";
+                         ModifiedValue="G/L Account",Customer,Vendor,Item,Resource,Job,,"Resource Group","Bank Account",Campaign,"Fixed Asset",Insurance,"Nonstock Item","IC Partner","Job Journal Line" }
+    { PropertyModification;
+                         Target=Comment(Field 6);
+                         Property=Data type;
+                         OriginalValue=Text80;
+                         ModifiedValue=Text250 }
+    { Insertion         ;InsertAfter=Comment(Field 6);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Day Lost Cause      ;Code10        ;TableRelation="Lost Days".Code;
+                                                                          OnValidate=BEGIN
+                                                                                       if seaport.Get("Day Lost Cause")  then
+                                                                                         "Day Lost Location":=seaport.SeaPort;
+                                                                                       if Operation.Get("No.") then
+                                                                                       begin
+                                                                                          Vessel:=Operation.Vessel;
+                                                                                          "Global Dimension 1 Code":=Operation."Global Dimension 1 Code";
+                                                                                          "Global Dimension 2 Code":=Operation."Global Dimension 2 Code";
+                                                                                          Voyage:=Operation."Voyage No.";
+                                                                                          "Operation No.":=Operation."No.";
+                                                                                       end;
+                                                                                     END;
+                                                                                      }
+                           { 50001;  ;Day Lost Location   ;Option        ;OptionString=PORT,SEA }
+                           { 50002;  ;Days Lost           ;Decimal       ;OnValidate=BEGIN
+                                                                                       "Hours Lost":="Days Lost"*24;
+                                                                                     END;
+                                                                                      }
+                           { 50003;  ;Vessel              ;Code10        ;TableRelation=Location WHERE ("Location Type"=CONST(Vessel)) }
+                           { 50004;  ;Global Dimension 1 Code;Code20     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+                                                                          CaptionClass='1,1,1' }
+                           { 50005;  ;Global Dimension 2 Code;Code20     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                                          CaptionClass='1,1,2' }
+                           { 50006;  ;Hours Lost          ;Decimal       ;OnValidate=BEGIN
+                                                                                       "Days Lost":="Hours Lost"/24;
+                                                                                     END;
+                                                                                      }
+                           { 50010;  ;Type                ;Option        ;OptionString=" ",Narration,Organoleptic }
+                           { 50020;  ;Operation No.       ;Code10        ;TableRelation=Job WHERE (Vessel=FIELD(Vessel),
+                                                                                                   Status=CONST(Completed));
+                                                                          OnValidate=BEGIN
+                                                                                       if Jobss.Get("Operation No.") then
+                                                                                       begin
+
+                                                                                         Captain:=Jobss."Person Responsible";
+                                                                                         Validate(Voyage,Jobss."Voyage No.");
+                                                                                       end;
+                                                                                     END;
+                                                                                      }
+                           { 50021;  ;Voyage              ;Code10        ;OnValidate=BEGIN
+                                                                                       "Date Code":=Date;
+                                                                                     END;
+                                                                                      }
+                           { 50022;  ;Captain             ;Code20         }
+                           { 50023;  ;Date Code           ;Date           }
+                           { 50024;  ;Frozen Weight W/O I/C;Decimal       }
+                           { 50025;  ;Drained Weight (KGS);Decimal       ;OnValidate=BEGIN
+                                                                                       "TTL No. Pcs/Slab":="Drained Weight (KGS)"*"Count/Kg";
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50026;  ;Count/Kg            ;Decimal       ;OnValidate=BEGIN
+                                                                                       "TTL No. Pcs/Slab":="Drained Weight (KGS)"*"Count/Kg";
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50027;  ;TTL No. Pcs/Slab    ;Decimal       ;DecimalPlaces=0:3 }
+                           { 50028;  ;Upper Grade Count   ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "Upper Grade Count"<>0 then
+                                                                                         "Uniformity Ratio":="Lower Grade Count"/"Upper Grade Count";
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50029;  ;Lower Grade Count   ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "Upper Grade Count"<>0 then
+                                                                                         "Uniformity Ratio":="Lower Grade Count"/"Upper Grade Count";
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50030;  ;Uniformity Ratio    ;Decimal       ;DecimalPlaces=0:3 }
+                           { 50031;  ;Dehydration%        ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "TTL No. Pcs/Slab"<>0 then "Dehydration%":=("Dehydration%"/"TTL No. Pcs/Slab")*100;
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50032;  ;Discolouration%     ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "TTL No. Pcs/Slab"<>0 then "Discolouration%":=("Discolouration%"/"TTL No. Pcs/Slab")*100;
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50033;  ;Black Spot%         ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "TTL No. Pcs/Slab"<>0 then "Black Spot%":=("Black Spot%"/"TTL No. Pcs/Slab")*100;
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50034;  ;Broken%             ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "TTL No. Pcs/Slab"<>0 then "Broken%":=("Broken%"/"TTL No. Pcs/Slab")*100;
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50035;  ;Mech Damage%        ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "TTL No. Pcs/Slab"<>0 then "Mech Damage%":=("Mech Damage%"/"TTL No. Pcs/Slab")*100;
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50036;  ;General Appearance  ;Option        ;OptionString=Ok," Not Ok" }
+                           { 50037;  ;Foreign Matter      ;Option        ;OptionString=Nil,Present }
+                           { 50038;  ;Odour               ;Option        ;OptionString=Fresh,Satisfactory }
+                           { 50039;  ;Overall Remark      ;Option        ;OptionString=Fair,Pass,Fail }
+                           { 50040;  ;Deductible          ;Boolean        }
+                           { 50041;  ;Grade               ;Code10        ;TableRelation=Item."No.";
+                                                                          OnValidate=BEGIN
+                                                                                       {IF Product.GET("No.") THEN;
+                                                                                       "Statistics Group":=Product."Statistics Group";
+                                                                                       Description:=Product.Description;
+                                                                                       fine:=EVALUATE("S/No.","No.");
+                                                                                       }
+                                                                                     END;
+
+                                                                          ValidateTableRelation=false;
+                                                                          TestTableRelation=false;
+                                                                          NotBlank=true }
+                           { 50042;  ;Pack Size           ;Code10        ;TableRelation="Unit of Measure" WHERE ("In Use"=CONST(true),
+                                                                                                                 "Catch Code"=FILTER(<>''));
+                                                                          OnValidate=BEGIN
+                                                                                       //IF UOM.GET("Pack Size") THEN "Pack Size":=UOM."Catch Code";
+                                                                                     END;
+                                                                                      }
+                           { 50043;  ;Brand               ;Code10        ;TableRelation="Reason Code" WHERE ("In Use"=CONST(true),
+                                                                                                             Type=CONST(Brands)) }
+                           { 50045;  ;Mix Up%             ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "TTL No. Pcs/Slab"<>0 then "Mix Up%":=("Mix Up%"/"TTL No. Pcs/Slab")*100;
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:3 }
+                           { 50046;  ;Loose Shells%       ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "TTL No. Pcs/Slab"<>0 then "Loose Shells%":=("Loose Shells%"/"TTL No. Pcs/Slab")*100;
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:2 }
+                           { 50047;  ;Loose Neck%         ;Decimal       ;OnValidate=BEGIN
+                                                                                       if "TTL No. Pcs/Slab"<>0 then "Loose Neck%":=("Loose Neck%"/"TTL No. Pcs/Slab")*100;
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:2 }
+                           { 50463;  ;Fuel Consumed       ;Decimal       ;OnValidate=BEGIN
+                                                                                       {
+                                                                                       IF Jobss.GET("No.") THEN Jobss.VALIDATE(Jobss."Fuel Consumed","Fuel Consumed");
+                                                                                       Jobss.MODIFY;
+                                                                                       }
+                                                                                     END;
+                                                                                      }
+                           { 50464;  ;Fuel Days           ;Decimal       ;OnValidate=BEGIN
+                                                                                       {IF "Fuel Days"<>0 THEN "Fuel Average":="Fuel Consumed"/"Fuel Days";
+                                                                                       IF Jobss.GET("No.") THEN  Jobss.VALIDATE(Jobss."Fuel Days","Fuel Days");
+                                                                                       Jobss.MODIFY;
+                                                                                       }//nitin
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:0 }
+                           { 50466;  ;Fuel Average        ;Decimal       ;OnValidate=BEGIN
+                                                                                       {IF "Fuel Average"<>0 THEN "Fuel Days":="Fuel Consumed"/"Fuel Average";
+                                                                                       IF Jobss.GET("No.") THEN Jobss.VALIDATE(Jobss."Fuel Average", "Fuel Average");
+                                                                                       Jobss.MODIFY;}//nitin
+                                                                                     END;
+                                                                                      }
+                         }
+                          }
+    { Insertion         ;InsertAfter="Table Name","No.","Line No."(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           { false;"Global Dimension 1 Code","Global Dimension 2 Code",Date,"Day Lost Cause","Day Lost Location",Vessel;
+                                                                          SumIndexFields="Days Lost" }
+                           {    ;"Hours Lost"                             }
+                           {    ;"No.","Table Name",Deductible,"Global Dimension 1 Code","Global Dimension 2 Code",Date,"Day Lost Cause","Day Lost Location",Vessel;
+                                                                          SumIndexFields="Days Lost" }
+                         }
+                          }
+    { Insertion         ;OnInsert=BEGIN
+                                    "Global Dimension 2 Code":='ATLANTIC';     //AAA - Oct 2002:='ATLANTIC';
+                                  END;
+                                   }
+    { Insertion         ;Target=SetUpNewLine(PROCEDURE 1);
+                         ChangedElements=ParameterCollection
+                         {
+                           { 1001;RECS                     ;Record       ;Subtype="Comment Line" }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        CommentLine.SetRange("Table Name","Table Name");
+                                        CommentLine.SetRange("No.","No.");
+                                        CommentLine.SetRange(Date,WorkDate);
+                                        if not CommentLine.FindFirst then
+                                          Date := WorkDate;
+
+                                        OnAfterSetUpNewLine(Rec,CommentLine);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..3
+                                          CommentLine.SetRange(Type,Type);  //AAA Dec 05 2002;
+                                        #4..7
+                                      END;
+
+                         Target=SetUpNewLine(PROCEDURE 1) }
+    { Insertion         ;InsertAfter=SetUpNewLine(PROCEDURE 1);
+                         ChangedElements=PROCEDURECollection
+                         {
+                           [LineStart(23905)]
+                           PROCEDURE ETA@1000000000() : Date;
+                           BEGIN
+                             //Univision Start 20/01/03
+                             if Jobss1.Get("Operation No.") then
+                               exit(Jobss1."Ending Date");
+                             //Univision Finish 20/01/03
+                           END;
+
+                           [LineStart(23911)]
+                           PROCEDURE ETD@1000000001() : Date;
+                           BEGIN
+                             //Univision Start 20/01/03
+                             if Jobss1.Get("Operation No.") then
+                               exit(Jobss1."Starting Date");
+                             //Univision Finish 20/01/03
+                           END;
+
+                           [LineStart(23917)]
+                           PROCEDURE "GRADE(Text)"@1000000002() : Text[100];
+                           BEGIN
+                             //Univision Start 20/01/03
+                             if Item.Get(Grade) then
+                               exit(Item.Description);
+                             //Univision Finish 20/01/03
+                           END;
+
+                           [LineStart(23923)]
+                           PROCEDURE Description@1000000003() : Text[100];
+                           BEGIN
+                             if seaport.Get("Day Lost Cause") then exit(seaport.Description);
+
+                                 {
+                                   -> disabled key (Global Dimension 1 Code,Global Dimension 2 Code,Date,Day Lost Cause,Day Lost Location,Vessel);
+                                   -> modified key (No.,Table Name,Deductible) to
+                                     (No.,Table Name,Deductible,Date,Day Lost Cause,Day Lost Location,Vessel)
+                                 }
+                           END;
+
+                         }
+                          }
+    { Insertion         ;ChangedElements=VariableCollection
+    {
+      seaport@1005 : Record "Lost Days";
+      Operation@1004 : Record Job;
+      Jobss@1003 : Record Job;
+      Jobss1@1002 : Record Job;
+      UOM@1001 : Record "Unit of Measure";
+      Item@1000 : Record Item;
+    }
+     }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

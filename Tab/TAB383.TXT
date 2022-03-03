@@ -1,0 +1,29 @@
+OBJECT Modification "Detailed CV Ledg. Entry Buffer"(Table 383)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20230719D;
+    Time=120000T;
+    Version List=NAVW114.03;
+  }
+  PROPERTIES
+  {
+    Target="Detailed CV Ledg. Entry Buffer"(Table 383);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Tax Jurisdiction Code"(Field 41);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50301;  ;Loan ID             ;Code10         }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

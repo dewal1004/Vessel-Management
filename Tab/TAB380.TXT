@@ -1,0 +1,29 @@
+OBJECT Modification "Detailed Vendor Ledg. Entry"(Table 380)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20290721D;
+    Time=120000T;
+    Version List=NAVW114.27;
+  }
+  PROPERTIES
+  {
+    Target="Detailed Vendor Ledg. Entry"(Table 380);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Ledger Entry Amount"(Field 43);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50301;  ;Loan ID             ;Code10         }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

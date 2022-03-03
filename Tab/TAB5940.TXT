@@ -1,0 +1,52 @@
+OBJECT Modification "Service Item"(Table 5940)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220519D;
+    Time=120000T;
+    Version List=NAVW114.01;
+  }
+  PROPERTIES
+  {
+    Target="Service Item"(Table 5940);
+  }
+  CHANGES
+  {
+    { PropertyInsertion ;Target=OnDelete.ResultDescription(Variable 1000);
+                         Property=Length;
+                         ModifiedValue=120 }
+    { PropertyInsertion ;Target=CheckIfCanBeDeleted(PROCEDURE 5).ReturnValue;
+                         Property=Length;
+                         ModifiedValue=120 }
+    { Deletion          ;Target=CheckIfCanBeDeleted(PROCEDURE 5).ServiceLedgerEntry(Variable 1000);
+                         ChangedElements=VariableCollection
+                         {
+                           ServiceLedgerEntry@1000 : Record "Service Ledger Entry";
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if ServItemLinesExist then
+                                          exit(
+                                            StrSubstNo(
+                                        #4..21
+                                          if ServContract.Get(ServContractLine."Contract Type",ServContractLine."Contract No.") then
+                                            exit(
+                                              StrSubstNo(Text002,TableCaption,"No."));
+
+                                        exit(MoveEntries.CheckIfServiceItemCanBeDeleted(ServiceLedgerEntry,"No."));
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..24
+                                      END;
+
+                         Target=CheckIfCanBeDeleted(PROCEDURE 5) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

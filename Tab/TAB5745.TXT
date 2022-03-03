@@ -1,0 +1,43 @@
+OBJECT Modification "Transfer Shipment Line"(Table 5745)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Transfer Shipment Line"(Table 5745);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Unit of Measure"(Field 5);
+                         ChangedElements=FieldCollection
+                         {
+                           { 6   ;   ;Quantity Shipped    ;Decimal       ;CaptionML=ENU=Quantity Shipped;
+                                                                          DecimalPlaces=0:5 }
+                         }
+                          }
+    { Insertion         ;InsertAfter="Transfer-from Bin Code"(Field 7300);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;Qty. Reqd.          ;Decimal       ;DecimalPlaces=0:5 }
+                           { 50301;  ;ROB                 ;Decimal       ;OnValidate=BEGIN
+                                                                                       {IF ROB > "Qty. Reqd." THEN ERROR('ROB can not be greater that Quantity Required');
+                                                                                       VALIDATE(Quantity,"Qty. Reqd."-ROB);
+                                                                                       }
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:5 }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

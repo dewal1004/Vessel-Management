@@ -1,0 +1,31 @@
+OBJECT Modification "Sales & Receivables Setup"(Table 311)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20260320D;
+    Time=120000T;
+    Version List=NAVW114.12;
+  }
+  PROPERTIES
+  {
+    Target="Sales & Receivables Setup"(Table 311);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Freight G/L Acc. No."(Field 7103);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50001;  ;Appraisal No.       ;Code10        ;TableRelation="No. Series" }
+                           { 50002;  ;Posted Appraisal No.;Code10        ;TableRelation="No. Series" }
+                           { 50013;  ;Posted Exp. Invoice Nos.;Code10    ;TableRelation="No. Series" }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

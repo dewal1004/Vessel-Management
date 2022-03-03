@@ -1,0 +1,361 @@
+OBJECT Table 50018 Applicants
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=144840T;
+    Modified=true;
+    Version List=HR Ver 1.0;
+  }
+  PROPERTIES
+  {
+    DataPerCompany=false;
+    DataCaptionFields="No.",Surname,"First Name","Middle Name";
+    OnInsert=BEGIN
+               if "No." = '' then begin
+                 HumanResSetup.Get;
+                 HumanResSetup.TestField("Application Nos.");
+                 NoSeriesMgt.InitSeries(HumanResSetup."Application Nos.",xRec."No. Series",0D,"No.","No. Series");
+               end;
+             END;
+
+    OnModify=BEGIN
+               "Last Date Modified" := Today;
+               ApplicantRec."Modified By" := UserId;
+
+               if Staffed then Error('You canot modify a STAFFED Applicant Record!!!');
+
+               {
+               IF Res.READPERMISSION THEN
+                 EmployeeResUpdate.HumanResToRes(xRec,Rec);
+               IF SalespersonPurchaser.READPERMISSION THEN
+                 EmployeeSalespersonUpdate.HumanResToSalesPerson(xRec,Rec);
+               }
+             END;
+
+    OnDelete=BEGIN
+               AlternativeAddr.SetRange("Employee No.","No.");
+               AlternativeAddr.DeleteAll;
+
+               EmployeeQualification.SetRange("Employee No.","No.");
+               EmployeeQualification.DeleteAll;
+
+               Relative.SetRange("Employee No.","No.");
+               Relative.DeleteAll;
+
+               EmployeeAbsence.SetRange("Employee No.","No.");
+               EmployeeAbsence.DeleteAll;
+
+               MiscArticleInformation.SetRange("Employee No.","No.");
+               MiscArticleInformation.DeleteAll;
+
+               ConfidentialInformation.SetRange("Employee No.","No.");
+               ConfidentialInformation.DeleteAll;
+
+               HumanResComment.SetRange("No.","No.");
+               HumanResComment.DeleteAll;
+             END;
+
+    OnRename=BEGIN
+               "Last Date Modified" := Today;
+             END;
+
+    LookupPageID="Applicants List";
+    DrillDownPageID="Applicants List";
+  }
+  FIELDS
+  {
+    { 1   ;   ;No.                 ;Code20        ;AltSearchField=Search Name;
+                                                   OnValidate=BEGIN
+                                                                if "No." <> xRec."No." then begin
+                                                                  HumanResSetup.Get;
+                                                                  NoSeriesMgt.TestManual(HumanResSetup."Application Nos.");
+                                                                  "No. Series" := '';
+                                                                end;
+                                                              END;
+                                                               }
+    { 2   ;   ;Surname             ;Text30         }
+    { 3   ;   ;First Name          ;Text30        ;OnValidate=BEGIN
+                                                                if ("Search Name" = '') then
+                                                                  "Search Name" := "First Name";
+                                                              END;
+                                                               }
+    { 4   ;   ;Middle Name         ;Text30         }
+    { 5   ;   ;Initials            ;Text30        ;OnValidate=BEGIN
+                                                                if ("Search Name" = UpperCase(xRec.Initials)) or ("Search Name" = '') then
+                                                                  "Search Name" := Initials;
+                                                              END;
+                                                               }
+    { 7   ;   ;Search Name         ;Code30         }
+    { 8   ;   ;Address             ;Text30         }
+    { 9   ;   ;Address 2           ;Text30         }
+    { 10  ;   ;City                ;Text30         }
+    { 11  ;   ;Post Code           ;Code20        ;TableRelation="Post Code";
+                                                   OnValidate=BEGIN
+                                                                if PostCode.Get("Post Code") then
+                                                                  City := PostCode.City;
+                                                              END;
+
+                                                   ValidateTableRelation=false;
+                                                   TestTableRelation=false }
+    { 12  ;   ;County              ;Text30         }
+    { 13  ;   ;Phone No.           ;Text30         }
+    { 14  ;   ;Mobile Phone No.    ;Text30         }
+    { 15  ;   ;E-Mail              ;Text80         }
+    { 16  ;   ;Alt. Address Code   ;Code10        ;TableRelation="Alternative Address".Code WHERE ("Employee No."=FIELD("No.")) }
+    { 17  ;   ;Alt. Address Start Date;Date        }
+    { 18  ;   ;Alt. Address End Date;Date          }
+    { 19  ;   ;Picture             ;BLOB          ;SubType=Bitmap }
+    { 20  ;   ;Birth Date          ;Date           }
+    { 24  ;   ;Sex                 ;Option        ;OptionString=Male,Female }
+    { 25  ;   ;Country Code        ;Code10        ;TableRelation="Country/Region" }
+    { 31  ;   ;Application Status  ;Option        ;OnValidate=BEGIN
+                                                                EmployeeQualification.SetRange("Employee No.","No.");
+                                                                EmployeeQualification.ModifyAll("Employee Status","Application Status");
+                                                                if (("Application Status"= "Application Status"::Accepted) or
+                                                                   ("Application Status"= "Application Status"::Accepted)) and
+                                                                   ("Date Accepted/Rejected"=0D) then
+                                                                   begin
+                                                                     "Date Accepted/Rejected" := WorkDate;
+                                                                     ApplicantRec."Date Offer Made" := WorkDate;
+                                                                   end;
+                                                                if ("Application Status"= "Application Status"::Accepted) then
+                                                                if Confirm('Do you want to convert this applicant to staff?',true) then
+                                                                  begin
+                                                                    "Application Status" := "Application Status"::Accepted;
+                                                                    Modify;
+                                                                    Applicantsr.SetRange("No.","No.");
+                                                                    REPORT.Run(REPORT::"Convert Applicant to Staff",true,true,Applicantsr);
+                                                                  end;
+                                                              END;
+
+                                                   OptionString=" ","Under Interview","Short Listed",Accepted,Rejected }
+    { 36  ;   ;Global Dimension 1 Code;Code20     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+                                                   OnValidate=BEGIN
+                                                                //ValidateShortcutDimCode(1,"Global Dimension 1 Code");
+                                                                //MODIFY;
+                                                              END;
+
+                                                   CaptionML=ENU=Global Dimension 1 Code;
+                                                   CaptionClass='1,1,1' }
+    { 37  ;   ;Global Dimension 2 Code;Code20     ;TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                   OnValidate=BEGIN
+                                                                //ValidateShortcutDimCode(2,"Global Dimension 2 Code");
+                                                                //MODIFY;
+                                                              END;
+
+                                                   CaptionML=ENU=Global Dimension 2 Code;
+                                                   CaptionClass='1,1,2' }
+    { 39  ;   ;Comment             ;Boolean       ;FieldClass=FlowField;
+                                                   CalcFormula=Exist("Human Resource Comment Line" WHERE ("Table Name"=CONST("7"),
+                                                                                                          "No."=FIELD("No.")));
+                                                   Editable=false }
+    { 40  ;   ;Last Date Modified  ;Date          ;Editable=false }
+    { 48  ;   ;Pager               ;Text30         }
+    { 49  ;   ;Fax No.             ;Text30         }
+    { 50  ;   ;Company E-Mail      ;Text80         }
+    { 51  ;   ;Title               ;Text30         }
+    { 52  ;   ;Salespers./Purch. Code;Code10      ;TableRelation="Salesperson/Purchaser" }
+    { 53  ;   ;No. Series          ;Code10        ;TableRelation="No. Series";
+                                                   Editable=false }
+    { 50000;  ;Region Code         ;Code10        ;TableRelation="Business Unit".Code }
+    { 50015;  ;Posting Group       ;Code20        ;TableRelation="Payroll-Posting Group Header."."Posting Group Code" }
+    { 50016;  ;Employee Group      ;Code20        ;TableRelation="Payroll-Employee Group Header." WHERE ("Posting Group Code"=FIELD("Posting Group")) }
+    { 50071;  ;Blocked             ;Boolean        }
+    { 50073;  ;Modified By         ;Code10        ;Editable=false }
+    { 50076;  ;Class               ;Code10        ;TableRelation="Skill Appraisal"."Skill code" }
+    { 50086;  ;Date Offer Made     ;Date           }
+    { 50088;  ;Position Applied For;Code20        ;TableRelation="Employment Contract"."Unique Cd No";
+                                                   OnValidate=BEGIN
+                                                                if "Position Applied For"<>'' then begin
+                                                                if EmplContract.Get("Position Applied For") then
+                                                                  "Position Description" := EmplContract.Description;
+                                                                end
+                                                                else
+                                                                "Position Description" := '';
+                                                              END;
+                                                               }
+    { 50089;  ;Position Description;Text30        ;Editable=false }
+    { 50092;  ;Agreed Start Date   ;Date           }
+    { 50093;  ;Assigned Employee No;Code10        ;OnValidate=BEGIN
+                                                                if "Assigned Employee No"<>'' then
+                                                                "Application Status" := "Application Status"::Accepted
+                                                                else
+                                                                if "Application Status" = "Application Status"::Accepted then
+                                                                "Application Status" := "Application Status"::" ";
+                                                              END;
+                                                               }
+    { 50094;  ;Date Accepted/Rejected;Date         }
+    { 50095;  ;Next of Kin         ;Text30        ;FieldClass=FlowField;
+                                                   CalcFormula=Lookup("Employee Relative"."First Name" WHERE ("Employee No."=FIELD("No."),
+                                                                                                              Source=CONST(Applicant),
+                                                                                                              "Relative Code"=CONST('NEXT')));
+                                                   Editable=false }
+    { 50096;  ;Staffed             ;Boolean       ;InitValue=false }
+    { 50097;  ;Last Renumeration   ;Decimal       ;DecimalPlaces=2:2;
+                                                   BlankZero=true }
+    { 53000;  ;First Interview     ;Boolean        }
+    { 53001;  ;First Interview Date;Date           }
+    { 53002;  ;First Interview Result;Decimal     ;OnValidate=BEGIN
+                                                                "First Interview Maximum" := "First Interview Result";
+                                                              END;
+
+                                                   DecimalPlaces=1:1 }
+    { 53003;  ;Second Interview    ;Boolean        }
+    { 53004;  ;Second Interview Date;Date          }
+    { 53005;  ;Second Interview Result;Decimal    ;OnValidate=BEGIN
+                                                                "Second Interview Maximum" := "Second Interview Result";
+                                                              END;
+
+                                                   DecimalPlaces=1:1 }
+    { 53006;  ;Final Interview     ;Boolean        }
+    { 53007;  ;Final Interview Date;Date           }
+    { 53008;  ;Final Interview Result;Decimal     ;OnValidate=BEGIN
+                                                                "Final Interview Maximum" := "Final Interview Result";
+                                                              END;
+
+                                                   DecimalPlaces=1:1 }
+    { 53009;  ;First Interview Maximum;Decimal     }
+    { 53010;  ;Second Interview Maximum;Decimal   ;OnValidate=BEGIN
+                                                                if ("Second Interview Result" > "Second Interview Maximum") then
+                                                                  Error('Maximum Score attainable in this interview is %1',Format("Second Interview Maximum"));
+                                                              END;
+                                                               }
+    { 53011;  ;Final Interview Maximum;Decimal    ;OnValidate=BEGIN
+                                                                if ("Final Interview Result" > "Final Interview Maximum") then
+                                                                  Error('Maximum Score attainable in this interview is %1',Format("Final Interview Maximum"));
+                                                              END;
+                                                               }
+    { 53012;  ;Advert Ref No       ;Code20         }
+    { 53013;  ;Position check lis  ;Text30        ;TableRelation=Table50055.Field2 }
+  }
+  KEYS
+  {
+    {    ;"No."                                   ;Clustered=true }
+    {    ;Surname,"First Name","Middle Name"       }
+    {    ;"Assigned Employee No"                   }
+    {    ;"Application Status"                     }
+    {    ;"Advert Ref No"                          }
+    {    ;"First Name","Middle Name"               }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      approved@1000000000 : Boolean;
+      approv@1000000001 : Record Object;
+      HumanResSetup@1000000002 : Record "Human Resources Setup";
+      ApplicantRec@1000000003 : Record Applicants;
+      Res@1000000004 : Record Resource;
+      PostCode@1000000005 : Record "Post Code";
+      AlternativeAddr@1000000006 : Record "Alternative Address";
+      EmployeeQualification@1000000007 : Record "Employee Qualification";
+      Relative@1000000008 : Record "Employee Relative";
+      EmployeeAbsence@1000000009 : Record "Employee Absence";
+      MiscArticleInformation@1000000010 : Record "Misc. Article Information";
+      ConfidentialInformation@1000000011 : Record "Confidential Information";
+      HumanResComment@1000000012 : Record "Human Resource Comment Line";
+      SalespersonPurchaser@1000000013 : Record "Salesperson/Purchaser";
+      NoSeriesMgt@1000000014 : Codeunit NoSeriesManagement;
+      EmployeeResUpdate@1000000015 : Codeunit "Employee/Resource Update";
+      EmployeeSalespersonUpdate@1000000016 : Codeunit "Employee/Salesperson Update";
+      DepartRec@1000000017 : Record "Dimension Value";
+      "day Employed"@1000000018 : Integer;
+      EmplContract@1000000019 : Record "Employment Contract";
+      Applicantsr@1000000020 : Record Applicants;
+      InterCount@1000000021 : Integer;
+      TotalScore@1000000022 : Decimal;
+      TotalMax@1000000023 : Decimal;
+      AllAvg@1000000024 : Decimal;
+      RegRec@1000000025 : Record "Business Unit";
+      BCRec@1000000026 : Record "Dimension Value";
+      CCRec@1000000027 : Record "Dimension Value";
+      DimMgt@1000000028 : Codeunit DimensionManagement;
+
+    [LineStart(117936)]
+    PROCEDURE AssistEdit@2(OldApplicant@1000000000 : Record Applicants) : Boolean;
+    BEGIN
+      with ApplicantRec do begin
+        ApplicantRec := Rec;
+        HumanResSetup.Get;
+        HumanResSetup.TestField("Application Nos.");
+        if NoSeriesMgt.SelectSeries(HumanResSetup."Application Nos.",OldApplicant."No. Series","No. Series") then begin
+          HumanResSetup.Get;
+          HumanResSetup.TestField("Application Nos.");
+          NoSeriesMgt.SetSeries("No.");
+          Rec := ApplicantRec;
+          exit(true);
+        end;
+      end;
+    END;
+
+    [LineStart(117950)]
+    PROCEDURE FullName@1() : Text[100];
+    BEGIN
+      if "Middle Name" = '' then
+        exit(Surname + ' ' + "First Name")
+      else
+        exit(Surname + ' ' + "First Name" + ' ' + "Middle Name");
+    END;
+
+    [LineStart(117956)]
+    PROCEDURE ComputeAverage@3() : Decimal;
+    BEGIN
+      InterCount := 0;
+      TotalMax := 0;
+      TotalScore := "First Interview Result" + "Second Interview Result" + "Final Interview Result";
+      if ("First Interview Result"<>0) then
+        begin
+          Validate("First Interview Maximum");
+          if ("First Interview Result" > "First Interview Maximum") then
+            begin
+              Message('Maximum Score attainable in 1st interview is %1',Format("First Interview Maximum"));
+              exit(0);
+            end;
+          TotalMax := TotalMax + "First Interview Maximum";
+        end;
+      if ("Second Interview Result"<>0) then
+        begin
+          Validate("Second Interview Maximum");
+          if ("Second Interview Result" > "Second Interview Maximum") then
+            begin
+              Message('Maximum Score attainable in 2nd interview is %1',Format("Second Interview Maximum"));
+              exit(0);
+            end;
+          TotalMax := TotalMax + "Second Interview Maximum";
+        end;
+
+      if ("Final Interview Result"<>0) then
+        begin
+          Validate("Final Interview Maximum");
+          if ("Final Interview Result" > "Final Interview Maximum") then
+            begin
+              Message('Maximum Score attainable in 3rd interview is %1',Format("Final Interview Maximum"));
+              exit(0);
+            end;
+          TotalMax := TotalMax + "Final Interview Maximum";
+        end;
+
+      if (TotalMax<>0) then
+        AllAvg := (TotalScore/(TotalMax))*100
+      else
+        AllAvg := 0;
+
+      exit(AllAvg);
+    END;
+
+    [LineStart(117999)]
+    PROCEDURE ValidateShortcutDimCode@29(FieldNo@1000 : Integer;VAR ShortcutDimCode@1001 : Code[20]);
+    BEGIN
+      DimMgt.ValidateDimValueCode(FieldNo,ShortcutDimCode);
+      DimMgt.SaveDefaultDim(DATABASE::"Applicant Qualification","No.",FieldNo,ShortcutDimCode);
+      Modify;
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

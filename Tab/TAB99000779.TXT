@@ -1,0 +1,28 @@
+OBJECT Modification "Production BOM Version"(Table 99000779)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20070621D;
+    Time=120000T;
+    Version List=NAVW114.25;
+  }
+  PROPERTIES
+  {
+    Target="Production BOM Version"(Table 99000779);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Version Code"(Field 2);
+                         Property=Data type;
+                         OriginalValue=Code20;
+                         ModifiedValue=Code10 }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

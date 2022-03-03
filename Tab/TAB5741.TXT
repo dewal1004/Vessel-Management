@@ -1,0 +1,152 @@
+OBJECT Modification "Transfer Line"(Table 5741)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20191219D;
+    Time=120000T;
+    Version List=NAVW114.09;
+  }
+  PROPERTIES
+  {
+    Target="Transfer Line"(Table 5741);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        TestField("Quantity Shipped",0);
+                                        if CurrFieldNo <> 0 then
+                                          TestStatusOpen;
+                                        #4..39
+
+                                        CreateDim(DATABASE::Item,"Item No.");
+                                        DimMgt.UpdateGlobalDimFromDimSetID("Dimension Set ID","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..42
+
+                                        //Customized
+                                        if "Item No."<>'' then
+                                        begin
+                                          ItemRec.Get("Item No.");
+                                          ItemLedgLn.SetCurrentKey(ItemLedgLn."Entry Type",ItemLedgLn."Item No.",ItemLedgLn."Posting Date",ItemLedgLn."Location Code");
+                                          ItemLedgLn.SetFilter(ItemLedgLn."Entry Type",'4');
+                                          ItemLedgLn.SetFilter(ItemLedgLn."Item No.","Item No.");
+                                          ItemLedgLn.SetFilter(ItemLedgLn."Location Code","Transfer-to Code");
+                                          if ItemLedgLn.FindLast then
+                                          begin
+                                            "Last Issued Date":=ItemLedgLn."Posting Date";
+                                            "Last Issued Qty.":=Abs(ItemLedgLn.Quantity);
+                                          end
+                                          else
+                                          begin
+                                            "Last Issued Date":=0D;
+                                            "Last Issued Qty.":=0;
+                                          end;
+                                        end
+                                        else
+                                          begin
+                                            "Last Issued Date":=0D;
+                                            "Last Issued Qty.":=0;
+                                          end;
+                                        // Customized
+                                      END;
+
+                         Target="Item No."(Field 3).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        GetLocation("Transfer-to Code");
+                                        if CurrFieldNo <> 0 then begin
+                                          if Location."Require Receive" and
+                                             ("Qty. to Receive" <> 0)
+                                          then
+                                            CheckWarehouse("Transfer-to Code",true);
+                                          WhseValidateSourceLine.TransLineVerifyChange(Rec,xRec);
+                                        end;
+
+                                        GetTransferHeaderNoVerification;
+
+                                        if not TransHeader."Direct Transfer" and ("Direct Transfer" = xRec."Direct Transfer") then
+                                        #13..16
+                                                "Qty. in Transit")
+                                            else
+                                              Error(Text009);
+                                        "Qty. to Receive (Base)" := CalcBaseQty("Qty. to Receive");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..8
+                                        #10..19
+                                        {<<<<<<<}
+                                        "Qty. to Receive (Base)" := CalcBaseQty("Qty. to Receive");
+                                      END;
+
+                         Target="Qty. to Receive"(Field 7).OnValidate }
+    { Insertion         ;InsertAfter="Transfer-To Bin Code"(Field 7301);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;Qty. Reqd.          ;Decimal       ;OnValidate=BEGIN
+                                                                                       Validate(Quantity,"Qty. Reqd.");
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:5 }
+                           { 50301;  ;ROB                 ;Decimal       ;OnValidate=BEGIN
+                                                                                       {IF ROB > "Qty. Reqd." THEN ERROR('ROB can not be greater that Quantity Required');
+                                                                                       VALIDATE(Quantity,"Qty. Reqd."-ROB);
+                                                                                       }
+                                                                                     END;
+
+                                                                          DecimalPlaces=0:5 }
+                           { 50302;  ;Last Issued Qty.    ;Decimal       ;DecimalPlaces=0:5 }
+                           { 50303;  ;Last Issued Date    ;Date          ;Editable=false }
+                         }
+                          }
+    { PropertyModification;
+                         Target=UOMMgt(Variable 1027);
+                         Property=Id;
+                         OriginalValue=1027;
+                         ModifiedValue=10027 }
+    { PropertyModification;
+                         Target=ConfirmManagement(Variable 1029);
+                         Property=Id;
+                         OriginalValue=1029;
+                         ModifiedValue=10029 }
+    { PropertyModification;
+                         Target=AnotherItemWithSameDescrQst(Variable 1026);
+                         Property=Id;
+                         OriginalValue=1026;
+                         ModifiedValue=10026 }
+    { PropertyModification;
+                         Target=StatusCheckSuspended(Variable 1028);
+                         Property=Id;
+                         OriginalValue=1028;
+                         ModifiedValue=10028 }
+    { Insertion         ;InsertAfter=ShippingMoreUnitsThanReceivedErr(Variable 1010);
+                         ChangedElements=VariableCollection
+                         {
+                           ItemRec@1027 : Record Item;
+                           ItemLedgLn@1026 : Record "Item Ledger Entry";
+                           ItemTrackingLinesInbound@1030 : Page "Posted Item Tracking Lines";
+                           ItemTrackingLinesOutbound@1029 : Page "Serial No. Information List";
+                           ItemTrackingMgt@1031 : Codeunit "Item Tracking Management";
+                           "-------"@1032 : Text[30];
+                         }
+                          }
+    { Move              ;Target=Bin(Variable 1000);
+                         InsertAfter=TransHeader(Variable 1014) }
+    { Move              ;Target=Reservation(Variable 1018);
+                         InsertAfter=Bin(Variable 1000) }
+    { Move              ;Target=DimMgt(Variable 1019);
+                         InsertAfter=Reservation(Variable 1018);
+                         IncludeSiblings=WhseValidateSourceLine(Variable 1022),ReserveTransferLine(Variable 1024),CheckDateConflict(Variable 1025),WMSManagement(Variable 1015) }
+    { Move              ;Target=TrackingBlocked(Variable 1007);
+                         InsertAfter=WMSManagement(Variable 1015);
+                         IncludeSiblings=MustUseTrackingErr(Variable 1023),LedgEntryWillBeOpenedMsg(Variable 1021),ShippingMoreUnitsThanReceivedErr(Variable 1010) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

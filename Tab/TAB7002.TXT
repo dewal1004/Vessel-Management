@@ -1,0 +1,56 @@
+OBJECT Modification "Sales Price"(Table 7002)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Sales Price"(Table 7002);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if ("Starting Date" > "Ending Date") and ("Ending Date" <> 0D) then
+                                          Error(Text000,FieldCaption("Starting Date"),FieldCaption("Ending Date"));
+
+                                        if CurrFieldNo = 0 then
+                                          exit;
+
+                                        if "Starting Date" <> 0D then
+                                          if "Sales Type" = "Sales Type"::Campaign then
+                                            Error(Text002,"Sales Type");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..3
+
+                                        #4..9
+                                      END;
+
+                         Target="Starting Date"(Field 4).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "Sales Type" = "Sales Type"::"All Customers" then
+                                          "Sales Code" := ''
+                                        else
+                                          TestField("Sales Code");
+                                        TestField("Item No.");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..4
+                                          TestField("Item No.");
+                                      END;
+
+                         Target=OnInsert }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

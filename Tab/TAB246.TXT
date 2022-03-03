@@ -1,0 +1,177 @@
+OBJECT Modification "Requisition Line"(Table 246)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20260620D;
+    Time=120000T;
+    Version List=NAVW114.15;
+  }
+  PROPERTIES
+  {
+    Target="Requisition Line"(Table 246);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        CheckActionMessageNew;
+                                        ReserveReqLine.VerifyChange(Rec,xRec);
+                                        DeleteRelations;
+                                        #4..35
+                                        CreateDim(
+                                          DimMgt.TypeToTableID3(Type),
+                                          "No.",DATABASE::Vendor,"Vendor No.");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..38
+
+                                        "Action Message":=1; {New}
+                                        Validate("Requester ID",UserId);
+                                      END;
+
+                         Target="No."(Field 5).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        "Quantity (Base)" := CalcBaseQty(Quantity);
+                                        if Type = Type::Item then begin
+                                          GetDirectCost(FieldNo(Quantity));
+                                        #4..20
+                                            end;
+                                          ReserveReqLine.VerifyQuantity(Rec,xRec);
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..23
+
+
+                                        if Type=2 then
+                                        begin
+                                          It.Get("No.");
+                                          if It."Order Multiple" <>0 then Modus:=Quantity/It."Order Multiple";
+                                          //IF Modus>ROUND(Modus, 0.001, '<') THEN
+                                          //ERROR('The entry in not a multiple of order multiple given on Item table');
+                                        end;
+                                      END;
+
+                         Target=Quantity(Field 8).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        CheckActionMessageNew;
+                                        "Order Address Code" := '';
+                                        if "Vendor No." <> '' then
+                                        #4..50
+                                        CreateDim(
+                                          DATABASE::Vendor,"Vendor No.",
+                                          DimMgt.TypeToTableID3(Type),"No.");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..53
+
+                                        if VendorRec.Get("Vendor No.") then "Vendor Name":=VendorRec.Name;
+                                      END;
+
+                         Target="Vendor No."(Field 9).OnValidate }
+    { PropertyModification;
+                         Target="Production BOM Version Code"(Field 99000885);
+                         Property=Data type;
+                         OriginalValue=Code20;
+                         ModifiedValue=Code10 }
+    { PropertyModification;
+                         Target="Routing Version Code"(Field 99000886);
+                         Property=Data type;
+                         OriginalValue=Code20;
+                         ModifiedValue=Code10 }
+    { Insertion         ;InsertAfter="Custom Sorting Order"(Field 7110);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;Print Line          ;Boolean       ;InitValue=true }
+                           { 50301;  ;Approved            ;Boolean        }
+                           { 50302;  ;Vendor Name         ;Text30         }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        ReqLine.Reset;
+                                        ReqLine.Get("Worksheet Template Name","Journal Batch Name","Line No.");
+                                        while (ReqLine.Next <> 0) and (ReqLine.Level > Level) do
+                                        #4..8
+                                        TestField("Reserved Qty. (Base)",0);
+
+                                        DeleteRelations;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..11
+
+
+                                        //AAA Dec 2001
+                                        if GLSetUp.Find('-') then ;
+                                        if (UserId<>GLSetUp.Administrator) then Error('You can not delete Purch. Req. Lines');
+                                      END;
+
+                         Target=OnDelete }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if CurrentKey <> Rec2.CurrentKey then begin
+                                          Rec2 := Rec;
+                                          Rec2.SetRecFilter;
+                                        #4..10
+                                        ReqWkshTmpl.Get("Worksheet Template Name");
+                                        ReqWkshName.Get("Worksheet Template Name","Journal Batch Name");
+
+                                        ValidateShortcutDimCode(1,"Shortcut Dimension 1 Code");
+                                        ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..13
+                                        "Shortcut Dimension 2 Code":='ATLANTIC';
+                                        ValidateShortcutDimCode(1,"Shortcut Dimension 1 Code");
+                                        ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
+                                      END;
+
+                         Target=OnInsert }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        Init;
+                                        "Journal Batch Name" := GetJnlBatchNameForOrderPlanning;
+                                        "Line No." := "Line No." + 10000;
+                                        #4..8
+                                        "Bin Code" := UnplannedDemand."Bin Code";
+                                        Validate("No.");
+                                        Validate("Variant Code",UnplannedDemand."Variant Code");
+                                        UpdateDescription;
+                                        "Unit Of Measure Code (Demand)" := UnplannedDemand."Unit of Measure Code";
+                                        "Qty. per UOM (Demand)" := UnplannedDemand."Qty. per Unit of Measure";
+                                        Reserve := UnplannedDemand.Reserve;
+                                        #16..37
+                                        "User ID" := UserId;
+
+                                        OnAfterTransferFromUnplannedDemand(Rec,UnplannedDemand);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..11
+                                        Description := UnplannedDemand.Description;
+                                        #13..40
+                                      END;
+
+                         Target=TransferFromUnplannedDemand(PROCEDURE 46) }
+    { Insertion         ;InsertAfter=SourceDropShipment(Variable 1026);
+                         ChangedElements=VariableCollection
+                         {
+                           "---"@1075 : Text[30];
+                           It@1074 : Record Item;
+                           Modus@1051 : Decimal;
+                           "----"@1050 : Text[30];
+                           GLSetUp@1028 : Record "General Ledger Setup";
+                           HR@1027 : Code[10];
+                           VendorRec@1076 : Record Vendor;
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

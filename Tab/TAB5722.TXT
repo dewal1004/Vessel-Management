@@ -1,0 +1,43 @@
+OBJECT Modification "Item Category"(Table 5722)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20260320D;
+    Time=120000T;
+    Version List=NAVW114.12;
+  }
+  PROPERTIES
+  {
+    Target="Item Category"(Table 5722);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Id(Field 8000);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Type                ;Option        ;OptionString=cldrm,store }
+                           { 50001;  ;No.                 ;Integer        }
+                           { 50385;  ;Shipped Quantity    ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Sales Shipment Line".Quantity WHERE ("Shipment Date"=FIELD("Date Filter"),
+                                                                                                                                "Item Category Code"=FIELD(Code),
+                                                                                                                                "Gen. Bus. Posting Group"=CONST('FOREIGN')));
+                                                                          DecimalPlaces=0:0;
+                                                                          Editable=false }
+                           { 50386;  ;Date Filter         ;Date          ;FieldClass=FlowFilter }
+                         }
+                          }
+    { Insertion         ;InsertAfter=Code(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"No."                                    }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

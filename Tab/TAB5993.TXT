@@ -1,0 +1,26 @@
+OBJECT Modification "Service Invoice Line"(Table 5993)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20230719D;
+    Time=120000T;
+    Version List=NAVW114.03;
+  }
+  PROPERTIES
+  {
+    Target="Service Invoice Line"(Table 5993);
+  }
+  CHANGES
+  {
+    { PropertyInsertion ;Target=ShowItemShipmentLines(PROCEDURE 9);
+                         Property=Local;
+                         ModifiedValue=Yes }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

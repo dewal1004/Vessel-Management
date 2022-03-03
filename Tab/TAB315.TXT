@@ -1,0 +1,60 @@
+OBJECT Modification "Jobs Setup"(Table 315)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20221117D;
+    Time=120000T;
+    Version List=NAVW111.00;
+  }
+  PROPERTIES
+  {
+    Target="Jobs Setup"(Table 315);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Automatic Update Job Item Cost"(Field 1001);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;Catch Nos.          ;Code10        ;TableRelation="No. Series";
+                                                                          CaptionML=ENU=Job Nos. }
+                           { 50301;  ;Crew Share Percentage;Decimal       }
+                           { 50302;  ;Standard Sea Days   ;Integer        }
+                           { 50310;  ;Incentive Rate Code ;Code10        ;TableRelation="Payroll-Lookup Header." }
+                           { 50311;  ;Posting group       ;Code20        ;TableRelation="Job Posting Group" }
+                           { 50320;  ;Export Prouct Code  ;Code10         }
+                           { 50329;  ;Picture             ;BLOB          ;CaptionML=ENU=Picture;
+                                                                          SubType=Bitmap }
+                           { 50330;  ;Dry Docking         ;Code10        ;TableRelation="No. Series" }
+                           { 50331;  ;Fixed Salary Rate   ;Decimal       ;Description=Non Incentive: Salaries in cycle days multiplied with a daily salary in Naira }
+                           { 50332;  ;Travelling Expenses Rate;Decimal   ;Description=Expatriate: Fixed rate per date }
+                           { 50333;  ;License Fee Rate    ;Decimal        }
+                           { 50334;  ;Clearing_Fwrd_NPA   ;Decimal        }
+                           { 50335;  ;Shore Overheads     ;Decimal        }
+                           { 50336;  ;AGO Account         ;Code20        ;TableRelation="G/L Account" }
+                           { 50337;  ;AGO Posting Code    ;Code10        ;TableRelation="Gen. Product Posting Group" }
+                           { 50338;  ;LUB.  Posting Code  ;Code10        ;TableRelation="Gen. Product Posting Group" }
+                           { 50340;  ;Job Val Begin Account;Code20       ;TableRelation="G/L Account" }
+                           { 50341;  ;Job Val End Account ;Code20        ;TableRelation="G/L Account" }
+                           { 50502;  ;Default Price Group Code;Code10    ;TableRelation="Customer Price Group";
+                                                                          Description=P & L Reports Price to be Used when price not found in the price list }
+                           { 50532;  ;Fishing Day (Manual);Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum(Job."Fishing Day (Manual)" WHERE ("Ending Date"=FIELD("Date Filter")));
+                                                                          DecimalPlaces=0:2 }
+                           { 50533;  ;Lost At Sea (Manual);Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum(Job."Lost At Sea (Manual)" WHERE ("Ending Date"=FIELD("Date Filter")));
+                                                                          DecimalPlaces=0:2 }
+                           { 50534;  ;Port Day (Manual)   ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum(Job."Port Day (Manual)" WHERE ("Ending Date"=FIELD("Date Filter")));
+                                                                          DecimalPlaces=0:2 }
+                           { 50910;  ;Date Filter         ;Date          ;FieldClass=FlowFilter }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

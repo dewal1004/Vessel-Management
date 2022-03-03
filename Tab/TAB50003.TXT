@@ -1,0 +1,151 @@
+OBJECT Table 50003 Payroll-Lookup Lines.
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20261216D;
+    Time=032549T;
+    Modified=true;
+    Version List=CBU Ver. 1.00;
+  }
+  PROPERTIES
+  {
+    LookupPageID="Table Lookup Lines.";
+  }
+  FIELDS
+  {
+    { 1   ;   ;TableId             ;Code20        ;TableRelation="Payroll-Lookup Header.";
+                                                   OnValidate=BEGIN
+                                                                 TableId := xRec.TableId;
+                                                                 exit;
+                                                              END;
+
+                                                   NotBlank=true }
+    { 2   ;   ;Lower Amount        ;Decimal       ;OnValidate=BEGIN
+                                                                 LookupHeader.Get( Rec.TableId);
+                                                                 if LookupHeader.Type = 1 then
+                                                                  "Lower Amount" := 0;
+                                                              END;
+
+                                                   DecimalPlaces=0:5;
+                                                   MinValue=0 }
+    { 3   ;   ;Upper Amount        ;Decimal       ;OnValidate=BEGIN
+                                                                 LookupHeader.Get( Rec.TableId);
+                                                                 if LookupHeader.Type = 1 then
+                                                                  "Upper Amount" := 0;
+
+                                                                 if LookupHeader.Type = 2 then
+                                                                   Validate("Tax Rate %");
+                                                              END;
+
+                                                   DecimalPlaces=0:5;
+                                                   MinValue=0 }
+    { 4   ;   ;Lower Code          ;Code20        ;OnValidate=BEGIN
+                                                                 LookupHeader.Get( Rec.TableId);
+                                                                 if (LookupHeader.Type = 0) or
+                                                                   (LookupHeader.Type = 2) then
+                                                                  "Lower Code" := '';
+                                                              END;
+                                                               }
+    { 5   ;   ;Upper Code          ;Code20        ;OnValidate=BEGIN
+                                                                 LookupHeader.Get( Rec.TableId);
+                                                                 if (LookupHeader.Type = 0) or
+                                                                   (LookupHeader.Type = 2) then
+                                                                  "Upper Code" := '';
+                                                              END;
+                                                               }
+    { 8   ;   ;Extract Amount      ;Decimal       ;OnValidate=BEGIN
+                                                                 LookupHeader.Get( Rec.TableId);
+                                                                if (LookupHeader.Type = 2) then
+                                                                  "Extract Amount" := 0;
+                                                              END;
+
+                                                   DecimalPlaces=0:5 }
+    { 9   ;   ;Tax Rate %          ;Decimal       ;OnValidate=BEGIN
+                                                                 LookupHeader.Get( Rec.TableId);
+                                                                 if (LookupHeader.Type = 0) or (LookupHeader.Type = 1) then
+                                                                 begin
+                                                                  "Tax Rate %" := 0;
+                                                                  "Cum. Tax Payable" := 0
+                                                                 end
+                                                                 else begin
+                                                                   LookupLines.SetRange(TableId, TableId);
+                                                                   LookupLines.SetRange("Lower Code", '');
+                                                                  if not  LookupLines.Find('-') then
+                                                                  begin
+                                                                    { This is the first record being created for this tax table }
+                                                                    if "Upper Amount" <> 0 then
+                                                                      "Cum. Tax Payable" := (1/100 ) * ("Tax Rate %" *
+                                                                                            ("Upper Amount" - "Lower Amount"))
+                                                                  end
+                                                                  else begin
+
+                                                                    if LookupLines."Lower Amount" = "Lower Amount" then
+                                                                    { We are at the record being edited currently}
+                                                                      LookupLines := Rec;
+
+                                                                    if LookupLines."Upper Amount" <> 0 then
+                                                                      LookupLines."Cum. Tax Payable" := (1/100 ) *
+                                                                      (LookupLines."Tax Rate %" * (LookupLines."Upper Amount"
+                                                                                                   - LookupLines."Lower Amount"))
+                                                                    else
+                                                                      LookupLines."Cum. Tax Payable" := 0;
+
+                                                                    if LookupLines."Lower Amount" = "Lower Amount" then
+                                                                    { We are at the record being edited currently}
+                                                                      "Cum. Tax Payable" := LookupLines."Cum. Tax Payable"
+                                                                    else
+                                                                       LookupLines.Modify;
+                                                                    PrevRec := LookupLines;
+
+                                                                    if ( LookupLines.Next <> 0) then
+                                                                    repeat
+
+                                                                      if LookupLines."Lower Amount" = "Lower Amount" then
+                                                                      { We are at the record being edited currently}
+                                                                        LookupLines := Rec;
+
+                                                                      if LookupLines."Upper Amount" = 0 then
+                                                                        LookupLines."Cum. Tax Payable" := 0
+                                                                      else
+                                                                      begin
+                                                                        LookupLines."Cum. Tax Payable" := (1/100 ) *
+                                                                        (LookupLines."Tax Rate %" * (LookupLines."Upper Amount" -
+                                                                                                     PrevRec."Upper Amount"));
+                                                                        LookupLines."Cum. Tax Payable" := LookupLines."Cum. Tax Payable" +
+                                                                                                           PrevRec."Cum. Tax Payable";
+                                                                      end;
+                                                                      if LookupLines."Lower Amount" = "Lower Amount" then
+                                                                      { We are at the record being edited currently}
+                                                                        "Cum. Tax Payable" := LookupLines."Cum. Tax Payable"
+                                                                      else
+                                                                         LookupLines.Modify;
+                                                                      PrevRec := LookupLines;
+                                                                    until ( LookupLines.Next = 0)
+                                                                  end
+                                                                 end
+                                                              END;
+
+                                                   DecimalPlaces=0:5;
+                                                   MinValue=0;
+                                                   MaxValue=100 }
+    { 10  ;   ;Cum. Tax Payable    ;Decimal       ;DecimalPlaces=0:5 }
+  }
+  KEYS
+  {
+    {    ;TableId,"Lower Amount","Lower Code"     ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      LookupHeader@1000000000 : Record "Payroll-Lookup Header.";
+      LookupLines@1000000001 : Record "Payroll-Lookup Lines.";
+      PrevRec@1000000002 : Record "Payroll-Lookup Lines.";
+
+    BEGIN
+    END.
+  }
+}
+

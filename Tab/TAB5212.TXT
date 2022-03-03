@@ -1,0 +1,32 @@
+OBJECT Modification "Employee Statistics Group"(Table 5212)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Employee Statistics Group"(Table 5212);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Description(Field 2);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Ledger Code         ;Code10         }
+                           { 50001;  ;Frequency           ;Code10        ;DateFormula=true }
+                           { 50002;  ;Hours Frequency     ;Integer        }
+                           { 50003;  ;G/L Account         ;Code10         }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

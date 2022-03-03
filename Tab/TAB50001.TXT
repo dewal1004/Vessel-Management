@@ -1,0 +1,115 @@
+OBJECT Table 50001 Payroll-E/D Codes.
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20030317D;
+    Time=141004T;
+    Modified=true;
+    Version List=CBU Ver. 1.00,LOAN1.0;
+  }
+  PROPERTIES
+  {
+    LookupPageID="E/D Codes.";
+  }
+  FIELDS
+  {
+    { 1   ;   ;E/D Code            ;Code20        ;AltSearchField=Search Name;
+                                                   OnValidate=BEGIN
+                                                                "Search Name" := "E/D Code";
+                                                              END;
+
+                                                   NotBlank=true }
+    { 2   ;   ;Search Name         ;Code20         }
+    { 3   ;   ;Payslip Text        ;Text35        ;Title=true }
+    { 4   ;   ;Payslip appearance  ;Option        ;OptionString="Non-zero & Code","Always & Code","Always & Text","Non-zero & Text","Does not appear",Heading,"Always & Text & Special" }
+    { 6   ;   ;Units               ;Text10        ;Title=true }
+    { 7   ;   ;Compute             ;Code20        ;TableRelation="Payroll-E/D Codes.";
+                                                   OnValidate=BEGIN
+                                                                 if Compute <> '' then
+                                                                  if Compute = "E/D Code" then
+                                                                    Error ('An E/D cannot compute itself')
+                                                                  else
+                                                                    "E/DFileRec".Get( Compute);
+                                                              END;
+                                                               }
+    { 8   ;   ;Factor Of           ;Code20        ;TableRelation="Payroll-E/D Codes.";
+                                                   OnValidate=BEGIN
+                                                                 if "Factor Of" <> '' then
+                                                                  if "Factor Of" = "E/D Code" then
+                                                                    Error ('An E/D cannot be a factor of itself')
+                                                                  else
+                                                                  "E/DFileRec".Get( "Factor Of");
+                                                              END;
+                                                               }
+    { 9   ;   ;Percentage          ;Decimal       ;DecimalPlaces=0:5 }
+    { 10  ;   ;Add/Subtract        ;Option        ;OptionString=" ",Add,Subtract }
+    { 11  ;   ;Table Look Up       ;Code20        ;TableRelation="Payroll-Lookup Header.";
+                                                   OnValidate=BEGIN
+                                                                 if "Table Look Up" <> '' then
+                                                                  LookupRec.Get( "Table Look Up");
+                                                              END;
+                                                               }
+    { 12  ;   ;Edit Amount?        ;Boolean        }
+    { 13  ;   ;Yes/No Req.?        ;Boolean        }
+    { 14  ;   ;Max. Amount         ;Decimal       ;DecimalPlaces=0:5 }
+    { 15  ;   ;Min. Amount         ;Decimal       ;DecimalPlaces=0:5 }
+    { 16  ;   ;Rate                ;Decimal       ;DecimalPlaces=0:5 }
+    { 17  ;   ;Payslip Group ID    ;Option        ;OptionString=" ","GROSS PAY","TAXABLE PAY","TAX CHARGED","TAX DEDUCTED","TOTAL DEDUCTIONS","NET PAY DUE" }
+    { 18  ;   ;Pos. In Payslip Grp.;Integer       ;MinValue=0;
+                                                   MaxValue=99 }
+    { 19  ;   ;Reset Next Period?  ;Boolean       ;InitValue=false }
+    { 20  ;   ;Rounding Direction  ;Option        ;OptionString=Nearest,Higher,Lower }
+    { 21  ;   ;Rounding Precision  ;Decimal       ;DecimalPlaces=0:5;
+                                                   MinValue=0 }
+    { 22  ;   ;Payslip Column      ;Option        ;InitValue=1;
+                                                   OptionString="1","2","3" }
+    { 23  ;   ;Changed             ;Boolean       ;InitValue=false }
+    { 24  ;   ;S. Report appearance;Option        ;InitValue="Does not appear";
+                                                   OptionString="Non-zero & Code","Always & Code","Always & Text","Non-zero & Text","Does not appear",Heading }
+    { 25  ;   ;Edit Grp. Amount?   ;Boolean       ;InitValue=false }
+    { 26  ;   ;Overline Column     ;Option        ;InitValue=None;
+                                                   OptionString=None,"1","2","3","1-2","2-3","1-3" }
+    { 27  ;   ;Underline Amount    ;Option        ;InitValue=None;
+                                                   OptionString=None,Underline,"Double Underline" }
+    { 28  ;   ;Description         ;Text30         }
+    { 29  ;   ;Loan (Y/N)          ;Boolean        }
+    { 30  ;   ;OverTime(Y/N)       ;Boolean        }
+    { 31  ;   ;Absent Deduction    ;Boolean        }
+    { 32  ;   ;Part of Absent Deduction;Boolean    }
+    { 34  ;   ;Payslip Print Column;Option        ;OptionString=" ",Postive,Negative,"Total Earning","Total Deduction","Net Earning" }
+    { 35  ;   ;ED Type             ;Option        ;OptionString=" ","NSITF Employee","NSITF Employer","Gross Salary","Pension Employee","Pension Employer";
+                                                   Description=Added by Adams for NSITF Report }
+    { 36  ;   ;Control Type        ;Option        ;OptionString=" ",Basic,Absence }
+    { 37  ;   ;Apportionable       ;Boolean       ;Description=Added for 7up }
+    { 38  ;   ;Monthly Variable    ;Boolean       ;Description=Added for Monthly Variables }
+    { 39  ;   ;Taxable Ref         ;Boolean       ;Description=Added to insert Taxable lines }
+    { 41  ;   ;Prorate             ;Boolean       ;Description=Added for Prorating }
+    { 42  ;   ;Variable Unit       ;Option        ;OnValidate=BEGIN
+                                                                if not "Monthly Variable" then "Variable Unit" := 0;
+                                                              END;
+
+                                                   OptionString=" ",Hours,Days }
+  }
+  KEYS
+  {
+    {    ;"E/D Code"                              ;Clustered=true }
+    {    ;"Search Name"                            }
+    {    ;"ED Type"                                }
+    {    ;"Monthly Variable"                       }
+  }
+  FIELDGROUPS
+  {
+    { 1   ;DropDown            ;"E/D Code","Payslip Text"                }
+    { 2   ;LookUp              ;"E/D Code","Payslip Text"                }
+  }
+  CODE
+  {
+    VAR
+      "E/DFileRec"@1000000000 : Record "Payroll-E/D Codes.";
+      LookupRec@1000000001 : Record "Payroll-Lookup Header.";
+
+    BEGIN
+    END.
+  }
+}
+

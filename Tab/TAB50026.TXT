@@ -1,0 +1,35 @@
+OBJECT Table 50026 Course Types
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=144533T;
+    Modified=true;
+    Version List=HR Ver 1.0;
+  }
+  PROPERTIES
+  {
+    DataCaptionFields="Course Type Code",Description;
+    LookupPageID="Course Type List";
+    DrillDownPageID="Course Type List";
+  }
+  FIELDS
+  {
+    { 1   ;   ;Course Type Code    ;Code10         }
+    { 2   ;   ;Description         ;Text100        }
+  }
+  KEYS
+  {
+    {    ;"Course Type Code"                      ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

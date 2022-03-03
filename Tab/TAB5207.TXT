@@ -1,0 +1,147 @@
+OBJECT Modification "Employee Absence"(Table 5207)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220519D;
+    Time=120000T;
+    Version List=NAVW114.01;
+  }
+  PROPERTIES
+  {
+    Target="Employee Absence"(Table 5207);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        Employee.Get("Employee No.");
+                                        if Employee."Privacy Blocked" then
+                                          Error(BlockedErr);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        Employee.Get("Employee No.");
+
+                                        "Employee Contract code":= Employee."Empl Contr Uni Code";
+                                        if Employee."Privacy Blocked" then
+                                          Error(BlockedErr);
+                                      END;
+
+                         Target="Employee No."(Field 1).OnValidate }
+    { Insertion         ;OnValidate=BEGIN
+
+                                      "To Date":="From Date";
+                                      if ("From Date"<="To Date") then Quantity:=("To Date"-"From Date")+1
+                                      else
+                                      Error('From Date should not be later than To Date');
+                                    END;
+
+                         Target="From Date"(Field 3) }
+    { Insertion         ;OnValidate=BEGIN
+
+                                      if ("From Date"<="To Date") then Quantity:=("To Date"-"From Date")+1
+                                      else
+                                      Error('From Date should not be later than To Date');
+                                    END;
+
+                         Target="To Date"(Field 4) }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        CauseOfAbsence.Get("Cause of Absence Code");
+                                        Description := CauseOfAbsence.Description;
+                                        Validate("Unit of Measure Code",CauseOfAbsence."Unit of Measure Code");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..3
+                                        "Deduct from Payroll":=CauseOfAbsence.Deductible;
+                                      END;
+
+                         Target="Cause of Absence Code"(Field 5).OnValidate }
+    { Insertion         ;InsertAfter="Qty. per Unit of Measure"(Field 13);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Region Code         ;Code10         }
+                           { 50001;  ;Deduct from Payroll ;Boolean       ;OnValidate=BEGIN
+                                                                                       //fieldval := FORMAT((FIELDNO("Deduct from Payroll")));
+                                                                                       //Autority(fieldval);
+                                                                                     END;
+                                                                                      }
+                           { 50002;  ;Employee Contract code;Code30       }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        EmployeeAbsence.SetCurrentKey("Entry No.");
+                                        if EmployeeAbsence.FindLast then
+                                          "Entry No." := EmployeeAbsence."Entry No." + 1
+                                        else begin
+                                          CheckBaseUOM;
+                                          "Entry No." := 1;
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..6
+                                        //CheckMod;
+
+                                        end;
+                                      END;
+
+                         Target=OnInsert }
+    { Insertion         ;OnModify=BEGIN
+
+                                    //CheckMod;
+                                  END;
+                                   }
+    { Insertion         ;InsertAfter=CalcBaseQty(PROCEDURE 14);
+                         ChangedElements=PROCEDURECollection
+                         {
+                           [LineStart(77631)]
+                           PROCEDURE CheckMod@1000000006();
+                           VAR
+                             GenSetUp@1000000000 : Record "General Ledger Setup";
+                             payPrd@1000000001 : Record "Payroll-Periods.";
+                             Text001@1000000002 : TextConst 'ENU=You are not permitted to modify the record';
+                             Text002@1000000003 : TextConst 'ENU=Record not found';
+                             PayrsetUp@1000000004 : Record "ASL Payroll Setup";
+                             Text003@1000000005 : TextConst 'ENU=You cannot edit date prior to %1';
+                           BEGIN
+                             GenSetUp.Get; PayrsetUp.Get('LOAN');
+                             payPrd.SetRange(payPrd.Closed,true);
+                             if not payPrd.Find('+') then Error(Text002);
+                             if (UserId<>GenSetUp.Administrator) and (UserId<>PayrsetUp."HR Officer") then Error (Text001);
+                             if (UserId<>GenSetUp.Administrator) and ("From Date"<payPrd."Start Date") then Error(Text003,payPrd."Start Date");
+                           END;
+
+                         }
+                          }
+    { PropertyModification;
+                         Target=BlockedErr(Variable 1004);
+                         Property=Id;
+                         OriginalValue=1004;
+                         ModifiedValue=10004 }
+    { PropertyModification;
+                         Target=UOMMgt(Variable 1005);
+                         Property=Id;
+                         OriginalValue=1005;
+                         ModifiedValue=10005 }
+    { Insertion         ;InsertAfter=HumanResUnitOfMeasure(Variable 1003);
+                         ChangedElements=VariableCollection
+                         {
+                           approved@1011 : Boolean;
+                           approv@1010 : Record Object;
+                           fieldval@1009 : Text[30];
+                           Deptrec@1008 : Record "Dimension Value";
+                           MPentry@1007 : Record "MP Budget Name";
+                           MPentryAvail@1006 : Record "MP Budget Entry";
+                           DatDif@1005 : ARRAY [2] OF Decimal;
+                           DayCount@1004 : Decimal;
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

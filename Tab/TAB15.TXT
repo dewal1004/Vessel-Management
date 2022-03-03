@@ -1,0 +1,36 @@
+OBJECT Modification "G/L Account"(Table 15)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20070621D;
+    Time=120000T;
+    Version List=NAVW114.25;
+  }
+  PROPERTIES
+  {
+    Target="G/L Account"(Table 15);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Id(Field 8000);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Ext. DocNo. Filter  ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation="G/L Entry"."External Document No." }
+                           { 50001;  ;Job Filter          ;Code10        ;TableRelation=Job."No." }
+                           { 50002;  ;Reason Code Filter  ;Code10        ;FieldClass=FlowField;
+                                                                          TableRelation="Reason Code".Code }
+                           { 50003;  ;Department Posting  ;Date           }
+                         }
+                          }
+    { PropertyInsertion ;Property=Permissions;
+                         ModifiedValue=TableData "G/L Entry"=rimd }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,320 @@
+OBJECT Modification "Transfer Header"(Table 5740)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220216D;
+    Time=181443.133T;
+    Modified=true;
+    Version List=NAVW114.07;
+  }
+  PROPERTIES
+  {
+    Target="Transfer Header"(Table 5740);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        TestStatusOpen;
+
+                                        IsHandled := false;
+                                        #4..58
+                                          end else
+                                            "Transfer-from Code" := xRec."Transfer-from Code";
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..61
+
+                                        //AAA-14-Dec-01/STA
+                                        "In-Transit Code":='OWN LOG.';
+                                        if LocationRec.Get("Transfer-from Code") then
+                                            "Shortcut Dimension 2 Code":=LocationRec."Shortcut Dimension 2 Code";
+                                        //CALCFIELDS("Transfer From Voy. No.");
+                                      END;
+
+                         Target="Transfer-from Code"(Field 2).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        TestStatusOpen;
+
+                                        IsHandled := false;
+                                        #4..56
+                                          end else
+                                            "Transfer-to Code" := xRec."Transfer-to Code";
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..59
+
+                                        //AAA-14-Dec-01/STA
+                                        "In-Transit Code":='OWN LOG.';
+                                        if LocationRec.Get("Transfer-to Code") then
+                                            "New Shortcut Dimension 2 Code":=LocationRec."Shortcut Dimension 2 Code";
+                                        //CALCFIELDS("Transfer To Voy. No.");
+                                      END;
+
+                         Target="Transfer-to Code"(Field 11).OnValidate }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
+
+                                        //AAA-Nov2001
+                                        UpdateTransLines(Rec,FieldNo("Shortcut Dimension 2 Code"));
+                                      END;
+
+                         Target="Shortcut Dimension 2 Code"(Field 26).OnValidate }
+    { PropertyInsertion ;Target="Shortcut Dimension 2 Code"(Field 26);
+                         Property=NotBlank;
+                         ModifiedValue=true }
+    { PropertyInsertion ;Target="In-Transit Code"(Field 27);
+                         Property=Editable;
+                         ModifiedValue=true }
+    { Insertion         ;InsertAfter="Assigned User ID"(Field 9000);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Voyage No.          ;Code10        ;TableRelation=Job.Status WHERE (Vessel=FIELD("Transfer-to Code"));
+                                                                          NotBlank=true }
+                           { 50001;  ;Req. Type           ;Option        ;OnValidate=BEGIN
+                                                                                       //AAA
+                                                                                       if "In-Transit Code"='' then Error('Remember to fill in in-transit-code');
+                                                                                       if LocationRec.Get("Transfer-to Code") then
+                                                                                       begin
+                                                                                         Message('Vessel %1 Selected \'+
+                                                                                                 'Sea days is %2 \' +
+                                                                                                 'Supply category is %3',
+                                                                                                  "Transfer-to Name",LocationRec."Sea Days","Req. Type");
+                                                                                         OnSeaDays:=LocationRec."Sea Days";
+                                                                                       end;
+                                                                                       InsertSpecialBomItem("Req. Type",OnSeaDays);
+                                                                                     END;
+
+                                                                          OptionString=" ",DECK,ELEC,ENGR,LIFE,FSGR,LUBS,PACK,AGO }
+                           { 50002;  ;New Shortcut Dimension 2 Code;Code20;
+                                                                          TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                                          OnValidate=BEGIN
+                                                                                       ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
+                                                                                       Modify;
+                                                                                       //TESTFIELD("New Shortcut Dimension 2 Code","Shortcut Dimension 2 Code");
+                                                                                       //AAA-Nov2001
+                                                                                       "External Document No.":='TRANSORD';
+                                                                                     END;
+
+                                                                          CaptionML=ENU=Shortcut Dimension 2 Code;
+                                                                          CaptionClass='1,2,2' }
+                           { 50300;  ;Transfer From Voy. No.;Code10      ;TableRelation=Job WHERE (Vessel=FIELD("Transfer-from Code"),
+                                                                                                   "Voyage Ended"=CONST(false));
+                                                                          OnValidate=BEGIN
+                                                                                       if Jobs.Get("Transfer From Voy. No.") then
+                                                                                       "Transfer From Voy. No.":=Jobs."Voyage No.";
+                                                                                     END;
+                                                                                      }
+                           { 50301;  ;Transfer To Voy. No.;Code10        ;TableRelation=Job WHERE (Vessel=FIELD("Transfer-to Code"),
+                                                                                                   "Voyage Ended"=CONST(false));
+                                                                          OnValidate=BEGIN
+                                                                                       if Jobs.Get("Transfer To Voy. No.") then
+                                                                                       "Transfer To Voy. No.":=Jobs."Voyage No.";
+                                                                                       "External Document No.":="Transfer To Voy. No.";
+                                                                                     END;
+
+                                                                          NotBlank=true }
+                           { 50310;  ;Previous Voyage Expensed;Boolean    }
+                           { 50311;  ;Requested By        ;Code30         }
+                           { 50312;  ;Received By         ;Code30         }
+                           { 50314;  ;Issued By           ;Code30         }
+                           { 50315;  ;Approved By         ;Code30         }
+                           { 50316;  ;Transfer Type       ;Option        ;OptionString=Regular,Repairs,"Dry Dock","Over Hauling" }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        GetInventorySetup;
+                                        if "No." = '' then begin
+                                          TestNoSeries;
+                                          NoSeriesMgt.InitSeries(GetNoSeriesCode,xRec."No. Series","Posting Date","No.","No. Series");
+                                        end;
+                                        InitRecord;
+                                        Validate("Shipment Date",WorkDate);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..7
+
+                                        "Shortcut Dimension 2 Code":='ATLANTIC';
+
+                                        if "No." <> '' then
+                                        Validate("In-Transit Code",'OWN LOG.');//AAA
+                                          //AAA
+                                      END;
+
+                         Target=OnInsert }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        TransferLine.SetRange("Document No.","No.");
+                                        TransferLine.SetFilter("Item No.",'<>%1','');
+                                        if TransferLine.FindSet then begin
+                                          TransferLine.LockTable;
+                                          repeat
+                                            case FieldID of
+                                              FieldNo("In-Transit Code"):
+                                                TransferLine.Validate("In-Transit Code",TransferHeader."In-Transit Code");
+                                              FieldNo("Transfer-from Code"):
+                                                begin
+                                                  TransferLine.Validate("Transfer-from Code",TransferHeader."Transfer-from Code");
+                                                  TransferLine.Validate("Shipping Agent Code",TransferHeader."Shipping Agent Code");
+                                                  TransferLine.Validate("Shipping Agent Service Code",TransferHeader."Shipping Agent Service Code");
+                                                  TransferLine.Validate("Shipment Date",TransferHeader."Shipment Date");
+                                                  TransferLine.Validate("Receipt Date",TransferHeader."Receipt Date");
+                                                  TransferLine.Validate("Shipping Time",TransferHeader."Shipping Time");
+                                                end;
+                                              FieldNo("Transfer-to Code"):
+                                                begin
+                                                  TransferLine.Validate("Transfer-to Code",TransferHeader."Transfer-to Code");
+                                                  TransferLine.Validate("Shipping Agent Code",TransferHeader."Shipping Agent Code");
+                                                  TransferLine.Validate("Shipping Agent Service Code",TransferHeader."Shipping Agent Service Code");
+                                                  TransferLine.Validate("Shipment Date",TransferHeader."Shipment Date");
+                                                  TransferLine.Validate("Receipt Date",TransferHeader."Receipt Date");
+                                                  TransferLine.Validate("Shipping Time",TransferHeader."Shipping Time");
+                                                end;
+                                              FieldNo("Shipping Agent Code"):
+                                                begin
+                                                  TransferLine.Validate("Shipping Agent Code",TransferHeader."Shipping Agent Code");
+                                                  TransferLine.BlockDynamicTracking(true);
+                                                  TransferLine.Validate("Shipping Agent Service Code",TransferHeader."Shipping Agent Service Code");
+                                                  TransferLine.Validate("Shipment Date",TransferHeader."Shipment Date");
+                                                  TransferLine.Validate("Receipt Date",TransferHeader."Receipt Date");
+                                                  TransferLine.Validate("Shipping Time",TransferHeader."Shipping Time");
+                                                  TransferLine.BlockDynamicTracking(false);
+                                                  TransferLine.DateConflictCheck;
+                                                end;
+                                              FieldNo("Shipping Agent Service Code"):
+                                                begin
+                                                  TransferLine.BlockDynamicTracking(true);
+                                                  TransferLine.Validate("Shipping Agent Service Code",TransferHeader."Shipping Agent Service Code");
+                                                  TransferLine.Validate("Shipment Date",TransferHeader."Shipment Date");
+                                                  TransferLine.Validate("Receipt Date",TransferHeader."Receipt Date");
+                                                  TransferLine.Validate("Shipping Time",TransferHeader."Shipping Time");
+                                                  TransferLine.BlockDynamicTracking(false);
+                                                  TransferLine.DateConflictCheck;
+                                                end;
+                                              FieldNo("Shipment Date"):
+                                                begin
+                                                  TransferLine.BlockDynamicTracking(true);
+                                                  TransferLine.Validate("Shipment Date",TransferHeader."Shipment Date");
+                                                  TransferLine.Validate("Receipt Date",TransferHeader."Receipt Date");
+                                                  TransferLine.Validate("Shipping Time",TransferHeader."Shipping Time");
+                                                  TransferLine.BlockDynamicTracking(false);
+                                                  TransferLine.DateConflictCheck;
+                                                end;
+                                              FieldNo("Receipt Date"),FieldNo("Shipping Time"):
+                                                begin
+                                                  TransferLine.BlockDynamicTracking(true);
+                                                  TransferLine.Validate("Shipping Time",TransferHeader."Shipping Time");
+                                                  TransferLine.Validate("Receipt Date",TransferHeader."Receipt Date");
+                                                  TransferLine.BlockDynamicTracking(false);
+                                                  TransferLine.DateConflictCheck;
+                                                end;
+                                              FieldNo("Outbound Whse. Handling Time"):
+                                                TransferLine.Validate("Outbound Whse. Handling Time",TransferHeader."Outbound Whse. Handling Time");
+                                              FieldNo("Inbound Whse. Handling Time"):
+                                                TransferLine.Validate("Inbound Whse. Handling Time",TransferHeader."Inbound Whse. Handling Time");
+                                              FieldNo(Status):
+                                                TransferLine.Validate(Status,TransferHeader.Status);
+                                              FieldNo("Direct Transfer"):
+                                                begin
+                                                  TransferLine.Validate("In-Transit Code",TransferHeader."In-Transit Code");
+                                                  TransferLine.Validate("Item No.",TransferLine."Item No.");
+                                                end;
+                                              else
+                                                OnUpdateTransLines(TransferLine,TransferHeader,FieldID);
+                                            end;
+                                            TransferLine.Modify(true);
+                                          until TransferLine.Next = 0;
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..16
+                                                 LocationRec.Get("Transfer-from Code");
+                                                 TransLine.Validate("Shortcut Dimension 2 Code",LocationRec."Shortcut Dimension 2 Code");  //AAA
+
+                                               end;
+                                        #18..33
+                                                 TransferLine.Validate("Shipping Time",TransferHeader."Shipping Time");
+                                        #35..66
+                                               FieldNo("Inbound Whse. Handling Time"):
+                                                TransferLine.Validate("Inbound Whse. Handling Time",TransferHeader."Inbound Whse. Handling Time");
+                                             FieldNo(Status):
+                                              TransferLine.Validate("Variant Code",'ATLANTIC');
+                                                //TransferLine.VALIDATE(Status,TransferHeader.Status);
+                                        #71..77
+                                         end;
+                                        #79..81
+                                      END;
+
+                         Target=UpdateTransLines(PROCEDURE 15) }
+    { Insertion         ;Target=DeleteOneTransferOrder(PROCEDURE 4);
+                         InsertAfter=No(Variable 1007);
+                         ChangedElements=VariableCollection
+                         {
+                           ItemTrackingMgt@1006 : Codeunit "Item Tracking Management";
+                           WhseValidateSourceLine@1005 : Codeunit "Whse. Validate Source Line";
+                         }
+                          }
+    { Insertion         ;InsertAfter=GetReceiptLines(PROCEDURE 22);
+                         ChangedElements=PROCEDURECollection
+                         {
+                           [LineStart(88352)]
+                           LOCAL PROCEDURE InsertSpecialBomItem@32(ReqType@1001 : Integer;Seadays@1000 : Integer);
+                           BEGIN
+
+                             TransLine.Init;
+                             TransLine."Document No.":="No.";
+                             TransLine."Line No.":=10000;
+
+                             if "Req. Type">0 then
+                             begin
+                                 case ReqType of
+                                   1:if Seadays>1 then Supply:='DECK'+'1' else Supply:='DECK' ;
+                                   2:Supply:='ELEC';
+                                   3:if Seadays>1 then Supply:='ENGR'+'1' else Supply:='ENGR' ;
+                                   4:Supply:='LIFE';
+                                   5:Supply:='FSGR';
+                                   6:if Seadays>1 then Supply:='LUBS'+'1' else Supply:='LUBS';
+                                   7:Supply:='PACK';
+                                end;
+                               TransLine.Validate(TransLine."Item No.",Supply);
+                               TransLine.Validate(TransLine."Qty. Reqd.",1);
+                               TransLine."Shortcut Dimension 2 Code":="Shortcut Dimension 2 Code";
+                             end;
+                             if not TransLine.Insert() then TransLine.Modify();
+                           END;
+
+                           [LineStart(88375)]
+                           LOCAL PROCEDURE GetLocation@33(InLocationCode@1000 : Code[10]);
+                           BEGIN
+                           END;
+
+                         }
+                          }
+    { Insertion         ;InsertAfter=Text007(Variable 1014);
+                         ChangedElements=VariableCollection
+                         {
+                           "--------------------"@1022 : Text[30];
+                           LocationRec@1021 : Record Location;
+                           Jobs@1020 : Record Job;
+                           OnSeaDays@1023 : Integer;
+                           Supply@1025 : Code[20];
+                           "OWN LOG."@1024 : Option;
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

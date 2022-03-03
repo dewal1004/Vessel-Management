@@ -1,0 +1,29 @@
+OBJECT Modification "Detailed Cust. Ledg. Entry"(Table 379)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20290721D;
+    Time=120000T;
+    Version List=NAVW114.27;
+  }
+  PROPERTIES
+  {
+    Target="Detailed Cust. Ledg. Entry"(Table 379);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Ledger Entry Amount"(Field 43);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50301;  ;Loan ID             ;Code10         }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

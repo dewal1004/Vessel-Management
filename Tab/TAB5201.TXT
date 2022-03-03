@@ -1,0 +1,75 @@
+OBJECT Modification "Alternative Address"(Table 5201)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Alternative Address"(Table 5201);
+  }
+  CHANGES
+  {
+    { CodeModification  ;OriginalCode=BEGIN
+                                        Employee.Get("Employee No.");
+                                        Name := Employee."Last Name";
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        //Employee.GET("Employee No.");
+                                        //Name := Employee."Last Name";
+
+                                        if Source=Source::" " then
+                                        begin
+                                          Employee.Get("Employee No.");
+                                          Name := Employee."Last Name";
+                                        end
+                                          else
+                                            begin
+                                              Applicant.Get("Employee No.");
+                                              Name := Applicant.Surname;
+                                            end;
+                                      END;
+
+                         Target="Employee No."(Field 1).OnValidate }
+    { PropertyModification;
+                         Target="Employee No."(Field 1);
+                         Property=TableRelation;
+                         OriginalValue=Employee;
+                         ModifiedValue=IF (Source=CONST(" ")) Employee
+                                       ELSE IF (Source=CONST(Applicant)) Applicants }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        PostCode.ValidatePostCode(City,"Post Code",County,"Country/Region Code",(CurrFieldNo <> 0) and GuiAllowed);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        PostCode.ValidatePostCode(City,"Post Code",County,"Country/Region Code",(CurrFieldNo <> 0) and GuiAllowed);
+
+                                        if PostCode.Get("Post Code") then
+                                          City := PostCode.City;
+                                      END;
+
+                         Target="Post Code"(Field 8).OnValidate }
+    { Insertion         ;InsertAfter="Country/Region Code"(Field 14);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50000;  ;Source              ;Option        ;OptionString=" ",Applicant }
+                         }
+                          }
+    { Insertion         ;InsertAfter=Employee(Variable 1001);
+                         ChangedElements=VariableCollection
+                         {
+                           Applicant@1002 : Record Applicants;
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

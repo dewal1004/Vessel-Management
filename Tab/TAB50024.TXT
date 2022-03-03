@@ -1,0 +1,35 @@
+OBJECT Table 50024 Job Category
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20291015D;
+    Time=144550T;
+    Modified=true;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    LookupPageID="Job Category List";
+    DrillDownPageID="Job Category List";
+  }
+  FIELDS
+  {
+    { 1   ;   ;Code                ;Code10         }
+    { 2   ;   ;Description         ;Text30         }
+    { 3   ;   ;Range               ;Text30         }
+  }
+  KEYS
+  {
+    {    ;Code                                    ;Clustered=true }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

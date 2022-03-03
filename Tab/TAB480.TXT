@@ -1,0 +1,34 @@
+OBJECT Modification "Dimension Set Entry"(Table 480)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Dimension Set Entry"(Table 480);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target=GetDimensionSetID(PROCEDURE 3).DimSetTreeNode(Variable 1002);
+                         Property=Subtype;
+                         OriginalValue="Dimension Set Tree Node";
+                         ModifiedValue="Dimension Set Tree Entry" }
+    { PropertyModification;
+                         Property=Permissions;
+                         OriginalValue=TableData "Dimension Set Entry"=ri,
+                                       TableData "Dimension Set Tree Node"=rim;
+                         ModifiedValue=TableData "Dimension Set Entry"=ri,
+                                       TableData "Dimension Set Tree Entry"=rim }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

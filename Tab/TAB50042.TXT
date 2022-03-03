@@ -1,0 +1,52 @@
+OBJECT Table 50042 Vessel Performance By Sea Day
+{
+  OBJECT-PROPERTIES
+  {
+    Date=19311015D;
+    Time=211215T;
+    Modified=true;
+    Version List=;
+  }
+  PROPERTIES
+  {
+  }
+  FIELDS
+  {
+    { 10  ;   ;No.                 ;Code20         }
+    { 20  ;   ;Voyage Sea Days     ;Option        ;OptionString=" ","40","45","60" }
+    { 30  ;   ;Revenue Per Sea Day ;Decimal        }
+    { 40  ;   ;Vess                ;Code10         }
+    { 41  ;   ;Cycle Day           ;Decimal        }
+    { 42  ;   ;Fishing Days        ;Decimal        }
+    { 43  ;   ;Lost Days           ;Decimal        }
+    { 44  ;   ;Port Days           ;Decimal        }
+    { 45  ;   ;Fish Perct          ;Decimal        }
+    { 46  ;   ;Export Val (N)      ;Decimal        }
+    { 47  ;   ;Local Val (N)       ;Decimal        }
+    { 48  ;   ;Revenue             ;Decimal        }
+    { 49  ;   ;Rev/SD              ;Decimal        }
+    { 50  ;   ;Rev/FD              ;Decimal        }
+    { 51  ;   ;AGO                 ;Decimal        }
+    { 52  ;   ;AGO Perct           ;Decimal        }
+    { 53  ;   ;Direct              ;Decimal        }
+    { 54  ;   ;Margin              ;Decimal        }
+    { 55  ;   ;Gross Margin Perc   ;Decimal        }
+    { 56  ;   ;Indirect            ;Decimal        }
+    { 57  ;   ;Profit              ;Decimal        }
+  }
+  KEYS
+  {
+    {    ;"No."                                   ;Clustered=true }
+    {    ;"Voyage Sea Days","Revenue Per Sea Day"  }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

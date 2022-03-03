@@ -1,0 +1,305 @@
+OBJECT Modification "Inventory Posting Group"(Table 94)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Inventory Posting Group"(Table 94);
+  }
+  CHANGES
+  {
+    { PropertyInsertion ;Target=Code(Field 1);
+                         Property=ValidateTableRelation;
+                         ModifiedValue=false }
+    { PropertyInsertion ;Target=Code(Field 1);
+                         Property=TestTableRelation;
+                         ModifiedValue=false }
+    { Insertion         ;InsertAfter=Description(Field 2);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50300;  ;Group Type          ;Option        ;OptionString=" ",Operation }
+                           { 50301;  ;Category            ;Code15        ;TableRelation="Sea Food categories";
+                                                                          ValidateTableRelation=false }
+                           { 50302;  ;Statistics Group    ;Integer        }
+                           { 50303;  ;Group Code          ;Code10         }
+                           { 50304;  ;Points/KG           ;Decimal        }
+                           { 50364;  ;Date Filter         ;Date          ;FieldClass=FlowFilter;
+                                                                          CaptionML=ENU=Date Filter }
+                           { 50365;  ;Global Dimension 1 Filter;Code20   ;FieldClass=FlowFilter;
+                                                                          TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+                                                                          CaptionML=ENU=Global Dimension 1 Filter;
+                                                                          CaptionClass='1,3,1' }
+                           { 50366;  ;Global Dimension 2 Filter;Code20   ;FieldClass=FlowFilter;
+                                                                          TableRelation="Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+                                                                          CaptionML=ENU=Global Dimension 2 Filter;
+                                                                          CaptionClass='1,3,2' }
+                           { 50367;  ;Location Filter     ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation=Location;
+                                                                          CaptionML=ENU=Location Filter }
+                           { 50368;  ;Inventory           ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Value Entry"."Valued Quantity" WHERE ("Inventory Posting Group"=FIELD(Code),
+                                                                                                                                 "Location Code"=FIELD("Location Filter"),
+                                                                                                                                 "Posting Date"=FIELD("Date Filter"),
+                                                                                                                                 "Reason Code"=FIELD(Reasoncodefilter)));
+                                                                          CaptionML=ENU=Inventory Total;
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 50369;  ;Points              ;Decimal       ;Editable=false }
+                           { 50370;  ;Value               ;Decimal       ;Editable=false }
+                           { 50378;  ;Inventory1          ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Value Entry"."Valued Quantity" WHERE ("Inventory Posting Group"=FIELD(Code),
+                                                                                                                                 "Location Code"=FIELD("Location Filter"),
+                                                                                                                                 "Posting Date"=FIELD("Date Filter")));
+                                                                          CaptionML=ENU=Inventory Total 1;
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 50379;  ;Inventory2          ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Value Entry"."Valued Quantity" WHERE ("Inventory Posting Group"=FIELD(Code),
+                                                                                                                                 "Location Code"=FIELD("Location Filter"),
+                                                                                                                                 "Posting Date"=FIELD("Date Filter"),
+                                                                                                                                 "External Document No."=FILTER('')));
+                                                                          CaptionML=ENU=Inventory Total 2;
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 50389;  ;Drop Shipment Filter;Boolean       ;FieldClass=FlowFilter;
+                                                                          CaptionML=ENU=Drop Shipment Filter }
+                           { 55423;  ;Bin Filter          ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation=Bin.Code WHERE ("Location Code"=FIELD("Location Filter"));
+                                                                          CaptionML=ENU=Bin Filter }
+                           { 55424;  ;Variant Filter      ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation="Item Variant".Code;
+                                                                          CaptionML=ENU=Variant Filter }
+                           { 55425;  ;Source Filter       ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation=Job }
+                           { 55426;  ;In Use              ;Boolean        }
+                           { 55427;  ;S/No.               ;Integer        }
+                           { 55428;  ;Source No. Filter   ;Code10        ;FieldClass=FlowFilter;
+                                                                          TableRelation=Job }
+                           { 55429;  ;Inventory total1    ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Value Entry"."Valued Quantity" WHERE ("Inventory Posting Group"=FIELD(Code),
+                                                                                                                                 "Location Code"=FILTER(<>'CRM-ASL'&<>'FISH-SHOP'),
+                                                                                                                                 "Posting Date"=FIELD("Date Filter")));
+                                                                          CaptionML=ENU=Inventory Total Vessel;
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 55430;  ;Inventory total2    ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Value Entry"."Valued Quantity" WHERE ("Inventory Posting Group"=FIELD(Code),
+                                                                                                                                 "Location Code"=FILTER(<>'CRM-ASL'&<>'FISH-SHOP'),
+                                                                                                                                 "Posting Date"=FIELD("Date Filter"),
+                                                                                                                                 "External Document No."=FILTER('')));
+                                                                          CaptionML=ENU=Inventory Total Fishing Grd;
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 55431;false;Reasoncodefilter ;Code10        ;FieldClass=FlowFilter }
+                           { 55432;  ;Inventory3          ;Decimal        }
+                           { 55433;  ;Inventory total3    ;Decimal        }
+                           { 55450;  ;Inventory Incentive ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Value Entry"."Valued Quantity" WHERE ("Inventory Posting Group"=FIELD(Code),
+                                                                                                                                 "Location Code"=FIELD("Location Filter"),
+                                                                                                                                 "Posting Date"=FIELD("Date Filter"),
+                                                                                                                                 "Source No."=FIELD("Source No. Filter"),
+                                                                                                                                 "Source Code"=FIELD("Source Filter"),
+                                                                                                                                 "Reason Code"=FIELD(Reasoncodefilter)));
+                                                                          CaptionML=ENU=Inventory Total;
+                                                                          DecimalPlaces=0:5;
+                                                                          Editable=false }
+                           { 55462;  ;Inventory4          ;Decimal        }
+                           { 55463;  ;Inventory total4    ;Decimal        }
+                           { 55465;  ;Catch Budget        ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Job catch Default"."Budget Quantity" WHERE (Code=FIELD(Code),
+                                                                                                                                       "Budget Quantity"=FILTER(<>0))) }
+                         }
+                          }
+    { Insertion         ;InsertAfter=Code(Key);
+                         ChangedElements=KeyCollection
+                         {
+                           {    ;"Statistics Group"                       }
+                           {    ;Category                                 }
+                           {    ;"Statistics Group",Category,"S/No."      }
+                           {    ;"S/No."                                  }
+                           {    ;"S/No.","Statistics Group"               }
+                         }
+                          }
+    { Insertion         ;ChangedElements=PROCEDURECollection
+    {
+      [LineStart(23501)]
+      PROCEDURE InventoryTwo@1000000000(InvtCode@1000000000 : Code[10];LocFilter@1000000001 : Code[100];DateFilter@1000000002 : Text[100]) : Decimal;
+      VAR
+        ValuEntry@1000000003 : Record "Value Entry";
+        ValuedQty@1000000004 : Decimal;
+      BEGIN
+        ValuedQty := 0;
+        ValuEntry.SetCurrentKey("Inventory Posting Group","Item No.","Posting Date",
+             "Location Code","External Document No.");
+        ValuEntry.SetFilter(ValuEntry."Inventory Posting Group",InvtCode);
+        if LocFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Location Code",LocFilter);
+        if DateFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Posting Date",DateFilter);
+        ValuEntry.SetFilter(ValuEntry."External Document No.",'%1','');
+        if ValuEntry.Find('-') then begin
+          repeat
+            ValuedQty := ValuedQty + ValuEntry."Valued Quantity";
+          until ValuEntry.Next = 0;
+          exit(ValuedQty);
+        end else
+          exit(0);
+      END;
+
+      [LineStart(23519)]
+      PROCEDURE InventoryTotal2@1000000001(InvtCode@1000000002 : Code[10];DateFilter@1000000000 : Text[100]) : Decimal;
+      VAR
+        ValuEntry@1000000003 : Record "Value Entry";
+        ValuedQty@1000000001 : Decimal;
+      BEGIN
+        ValuedQty := 0;
+        ValuEntry.SetCurrentKey("Inventory Posting Group","Item No.","Posting Date",
+             "Location Code","External Document No.");
+        ValuEntry.SetFilter(ValuEntry."Inventory Posting Group",InvtCode);
+        ValuEntry.SetFilter(ValuEntry."Location Code",'<>%1&<>%2','CRM-ASL','FISH-SHOP');
+        if DateFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Posting Date",DateFilter);
+        ValuEntry.SetFilter(ValuEntry."External Document No.",'%1','');
+        if ValuEntry.Find('-') then begin
+          repeat
+            ValuedQty := ValuedQty + ValuEntry."Valued Quantity";
+          until ValuEntry.Next = 0;
+          exit(ValuedQty);
+        end else
+          exit(0);
+      END;
+
+      [LineStart(23536)]
+      PROCEDURE InventoryThree@1000000003(InvtCode@1000000000 : Code[10];DateFilter@1000000002 : Text[100]) : Decimal;
+      VAR
+        ValuEntry@1000000003 : Record "Value Entry";
+        ValuedQty@1000000004 : Decimal;
+      BEGIN
+        ValuedQty := 0;
+        ValuEntry.SetCurrentKey("Inventory Posting Group","Item No.","Posting Date",
+             "Location Code","External Document No.");
+        ValuEntry.SetFilter(ValuEntry."Inventory Posting Group",InvtCode);
+        ValuEntry.SetFilter(ValuEntry."Location Code",'CRM-ASL');
+        if DateFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Posting Date",DateFilter);
+        if ValuEntry.Find('-') then begin
+          repeat
+            ValuedQty := ValuedQty + ValuEntry."Valued Quantity";
+          until ValuEntry.Next = 0;
+          exit(-ValuedQty);
+        end else
+          exit(0);
+      END;
+
+      [LineStart(23552)]
+      PROCEDURE InventoryTotal3@1000000002(InvtCode@1000000002 : Code[10];DateFilter@1000000000 : Text[100]) : Decimal;
+      VAR
+        ValuEntry@1000000003 : Record "Value Entry";
+        ValuedQty@1000000001 : Decimal;
+      BEGIN
+        ValuedQty := 0;
+        ValuEntry.SetCurrentKey("Inventory Posting Group","Item No.","Posting Date",
+             "Location Code","External Document No.");
+        ValuEntry.SetFilter(ValuEntry."Inventory Posting Group",InvtCode);
+        ValuEntry.SetFilter(ValuEntry."Location Code",'<>%1','CRM-ASL');
+        if DateFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Posting Date",DateFilter);
+        if ValuEntry.Find('-') then begin
+          repeat
+            ValuedQty := ValuedQty + ValuEntry."Valued Quantity";
+          until ValuEntry.Next = 0;
+          exit(-ValuedQty);
+        end else
+          exit(0);
+      END;
+
+      [LineStart(23568)]
+      PROCEDURE InventoryFour@1000000005(InvtCode@1000000000 : Code[10];DateFilter@1000000002 : Text[100];SourceCodeFilter@1000000001 : Text[100]) : Decimal;
+      VAR
+        ValuEntry@1000000003 : Record "Value Entry";
+        ValuedQty@1000000004 : Decimal;
+      BEGIN
+        ValuedQty := 0;
+        ValuEntry.SetCurrentKey("Location Code","Inventory Posting Group","Posting Date","Source Code");
+        ValuEntry.SetFilter(ValuEntry."Inventory Posting Group",InvtCode);
+        ValuEntry.SetFilter(ValuEntry."Location Code",'CRM-ASL');
+        if DateFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Posting Date",DateFilter);
+        if SourceCodeFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Source Code",SourceCodeFilter);
+        if ValuEntry.Find('-') then begin
+          repeat
+            ValuedQty := ValuedQty + ValuEntry."Valued Quantity";
+          until ValuEntry.Next = 0;
+          exit(ValuedQty);
+        end else
+          exit(0);
+      END;
+
+      [LineStart(23585)]
+      PROCEDURE InventoryTotal4@1000000004(InvtCode@1000000002 : Code[10];DateFilter@1000000000 : Text[100]) : Decimal;
+      VAR
+        ValuEntry@1000000003 : Record "Value Entry";
+        ValuedQty@1000000001 : Decimal;
+        SourceCodeFilter@1000000004 : Text[100];
+      BEGIN
+        ValuedQty := 0;
+        ValuEntry.SetCurrentKey("Location Code","Inventory Posting Group","Posting Date","Source Code");
+        ValuEntry.SetFilter(ValuEntry."Inventory Posting Group",InvtCode);
+        ValuEntry.SetFilter(ValuEntry."Location Code",'CRM-ASL');
+        if DateFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Posting Date",DateFilter);
+        SourceCodeFilter := '<>PHYSINVJNL&<>TRANSFER&<>ITEMJNL&<>SALES&<>PURCHASES&<>PURCHJNL&<>SALESJNL&<>JOBJNL';
+        ValuEntry.SetFilter(ValuEntry."Source Code",SourceCodeFilter);
+        if ValuEntry.Find('-') then begin
+          repeat
+            ValuedQty := ValuedQty + ValuEntry."Valued Quantity";
+          until ValuEntry.Next = 0;
+          exit(ValuedQty);
+        end else
+          exit(0);
+      END;
+
+      [LineStart(23602)]
+      PROCEDURE InvtIncentive@1000000006(InvtCode@1000000000 : Code[10];DateFilter@1000000002 : Text[100];SourceCodeFilter@1000000001 : Text[100];LocFilter@1000000005 : Text[100];ReasonCodeFilter@1000000006 : Text[100];SourceNoFilter@1000000007 : Text[100]) : Decimal;
+      VAR
+        ValuEntry@1000000003 : Record "Value Entry";
+        ValuedQty@1000000004 : Decimal;
+      BEGIN
+        ValuedQty := 0;
+        ValuEntry.SetCurrentKey("Source No.","Inventory Posting Group","Location Code","Source Code","Reason Code");
+        ValuEntry.SetFilter(ValuEntry."Inventory Posting Group",InvtCode);
+        if LocFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Location Code",LocFilter);
+        if DateFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Posting Date",DateFilter);
+        if SourceCodeFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Source Code",SourceCodeFilter);
+        if SourceNoFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Source No.",SourceNoFilter);
+        if ReasonCodeFilter <> '' then
+          ValuEntry.SetFilter(ValuEntry."Reason Code",ReasonCodeFilter);
+        if ValuEntry.Find('-') then begin
+          repeat
+            ValuedQty := ValuedQty + ValuEntry."Valued Quantity";
+          until ValuEntry.Next = 0;
+          exit(ValuedQty);
+        end else
+          exit(0);
+      END;
+
+    }
+     }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

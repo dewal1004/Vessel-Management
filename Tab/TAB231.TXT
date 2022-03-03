@@ -1,0 +1,32 @@
+OBJECT Modification "Reason Code"(Table 231)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Reason Code"(Table 231);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Contract Gain/Loss Amount"(Field 5901);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50006;  ;Yes                 ;Boolean        }
+                           { 50007;  ;o                   ;Option        ;OptionString=" ",Brands }
+                           { 50300;  ;In Use              ;Boolean       ;InitValue=true }
+                           { 50301;  ;Type                ;Option        ;OptionString=" ",Brands,"Item Jl",Import,Usage }
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,34 @@
+OBJECT Modification "Deferral Line"(Table 1702)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20240319D;
+    Time=120000T;
+    Version List=NAVW114.00;
+  }
+  PROPERTIES
+  {
+    Target="Deferral Line"(Table 1702);
+  }
+  CHANGES
+  {
+    { Deletion          ;Target="Posting Date"(Field 7).OnValidate.AccountingPeriod(Variable 1000);
+                         ChangedElements=VariableCollection
+                         {
+                           AccountingPeriod@1000 : Record "Accounting Period";
+                         }
+                          }
+    { Insertion         ;ChangedElements=VariableCollection
+    {
+      AccountingPeriod@1000 : Record "Accounting Period";
+    }
+     }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

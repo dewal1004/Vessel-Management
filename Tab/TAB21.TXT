@@ -1,0 +1,132 @@
+OBJECT Modification "Cust. Ledger Entry"(Table 21)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220216D;
+    Time=122409.033T;
+    Modified=true;
+    Version List=NAVW114.23;
+  }
+  PROPERTIES
+  {
+    Target="Cust. Ledger Entry"(Table 21);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter="Direct Debit Mandate ID"(Field 1200);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50301;  ;Loan ID             ;Code10        ;TableRelation="Loan." }
+                           { 90016;  ;Remaining Amt. (LCY)1;Decimal      ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Detailed Cust. Ledg. Entry"."Amount (LCY)" WHERE ("Cust. Ledger Entry No."=FIELD("Entry No."),
+                                                                                                                                             "Posting Date"=FIELD("Date Filter")));
+                                                                          CaptionML=ENU=Remaining Amt. (LCY);
+                                                                          Editable=false;
+                                                                          AutoFormatType=1 }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        case "Document Type" of
+                                          "Document Type"::Invoice:
+                                            begin
+                                              if SalesInvoiceHdr.Get("Document No.") then begin
+                                                PAGE.Run(PAGE::"Posted Sales Invoice",SalesInvoiceHdr);
+                                                exit(true);
+                                              end;
+                                              if ServiceInvoiceHeader.Get("Document No.") then begin
+                                                PAGE.Run(PAGE::"Posted Service Invoice",ServiceInvoiceHeader);
+                                                exit(true);
+                                              end;
+                                            end;
+                                          "Document Type"::"Credit Memo":
+                                            begin
+                                              if SalesCrMemoHdr.Get("Document No.") then begin
+                                                PAGE.Run(PAGE::"Posted Sales Credit Memo",SalesCrMemoHdr);
+                                                exit(true);
+                                              end;
+                                              if ServiceCrMemoHeader.Get("Document No.") then begin
+                                                PAGE.Run(PAGE::"Posted Service Credit Memo",ServiceCrMemoHeader);
+                                                exit(true);
+                                              end;
+                                            end;
+                                          "Document Type"::"Finance Charge Memo":
+                                            if IssuedFinChargeMemoHeader.Get("Document No.") then begin
+                                              PAGE.Run(PAGE::"Issued Finance Charge Memo",IssuedFinChargeMemoHeader);
+                                              exit(true);
+                                            end;
+                                          "Document Type"::Reminder:
+                                            if IssuedReminderHeader.Get("Document No.") then begin
+                                              PAGE.Run(PAGE::"Issued Reminder",IssuedReminderHeader);
+                                              exit(true);
+                                            end;
+                                        end;
+
+                                        OnAfterShowDoc(Rec);
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        case "Document Type" of
+                                          "Document Type"::Invoice: begin
+                                            if SalesInvoiceHdr.Get("Document No.") then begin
+                                              PAGE.Run(PAGE::"Posted Sales Invoice",SalesInvoiceHdr);
+                                              exit(true);
+                                            end;
+                                            if ServiceInvoiceHeader.Get("Document No.") then begin
+                                        #9..14
+                                               if SalesCrMemoHdr.Get("Document No.") then begin
+                                                 PAGE.Run(PAGE::"Posted Sales Credit Memo",SalesCrMemoHdr);
+                                                 exit(true);
+                                               end;
+                                               if ServiceCrMemoHeader.Get("Document No.") then begin
+                                                 PAGE.Run(PAGE::"Posted Service Credit Memo",ServiceCrMemoHeader);
+                                                 exit(true);
+                                               end;
+                                             end;
+                                           "Document Type"::"Finance Charge Memo":
+                                             if IssuedFinChargeMemoHeader.Get("Document No.") then begin
+                                               PAGE.Run(PAGE::"Issued Finance Charge Memo",IssuedFinChargeMemoHeader);
+                                               exit(true);
+                                             end;
+                                           "Document Type"::Reminder:
+                                             if IssuedReminderHeader.Get("Document No.") then begin
+                                               PAGE.Run(PAGE::"Issued Reminder",IssuedReminderHeader);
+                                               exit(true);
+                                             end;
+                                           end;
+                                      END;
+
+                         Target=ShowDoc(PROCEDURE 7) }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        case "Document Type" of
+                                          "Document Type"::Invoice:
+                                            if SalesInvoiceHdr.Get("Document No.") then
+                                              OpenDocumentAttachmentDetails(SalesInvoiceHdr);
+                                          "Document Type"::"Credit Memo":
+                                            if SalesCrMemoHdr.Get("Document No.") then
+                                              OpenDocumentAttachmentDetails(SalesCrMemoHdr);
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        case "Document Type" of
+                                          "Document Type"::Invoice: begin
+                                            if SalesInvoiceHdr.Get("Document No.") then
+                                              OpenDocumentAttachmentDetails(SalesInvoiceHdr);
+                                            end;
+                                          "Document Type"::"Credit Memo": begin
+                                            if SalesCrMemoHdr.Get("Document No.") then
+                                              OpenDocumentAttachmentDetails(SalesCrMemoHdr);
+                                          end;
+                                          end;
+                                      END;
+
+                         Target=ShowPostedDocAttachment(PROCEDURE 15) }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

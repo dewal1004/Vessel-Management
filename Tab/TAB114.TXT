@@ -1,0 +1,57 @@
+OBJECT Modification "Sales Cr.Memo Header"(Table 114)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220223D;
+    Time=132244.410T;
+    Modified=true;
+    Version List=NAVW114.18;
+  }
+  PROPERTIES
+  {
+    Target="Sales Cr.Memo Header"(Table 114);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Id(Field 8000);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50301;  ;Contr. Code/Postn.  Applied;Option ;OptionString="01-Skipper","02-Marine Eng","03-Coxswain","04-Eng Superv","05-Shr Mast/Sail","06-Mec/Carp/Wel/Secu","07-Others" }
+                           { 50302;  ;Appraisal Selection ;Option        ;OptionString=" ",Interview,"Skill & Performance";
+                                                                          Description=[ ,Interview,Skill & Performance] }
+                           { 50303;  ;Skill Score         ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Sales Line".Quantity WHERE (Type=CONST(Skill),
+                                                                                                                       "Document No."=FIELD("No."),
+                                                                                                                       "Document Type"=CONST(Order))) }
+                           { 50304;  ;Skill Total         ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Sales Line".xx WHERE (Type=CONST(Skill),
+                                                                                                                 "Document No."=FIELD("No."))) }
+                           { 50305;  ;Skill Percentage    ;Decimal        }
+                           { 50306;  ;Performance Score   ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Sales Line".Quantity WHERE (Type=CONST(Performance),
+                                                                                                                       "Document No."=FIELD("No."),
+                                                                                                                       "Document Type"=CONST(Order))) }
+                           { 50307;  ;Performance Total   ;Decimal       ;FieldClass=FlowField;
+                                                                          CalcFormula=Sum("Sales Line".xx2 WHERE (Type=CONST(Performance),
+                                                                                                                  "Document No."=FIELD("No."))) }
+                           { 50308;  ;Performance Percentage;Decimal      }
+                           { 50309;  ;Total Percentage    ;Decimal        }
+                           { 50380;  ;Container Code      ;Code10         }
+                           { 50381;  ;Seal No             ;Code15         }
+                         }
+                          }
+    { Insertion         ;InsertAfter=UserSetupMgt(Variable 1006);
+                         ChangedElements=VariableCollection
+                         {
+                           CannotSendMultipleCrMemosElectronicallyErr@1000 : TextConst 'ENU=You can only send one electronic credit memo at a time.';
+                         }
+                          }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

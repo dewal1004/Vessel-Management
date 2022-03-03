@@ -1,0 +1,111 @@
+OBJECT Modification Vendor(Table 23)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=20220216D;
+    Time=122615.257T;
+    Modified=true;
+    Version List=NAVW114.21;
+  }
+  PROPERTIES
+  {
+    Target=Vendor(Table 23);
+  }
+  CHANGES
+  {
+    { PropertyModification;
+                         Target="Debit Amount (LCY)"(Field 99);
+                         Property=CalcFormula;
+                         OriginalValue=Sum("Detailed Vendor Ledg. Entry"."Debit Amount (LCY)" WHERE ("Vendor No."=FIELD("No."),
+                                                                                                     "Entry Type"=FILTER(<>Application),
+                                                                                                     "Initial Entry Global Dim. 1"=FIELD("Global Dimension 1 Filter"),
+                                                                                                     "Initial Entry Global Dim. 2"=FIELD("Global Dimension 2 Filter"),
+                                                                                                     "Posting Date"=FIELD("Date Filter"),
+                                                                                                     "Currency Code"=FIELD("Currency Filter")));
+                         ModifiedValue=Sum("Detailed Vendor Ledg. Entry"."Debit Amount (LCY)" WHERE ("Vendor No."=FIELD("No."),
+                                                                                                     "Initial Entry Global Dim. 1"=FIELD("Global Dimension 1 Filter"),
+                                                                                                     "Initial Entry Global Dim. 2"=FIELD("Global Dimension 2 Filter"),
+                                                                                                     "Posting Date"=FIELD("Date Filter"),
+                                                                                                     "Currency Code"=FIELD("Currency Filter"),
+                                                                                                     "Entry Type"=FIELD("Entry Type Filter"))) }
+    { PropertyModification;
+                         Target="Credit Amount (LCY)"(Field 100);
+                         Property=CalcFormula;
+                         OriginalValue=Sum("Detailed Vendor Ledg. Entry"."Credit Amount (LCY)" WHERE ("Vendor No."=FIELD("No."),
+                                                                                                      "Entry Type"=FILTER(<>Application),
+                                                                                                      "Initial Entry Global Dim. 1"=FIELD("Global Dimension 1 Filter"),
+                                                                                                      "Initial Entry Global Dim. 2"=FIELD("Global Dimension 2 Filter"),
+                                                                                                      "Posting Date"=FIELD("Date Filter"),
+                                                                                                      "Currency Code"=FIELD("Currency Filter")));
+                         ModifiedValue=Sum("Detailed Vendor Ledg. Entry"."Credit Amount (LCY)" WHERE ("Vendor No."=FIELD("No."),
+                                                                                                      "Initial Entry Global Dim. 1"=FIELD("Global Dimension 1 Filter"),
+                                                                                                      "Initial Entry Global Dim. 2"=FIELD("Global Dimension 2 Filter"),
+                                                                                                      "Posting Date"=FIELD("Date Filter"),
+                                                                                                      "Currency Code"=FIELD("Currency Filter"),
+                                                                                                      "Entry Type"=FIELD("Entry Type Filter"))) }
+    { Insertion         ;InsertAfter="Payment Method Id"(Field 8003);
+                         ChangedElements=FieldCollection
+                         {
+                           { 50301;  ;Entry Type Filter   ;Option        ;FieldClass=FlowFilter;
+                                                                          CaptionML=ENU=Entry Type;
+                                                                          OptionCaptionML=ENU=" ,Initial Entry,Application,Unrealized Loss,Unrealized Gain,Realized Loss,Realized Gain,Payment Discount,Payment Discount (VAT Excl.),Payment Discount (VAT Adjustment),Appln. Rounding,Correction of Remaining Amount";
+                                                                          OptionString=" ","Initial Entry",Application,"Unrealized Loss","Unrealized Gain","Realized Loss","Realized Gain","Payment Discount","Payment Discount (VAT Excl.)","Payment Discount (VAT Adjustment)","Appln. Rounding","Correction of Remaining Amount";
+                                                                          Description=Balace at date rep. }
+                           { 60000;  ;Hospital            ;Boolean        }
+                           { 60001;  ;Trainer             ;Boolean        }
+                         }
+                          }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        if "No." = '' then begin
+                                          PurchSetup.Get;
+                                          PurchSetup.TestField("Vendor Nos.");
+                                        #4..8
+
+                                        if not (InsertFromContact or (InsertFromTemplate and (Contact <> ''))) then
+                                          UpdateContFromVend.OnInsert(Rec);
+
+                                        if "Purchaser Code" = '' then
+                                          SetDefaultPurchaser;
+                                        #15..18
+
+                                        UpdateReferencedIds;
+                                        SetLastModifiedDateTime;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..11
+                                        "Global Dimension 2 Code":='ATLANTIC';     //AAA - Oct 2002
+                                        #12..21
+                                      END;
+
+                         Target=OnInsert }
+    { CodeModification  ;OriginalCode=BEGIN
+                                        UpdateReferencedIds;
+                                        SetLastModifiedDateTime;
+
+                                        if IsContactUpdateNeeded then begin
+                                          Modify;
+                                          UpdateContFromVend.OnModify(Rec);
+                                          if not Find then begin
+                                            Reset;
+                                            if Find then;
+                                          end;
+                                        end;
+                                      END;
+
+                         ModifiedCode=BEGIN
+                                        #1..6
+                                          if Find then;
+                                        end;
+                                      END;
+
+                         Target=OnModify }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

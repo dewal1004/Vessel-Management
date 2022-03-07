@@ -167,12 +167,12 @@ pageextension 50213 pageextension50213 extends "Item Card"
             {
             }
         }
-        addfirst("Order Modifiers")
-        {
-            field("Monthly Consumption"; "Monthly Consumption")
-            {
-            }
-        }
+        // addfirst("Order Modifiers")
+        // {
+            // field("Monthly Consumption"; "Monthly Consumption")
+            // {
+            // }
+        // }
         addafter("Use Cross-Docking")
         {
             field("Commission Group"; "Commission Group")
@@ -216,7 +216,7 @@ pageextension 50213 pageextension50213 extends "Item Card"
         moveafter("Last Direct Cost"; "Service Item Group")
         moveafter("Search Description"; "Qty. on Purch. Order")
         moveafter("Qty. on Job Order"; Reserve)
-        moveafter("Product Group Code"; "Qty. on Assembly Order")
+        // moveafter("Product Group Code"; "Qty. on Assembly Order")
         moveafter("Last Date Modified"; StockoutWarningDefaultYes)
         moveafter(PreventNegInventoryDefaultNo; "Prices & Sales")
         moveafter("Prices & Sales"; "Costing Method")
@@ -231,7 +231,7 @@ pageextension 50213 pageextension50213 extends "Item Card"
         moveafter("Sales Unit of Measure"; "Application Wksh. User ID")
         moveafter("Application Wksh. User ID"; "Indirect Cost %")
         moveafter(Reserve; Replenishment)
-        moveafter("Purch. Unit of Measure"; Control230)
+        // moveafter("Purch. Unit of Measure"; Control230)
         moveafter("Flushing Method"; "Scrap %")
         moveafter("Assembly Policy"; Planning)
         moveafter("Reordering Policy"; "Order Tracking Policy")

@@ -265,19 +265,19 @@ pageextension 50234 pageextension50234 extends "Job List"
             {
                 Caption = 'Points Summary';
                 Image = "Report";
-                RunObject = Report "Points Summary VJ";
+                //*** RunObject = Report "Points Summary VJ";
             }
             action("New Daily Points")
             {
                 Caption = 'New Daily Points';
                 Image = "Report";
-                RunObject = Report "New Daily Points Report Fast";
+                //*** RunObject = Report "New Daily Points Report Fast";
             }
             action("Consolidated Narration")
             {
                 Caption = 'Consolidated Narration';
                 Image = "Report";
-                RunObject = Report "Consolidated Narration_";
+                //*** RunObject = Report "Consolidated Narration_";
             }
             separator(Action68)
             {
@@ -286,37 +286,37 @@ pageextension 50234 pageextension50234 extends "Job List"
             {
                 Caption = 'Daily BreakUp by Vess Summary';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vess Summary";
+                //*** RunObject = Report "Daily BreakUp by Vess Summary";
             }
             action("Daily BreakUp by Vessel Rep 1")
             {
                 Caption = 'Daily BreakUp by Vessel Rep 1';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vessel Rep 1";
+                //*** RunObject = Report "Daily BreakUp by Vessel Rep 1";
             }
             action("Daily BreakUp by Vessel Rep 2")
             {
                 Caption = 'Daily BreakUp by Vessel Rep 2';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vessel Rep 2";
+                //*** RunObject = Report "Daily BreakUp by Vessel Rep 2";
             }
             action("Daily BreakUp by Vessel Rep 3")
             {
                 Caption = 'Daily BreakUp by Vessel Rep 3';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vessel Rep 3";
+                //*** RunObject = Report "Daily BreakUp by Vessel Rep 3";
             }
             action("Daily BreakUp by Vessel Rep 4")
             {
                 Caption = 'Daily BreakUp by Vessel Rep 4';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vessel Rep 4";
+                //*** RunObject = Report "Daily BreakUp by Vessel Rep 4";
             }
             action("Vessel Daily Log")
             {
                 Caption = 'Vessel Daily Log';
                 Image = "Report";
-                RunObject = Report "Vessel Daily Log";
+                //*** RunObject = Report "Vessel Daily Log";
             }
             separator(Action61)
             {
@@ -325,25 +325,25 @@ pageextension 50234 pageextension50234 extends "Job List"
             {
                 Caption = 'Voyage P&L Ledger Line - (1 Vessel & 1Job at a time)';
                 Image = "Report";
-                RunObject = Report "Voyage P&L Ledger Line 2";
+                //*** RunObject = Report "Voyage P&L Ledger Line 2";
             }
             action("Consolidated Voyage P&L - (Monthly Report)")
             {
                 Caption = 'Consolidated Voyage P&L - (Monthly Report)';
                 Image = "Report";
-                RunObject = Report "Consolidated Voyage P&L2";
+                //*** RunObject = Report "Consolidated Voyage P&L2";
             }
             action("Voyage P&L Before Posing")
             {
                 Caption = 'Voyage P&L Before Posing';
                 Image = "Report";
-                RunObject = Report Report50027;
+                //*** RunObject = Report Report50027;
             }
             action("Voyage P&L Batch")
             {
                 Caption = 'Voyage P&L Batch';
                 Image = "Report";
-                RunObject = Report "Voyage P&L Batch";
+                //*** RunObject = Report "Voyage P&L Batch";
             }
         }
         moveafter(ActionContainer1900000003; Action7)
@@ -357,22 +357,22 @@ pageextension 50234 pageextension50234 extends "Job List"
         StyleText: Text[20];
 
 
-        //Unsupported feature: Code Insertion on "OnAfterGetRecord".
+    //Unsupported feature: Code Insertion on "OnAfterGetRecord".
 
-        //trigger OnAfterGetRecord()
-        //begin
-        /*
-        //SETRANGE("No.");
-        StyleText:='';
-        if Status = Status ::Completed then begin
-          StyleText := 'Unfavorable';
-        end else begin
-          StyleText := 'standard'
-        end;
+    //trigger OnAfterGetRecord()
+    //begin
+    /*
+    //SETRANGE("No.");
+    StyleText:='';
+    if Status = Status ::Completed then begin
+      StyleText := 'Unfavorable';
+    end else begin
+      StyleText := 'standard'
+    end;
 
-        if Rec."Voyage Ended" = true then
-          StyleText:='Unfavorable'
-        */
-        //end;
+    if Rec."Voyage Ended" = true then
+      StyleText:='Unfavorable'
+    */
+    //end;
 }
 

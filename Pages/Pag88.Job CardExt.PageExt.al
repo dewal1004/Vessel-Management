@@ -340,8 +340,8 @@ pageextension 50233 pageextension50233 extends "Job Card"
             {
                 ApplicationArea = Jobs;
                 Caption = 'Tasks';
-                SubPageLink = "Job No." = FIELD ("No.");
-                SubPageView = SORTING ("Job Task No.")
+                SubPageLink = "Job No." = FIELD("No.");
+                SubPageView = SORTING("Job Task No.")
                               ORDER(Ascending);
             }
         }
@@ -637,17 +637,17 @@ pageextension 50233 pageextension50233 extends "Job Card"
                 Image = TaskList;
                 Promoted = true;
                 RunObject = Page "Lost Days";
-                RunPageLink = "Table Name" = CONST (Job),
-                              "No." = FIELD ("No."),
-                              Type = CONST (Narration);
+                RunPageLink = "Table Name" = CONST(Job),
+                              "No." = FIELD("No."),
+                              Type = CONST(Narration);
             }
             action("Voyage Default Catch")
             {
                 Caption = 'Voyage Default Catch';
                 Image = TaskList;
                 RunObject = Page "Voyage Catch Default";
-                RunPageLink = "Table Name" = CONST (Job),
-                              "No." = FIELD ("No.");
+                RunPageLink = "Table Name" = CONST(Job),
+                              "No." = FIELD("No.");
             }
             action("Register Catch")
             {
@@ -675,9 +675,9 @@ pageextension 50233 pageextension50233 extends "Job Card"
                 Image = AnalysisView;
                 Promoted = true;
                 RunObject = Page "Organoleptic Sheet";
-                RunPageLink = "Table Name" = CONST (Job),
-                              "No." = FIELD ("No."),
-                              Type = CONST (Organoleptic);
+                RunPageLink = "Table Name" = CONST(Job),
+                              "No." = FIELD("No."),
+                              Type = CONST(Organoleptic);
             }
             action("Stock on Board")
             {
@@ -693,19 +693,19 @@ pageextension 50233 pageextension50233 extends "Job Card"
             {
                 Caption = 'Points Summary';
                 Image = "Report";
-                RunObject = Report "Points Summary VJ";
+                //*** RunObject = Report "Points Summary VJ";
             }
             action("New Daily Points")
             {
                 Caption = 'New Daily Points';
                 Image = "Report";
-                RunObject = Report "New Daily Points Report Fast";
+                //*** RunObject = Report "New Daily Points Report Fast";
             }
             action("Consolidated Narration")
             {
                 Caption = 'Consolidated Narration';
                 Image = "Report";
-                RunObject = Report "Consolidated Narration_";
+                //*** RunObject = Report "Consolidated Narration_";
             }
         }
         addafter("<Action83>")
@@ -714,37 +714,37 @@ pageextension 50233 pageextension50233 extends "Job Card"
             {
                 Caption = 'Daily BreakUp by Vess Summary';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vess Summary";
+                //*** RunObject = Report "Daily BreakUp by Vess Summary";
             }
             action("Daily BreakUp by Vessel Rep 1")
             {
                 Caption = 'Daily BreakUp by Vessel Rep 1';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vessel Rep 1";
+                //*** RunObject = Report "Daily BreakUp by Vessel Rep 1";
             }
             action("Daily BreakUp by Vessel Rep 2")
             {
                 Caption = 'Daily BreakUp by Vessel Rep 2';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vessel Rep 2";
+                //*** RunObject = Report "Daily BreakUp by Vessel Rep 2";
             }
             action("Daily BreakUp by Vessel Rep 3")
             {
                 Caption = 'Daily BreakUp by Vessel Rep 3';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vessel Rep 3";
+                //*** RunObject = Report "Daily BreakUp by Vessel Rep 3";
             }
             action("Daily BreakUp by Vessel Rep 4")
             {
                 Caption = 'Daily BreakUp by Vessel Rep 4';
                 Image = "Report";
-                RunObject = Report "Daily BreakUp by Vessel Rep 4";
+                //*** RunObject = Report "Daily BreakUp by Vessel Rep 4";
             }
             action("Vessel Daily Log")
             {
                 Caption = 'Vessel Daily Log';
                 Image = "Report";
-                RunObject = Report "Vessel Daily Log";
+                //*** RunObject = Report "Vessel Daily Log";
             }
         }
         moveafter("   Operations"; ActionContainer1900000006)
@@ -786,49 +786,49 @@ pageextension 50233 pageextension50233 extends "Job Card"
         JobTask: Record "Job Task";
 
 
-        //Unsupported feature: Code Insertion on "OnAfterGetRecord".
+    //Unsupported feature: Code Insertion on "OnAfterGetRecord".
 
-        //trigger OnAfterGetRecord()
-        //begin
-        /*
+    //trigger OnAfterGetRecord()
+    //begin
+    /*
 
-        SetRange("No.");
-        "Incentive Days":="Sea Days"-"Deductible Lost Days (Incentiv";
-        if JobSetup.Get then
-          if "Incentive Days">0 then
-            "Incentive Points Determinant":=Points*(JobSetup."Standard Sea Days"/"Incentive Days");
+    SetRange("No.");
+    "Incentive Days":="Sea Days"-"Deductible Lost Days (Incentiv";
+    if JobSetup.Get then
+      if "Incentive Days">0 then
+        "Incentive Points Determinant":=Points*(JobSetup."Standard Sea Days"/"Incentive Days");
 
-        //IncentiveLookUp.GET;
-        IncentiveLookUp.SetRange(IncentiveLookUp.TableId,JobSetup."Incentive Rate Code"+"Fishing Country Code");
-        IncentiveLookUp.SetRange(IncentiveLookUp."Lower Amount",0,"Incentive Points Determinant");
-        IncentiveLookUp.SetRange(IncentiveLookUp."Upper Amount","Incentive Points Determinant",999999);
-        if IncentiveLookUp.Find('-') then
-          Validate("Incentive Rate",IncentiveLookUp."Extract Amount");
+    //IncentiveLookUp.GET;
+    IncentiveLookUp.SetRange(IncentiveLookUp.TableId,JobSetup."Incentive Rate Code"+"Fishing Country Code");
+    IncentiveLookUp.SetRange(IncentiveLookUp."Lower Amount",0,"Incentive Points Determinant");
+    IncentiveLookUp.SetRange(IncentiveLookUp."Upper Amount","Incentive Points Determinant",999999);
+    if IncentiveLookUp.Find('-') then
+      Validate("Incentive Rate",IncentiveLookUp."Extract Amount");
 
-        Validate("Incentive (Pt. Based)","Incentive Rate"*Points);
-        //"Incentive (Hook Fish)":= "Incentive (Hook Fish)"/2;  //Incentive does not
-        Validate("Total Incentive","Incentive (Pt. Based)"+"Incentive (Hook Fish)");
-        Validate("Net Incentive","Total Incentive"+"Add/Ded. Crew");
+    Validate("Incentive (Pt. Based)","Incentive Rate"*Points);
+    //"Incentive (Hook Fish)":= "Incentive (Hook Fish)"/2;  //Incentive does not
+    Validate("Total Incentive","Incentive (Pt. Based)"+"Incentive (Hook Fish)");
+    Validate("Net Incentive","Total Incentive"+"Add/Ded. Crew");
 
-        //Actual
-        //CALCFIELDS("Points Actual"); //blocked by santus
-        {"Points Actual" := Job.PointsActual("No.",GETFILTER("Posting Date Filter"),GETFILTER("Phase Filter")
-          ,GETFILTER("Task Filter"),GETFILTER("Step Filter"));} //Error
-        if JobSetup.Get then
-          if "Incentive Days">0 then
-           "Incentive Pts Determt Actual":="Points Actual"*(JobSetup."Standard Sea Days"/"Incentive Days");
+    //Actual
+    //CALCFIELDS("Points Actual"); //blocked by santus
+    {"Points Actual" := Job.PointsActual("No.",GETFILTER("Posting Date Filter"),GETFILTER("Phase Filter")
+      ,GETFILTER("Task Filter"),GETFILTER("Step Filter"));} //Error
+    if JobSetup.Get then
+      if "Incentive Days">0 then
+       "Incentive Pts Determt Actual":="Points Actual"*(JobSetup."Standard Sea Days"/"Incentive Days");
 
-        //IncentiveLookUp.GET;
-        IncentiveLookUp.SetRange(IncentiveLookUp.TableId,JobSetup."Incentive Rate Code"+"Fishing Country Code");
-        IncentiveLookUp.SetRange(IncentiveLookUp."Lower Amount",0,"Incentive Pts Determt Actual");
-        IncentiveLookUp.SetRange(IncentiveLookUp."Upper Amount","Incentive Pts Determt Actual",999999);
-        if IncentiveLookUp.Find('-') then
-          Validate("Incentive Rate Actual",IncentiveLookUp."Extract Amount");
+    //IncentiveLookUp.GET;
+    IncentiveLookUp.SetRange(IncentiveLookUp.TableId,JobSetup."Incentive Rate Code"+"Fishing Country Code");
+    IncentiveLookUp.SetRange(IncentiveLookUp."Lower Amount",0,"Incentive Pts Determt Actual");
+    IncentiveLookUp.SetRange(IncentiveLookUp."Upper Amount","Incentive Pts Determt Actual",999999);
+    if IncentiveLookUp.Find('-') then
+      Validate("Incentive Rate Actual",IncentiveLookUp."Extract Amount");
 
-        Validate("Incentive (Pt. Based) Actual","Incentive Rate Actual"*"Points Actual");
-        Validate("Total Incentive Actual","Incentive (Pt. Based) Actual"+"Incentive (Hook Fish)");
-        Validate("Net Incentive Actual","Total Incentive Actual"+"Add/Ded. Crew");
-        */
-        //end;
+    Validate("Incentive (Pt. Based) Actual","Incentive Rate Actual"*"Points Actual");
+    Validate("Total Incentive Actual","Incentive (Pt. Based) Actual"+"Incentive (Hook Fish)");
+    Validate("Net Incentive Actual","Total Incentive Actual"+"Add/Ded. Crew");
+    */
+    //end;
 }
 

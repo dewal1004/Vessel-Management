@@ -136,7 +136,7 @@ page 50003 "E/D Codes."
                 {
                     Caption = 'Amend Payslip Details';
                     Ellipsis = true;
-                    RunObject = Report Report50057;
+                    // //*** RunObject = Report Report50057; Revisit
                 }
             }
         }

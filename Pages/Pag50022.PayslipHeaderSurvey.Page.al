@@ -55,12 +55,12 @@ page 50022 "Payslip Header Survey."
                 action(Payslip)
                 {
                     Image = "Report";
-                    RunObject = Report "Monthly Payslip";
+                    //*** RunObject = Report "Monthly Payslip";
                 }
                 action("Monthly PayRoll")
                 {
                     Image = "Report";
-                    RunObject = Report "ASL Create New payslips - New";
+                    //*** RunObject = Report "ASL Create New payslips - New";
                 }
             }
         }

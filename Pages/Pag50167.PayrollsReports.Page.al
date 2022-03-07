@@ -15,22 +15,22 @@ page 50167 "Payrolls-Reports"
                 action("Create New Payslips ")
                 {
                     Image = "Report";
-                    RunObject = Report "ASL Create New payslips - New";
+                    //*** RunObject = Report "ASL Create New payslips - New";
                 }
                 action("Monthly Payslip")
                 {
                     Image = "Report";
-                    RunObject = Report "Monthly Payslip";
+                    //*** RunObject = Report "Monthly Payslip";
                 }
                 action("Payroll Report")
                 {
                     Image = "Report";
-                    RunObject = Report "Payroll Report";
+                    //*** RunObject = Report "Payroll Report";
                 }
                 action("Outstanding Loans")
                 {
                     Image = "Report";
-                    RunObject = Report "OUTSTANDING LOANS";
+                    //*** RunObject = Report "OUTSTANDING LOANS";
                 }
             }
         }

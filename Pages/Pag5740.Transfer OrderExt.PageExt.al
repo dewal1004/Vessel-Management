@@ -37,7 +37,7 @@ pageextension 50325 pageextension50325 extends "Transfer Order"
         {
             action("Short Supply")
             {
-                RunObject = Report "Sales Register";
+                //*** RunObject = Report "Sales Register";
             }
         }
         addafter(PostAndPrint)

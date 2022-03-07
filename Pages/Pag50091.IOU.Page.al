@@ -19,10 +19,10 @@ page 50091 IOU
                 field("Employee No."; "Employee No.")
                 {
                 }
-                field(EmployeeName; EmployeeName)
-                {
-                    Caption = 'Full Name';
-                }
+                // field(EmployeeName; EmployeeName)
+                // {
+                //     Caption = 'Full Name';
+                // }
                 field(Amount; Amount)
                 {
                 }

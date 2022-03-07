@@ -1,101 +1,101 @@
 pageextension 50258 pageextension50258 extends "Job Journal"
 {
-    layout
-    {
+    // layout
+    // {
 
-        //Unsupported feature: Property Modification (ImplicitType) on "CurrentJnlBatchName(Control 78)".
+    //     //Unsupported feature: Property Modification (ImplicitType) on "CurrentJnlBatchName(Control 78)".
 
-        modify("Document No.")
-        {
-            Visible = false;
-        }
-        modify("Job No.")
-        {
-            Visible = false;
-        }
-        modify(Type)
-        {
-            Visible = false;
-        }
-        modify("Work Type Code")
-        {
-            Visible = false;
-        }
-        modify("Unit of Measure Code")
-        {
-            Visible = false;
-        }
-        modify(Quantity)
-        {
-            Visible = true;
-        }
-        modify("Unit Cost")
-        {
-            Visible = false;
-        }
-        modify("Total Cost")
-        {
-            Visible = false;
-        }
-        modify("Unit Price")
-        {
-            Visible = false;
-        }
-        modify(ShortcutDimCode3)
-        {
-            Visible = false;
-        }
-        modify(ShortcutDimCode4)
-        {
-            Visible = false;
-        }
-        addafter(Quantity)
-        {
-            field(Catch; Catch)
-            {
-            }
-            field("Stock Position Calc."; "Stock Position Calc.")
-            {
-            }
-            field("Posting Group"; "Posting Group")
-            {
-            }
-        }
-        addafter("Total Cost (LCY)")
-        {
-            field("Source Code"; "Source Code")
-            {
-            }
-        }
-        addafter("Shortcut Dimension 2 Code")
-        {
-            field(ShortcutDimCode3; ShortcutDimCode[3])
-            {
-                ApplicationArea = Dimensions;
-                CaptionClass = '1,2,3';
-                TableRelation = "Dimension Value".Code WHERE ("Global Dimension No." = CONST (3),
-                                                              "Dimension Value Type" = CONST (Standard),
-                                                              Blocked = CONST (false));
-                Visible = DimVisible3;
-            }
-            field(ShortcutDimCode4; ShortcutDimCode[4])
-            {
-                ApplicationArea = Dimensions;
-                CaptionClass = '1,2,4';
-                TableRelation = "Dimension Value".Code WHERE ("Global Dimension No." = CONST (4),
-                                                              "Dimension Value Type" = CONST (Standard),
-                                                              Blocked = CONST (false));
-                Visible = DimVisible4;
-            }
-        }
-        addafter(Control73)
-        {
-            field("Reconciliation Catch Quantity"; "Reconciliation Catch Quantity")
-            {
-            }
-        }
-        moveafter(Description; Quantity)
-    }
+    //     modify("Document No.")
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify("Job No.")
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify(Type)
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify("Work Type Code")
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify("Unit of Measure Code")
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify(Quantity)
+    //     {
+    //         Visible = true;
+    //     }
+    //     modify("Unit Cost")
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify("Total Cost")
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify("Unit Price")
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify(ShortcutDimCode3)
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify(ShortcutDimCode4)
+    //     {
+    //         Visible = false;
+    //     }
+    //     addafter(Quantity)
+    //     {
+    //         field(Catch; Catch)
+    //         {
+    //         }
+    //         field("Stock Position Calc."; "Stock Position Calc.")
+    //         {
+    //         }
+    //         field("Posting Group"; "Posting Group")
+    //         {
+    //         }
+    //     }
+    //     addafter("Total Cost (LCY)")
+    //     {
+    //         field("Source Code"; "Source Code")
+    //         {
+    //         }
+    //     }
+    //     addafter("Shortcut Dimension 2 Code")
+    //     {
+    //         field(ShortcutDimCode3; ShortcutDimCode[3])
+    //         {
+    //             ApplicationArea = Dimensions;
+    //             CaptionClass = '1,2,3';
+    //             TableRelation = "Dimension Value".Code WHERE ("Global Dimension No." = CONST (3),
+    //                                                           "Dimension Value Type" = CONST (Standard),
+    //                                                           Blocked = CONST (false));
+    //             Visible = DimVisible3;
+    //         }
+    //         field(ShortcutDimCode4; ShortcutDimCode[4])
+    //         {
+    //             ApplicationArea = Dimensions;
+    //             CaptionClass = '1,2,4';
+    //             TableRelation = "Dimension Value".Code WHERE ("Global Dimension No." = CONST (4),
+    //                                                           "Dimension Value Type" = CONST (Standard),
+    //                                                           Blocked = CONST (false));
+    //             Visible = DimVisible4;
+    //         }
+    //     }
+    //     addafter(Control73)
+    //     {
+    //         field("Reconciliation Catch Quantity"; "Reconciliation Catch Quantity")
+    //         {
+    //         }
+    //     }
+    //     moveafter(Description; Quantity)
+    // }
     actions
     {
 

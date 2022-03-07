@@ -2,13 +2,13 @@ pageextension 50272 pageextension50272 extends "Phys. Inventory Journal"
 {
     layout
     {
-        modify(ShortcutDimCode8)
-        {
-            Visible = false;
-        }
+        // modify(ShortcutDimCode8)
+        // {
+        //     Visible = false;
+        // }
         addafter(ShortcutDimCode7)
         {
-            field(ShortcutDimCode8; ShortcutDimCode[8])
+            field(ShortcutDimCode8A; ShortcutDimCode[8])
             {
                 ApplicationArea = Dimensions;
                 CaptionClass = '1,2,8';

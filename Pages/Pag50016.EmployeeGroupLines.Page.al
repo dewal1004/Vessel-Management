@@ -21,10 +21,10 @@ page 50016 "Employee Group Lines."
                     Lookup = true;
                     LookupPageID = "E/D Survey.";
                 }
-                field(GetEDName; GetEDName)
-                {
-                    Caption = 'Payslip Text';
-                }
+                // field(GetEDName; GetEDName)
+                // {
+                //     Caption = 'Payslip Text';
+                // }
                 field(Units; Units)
                 {
                 }
@@ -37,12 +37,12 @@ page 50016 "Employee Group Lines."
                 field(Flag; Flag)
                 {
                 }
-                field("Default Amount"; "Default Amount")
-                {
-                    DecimalPlaces = 0 :;
-                    NotBlank = true;
-                    Numeric = false;
-                }
+                // field("Default Amount"; "Default Amount")
+                // {
+                //     DecimalPlaces = 0 :;
+                //     NotBlank = true;
+                //     Numeric = false;
+                // }
                 field("Old Default Amount"; "Old Default Amount")
                 {
                 }

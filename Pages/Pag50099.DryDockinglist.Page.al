@@ -5,7 +5,7 @@ page 50099 "Dry Docking list"
     Editable = false;
     PageType = List;
     SourceTable = Job;
-    SourceTableView = WHERE ("No." = CONST ('*C*'));
+    SourceTableView = WHERE("No." = CONST('*C*'));
 
     layout
     {
@@ -102,7 +102,7 @@ page 50099 "Dry Docking list"
                     PromotedCategory = Process;
                     PromotedIsBig = true;
                     RunObject = Page "Job Task Lines";
-                    RunPageLink = "Job No." = FIELD ("No.");
+                    RunPageLink = "Job No." = FIELD("No.");
                     ShortCutKey = 'Shift+Ctrl+T';
                 }
             }
@@ -117,8 +117,8 @@ page 50099 "Dry Docking list"
                     Promoted = true;
                     PromotedCategory = Process;
                     RunObject = Page "Job Ledger Entries";
-                    RunPageLink = "Job No." = FIELD ("No.");
-                    RunPageView = SORTING ("Job No.", "Job Task No.", "Entry Type", "Posting Date");
+                    RunPageLink = "Job No." = FIELD("No.");
+                    RunPageView = SORTING("Job No.", "Job Task No.", "Entry Type", "Posting Date");
                     ShortCutKey = 'Ctrl+F7';
                 }
             }
@@ -131,7 +131,7 @@ page 50099 "Dry Docking list"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report "Transfer To Vessel";
+                //*** RunObject = Report "Transfer To Vessel";
             }
             action("Job - Transaction Detail 2")
             {
@@ -140,7 +140,7 @@ page 50099 "Dry Docking list"
                 Promoted = false;
                 //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
                 //PromotedCategory = "Report";
-                RunObject = Report "Job - Transaction Detail 2";
+                //*** RunObject = Report "Job - Transaction Detail 2";
             }
         }
     }

@@ -28,6 +28,7 @@ pageextension 50257 pageextension50257 extends "Incoming Documents"
             //Unsupported feature: Property Modification (Image) on "CreateManually(Action 63)".
 
             PromotedCategory = Category5;
+            Promoted = true;
         }
 
         //Unsupported feature: Property Deletion (Enabled) on "ReceiveFromOCR(Action 47)".

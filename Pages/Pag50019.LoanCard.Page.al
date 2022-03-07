@@ -62,11 +62,11 @@ page 50019 "Loan Card."
                 }
                 field("Acct. No."; "Acct. No.")
                 {
-                    TableRelation = IF ("Acct. Type" = CONST (Finance)) "G/L Account"
+                    TableRelation = IF ("Acct. Type" = CONST(Finance)) "G/L Account"
                     ELSE
-                    IF ("Acct. Type" = CONST (Staff)) Customer WHERE ("No." = FILTER ('E' .. 'F'))
+                    IF ("Acct. Type" = CONST(Staff)) Customer WHERE("No." = FILTER('E' .. 'F'))
                     ELSE
-                    IF ("Acct. Type" = CONST (Supplier)) Vendor;
+                    IF ("Acct. Type" = CONST(Supplier)) Vendor;
                 }
                 field("Posting Date for Loan"; "Posting Date for Loan")
                 {
@@ -94,13 +94,13 @@ page 50019 "Loan Card."
                 field("Interest Percent"; "Interest Percent")
                 {
                 }
-                field(LPlusInt; LPlusInt)
-                {
-                    Caption = 'Loan Plus Interest';
-                    Editable = false;
-                    Style = StrongAccent;
-                    StyleExpr = TRUE;
-                }
+                // field(LPlusInt; LPlusInt)
+                // {
+                //     Caption = 'Loan Plus Interest';
+                //     Editable = false;
+                //     Style = StrongAccent;
+                //     StyleExpr = TRUE;
+                // }
                 field("Monthly Repayment"; "Monthly Repayment")
                 {
                     Style = Standard;
@@ -166,7 +166,7 @@ page 50019 "Loan Card."
                 {
                     Caption = 'Outstanding Loan';
                     Image = "Report";
-                    RunObject = Report "OUTSTANDING LOANS";
+                    // //*** RunObject = Report "OUTSTANDING LOANS"; Revisit
                 }
             }
         }

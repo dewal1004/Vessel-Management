@@ -10,10 +10,10 @@ pageextension 50329 pageextension50329 extends "Posted Transfer Shipments"
         }
         addafter("Shipping Agent Code")
         {
-            field("TransShptHeader.""Transfer Value"""; TransShptHeader."Transfer Value")
-            {
-                Caption = 'Value';
-            }
+            // field("TransShptHeader.""Transfer Value"""; TransShptHeader."Transfer Value")
+            // {
+            //     Caption = 'Value';
+            // }
         }
     }
 }

@@ -11,78 +11,78 @@ page 50099 "Dry Docking list"
     {
         area(content)
         {
-            repeater(Control1)
-            {
-                ShowCaption = false;
-                field("No."; "No.")
-                {
-                    StyleExpr = StyleText;
-                }
-                field(Vessel; Vessel)
-                {
-                }
-                field("Voyage No."; "Voyage No.")
-                {
-                }
-                field(Description; Description)
-                {
-                }
-                field("Fuel Consumed"; "Fuel Consumed")
-                {
-                }
-                field("Voyage Ended"; "Voyage Ended")
-                {
-                }
-                field("Bill-to Customer No."; "Bill-to Customer No.")
-                {
-                }
-                field(Status; Status)
-                {
-                    StyleExpr = StyleText;
-                }
-                field("Person Responsible"; "Person Responsible")
-                {
-                    Visible = false;
-                }
-                field("Next Invoice Date"; "Next Invoice Date")
-                {
-                    Visible = false;
-                }
-                field("Job Posting Group"; "Job Posting Group")
-                {
-                    Visible = false;
-                }
-                field("Search Description"; "Search Description")
-                {
-                }
-                field("% of Overdue Planning Lines"; PercentOverdue)
-                {
-                    Caption = '% of Overdue Planning Lines';
-                    Editable = false;
-                    Visible = false;
-                }
-                field("Starting Date"; "Starting Date")
-                {
-                }
-                field("% Completed"; PercentCompleted)
-                {
-                    Caption = '% Completed';
-                    Editable = false;
-                    Visible = false;
-                }
-                field("% Invoiced"; PercentInvoiced)
-                {
-                    Caption = '% Invoiced';
-                    Editable = false;
-                    Visible = false;
-                }
-                field("Last Date Modified"; "Last Date Modified")
-                {
-                }
-                field("Ending Date"; "Ending Date")
-                {
-                }
-            }
+            // repeater(Control1)
+            // {
+            //     ShowCaption = false;
+            //     field("No."; "No.")
+            //     {
+            //         StyleExpr = StyleText;
+            //     }
+            //     field(Vessel; Vessel)
+            //     {
+            //     }
+            //     field("Voyage No."; "Voyage No.")
+            //     {
+            //     }
+            //     field(Description; Description)
+            //     {
+            //     }
+            //     field("Fuel Consumed"; "Fuel Consumed")
+            //     {
+            //     }
+            //     field("Voyage Ended"; "Voyage Ended")
+            //     {
+            //     }
+            //     field("Bill-to Customer No."; "Bill-to Customer No.")
+            //     {
+            //     }
+            //     field(Status; Status)
+            //     {
+            //         StyleExpr = StyleText;
+            //     }
+            //     field("Person Responsible"; "Person Responsible")
+            //     {
+            //         Visible = false;
+            //     }
+            //     field("Next Invoice Date"; "Next Invoice Date")
+            //     {
+            //         Visible = false;
+            //     }
+            //     field("Job Posting Group"; "Job Posting Group")
+            //     {
+            //         Visible = false;
+            //     }
+            //     field("Search Description"; "Search Description")
+            //     {
+            //     }
+            //     field("% of Overdue Planning Lines"; PercentOverdue)
+            //     {
+            //         Caption = '% of Overdue Planning Lines';
+            //         Editable = false;
+            //         Visible = false;
+            //     }
+            //     field("Starting Date"; "Starting Date")
+            //     {
+            //     }
+            //     field("% Completed"; PercentCompleted)
+            //     {
+            //         Caption = '% Completed';
+            //         Editable = false;
+            //         Visible = false;
+            //     }
+            //     field("% Invoiced"; PercentInvoiced)
+            //     {
+            //         Caption = '% Invoiced';
+            //         Editable = false;
+            //         Visible = false;
+            //     }
+            //     field("Last Date Modified"; "Last Date Modified")
+            //     {
+            //     }
+            //     field("Ending Date"; "Ending Date")
+            //     {
+            //     }
+            // }
         }
     }
 

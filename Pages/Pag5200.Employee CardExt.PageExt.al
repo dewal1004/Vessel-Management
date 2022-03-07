@@ -19,10 +19,6 @@ pageextension 50302 pageextension50302 extends "Employee Card"
         {
             Editable = false;
         }
-        modify("Application Method")
-        {
-            Visible = false;
-        }
         addafter("Country/Region Code")
         {
             field("Global Dimension 2 Code"; "Global Dimension 2 Code")
@@ -103,10 +99,11 @@ pageextension 50302 pageextension50302 extends "Employee Card"
         }
         addafter("Employee Posting Group")
         {
-            field("Application Method"; "Application Method")
+            field("Application Method1"; "Application Method")
             {
                 ApplicationArea = BasicHR;
                 ToolTip = 'Specifies how to apply payments to entries for this employee.';
+                Visible = true;
             }
         }
     }

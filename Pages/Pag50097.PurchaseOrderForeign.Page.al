@@ -580,48 +580,48 @@ page 50097 "Purchase Order Foreign"
         }
         area(processing)
         {
-            group(Approval)
-            {
-                Caption = 'Approval';
-                action(Approve)
-                {
-                    Caption = 'Approve';
-                    Image = Approve;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
-                    Visible = OpenApprovalEntriesExistForCurrUser;
-                }
-                action(Reject)
-                {
-                    Caption = 'Reject';
-                    Image = Reject;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
-                    Visible = OpenApprovalEntriesExistForCurrUser;
-                }
-                action(Delegate)
-                {
-                    Caption = 'Delegate';
-                    Image = Delegate;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    Visible = OpenApprovalEntriesExistForCurrUser;
-                }
-                action(Comment)
-                {
-                    Caption = 'Comments';
-                    Image = ViewComments;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    RunObject = Page "Approval Comments";
-                    RunPageLink = "Table ID" = CONST (38),
-                                  "Document Type" = FIELD ("Document Type"),
-                                  "Document No." = FIELD ("No.");
-                    Visible = OpenApprovalEntriesExistForCurrUser;
-                }
-            }
+            // group(Approval)
+            // {
+            //     Caption = 'Approval';
+            //     action(Approve)
+            //     {
+            //         Caption = 'Approve';
+            //         Image = Approve;
+            //         Promoted = true;
+            //         PromotedCategory = Category4;
+            //         PromotedIsBig = true;
+            //         Visible = OpenApprovalEntriesExistForCurrUser;
+            //     }
+            //     action(Reject)
+            //     {
+            //         Caption = 'Reject';
+            //         Image = Reject;
+            //         Promoted = true;
+            //         PromotedCategory = Category4;
+            //         PromotedIsBig = true;
+            //         Visible = OpenApprovalEntriesExistForCurrUser;
+            //     }
+            //     action(Delegate)
+            //     {
+            //         Caption = 'Delegate';
+            //         Image = Delegate;
+            //         Promoted = true;
+            //         PromotedCategory = Category4;
+            //         Visible = OpenApprovalEntriesExistForCurrUser;
+            //     }
+            //     action(Comment)
+            //     {
+            //         Caption = 'Comments';
+            //         Image = ViewComments;
+            //         Promoted = true;
+            //         PromotedCategory = Category4;
+            //         RunObject = Page "Approval Comments";
+            //         RunPageLink = "Table ID" = CONST (38),
+            //                       "Document Type" = FIELD ("Document Type"),
+            //                       "Document No." = FIELD ("No.");
+            //         Visible = OpenApprovalEntriesExistForCurrUser;
+            //     }
+            // }
             group(Action13)
             {
                 Caption = 'Release';
@@ -724,68 +724,68 @@ page 50097 "Purchase Order Foreign"
                 separator(Action189)
                 {
                 }
-                group(IncomingDocument)
-                {
-                    Caption = 'Incoming Document';
-                    Image = Documents;
-                    action(IncomingDocCard)
-                    {
-                        Caption = 'View Incoming Document';
-                        Enabled = HasIncomingDocument;
-                        Image = ViewOrder;
-                        //The property 'ToolTip' cannot be empty.
-                        //ToolTip = '';
-                    }
-                    action(SelectIncomingDoc)
-                    {
-                        AccessByPermission = TableData "Incoming Document" = R;
-                        Caption = 'Select Incoming Document';
-                        Image = SelectLineToApply;
-                        //The property 'ToolTip' cannot be empty.
-                        //ToolTip = '';
-                    }
-                    action(IncomingDocAttachFile)
-                    {
-                        Caption = 'Create Incoming Document from File';
-                        Ellipsis = true;
-                        Enabled = NOT HasIncomingDocument;
-                        Image = Attach;
-                        //The property 'ToolTip' cannot be empty.
-                        //ToolTip = '';
-                    }
-                    action(RemoveIncomingDoc)
-                    {
-                        Caption = 'Remove Incoming Document';
-                        Enabled = HasIncomingDocument;
-                        Image = RemoveLine;
-                        //The property 'ToolTip' cannot be empty.
-                        //ToolTip = '';
-                    }
-                }
+                // group(IncomingDocument)
+                // {
+                //     Caption = 'Incoming Document';
+                //     Image = Documents;
+                //     action(IncomingDocCard)
+                //     {
+                //         Caption = 'View Incoming Document';
+                //         Enabled = HasIncomingDocument;
+                //         Image = ViewOrder;
+                //         //The property 'ToolTip' cannot be empty.
+                //         //ToolTip = '';
+                //     }
+                //     action(SelectIncomingDoc)
+                //     {
+                //         AccessByPermission = TableData "Incoming Document" = R;
+                //         Caption = 'Select Incoming Document';
+                //         Image = SelectLineToApply;
+                //         //The property 'ToolTip' cannot be empty.
+                //         //ToolTip = '';
+                //     }
+                //     action(IncomingDocAttachFile)
+                //     {
+                //         Caption = 'Create Incoming Document from File';
+                //         Ellipsis = true;
+                //         Enabled = NOT HasIncomingDocument;
+                //         Image = Attach;
+                //         //The property 'ToolTip' cannot be empty.
+                //         //ToolTip = '';
+                //     }
+                //     action(RemoveIncomingDoc)
+                //     {
+                //         Caption = 'Remove Incoming Document';
+                //         Enabled = HasIncomingDocument;
+                //         Image = RemoveLine;
+                //         //The property 'ToolTip' cannot be empty.
+                //         //ToolTip = '';
+                //     }
+                // }
             }
-            group("Request Approval")
-            {
-                Caption = 'Request Approval';
-                action(SendApprovalRequest)
-                {
-                    Caption = 'Send A&pproval Request';
-                    Enabled = NOT OpenApprovalEntriesExist;
-                    Image = SendApprovalRequest;
-                    Promoted = true;
-                    PromotedCategory = Category9;
-                }
-                action(ApprovalsList)
-                {
-                }
-                action(CancelApprovalRequest)
-                {
-                    Caption = 'Cancel Approval Re&quest';
-                    Enabled = OpenApprovalEntriesExist;
-                    Image = Cancel;
-                    Promoted = true;
-                    PromotedCategory = Category9;
-                }
-            }
+            // group("Request Approval")
+            // {
+            //     Caption = 'Request Approval';
+            //     action(SendApprovalRequest)
+            //     {
+            //         Caption = 'Send A&pproval Request';
+            //         Enabled = NOT OpenApprovalEntriesExist;
+            //         Image = SendApprovalRequest;
+            //         Promoted = true;
+            //         PromotedCategory = Category9;
+            //     }
+            //     action(ApprovalsList)
+            //     {
+            //     }
+            //     action(CancelApprovalRequest)
+            //     {
+            //         Caption = 'Cancel Approval Re&quest';
+            //         Enabled = OpenApprovalEntriesExist;
+            //         Image = Cancel;
+            //         Promoted = true;
+            //         PromotedCategory = Category9;
+            //     }
+            // }
             group(Action17)
             {
                 Caption = 'Warehouse';
@@ -854,7 +854,7 @@ page 50097 "Purchase Order Foreign"
                 {
                     Caption = 'Remove From Job Queue';
                     Image = RemoveLine;
-                    Visible = JobQueueVisible;
+                    // Visible = JobQueueVisible; Revisit
                 }
                 separator(Action201)
                 {

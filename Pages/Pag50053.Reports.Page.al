@@ -15,62 +15,62 @@ page 50053 Reports
                 action("Vendor -summary Agng")
                 {
                     Image = "report";
-                    RunObject = Report "Vendor - Summary Aging";
+                    //*** RunObject = Report "Vendor - Summary Aging";
                 }
                 action("Vendor-top 10 List")
                 {
                     Image = "report";
-                    RunObject = Report "Vendor - Top 10 List";
+                    //*** RunObject = Report "Vendor - Top 10 List";
                 }
                 action("Vendor- Item purchase")
                 {
                     Image = "report";
-                    RunObject = Report "Vendor/Item Purchases";
+                    //*** RunObject = Report "Vendor/Item Purchases";
                 }
                 action("Quotes Comparision Report")
                 {
                     Image = "report";
-                    RunObject = Report "Payroll Rprt- WITH DELETED EMP";
+                    //*** RunObject = Report "Payroll Rprt- WITH DELETED EMP";
                 }
                 action("Compare Standard &Atual Rate")
                 {
                     Image = "report";
-                    RunObject = Report Update;
+                    //*** RunObject = Report Update;
                 }
                 action("Purchase Import status ")
                 {
                     Image = "report";
-                    RunObject = Report "Purchase Import Status";
+                    //*** RunObject = Report "Purchase Import Status";
                 }
                 action("Pending purchase Orde")
                 {
                     Image = "report";
-                    RunObject = Report "Pending Purchase Orders";
+                    //*** RunObject = Report "Pending Purchase Orders";
                 }
                 action("Purchase variance report")
                 {
                     Image = "report";
-                    RunObject = Report "Purch var";
+                    //*** RunObject = Report "Purch var";
                 }
                 action("Purchase reorder")
                 {
                     Image = "report";
-                    RunObject = Report "Purchase Re-order";
+                    //*** RunObject = Report "Purchase Re-order";
                 }
                 action("Vendor -Balance to date")
                 {
                     Image = "report";
-                    RunObject = Report "Vendor - Balance to Date";
+                    //*** RunObject = Report "Vendor - Balance to Date";
                 }
                 action("Purchase register ")
                 {
                     Image = "report";
-                    RunObject = Report "Purchase Register(LCY)";
+                    //*** RunObject = Report "Purchase Register(LCY)";
                 }
                 action("Purchase return register")
                 {
                     Image = "report";
-                    RunObject = Report "Purchase Returns Register";
+                    //*** RunObject = Report "Purchase Returns Register";
                 }
             }
         }
@@ -82,147 +82,147 @@ page 50053 Reports
                 action("Consolidatdd daily Point Rep!")
                 {
                     Image = "report";
-                    RunObject = Report "Sales Test/Confirmation Report";
+                    //*** RunObject = Report "Sales Test/Confirmation Report";
                 }
                 action("New daily points report fast")
                 {
                     Image = "report";
-                    RunObject = Report "New Daily Points Report Fast";
+                    //*** RunObject = Report "New Daily Points Report Fast";
                 }
                 action("Historical  daily points rep")
                 {
                     Image = "report";
-                    RunObject = Report "Historical Daily Points Rep!";
+                    //*** RunObject = Report "Historical Daily Points Rep!";
                 }
                 action("Consolidated narration")
                 {
                     Image = "report";
-                    RunObject = Report "Container By Month Shipment";
+                    //*** RunObject = Report "Container By Month Shipment";
                 }
                 action("Voyage Narration")
                 {
                     Image = "report";
-                    RunObject = Report "Voyage Narration";
+                    //*** RunObject = Report "Voyage Narration";
                 }
                 action("New daily point s by capt rep")
                 {
                     Image = "report";
-                    RunObject = Report "New Daily Points by Capt Rep";
+                    //*** RunObject = Report "New Daily Points by Capt Rep";
                 }
                 action("Points summary report")
                 {
                     Image = "report";
-                    RunObject = Report "Points Summary VJ";
+                    //*** RunObject = Report "Points Summary VJ";
                 }
                 action("Consolidated narration-kkk")
                 {
                     Image = "report";
-                    RunObject = Report "Consolidated Narration_";
+                    //*** RunObject = Report "Consolidated Narration_";
                 }
                 action("Skipper/vessel performance")
                 {
                     Image = "report";
-                    RunObject = Report "Skipper/Vessel Performance";
+                    //*** RunObject = Report "Skipper/Vessel Performance";
                 }
                 action("Catch incentive")
                 {
                     Image = "report";
-                    RunObject = Report "Catch Incentive";
+                    //*** RunObject = Report "Catch Incentive";
                 }
                 action("Job-Transaction Detail")
                 {
                     Image = "report";
-                    RunObject = Report Report1204;
+                    //*** RunObject = Report Report1204;
                 }
                 action("Daily points-with fishhold Temp")
                 {
                     Image = "report";
-                    RunObject = Report "NewDailyPointsReport Fast-AP";
+                    //*** RunObject = Report "NewDailyPointsReport Fast-AP";
                 }
                 action(Organoleptic)
                 {
                     Image = "report";
-                    RunObject = Report Organoleptic0809;
+                    //*** RunObject = Report Organoleptic0809;
                 }
                 action("Consolidatdd daily Points")
                 {
                     Image = "report";
-                    RunObject = Report "Balance At Date (Cust/Vend)";
+                    //*** RunObject = Report "Balance At Date (Cust/Vend)";
                 }
                 action("Voyage End consumption Report")
                 {
                     Image = "report";
-                    RunObject = Report "Voyage Ending Inv Cons exp3!";
+                    //*** RunObject = Report "Voyage Ending Inv Cons exp3!";
                 }
                 action("Daily Breakup by Vessel Rep 1")
                 {
                     Image = "report";
-                    RunObject = Report "Daily BreakUp by Vessel Rep 1";
+                    //*** RunObject = Report "Daily BreakUp by Vessel Rep 1";
                 }
                 action("Daily Breakup by Vessel Rep 2")
                 {
                     Image = "report";
-                    RunObject = Report "Daily BreakUp by Vessel Rep 2";
+                    //*** RunObject = Report "Daily BreakUp by Vessel Rep 2";
                 }
                 action("Daily Breakup by Vessel Rep 3")
                 {
                     Image = "report";
-                    RunObject = Report "Daily BreakUp by Vessel Rep 3";
+                    //*** RunObject = Report "Daily BreakUp by Vessel Rep 3";
                 }
                 action("Daily Breakup by Vessel Rep 4")
                 {
                     Image = "report";
-                    RunObject = Report "Foreign Banks Report";
+                    //*** RunObject = Report "Foreign Banks Report";
                 }
                 action("Daily Breakup by Vessel")
                 {
                     Image = "report";
-                    RunObject = Report "Daily Break Up By Vessel";
+                    //*** RunObject = Report "Daily Break Up By Vessel";
                 }
                 action("Daily Breakup by Vess summary ")
                 {
                     Image = "report";
-                    RunObject = Report "Daily BreakUp by Vess Summary";
+                    //*** RunObject = Report "Daily BreakUp by Vess Summary";
                 }
                 action("Job-Transaction Detail2")
                 {
                     Image = "report";
-                    RunObject = Report "Job - Transaction Detail";
+                    //*** RunObject = Report "Job - Transaction Detail";
                 }
                 action("Inventory-Transaction Detail")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory - Transaction Detail";
+                    //*** RunObject = Report "Inventory - Transaction Detail";
                 }
                 action("Transfer to Vessel")
                 {
                     Image = "report";
-                    RunObject = Report "Transfer To Vessel";
+                    //*** RunObject = Report "Transfer To Vessel";
                 }
                 action("Vessel Daily log")
                 {
                     Image = "report";
-                    RunObject = Report "Vessel Daily Log";
+                    //*** RunObject = Report "Vessel Daily Log";
                 }
                 action("Job-Transaction Detail 2")
                 {
                     Image = "report";
-                    RunObject = Report "Job - Transaction Detail 2";
+                    //*** RunObject = Report "Job - Transaction Detail 2";
                 }
                 action("Periodic Landing Report")
                 {
                     Image = "report";
-                    RunObject = Report "Account Schedule BS";
+                    //*** RunObject = Report "Account Schedule BS";
                 }
                 action("Voyage Narration(Points)")
                 {
                     Image = "report";
-                    RunObject = Report "Voyage Narration (Points)";
+                    //*** RunObject = Report "Voyage Narration (Points)";
                 }
                 action("Stock on bord")
                 {
                     Image = "report";
-                    RunObject = Report "Stock On Board";
+                    //*** RunObject = Report "Stock On Board";
                 }
             }
         }
@@ -235,112 +235,112 @@ page 50053 Reports
                 {
                     Caption = '<Inventory-Transaction Detail(Bin card)';
                     Image = "report";
-                    RunObject = Report "Inventory - Transaction Detail";
+                    //*** RunObject = Report "Inventory - Transaction Detail";
                 }
                 action("Item Age Composition-Quantity")
                 {
                     Image = "report";
-                    RunObject = Report "Item Age Composition - Qty.";
+                    //*** RunObject = Report "Item Age Composition - Qty.";
                 }
                 action("Transfer to vessel Report(Issues)")
                 {
                     Image = "report";
-                    RunObject = Report "Transfer To Vessel";
+                    //*** RunObject = Report "Transfer To Vessel";
                 }
                 action("Issues to cost centers")
                 {
                     Image = "report";
-                    RunObject = Report "Update Value Entry Quantity";
+                    //*** RunObject = Report "Update Value Entry Quantity";
                 }
                 action("Periodic stock production")
                 {
                     Image = "report";
-                    RunObject = Report "Periodic Stock Position";
+                    //*** RunObject = Report "Periodic Stock Position";
                 }
                 action("Inventory Avg. Monthly Demand")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory Avg. Monthly Demand";
+                    //*** RunObject = Report "Inventory Avg. Monthly Demand";
                 }
                 action("Job-Transaction Detail1")
                 {
                     Image = "report";
-                    RunObject = Report Report1204;
+                    //*** RunObject = Report Report1204;
                 }
                 action("Phys. Inventory List")
                 {
                     Image = "report";
-                    RunObject = Report "Phys. Inventory List";
+                    //*** RunObject = Report "Phys. Inventory List";
                 }
                 action("Inventory avaliability")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory - Transaction Detail";
+                    //*** RunObject = Report "Inventory - Transaction Detail";
                 }
                 action("Short Supply by vessel")
                 {
                     Image = "report";
-                    RunObject = Report "Short Supply thru Posted Trans";
+                    //*** RunObject = Report "Short Supply thru Posted Trans";
                 }
                 action("Inventory-Trans for D period")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory - Transaction -test";
+                    //*** RunObject = Report "Inventory - Transaction -test";
                 }
                 action("Transfer Processing/Fishshop")
                 {
                     Image = "report";
-                    RunObject = Report "Itew Ledger Qty Update";
+                    //*** RunObject = Report "Itew Ledger Qty Update";
                 }
                 action("Inventory Valuation")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory Valuation";
+                    //*** RunObject = Report "Inventory Valuation";
                 }
                 action("BOM-Finished Goods")
                 {
                     Image = "report";
-                    RunObject = Report "Assembly BOM - End Items";
+                    //*** RunObject = Report "Assembly BOM - End Items";
                 }
                 action("BOM Journal-test")
                 {
                     Image = "report";
-                    RunObject = Report Report802;
+                    //*** RunObject = Report Report802;
                 }
                 action("BOM-Raw Materials")
                 {
                     Image = "report";
-                    RunObject = Report "Assembly BOM - Raw Materials";
+                    //*** RunObject = Report "Assembly BOM - Raw Materials";
                 }
                 action("BOM Register")
                 {
                     Image = "report";
-                    RunObject = Report Report803;
+                    //*** RunObject = Report Report803;
                 }
                 action("BOM-Requirmnet Planning")
                 {
                     Image = "report";
-                    RunObject = Report Report807;
+                    //*** RunObject = Report Report807;
                 }
                 action("BOM-Requirment Calculation")
                 {
                     Image = "report";
-                    RunObject = Report Report808;
+                    //*** RunObject = Report Report808;
                 }
                 action("BOM-Sub-Assemblies")
                 {
                     Image = "report";
-                    RunObject = Report "Assembly BOM - Subassemblies";
+                    //*** RunObject = Report "Assembly BOM - Subassemblies";
                 }
                 action(BOMs)
                 {
                     Image = "report";
-                    RunObject = Report "Assembly BOMs";
+                    //*** RunObject = Report "Assembly BOMs";
                 }
                 action("Where-Used List")
                 {
                     Image = "report";
-                    RunObject = Report "Where-Used List";
+                    //*** RunObject = Report "Where-Used List";
                 }
             }
         }
@@ -352,102 +352,102 @@ page 50053 Reports
                 action("Organoleptic Report")
                 {
                     Image = "report";
-                    RunObject = Report Organoleptic;
+                    //*** RunObject = Report Organoleptic;
                 }
                 action("Fish Shop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "Fish Shop Sales Report";
+                    //*** RunObject = Report "Fish Shop Sales Report";
                 }
                 action("Sales Invoice Check Report")
                 {
                     Image = "report";
-                    RunObject = Report "Consolidatdd Daily Points Rep!";
+                    //*** RunObject = Report "Consolidatdd Daily Points Rep!";
                 }
                 action("Local sales report")
                 {
                     Image = "report";
-                    RunObject = Report "Local Sales Report1";
+                    //*** RunObject = Report "Local Sales Report1";
                 }
                 action("Fish Shop Sales Report-new")
                 {
                     Image = "report";
-                    RunObject = Report "Fish Shop Sales Rep";
+                    //*** RunObject = Report "Fish Shop Sales Rep";
                 }
                 action("Fish Shop Print-Before Posting ")
                 {
                     Image = "report";
-                    RunObject = Report "FIsh And Shop";
+                    //*** RunObject = Report "FIsh And Shop";
                 }
                 action("Periodic Stock Position by Grip")
                 {
                     Image = "report";
-                    RunObject = Report "Periodic Stock Position by Grp";
+                    //*** RunObject = Report "Periodic Stock Position by Grp";
                 }
                 action("Apapa Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "Apapa Fish Shop Sales Report";
+                    //*** RunObject = Report "Apapa Fish Shop Sales Report";
                 }
                 action("VI  Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "VI Fish Shop Sales Report";
+                    //*** RunObject = Report "VI Fish Shop Sales Report";
                 }
                 action("ABUJA  Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "ABUJA Fish Shop Sales Report";
+                    //*** RunObject = Report "ABUJA Fish Shop Sales Report";
                 }
                 action("IKEJA  Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "IKEJA Fish Shop Sales Report";
+                    //*** RunObject = Report "IKEJA Fish Shop Sales Report";
                 }
                 action("LEKKI  Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "LEKKI Fish Shop Sales Report";
+                    //*** RunObject = Report "LEKKI Fish Shop Sales Report";
                 }
                 action("SURULERE Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "SURULERE Fish Shop SalesReport";
+                    //*** RunObject = Report "SURULERE Fish Shop SalesReport";
                 }
                 action("FESTAC  Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "FESTAC Fish Shop Sales Report";
+                    //*** RunObject = Report "FESTAC Fish Shop Sales Report";
                 }
                 action("IBADAN  Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "IBADAN Fish Shop Sales Report";
+                    //*** RunObject = Report "IBADAN Fish Shop Sales Report";
                 }
                 action("ALL  Fishshop Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "ALL Fish Shop Sales Report";
+                    //*** RunObject = Report "ALL Fish Shop Sales Report";
                 }
                 action("Local sales report-Import Fish")
                 {
                     Image = "report";
-                    RunObject = Report "Local Sales Report 2";
+                    //*** RunObject = Report "Local Sales Report 2";
                 }
                 action("Institutional Sales Report")
                 {
                     Image = "report";
-                    RunObject = Report "Institutional Sales Report";
+                    //*** RunObject = Report "Institutional Sales Report";
                 }
                 action("Customer - Balance to Date")
                 {
                     Image = "report";
-                    RunObject = Report "Customer - Balance to Date";
+                    //*** RunObject = Report "Customer - Balance to Date";
                 }
                 action("Customer/Item Sales")
                 {
                     Image = "report";
-                    RunObject = Report "Customer/Item Sales";
+                    //*** RunObject = Report "Customer/Item Sales";
                 }
             }
             group("General Leadger")
@@ -456,127 +456,127 @@ page 50053 Reports
                 action("Bank Acc.- Detail Trail Bal.")
                 {
                     Image = "report";
-                    RunObject = Report "Bank Acc. - Detail Trial Bal.";
+                    //*** RunObject = Report "Bank Acc. - Detail Trial Bal.";
                 }
                 action("Closing Trail Balance")
                 {
                     Image = "report";
-                    RunObject = Report "Closing Trial Balance";
+                    //*** RunObject = Report "Closing Trial Balance";
                 }
                 action("Detail Trial Balance")
                 {
                     Image = "report";
-                    RunObject = Report "Detail Trial Balance";
+                    //*** RunObject = Report "Detail Trial Balance";
                 }
                 action("Foreign Currency  Balance")
                 {
                     Image = "report";
-                    RunObject = Report "Foreign Currency Balance";
+                    //*** RunObject = Report "Foreign Currency Balance";
                 }
                 action("G/L Register")
                 {
                     Image = "report";
-                    RunObject = Report "G/L Register";
+                    //*** RunObject = Report "G/L Register";
                 }
                 action("No. Series Check")
                 {
                     Image = "report";
-                    RunObject = Report "No. Series Check";
+                    //*** RunObject = Report "No. Series Check";
                 }
                 action("Receivables-Payables")
                 {
                     Image = "report";
-                    RunObject = Report "Receivables-Payables";
+                    //*** RunObject = Report "Receivables-Payables";
                 }
                 action("Reconcile Cust and vend Accs")
                 {
                     Image = "report";
-                    RunObject = Report "Reconcile Cust. and Vend. Accs";
+                    //*** RunObject = Report "Reconcile Cust. and Vend. Accs";
                 }
                 action("Trial Balance")
                 {
                     Image = "report";
-                    RunObject = Report "Trial Balance";
+                    //*** RunObject = Report "Trial Balance";
                 }
                 action("Trial Balance/Budget")
                 {
                     Image = "report";
-                    RunObject = Report "Trial Balance/Budget";
+                    //*** RunObject = Report "Trial Balance/Budget";
                 }
                 action("Trial Balance/previous Year")
                 {
                     Image = "report";
-                    RunObject = Report "Trial Balance/Previous Year";
+                    //*** RunObject = Report "Trial Balance/Previous Year";
                 }
                 action("IOU Status Report")
                 {
                     Image = "report";
-                    RunObject = Report "IOU Status Report";
+                    //*** RunObject = Report "IOU Status Report";
                 }
                 action("Periodic Landing Report1")
                 {
                     Image = "report";
-                    RunObject = Report "Periodic Landing Report";
+                    //*** RunObject = Report "Periodic Landing Report";
                 }
                 action("Bank LIST local currency")
                 {
                     Image = "report";
-                    RunObject = Report "BANK LIST local currency";
+                    //*** RunObject = Report "BANK LIST local currency";
                 }
                 action("Bank LIST Foreign  currency")
                 {
                     Image = "report";
-                    RunObject = Report "BANK LIST foreign currency";
+                    //*** RunObject = Report "BANK LIST foreign currency";
                 }
                 action("Bank balance")
                 {
                     Image = "report";
-                    RunObject = Report "Banks Balances";
+                    //*** RunObject = Report "Banks Balances";
                 }
                 action("Balance at date (cust/vend)")
                 {
                     Image = "report";
-                    RunObject = Report Report50027;
+                    //*** RunObject = Report Report50027;
                 }
                 action("OUTSTANDING LOANS")
                 {
                     Image = "report";
-                    RunObject = Report "Online loan";
+                    //*** RunObject = Report "Online loan";
                 }
                 action("Vendor- Summary aging")
                 {
                     Image = "report";
-                    RunObject = Report "Vendor - Summary Aging";
+                    //*** RunObject = Report "Vendor - Summary Aging";
                 }
                 action("Customer-Summary aging")
                 {
                     Image = "report";
-                    RunObject = Report "Customer - Summary Aging";
+                    //*** RunObject = Report "Customer - Summary Aging";
                 }
                 action("Account schedule Portait")
                 {
                     Image = "report";
-                    RunObject = Report "Account Schedule Portrait";
+                    //*** RunObject = Report "Account Schedule Portrait";
                 }
                 action("Periodic stock position by Grp")
                 {
                     Image = "report";
-                    RunObject = Report "Periodic Stock Position by Grp";
+                    //*** RunObject = Report "Periodic Stock Position by Grp";
                 }
                 action("Journal Register")
                 {
                     Image = "report";
-                    RunObject = Report "Journal Register";
+                    //*** RunObject = Report "Journal Register";
                 }
                 action("New Trail Balance")
                 {
                     Image = "report";
-                    RunObject = Report "New Trial Balance";
+                    //*** RunObject = Report "New Trial Balance";
                 }
                 action("Sales register")
                 {
                     Image = "report";
-                    RunObject = Report "Sales Register old";
+                    //*** RunObject = Report "Sales Register old";
                 }
             }
             group("Human Resource")
@@ -585,42 +585,42 @@ page 50053 Reports
                 action("Employee-Staff Absences")
                 {
                     Image = "report";
-                    RunObject = Report "Employee - Staff Absences";
+                    //*** RunObject = Report "Employee - Staff Absences";
                 }
                 action("Employee-Absences by Causes")
                 {
                     Image = "report";
-                    RunObject = Report "Employee - Absences by Causes";
+                    //*** RunObject = Report "Employee - Absences by Causes";
                 }
                 action("Man power budget report")
                 {
                     Image = "report";
-                    RunObject = Report "Mp Budget report";
+                    //*** RunObject = Report "Mp Budget report";
                 }
                 action("Payrol report-NSITF")
                 {
                     Image = "report";
-                    RunObject = Report Report50162;
+                    //*** RunObject = Report Report50162;
                 }
                 action("Staff position count")
                 {
                     Image = "report";
-                    RunObject = Report "Staff Position as at";
+                    //*** RunObject = Report "Staff Position as at";
                 }
                 action("Staff position -Group Wise")
                 {
                     Image = "report";
-                    RunObject = Report "Staff Position as at by PG";
+                    //*** RunObject = Report "Staff Position as at by PG";
                 }
                 action("Employee-List")
                 {
                     Image = "report";
-                    RunObject = Report "Employee - List";
+                    //*** RunObject = Report "Employee - List";
                 }
                 action("Employee-Bank Acc No.s")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory(Value) - Top 10 List";
+                    //*** RunObject = Report "Inventory(Value) - Top 10 List";
                 }
             }
             group("Fixed assets")
@@ -629,177 +629,177 @@ page 50053 Reports
                 action("Fixed asset Register")
                 {
                     Image = "report";
-                    RunObject = Report "Fixed Asset Register";
+                    //*** RunObject = Report "Fixed Asset Register";
                 }
                 action("Fixed Asset -Analysis")
                 {
                     Image = "report";
-                    RunObject = Report "Fixed Asset - Analysis";
+                    //*** RunObject = Report "Fixed Asset - Analysis";
                 }
                 action("Fixed Asset-Detail")
                 {
                     Image = "report";
-                    RunObject = Report "Fixed Asset - Details";
+                    //*** RunObject = Report "Fixed Asset - Details";
                 }
                 action("Fixed Asset-G/L Analysis")
                 {
                     Image = "report";
-                    RunObject = Report "Fixed Asset - G/L Analysis";
+                    //*** RunObject = Report "Fixed Asset - G/L Analysis";
                 }
                 action("Maintenance Register")
                 {
                     Image = "report";
-                    RunObject = Report "Maintenance Register";
+                    //*** RunObject = Report "Maintenance Register";
                 }
                 action("Maintainance- Analysis")
                 {
                     Image = "report";
-                    RunObject = Report "Maintenance - Analysis";
+                    //*** RunObject = Report "Maintenance - Analysis";
                 }
                 action("Maintainance- Detail")
                 {
                     Image = "report";
-                    RunObject = Report "Maintenance - Details";
+                    //*** RunObject = Report "Maintenance - Details";
                 }
                 action("Maintainance-Next Service")
                 {
                     Image = "report";
-                    RunObject = Report "Maintenance - Next Service";
+                    //*** RunObject = Report "Maintenance - Next Service";
                 }
                 action("Vehicle Maintainance-Analysis")
                 {
                     Image = "report";
-                    RunObject = Report "Voyage P&L Batch";
+                    //*** RunObject = Report "Voyage P&L Batch";
                 }
                 action("Customer- Detail Trail Bal.")
                 {
                     Image = "report";
-                    RunObject = Report "Customer - Detail Trial Bal.";
+                    //*** RunObject = Report "Customer - Detail Trial Bal.";
                 }
                 action("Vendor-Detail Trail bal.")
                 {
                     Image = "report";
-                    RunObject = Report "Vendor - Detail Trial Balance";
+                    //*** RunObject = Report "Vendor - Detail Trial Balance";
                 }
                 action("Customer-Balance to Date")
                 {
                     Image = "report";
-                    RunObject = Report "Customer - Balance to Date";
+                    //*** RunObject = Report "Customer - Balance to Date";
                 }
                 action("Inventory-Top 10List")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory - Top 10 List";
+                    //*** RunObject = Report "Inventory - Top 10 List";
                 }
                 action("Inventory Valuation2")
                 {
                     Image = "report";
-                    RunObject = Report Report50027;
+                    //*** RunObject = Report Report50027;
                 }
                 action("Group Inventory Valuation ")
                 {
                     Image = "report";
-                    RunObject = Report Report50233;
+                    //*** RunObject = Report Report50233;
                 }
                 action("Item Age Composition-Value")
                 {
                     Image = "report";
-                    RunObject = Report "Item Age Composition - Value";
+                    //*** RunObject = Report "Item Age Composition - Value";
                 }
                 action("Inventory Valuation1")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory Valuation";
+                    //*** RunObject = Report "Inventory Valuation";
                 }
                 action("Customer-Detail Trail Bal.")
                 {
                     Image = "report";
-                    RunObject = Report "Customer - Detail Trial Bal.";
+                    //*** RunObject = Report "Customer - Detail Trial Bal.";
                 }
                 action("Export order Summary")
                 {
                     Image = "report";
-                    RunObject = Report "Export Order Details";
+                    //*** RunObject = Report "Export Order Details";
                 }
                 action("Export Order Container Detail")
                 {
                     Image = "report";
-                    RunObject = Report Report50166;
+                    //*** RunObject = Report Report50166;
                 }
                 action("Item Age Composition-Value1")
                 {
                     Image = "report";
-                    RunObject = Report "Item Age Composition - Qty.";
+                    //*** RunObject = Report "Item Age Composition - Qty.";
                 }
                 action("Vendor-Detail Trail bal.1")
                 {
                     Image = "report";
-                    RunObject = Report "Vendor - Detail Trial Balance";
+                    //*** RunObject = Report "Vendor - Detail Trial Balance";
                 }
                 action("Bank Acc-Detail Trail Bal-1404")
                 {
                     Image = "report";
-                    RunObject = Report "Bank Acc-Detail Trial Bal-1404";
+                    //*** RunObject = Report "Bank Acc-Detail Trial Bal-1404";
                 }
                 action("Detail Trial Balance-4")
                 {
                     Image = "report";
-                    RunObject = Report "Detail Trial Balance-4";
+                    //*** RunObject = Report "Detail Trial Balance-4";
                 }
                 action("Vendor- Detail Trial Balance-304")
                 {
                     Image = "report";
-                    RunObject = Report "Vendor-Detail Trial Balanc-304";
+                    //*** RunObject = Report "Vendor-Detail Trial Balanc-304";
                 }
                 action("Inventory-Transaction-704")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory - BINCARD 704";
+                    //*** RunObject = Report "Inventory - BINCARD 704";
                 }
                 action("Consumptions Vessel Wise VJ")
                 {
                     Image = "report";
-                    RunObject = Report "Consumptions Vessel Wise VJ";
+                    //*** RunObject = Report "Consumptions Vessel Wise VJ";
                 }
                 action("Inventory-BINCARD 704 B")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory - BINCARD 704 B";
+                    //*** RunObject = Report "Inventory - BINCARD 704 B";
                 }
                 action("Import item summary VJ")
                 {
                     Image = "report";
-                    RunObject = Report "Import Items Summary VJ";
+                    //*** RunObject = Report "Import Items Summary VJ";
                 }
                 action("Vessel Performance ")
                 {
                     Image = "report";
-                    RunObject = Report "Vessel Performance";
+                    //*** RunObject = Report "Vessel Performance";
                 }
                 action("Cummulative Payroll Report")
                 {
                     Image = "report";
-                    RunObject = Report "Cummulative Payroll Report";
+                    //*** RunObject = Report "Cummulative Payroll Report";
                 }
                 action("Import Summary for a Period")
                 {
                     Image = "report";
-                    RunObject = Report "Import for a period 2 VJ";
+                    //*** RunObject = Report "Import for a period 2 VJ";
                 }
                 action("FISH SHOP Sales Statistics")
                 {
                     Image = "report";
-                    RunObject = Report "Inventory - Sales Statistics";
+                    //*** RunObject = Report "Inventory - Sales Statistics";
                 }
                 action("Posted Catch Reconcilation")
                 {
                     Image = "report";
-                    RunObject = Report "Catch Reconciliatn Posted";
+                    //*** RunObject = Report "Catch Reconciliatn Posted";
                 }
                 action("Detail Trail Balnce-5")
                 {
                     Image = "report";
-                    RunObject = Report Report53177;
+                    //*** RunObject = Report Report53177;
                 }
             }
             group(Resource)
@@ -808,7 +808,7 @@ page 50053 Reports
                 action("Resource List")
                 {
                     Image = "report";
-                    RunObject = Report "Resource - List";
+                    //*** RunObject = Report "Resource - List";
                 }
             }
             group(PayRolls)
@@ -817,47 +817,47 @@ page 50053 Reports
                 action("ASL Create New Payslips ")
                 {
                     Image = "report";
-                    RunObject = Report "ASL Create New payslips - New";
+                    //*** RunObject = Report "ASL Create New payslips - New";
                 }
                 action("ASL Monthly Payslip")
                 {
                     Image = "report";
-                    RunObject = Report "Monthly Payslip";
+                    //*** RunObject = Report "Monthly Payslip";
                 }
                 action("Personal Record List")
                 {
                     Image = "report";
-                    RunObject = Report "Personal Record List";
+                    //*** RunObject = Report "Personal Record List";
                 }
                 action("Payroll Report")
                 {
                     Image = "report";
-                    RunObject = Report "Payroll Report";
+                    //*** RunObject = Report "Payroll Report";
                 }
                 action("Online loan")
                 {
                     Image = "report";
-                    RunObject = Report "OUTSTANDING LOANS";
+                    //*** RunObject = Report "OUTSTANDING LOANS";
                 }
                 action("IOU Balance")
                 {
                     Image = "report";
-                    RunObject = Report "IOU Balance";
+                    //*** RunObject = Report "IOU Balance";
                 }
                 action("Outstanding Loans")
                 {
                     Image = "report";
-                    RunObject = Report "Local Sales Report1";
+                    //*** RunObject = Report "Local Sales Report1";
                 }
                 action("Employee-Bank Accts")
                 {
                     Image = "report";
-                    RunObject = Report "Employee-Bank Acct";
+                    //*** RunObject = Report "Employee-Bank Acct";
                 }
                 action("Payroll Rprt-WITH DELETED EMP")
                 {
                     Image = "report";
-                    RunObject = Report "Payroll Rprt- WITH DELETED EMP";
+                    //*** RunObject = Report "Payroll Rprt- WITH DELETED EMP";
                 }
             }
         }

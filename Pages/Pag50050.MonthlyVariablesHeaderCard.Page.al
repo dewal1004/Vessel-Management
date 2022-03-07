@@ -39,7 +39,7 @@ page 50050 "Monthly Variables Header Card."
                 field("Global Dimension 2 Code"; "Global Dimension 2 Code")
                 {
                     Editable = false;
-                    TableRelation = Table12;
+                    // TableRelation = Table12; Revisit
                 }
                 field(VariableAmount; VariableAmount)
                 {

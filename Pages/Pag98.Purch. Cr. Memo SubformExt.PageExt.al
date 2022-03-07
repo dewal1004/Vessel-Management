@@ -8,9 +8,9 @@ pageextension 50237 pageextension50237 extends "Purch. Cr. Memo Subform"
             {
                 Visible = false;
             }
-            field("Gen. Prod. Posting Group"; "Gen. Prod. Posting Group")
-            {
-            }
+            // field("Gen. Prod. Posting Group"; "Gen. Prod. Posting Group")
+            // {
+            // }
         }
     }
 }

@@ -169,31 +169,31 @@ pageextension 50303 pageextension50303 extends "Employee List"
             {
                 Caption = ' Monthly Payslip';
                 Image = "Report";
-                RunObject = Report "Monthly Payslip";
+                //*** RunObject = Report "Monthly Payslip";
             }
             action("Payroll Report - NSITF")
             {
                 Caption = 'Payroll Report - NSITF';
                 Image = "Report";
-                RunObject = Report "Payroll Report - NSITF";
+                //*** RunObject = Report "Payroll Report - NSITF";
             }
             action("Employee-Bank Acct")
             {
                 Caption = 'Employee-Bank Acct';
                 Image = "Report";
-                RunObject = Report "Employee-Bank Acct";
+                //*** RunObject = Report "Employee-Bank Acct";
             }
             action("Outstanding Loans")
             {
                 Caption = 'Outstanding Loans';
                 Image = "Report";
-                RunObject = Report "OUTSTANDING LOANS";
+                //*** RunObject = Report "OUTSTANDING LOANS";
             }
             action("Payroll Report")
             {
                 Caption = 'Payroll Report';
                 Image = "Report";
-                RunObject = Report "Payroll Report";
+                //*** RunObject = Report "Payroll Report";
             }
         }
     }
@@ -203,36 +203,36 @@ pageextension 50303 pageextension50303 extends "Employee List"
         StyleText: Text[20];
 
 
-        //Unsupported feature: Code Insertion on "OnAfterGetRecord".
+    //Unsupported feature: Code Insertion on "OnAfterGetRecord".
 
-        //trigger OnAfterGetRecord()
-        //begin
-        /*
-        //SETRANGE("No.");
-        StyleText:='';
-        if Status = Status ::Inactive then begin
-          StyleText := 'Unfavorable';
-        end else begin
-          StyleText := 'standard'
-        end;
+    //trigger OnAfterGetRecord()
+    //begin
+    /*
+    //SETRANGE("No.");
+    StyleText:='';
+    if Status = Status ::Inactive then begin
+      StyleText := 'Unfavorable';
+    end else begin
+      StyleText := 'standard'
+    end;
 
-        if Rec.Blocked = true then
-          StyleText:='Unfavorable'
-        */
-        //end;
+    if Rec.Blocked = true then
+      StyleText:='Unfavorable'
+    */
+    //end;
 
 
-        //Unsupported feature: Code Insertion on "OnInit".
+    //Unsupported feature: Code Insertion on "OnInit".
 
-        //trigger OnInit()
-        //Parameters and return type have not been exported.
-        //begin
-        /*
-        EDNO[2]:='4000';//Basic+Hous+Transp
-        EDNO[3]:='2600';//Housing
-        EDNO[4]:='2700';//Transport
-        */
-        //end;
+    //trigger OnInit()
+    //Parameters and return type have not been exported.
+    //begin
+    /*
+    EDNO[2]:='4000';//Basic+Hous+Transp
+    EDNO[3]:='2600';//Housing
+    EDNO[4]:='2700';//Transport
+    */
+    //end;
 
     local procedure AssistEdit(OldEmployee: Record Employee): Boolean
     begin

@@ -4,9 +4,9 @@ pageextension 50279 pageextension50279 extends "Item Availability by Location"
     {
         addafter(AmountType)
         {
-            field("Calendar.""Period Start"""; Calendar."Period Start")
-            {
-            }
+            // field("Calendar.""Period Start"""; Calendar."Period Start")
+            // {
+            // }
         }
     }
 }

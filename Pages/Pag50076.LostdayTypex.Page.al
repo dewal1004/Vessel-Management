@@ -37,7 +37,7 @@ page 50076 "Lost day Typex"
                 Ellipsis = true;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Page Page82;
+                // RunObject = Page Page82; Revisit
             }
         }
     }

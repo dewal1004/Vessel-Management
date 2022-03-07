@@ -49,19 +49,19 @@ page 50137 "Sales Manager 2"
             {
                 Caption = 'S&ales Statistics';
                 Image = "Report";
-                RunObject = Report "Sales Statistics";
+                //*** RunObject = Report "Sales Statistics";
             }
             action("Salesperson - Sales &Statistics")
             {
                 Caption = 'Salesperson - Sales &Statistics';
                 Image = "Report";
-                RunObject = Report "Salesperson - Sales Statistics";
+                //*** RunObject = Report "Salesperson - Sales Statistics";
             }
             action("Salesperson - &Commission")
             {
                 Caption = 'Salesperson - &Commission';
                 Image = "Report";
-                RunObject = Report "Salesperson - Commission";
+                //*** RunObject = Report "Salesperson - Commission";
             }
             separator(Action22)
             {
@@ -69,13 +69,13 @@ page 50137 "Sales Manager 2"
             action("New Report")
             {
                 Image = "Report";
-                RunObject = Report Statement;
+                //*** RunObject = Report Statement;
             }
             action("Campaign - &Details")
             {
                 Caption = 'Campaign - &Details';
                 Image = "Report";
-                RunObject = Report "Campaign - Details";
+                //*** RunObject = Report "Campaign - Details";
             }
         }
         area(embedding)
@@ -112,15 +112,15 @@ page 50137 "Sales Manager 2"
                 Caption = 'Open';
                 Image = Edit;
                 RunObject = Page "Sales Order List";
-                RunPageView = WHERE (Status = FILTER (Open));
+                RunPageView = WHERE(Status = FILTER(Open));
                 ShortCutKey = 'Return';
             }
             action("Dynamics CRM Sales Orders")
             {
                 Caption = 'Dynamics CRM Sales Orders';
                 RunObject = Page "CRM Sales Order List";
-                RunPageView = WHERE (StateCode = FILTER (Submitted),
-                                    LastBackofficeSubmit = FILTER (0D));
+                RunPageView = WHERE(StateCode = FILTER(Submitted),
+                                    LastBackofficeSubmit = FILTER(0D));
             }
             action("Sales Invoices")
             {
@@ -133,7 +133,7 @@ page 50137 "Sales Manager 2"
                 Caption = 'Open';
                 Image = Edit;
                 RunObject = Page "Sales Invoice List";
-                RunPageView = WHERE (Status = FILTER (Open));
+                RunPageView = WHERE(Status = FILTER(Open));
                 ShortCutKey = 'Return';
             }
             action(Items)

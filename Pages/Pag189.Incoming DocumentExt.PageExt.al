@@ -2,16 +2,16 @@ pageextension 50256 pageextension50256 extends "Incoming Document"
 {
     actions
     {
-        modify(CreateManually)
-        {
+        // modify(CreateManually)
+        // {
 
-            //Unsupported feature: Property Modification (Level) on "CreateManually(Action 285)".
+        //     //Unsupported feature: Property Modification (Level) on "CreateManually(Action 285)".
 
 
-            //Unsupported feature: Property Modification (Image) on "CreateManually(Action 285)".
+        //     //Unsupported feature: Property Modification (Image) on "CreateManually(Action 285)".
 
-            PromotedCategory = Category5;
-        }
+        //     // PromotedCategory = Category5;
+        // }
         modify(ReceiveFromOCR)
         {
             Enabled = "OCR Status" = "OCR Status"::Sent;

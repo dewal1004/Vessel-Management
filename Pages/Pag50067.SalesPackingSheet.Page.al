@@ -9,8 +9,8 @@ page 50067 "Sales Packing Sheet"
     MultipleNewLines = true;
     PageType = Card;
     SourceTable = "Sales Comment Line";
-    SourceTableView = SORTING ("Document Type", "No.", "Line No.")
-                      WHERE (Code = FILTER ('P'));
+    SourceTableView = SORTING("Document Type", "No.", "Line No.")
+                      WHERE(Code = FILTER('P'));
 
     layout
     {
@@ -51,7 +51,7 @@ page 50067 "Sales Packing Sheet"
                 {
                     Caption = 'Print';
                     Image = Print;
-                    RunObject = Report "Sales Packing List";
+                    //*** RunObject = Report "Sales Packing List";
                 }
             }
         }

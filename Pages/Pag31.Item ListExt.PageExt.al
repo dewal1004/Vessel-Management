@@ -1,67 +1,67 @@
 pageextension 50214 pageextension50214 extends "Item List"
 {
-    layout
-    {
-        modify("Production BOM No.")
-        {
-            Visible = false;
-        }
-        modify("Routing No.")
-        {
-            Visible = false;
-        }
-        addafter("No.")
-        {
-            field("No. 2"; "No. 2")
-            {
-                Visible = false;
-            }
-        }
-        addafter("Default Deferral Template Code")
-        {
-            field("Statistics Group"; "Statistics Group")
-            {
-            }
-            field(Reserve; Reserve)
-            {
-                Visible = false;
-            }
-            field("SF Cat"; "SF Cat")
-            {
-            }
-            field("Country/Region Purchased Code"; "Country/Region Purchased Code")
-            {
-                Visible = false;
-            }
-            field(Points; Points)
-            {
-                Visible = false;
-            }
-            field("Duty Rate%"; "Duty Rate%")
-            {
-                Visible = false;
-            }
-            field("Order Multiple"; "Order Multiple")
-            {
-                Visible = false;
-            }
-            field("CRM / STR"; "CRM / STR")
-            {
-            }
-            field("Reorder Point"; "Reorder Point")
-            {
-                Visible = false;
-            }
-            field("Reorder Quantity"; "Reorder Quantity")
-            {
-                Visible = false;
-            }
-            field(Class; xRec.Class)
-            {
-                Caption = 'Class';
-            }
-        }
-    }
+    // layout
+    // {
+    //     modify("Production BOM No.")
+    //     {
+    //         Visible = false;
+    //     }
+    //     modify("Routing No.")
+    //     {
+    //         Visible = false;
+    //     }
+    //     addafter("No.")
+    //     {
+    //         field("No. 2"; "No. 2")
+    //         {
+    //             Visible = false;
+    //         }
+    //     }
+    //     addafter("Default Deferral Template Code")
+    //     {
+    //         field("Statistics Group"; "Statistics Group")
+    //         {
+    //         }
+    //         field(Reserve; Reserve)
+    //         {
+    //             Visible = false;
+    //         }
+    //         field("SF Cat"; "SF Cat")
+    //         {
+    //         }
+    //         field("Country/Region Purchased Code"; "Country/Region Purchased Code")
+    //         {
+    //             Visible = false;
+    //         }
+    //         field(Points; Points)
+    //         {
+    //             Visible = false;
+    //         }
+    //         field("Duty Rate%"; "Duty Rate%")
+    //         {
+    //             Visible = false;
+    //         }
+    //         field("Order Multiple"; "Order Multiple")
+    //         {
+    //             Visible = false;
+    //         }
+    //         field("CRM / STR"; "CRM / STR")
+    //         {
+    //         }
+    //         field("Reorder Point"; "Reorder Point")
+    //         {
+    //             Visible = false;
+    //         }
+    //         field("Reorder Quantity"; "Reorder Quantity")
+    //         {
+    //             Visible = false;
+    //         }
+    //         field(Class; xRec.Class)
+    //         {
+    //             Caption = 'Class';
+    //         }
+    //     }
+    // }
     actions
     {
 
@@ -115,22 +115,22 @@ pageextension 50214 pageextension50214 extends "Item List"
 
         //Unsupported feature: Property Modification (Name) on ""Revaluation Journal"(Action 119)".
 
-        modify(SendApprovalRequest)
-        {
+        // modify(SendApprovalRequest)
+        // {
 
             //Unsupported feature: Property Modification (Level) on "SendApprovalRequest(Action 87)".
 
 
             //Unsupported feature: Property Modification (Name) on "SendApprovalRequest(Action 87)".
 
-            Caption = 'Revaluation Journal';
+            // Caption = 'Revaluation Journal';
 
             //Unsupported feature: Property Modification (Image) on "SendApprovalRequest(Action 87)".
 
 
             //Unsupported feature: Property Insertion (RunObject) on "SendApprovalRequest(Action 87)".
 
-        }
+        // }
         modify(CancelApprovalRequest)
         {
 
@@ -148,43 +148,43 @@ pageextension 50214 pageextension50214 extends "Item List"
         {
             Visible = false;
         }
-        modify(Resources)
-        {
+        // modify(Resources)
+        // {
 
-            //Unsupported feature: Property Modification (ActionType) on "Resources(Action 62)".
-
-
-            //Unsupported feature: Property Modification (Name) on "Resources(Action 62)".
-
-            Caption = 'Item Reclass. Journal';
-
-            //Unsupported feature: Property Modification (Image) on "Resources(Action 62)".
+        //     //Unsupported feature: Property Modification (ActionType) on "Resources(Action 62)".
 
 
-            //Unsupported feature: Property Insertion (RunObject) on "Resources(Action 62)".
+        //     //Unsupported feature: Property Modification (Name) on "Resources(Action 62)".
 
-            Promoted = false;
-        }
+        //     Caption = 'Item Reclass. Journal';
+
+        //     //Unsupported feature: Property Modification (Image) on "Resources(Action 62)".
+
+
+        //     //Unsupported feature: Property Insertion (RunObject) on "Resources(Action 62)".
+
+        //     Promoted = false;
+        // }
 
         //Unsupported feature: Property Modification (Level) on ""Resource &Skills"(Action 108)".
 
 
         //Unsupported feature: Property Modification (Level) on ""Skilled R&esources"(Action 109)".
 
-        modify("Request Approval")
-        {
-            Visible = false;
-        }
+        // modify("Request Approval")
+        // {
+        //     Visible = false;
+        // }
         modify(SendApprovalRequest)
         {
             Visible = false;
         }
-        moveafter(; Item)
+        moveafter("&Bin Contents"; Item)
         moveafter("Prices_Prices"; PricesDiscountsOverview)
         moveafter("Revaluation Journal"; Workflow)
         moveafter(ManageApprovalWorkflow; CopyItem)
         moveafter(CopyItem; "Item Reclassification Journal")
-        moveafter(ActionContainer1900000004; "F&unctions")
+        // moveafter(ActionContainer1900000004; "F&unctions")
         moveafter("Prices_LineDiscounts"; "Requisition Worksheet")
         moveafter("Item Journal"; Resources)
     }

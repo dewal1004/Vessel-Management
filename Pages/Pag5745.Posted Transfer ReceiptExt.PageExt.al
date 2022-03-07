@@ -8,12 +8,12 @@ pageextension 50328 pageextension50328 extends "Posted Transfer Receipt"
         }
         addafter("Transfer-to Code")
         {
-            field("Direct Transfer"; "Direct Transfer")
-            {
-                ApplicationArea = Location;
-                Editable = false;
-                ToolTip = 'Specifies that the transfer does not use an in-transit location.';
-            }
+            // field("Direct Transfer"; "Direct Transfer")
+            // {
+            //     ApplicationArea = Location;
+            //     Editable = false;
+            //     ToolTip = 'Specifies that the transfer does not use an in-transit location.';
+            // }
         }
     }
     actions

@@ -12,6 +12,15 @@ Compile-NAVApplicationObject
 
 # Task 3: Export the application objects to the new TXT syntax
 # 3.1 Make target path if not existing:  C:\export2al\bc14tablesonly
+Check if test library is imported by using this filter on objects 130000..130999&<130400&>130416
+if test library is not imported  then use the ff Export-NAVApplicationObject
+  Export-NAVApplicationObject -DatabaseServer NAV365TEST\ASLHO2016 -DatabaseName "Atlantic ASL BDG" -ExportToNewSyntax -Path "C:\export2al\bc14tablesonly\B\exportedbc14-tables.txt" -Filter 'Type=Table;Id=1..1999999999'
+else {
+    # use the following
+}
+
+
+
 mkdir C:\export2alBDG\bc14tablesonly
 # 3.2 Export tables e.g. 
 # Export-NAVApplicationObject -DatabaseServer .\BCDEMO -DatabaseName "Demo Database BC (14-0)" -ExportToNewSyntax -Path "C:\export2al\bc14tablesonly\exportedbc14-tables.txt" -Filter 'Type=Table;Id=1..1999999999'

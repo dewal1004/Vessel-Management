@@ -67,14 +67,14 @@ pageextension 50218 pageextension50218 extends "Sales Order"
         }
         addafter("Sell-to Contact")
         {
-            field("Shipment Month"; "Shipment Month")
+            field("Shipment Month"; rec."Shipment Month")
             {
                 QuickEntry = false;
             }
         }
         addafter("Area")
         {
-            field("Posting No. Series"; "Posting No. Series")
+            field("Posting No. Series"; rec."Posting No. Series")
             {
             }
         }

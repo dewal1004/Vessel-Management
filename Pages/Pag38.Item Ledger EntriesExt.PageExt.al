@@ -8,27 +8,27 @@ pageextension 50215 pageextension50215 extends "Item Ledger Entries"
         }
         addafter("Remaining Quantity")
         {
-            field("Applied Negative"; "Applied Negative")
+            field("Applied Negative"; rec."Applied Negative")
             {
             }
-            field("Applied Positive"; "Applied Positive")
+            field("Applied Positive"; rec."Applied Positive")
             {
             }
         }
         addafter("Job Task No.")
         {
-            field("Source Code"; "Source Code")
+            field("Source Code"; rec."Source Code")
             {
             }
-            field("Source No."; "Source No.")
-            {
-                Visible = false;
-            }
-            field("External Document No."; "External Document No.")
+            field("Source No."; rec."Source No.")
             {
                 Visible = false;
             }
-            field("Source Type"; "Source Type")
+            field("External Document No."; rec."External Document No.")
+            {
+                Visible = false;
+            }
+            field("Source Type"; rec."Source Type")
             {
             }
         }

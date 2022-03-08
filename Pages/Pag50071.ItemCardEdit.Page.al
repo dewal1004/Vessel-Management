@@ -7,261 +7,261 @@ page 50071 "Item Card Edit"
 
     layout
     {
-        area(content)
-        {
-            group(General)
-            {
-                Caption = 'General';
-                field("No."; "No.")
-                {
-                }
-                field(Description; Description)
-                {
-                }
-                field("Base Unit of Measure"; "Base Unit of Measure")
-                {
-                }
-                field(Points; Points)
-                {
-                }
-                field("Shelf No."; "Shelf No.")
-                {
-                }
-                field("Automatic Ext. Texts"; "Automatic Ext. Texts")
-                {
-                }
-                field("Stockkeeping Unit Exists"; "Stockkeeping Unit Exists")
-                {
-                    Editable = false;
-                    Visible = false;
-                }
-                field("Created From Nonstock Item"; "Created From Nonstock Item")
-                {
-                    Editable = false;
-                    Visible = false;
-                }
-                field("Order Tracking Policy"; "Order Tracking Policy")
-                {
-                    Editable = false;
-                    Visible = false;
-                }
-                field("Search Description"; "Search Description")
-                {
-                }
-                field("CRM / STR"; "CRM / STR")
-                {
-                }
-                field("Qty. on Purch. Order"; "Qty. on Purch. Order")
-                {
-                }
-                field("Qty. on Sales Order"; "Qty. on Sales Order")
-                {
-                }
-                field("Last Date Modified"; "Last Date Modified")
-                {
-                }
-                field(Blocked; Blocked)
-                {
-                }
-                field("Qty. on Prod. Order"; "Qty. on Prod. Order")
-                {
-                    Editable = false;
-                    Visible = false;
-                }
-                field("Qty. on Component Lines"; "Qty. on Component Lines")
-                {
-                    Editable = false;
-                    Visible = false;
-                }
-            }
-            group(Invoicing)
-            {
-                Caption = 'Invoicing';
-                field("Costing Method"; "Costing Method")
-                {
-                }
-                field(AverageCostLCY; AverageCostLCY)
-                {
-                    AutoFormatType = 2;
-                    Caption = 'Average Cost (LCY)';
-                    Editable = false;
-                }
-                field("Indirect Cost %"; "Indirect Cost %")
-                {
-                }
-                field("Unit Cost"; "Unit Cost")
-                {
-                    DecimalPlaces = 2 : 2;
-                }
-                field("Last Direct Cost"; "Last Direct Cost")
-                {
-                }
-                field("Unit Price"; "Unit Price")
-                {
-                }
-                field("Last Imported Cost"; "Last Imported Cost")
-                {
-                    Visible = false;
-                }
-                field("Last Local Cost"; "Last Local Cost")
-                {
-                    Visible = false;
-                }
-                field("Last Purchase Cost"; "Last Purchase Cost")
-                {
-                    Visible = false;
-                }
-                field("Standard Cost"; "Standard Cost")
-                {
-                    Visible = false;
-                }
-                field("Gen. Prod. Posting Group"; "Gen. Prod. Posting Group")
-                {
-                }
-                field("VAT Prod. Posting Group"; "VAT Prod. Posting Group")
-                {
-                }
-                field("Inventory Posting Group"; "Inventory Posting Group")
-                {
-                }
-                field("Net Invoiced Qty."; "Net Invoiced Qty.")
-                {
-                }
-                field("Allow Invoice Disc."; "Allow Invoice Disc.")
-                {
-                    Visible = false;
-                }
-                field("Item Disc. Group"; "Item Disc. Group")
-                {
-                }
-                field("Sales Unit of Measure"; "Sales Unit of Measure")
-                {
-                }
-                field("Price/Profit Calculation"; "Price/Profit Calculation")
-                {
-                }
-                field("Profit %"; "Profit %")
-                {
-                }
-            }
-            group(Ordering)
-            {
-                Caption = 'Ordering';
-                field("Replenishment System"; "Replenishment System")
-                {
-                    OptionCaption = 'Purchase,Prod. Order';
-                }
-                field("Lead Time Calculation"; "Lead Time Calculation")
-                {
-                    Enabled = "Lead Time CalculationEnable";
-                }
-                field("Vendor No."; "Vendor No.")
-                {
-                    Enabled = "Vendor No.Enable";
-                }
-                field("Vendor Item No."; "Vendor Item No.")
-                {
-                    Enabled = "Vendor Item No.Enable";
-                }
-                field(Reserve; Reserve)
-                {
-                }
-                field("Item Category Code"; "Item Category Code")
-                {
-                }
-                field("Country/Region Purchased Code"; "Country/Region Purchased Code")
-                {
-                }
-                field("Product Group Code"; "Product Group Code")
-                {
-                    Visible = false;
-                }
-                field("Manufacturer Code"; "Manufacturer Code")
-                {
-                    Visible = false;
-                }
-                field("Monthly Consumption"; "Monthly Consumption")
-                {
-                }
-                field("Reorder Point"; "Reorder Point")
-                {
-                }
-                field("Reorder Quantity"; "Reorder Quantity")
-                {
-                }
-                field("Purch. Unit of Measure"; "Purch. Unit of Measure")
-                {
-                }
-                field("Minimum Order Quantity"; "Minimum Order Quantity")
-                {
-                    Visible = false;
-                }
-                field("Maximum Order Quantity"; "Maximum Order Quantity")
-                {
-                    Visible = true;
-                }
-                field("Order Multiple"; "Order Multiple")
-                {
-                }
-                field("Maximum Inventory"; "Maximum Inventory")
-                {
-                    Visible = false;
-                }
-                field("Lot Size"; "Lot Size")
-                {
-                    Visible = false;
-                }
-                field("Safety Stock Quantity"; "Safety Stock Quantity")
-                {
-                    Visible = false;
-                }
-                field("Safety Lead Time"; "Safety Lead Time")
-                {
-                    Visible = false;
-                }
-            }
-            group("Foreign Trade")
-            {
-                Caption = 'Foreign Trade';
-                field("Duty Rate%"; "Duty Rate%")
-                {
-                }
-            }
-            group(Reporting)
-            {
-                Caption = 'Reporting';
-                field(AverageCostACY; AverageCostACY)
-                {
-                    AutoFormatType = 2;
-                    Caption = 'Average Cost (ACY)';
-                    Editable = false;
-                }
-                field(Inventory; Inventory)
-                {
-                }
-                field("VReceived Qty"; "VReceived Qty")
-                {
-                    DrillDownPageID = 50000;
-                    Visible = false;
-                }
-                field("VSupplimentary Qty"; "VSupplimentary Qty")
-                {
-                    DrillDownPageID = 50000;
-                    Visible = false;
-                }
-                field("VOrdered Qty"; "VOrdered Qty")
-                {
-                    DrillDownPageID = 50000;
-                    Visible = false;
-                }
-                field("Statistics Group"; "Statistics Group")
-                {
-                }
-                field("Commission Group"; "Commission Group")
-                {
-                }
-            }
-        }
+        // area(content)
+        // {
+        //     group(General)
+        //     {
+        //         Caption = 'General';
+        //         field("No."; "No.")
+        //         {
+        //         }
+        //         field(Description; Description)
+        //         {
+        //         }
+        //         field("Base Unit of Measure"; "Base Unit of Measure")
+        //         {
+        //         }
+        //         field(Points; Points)
+        //         {
+        //         }
+        //         field("Shelf No."; "Shelf No.")
+        //         {
+        //         }
+        //         field("Automatic Ext. Texts"; "Automatic Ext. Texts")
+        //         {
+        //         }
+        //         field("Stockkeeping Unit Exists"; "Stockkeeping Unit Exists")
+        //         {
+        //             Editable = false;
+        //             Visible = false;
+        //         }
+        //         field("Created From Nonstock Item"; "Created From Nonstock Item")
+        //         {
+        //             Editable = false;
+        //             Visible = false;
+        //         }
+        //         field("Order Tracking Policy"; "Order Tracking Policy")
+        //         {
+        //             Editable = false;
+        //             Visible = false;
+        //         }
+        //         field("Search Description"; "Search Description")
+        //         {
+        //         }
+        //         field("CRM / STR"; "CRM / STR")
+        //         {
+        //         }
+        //         field("Qty. on Purch. Order"; "Qty. on Purch. Order")
+        //         {
+        //         }
+        //         field("Qty. on Sales Order"; "Qty. on Sales Order")
+        //         {
+        //         }
+        //         field("Last Date Modified"; "Last Date Modified")
+        //         {
+        //         }
+        //         field(Blocked; Blocked)
+        //         {
+        //         }
+        //         field("Qty. on Prod. Order"; "Qty. on Prod. Order")
+        //         {
+        //             Editable = false;
+        //             Visible = false;
+        //         }
+        //         field("Qty. on Component Lines"; "Qty. on Component Lines")
+        //         {
+        //             Editable = false;
+        //             Visible = false;
+        //         }
+        //     }
+        //     group(Invoicing)
+        //     {
+        //         Caption = 'Invoicing';
+        //         field("Costing Method"; "Costing Method")
+        //         {
+        //         }
+        //         field(AverageCostLCY; AverageCostLCY)
+        //         {
+        //             AutoFormatType = 2;
+        //             Caption = 'Average Cost (LCY)';
+        //             Editable = false;
+        //         }
+        //         field("Indirect Cost %"; "Indirect Cost %")
+        //         {
+        //         }
+        //         field("Unit Cost"; "Unit Cost")
+        //         {
+        //             DecimalPlaces = 2 : 2;
+        //         }
+        //         field("Last Direct Cost"; "Last Direct Cost")
+        //         {
+        //         }
+        //         field("Unit Price"; "Unit Price")
+        //         {
+        //         }
+        //         field("Last Imported Cost"; "Last Imported Cost")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Last Local Cost"; "Last Local Cost")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Last Purchase Cost"; "Last Purchase Cost")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Standard Cost"; "Standard Cost")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Gen. Prod. Posting Group"; "Gen. Prod. Posting Group")
+        //         {
+        //         }
+        //         field("VAT Prod. Posting Group"; "VAT Prod. Posting Group")
+        //         {
+        //         }
+        //         field("Inventory Posting Group"; "Inventory Posting Group")
+        //         {
+        //         }
+        //         field("Net Invoiced Qty."; "Net Invoiced Qty.")
+        //         {
+        //         }
+        //         field("Allow Invoice Disc."; "Allow Invoice Disc.")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Item Disc. Group"; "Item Disc. Group")
+        //         {
+        //         }
+        //         field("Sales Unit of Measure"; "Sales Unit of Measure")
+        //         {
+        //         }
+        //         field("Price/Profit Calculation"; "Price/Profit Calculation")
+        //         {
+        //         }
+        //         field("Profit %"; "Profit %")
+        //         {
+        //         }
+        //     }
+        //     group(Ordering)
+        //     {
+        //         Caption = 'Ordering';
+        //         field("Replenishment System"; "Replenishment System")
+        //         {
+        //             OptionCaption = 'Purchase,Prod. Order';
+        //         }
+        //         field("Lead Time Calculation"; "Lead Time Calculation")
+        //         {
+        //             Enabled = "Lead Time CalculationEnable";
+        //         }
+        //         field("Vendor No."; "Vendor No.")
+        //         {
+        //             Enabled = "Vendor No.Enable";
+        //         }
+        //         field("Vendor Item No."; "Vendor Item No.")
+        //         {
+        //             Enabled = "Vendor Item No.Enable";
+        //         }
+        //         field(Reserve; Reserve)
+        //         {
+        //         }
+        //         field("Item Category Code"; "Item Category Code")
+        //         {
+        //         }
+        //         field("Country/Region Purchased Code"; "Country/Region Purchased Code")
+        //         {
+        //         }
+        //         field("Product Group Code"; "Product Group Code")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Manufacturer Code"; "Manufacturer Code")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Monthly Consumption"; "Monthly Consumption")
+        //         {
+        //         }
+        //         field("Reorder Point"; "Reorder Point")
+        //         {
+        //         }
+        //         field("Reorder Quantity"; "Reorder Quantity")
+        //         {
+        //         }
+        //         field("Purch. Unit of Measure"; "Purch. Unit of Measure")
+        //         {
+        //         }
+        //         field("Minimum Order Quantity"; "Minimum Order Quantity")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Maximum Order Quantity"; "Maximum Order Quantity")
+        //         {
+        //             Visible = true;
+        //         }
+        //         field("Order Multiple"; "Order Multiple")
+        //         {
+        //         }
+        //         field("Maximum Inventory"; "Maximum Inventory")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Lot Size"; "Lot Size")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Safety Stock Quantity"; "Safety Stock Quantity")
+        //         {
+        //             Visible = false;
+        //         }
+        //         field("Safety Lead Time"; "Safety Lead Time")
+        //         {
+        //             Visible = false;
+        //         }
+        //     }
+        //     group("Foreign Trade")
+        //     {
+        //         Caption = 'Foreign Trade';
+        //         field("Duty Rate%"; "Duty Rate%")
+        //         {
+        //         }
+        //     }
+        //     group(Reporting)
+        //     {
+        //         Caption = 'Reporting';
+        //         field(AverageCostACY; AverageCostACY)
+        //         {
+        //             AutoFormatType = 2;
+        //             Caption = 'Average Cost (ACY)';
+        //             Editable = false;
+        //         }
+        //         field(Inventory; Inventory)
+        //         {
+        //         }
+        //         field("VReceived Qty"; "VReceived Qty")
+        //         {
+        //             DrillDownPageID = 50000;
+        //             Visible = false;
+        //         }
+        //         field("VSupplimentary Qty"; "VSupplimentary Qty")
+        //         {
+        //             DrillDownPageID = 50000;
+        //             Visible = false;
+        //         }
+        //         field("VOrdered Qty"; "VOrdered Qty")
+        //         {
+        //             DrillDownPageID = 50000;
+        //             Visible = false;
+        //         }
+        //         field("Statistics Group"; "Statistics Group")
+        //         {
+        //         }
+        //         field("Commission Group"; "Commission Group")
+        //         {
+        //         }
+        //     }
+        // }
     }
 
     actions
@@ -588,7 +588,7 @@ page 50071 "Item Card Edit"
                 {
                     Caption = 'Quantity Discounts';
                     RunObject = Page "Vendor Lookup";
-                    RunPageLink = "No." = FIELD (Field13);
+                    // RunPageLink = "No." = FIELD (Field13); Revisit
                 }
                 action(Prices)
                 {
@@ -608,32 +608,32 @@ page 50071 "Item Card Edit"
                     RunPageView = SORTING ("Document Type", Type, "No.");
                 }
             }
-            group("&Purchases")
-            {
-                Caption = '&Purchases';
-                action("Ven&dors")
-                {
-                    Caption = 'Ven&dors';
-                    RunObject = Page "Item Vendor Catalog";
-                    RunPageLink = "Item No." = FIELD ("No.");
-                }
-                action(Action86)
-                {
-                    Caption = 'Quantity Discounts';
-                    RunObject = Page "G/L Posting Preview";
-                    RunPageLink = "Table ID" = FIELD ("No."),
-                                  "No. of Records" = FIELD ("Vendor No.");
-                }
-                action(Action87)
-                {
-                    Caption = 'Orders';
-                    Image = Document;
-                    RunObject = Page "Purchase Orders";
-                    RunPageLink = Type = CONST (Item),
-                                  "No." = FIELD ("No.");
-                    RunPageView = SORTING ("Document Type", Type, "No.");
-                }
-            }
+            // group("&Purchases")
+            // {
+            //     Caption = '&Purchases';
+            //     action("Ven&dors")
+            //     {
+            //         Caption = 'Ven&dors';
+            //         RunObject = Page "Item Vendor Catalog";
+            //         RunPageLink = "Item No." = FIELD ("No.");
+            //     }
+            //     action(Action86)
+            //     {
+            //         Caption = 'Quantity Discounts';
+            //         RunObject = Page "G/L Posting Preview";
+            //         // RunPageLink = "Table ID" = FIELD ("No."), Revisit
+            //                       "No. of Records" = FIELD ("Vendor No.");
+            //     }
+            //     action(Action87)
+            //     {
+            //         Caption = 'Orders';
+            //         Image = Document;
+            //         RunObject = Page "Purchase Orders";
+            //         RunPageLink = Type = CONST (Item),
+            //                       "No." = FIELD ("No.");
+            //         RunPageView = SORTING ("Document Type", Type, "No.");
+            //     }
+            // }
         }
         area(processing)
         {

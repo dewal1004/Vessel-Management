@@ -12,7 +12,7 @@ page 50005 "Payslip Header Card."
                 Caption = 'General';
                 field("Payroll Period"; "Payroll Period")
                 {
-                    TableRelation = Table65004;
+                    // TableRelation = Table65004;
                 }
                 field("Closed?"; "Closed?")
                 {
@@ -20,7 +20,7 @@ page 50005 "Payslip Header Card."
                 field("Employee No"; "Employee No")
                 {
                     LookupPageID = "Employee List";
-                    TableRelation = Table65005;
+                    // TableRelation = Table65005;
                 }
                 field("Employee Name"; "Employee Name")
                 {
@@ -42,7 +42,7 @@ page 50005 "Payslip Header Card."
                 field("Global Dimension 2 Code"; "Global Dimension 2 Code")
                 {
                     Editable = false;
-                    TableRelation = Table12;
+                    // TableRelation = Table12;
                 }
                 field(Edvalue; Edvalue)
                 {
@@ -50,8 +50,8 @@ page 50005 "Payslip Header Card."
             }
             part(Control1000000000; "Payslip Lines.")
             {
-                SubPageLink = "Payroll Period" = FIELD ("Payroll Period"),
-                              "Employee No" = FIELD ("Employee No");
+                SubPageLink = "Payroll Period" = FIELD("Payroll Period"),
+                              "Employee No" = FIELD("Employee No");
             }
         }
     }
@@ -68,7 +68,7 @@ page 50005 "Payslip Header Card."
                     Caption = 'Print Payslip';
                     Ellipsis = true;
                     Image = "Report";
-                    RunObject = Report "Monthly Payslip";
+                    // //*** RunObject = Report "Monthly Payslip"; revisit
                     ShortCutKey = 'Shift+F7';
                 }
             }
@@ -78,7 +78,7 @@ page 50005 "Payslip Header Card."
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Report "ASL Create New payslips - New";
+                // //*** RunObject = Report "ASL Create New payslips - New"; //Revisit
             }
         }
     }

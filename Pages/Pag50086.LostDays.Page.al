@@ -73,7 +73,7 @@ page 50086 "Lost Days"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report "Voyage Narration";
+                //*** RunObject = Report "Voyage Narration";
             }
             action("Consolidated Narration")
             {
@@ -81,7 +81,7 @@ page 50086 "Lost Days"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report "Consolidated Narration_";
+                //*** RunObject = Report "Consolidated Narration_";
             }
         }
     }

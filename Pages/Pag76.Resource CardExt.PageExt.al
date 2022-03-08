@@ -38,15 +38,15 @@ pageextension 50231 pageextension50231 extends "Resource Card"
 
         //Unsupported feature: Property Modification (ImplicitType) on ""Social Security No."(Control 12)".
 
-        modify("Employment Date")
-        {
-            Visible = false;
-        }
+        // modify("Employment Date")
+        // {
+        //     Visible = false;
+        // }
         addafter("Contract Class")
         {
-            field("Employment Date"; "Employment Date")
-            {
-            }
+            // field("Employment Date"; "Employment Date")
+            // {
+            // }
             field(Posted; Posted)
             {
             }

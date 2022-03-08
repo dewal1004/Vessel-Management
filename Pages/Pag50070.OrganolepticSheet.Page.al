@@ -134,7 +134,7 @@ page 50070 "Organoleptic Sheet"
                 {
                     Caption = 'Organoleptic Report';
                     Image = "Report";
-                    RunObject = Report Organoleptic0809;
+                    //*** RunObject = Report Organoleptic0809;
                 }
             }
         }

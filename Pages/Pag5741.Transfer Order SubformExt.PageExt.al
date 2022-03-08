@@ -25,12 +25,12 @@ pageextension 50326 pageextension50326 extends "Transfer Order Subform"
             {
             }
         }
-        addafter("Item No.")
-        {
-            field("Item No."; "Item No.")
-            {
-            }
-        }
+        // addafter("Item No.")
+        // {
+        //     field("Item No."; "Item No.")
+        //     {
+        //     }
+        // }
         addafter("Unit of Measure")
         {
             field("Qty. Reqd."; "Qty. Reqd.")
@@ -73,7 +73,7 @@ pageextension 50326 pageextension50326 extends "Transfer Order Subform"
             {
             }
         }
-        moveafter("Last Issued Date"; Description)
+        // moveafter("Last Issued Date"; Description)
         moveafter(Description; "Unit of Measure")
         moveafter("Unit of Measure"; Quantity)
     }

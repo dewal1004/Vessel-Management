@@ -55,7 +55,7 @@ page 50004 "E/D Survey."
                 }
                 field("Max. Amount"; "Max. Amount")
                 {
-                    MaxValue = 99,990;
+                    MaxValue = 99990;
                     MinValue = 0;
                     NotBlank = true;
                 }

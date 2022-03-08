@@ -29,7 +29,7 @@ page 50015 "Employee Group Header."
             }
             part(Control12; "Employee Group Lines.")
             {
-                SubPageLink = "Employee Group" = FIELD (Code);
+                SubPageLink = "Employee Group" = FIELD(Code);
             }
         }
     }
@@ -45,7 +45,7 @@ page 50015 "Employee Group Header."
                 {
                     Caption = 'Copy Lines from another group';
                     Ellipsis = false;
-                    RunObject = Report "PRoll; Create next Payroll";
+                    // //*** RunObject = Report "PRoll; Create next Payroll"; Revisit
                 }
             }
         }

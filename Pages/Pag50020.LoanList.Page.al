@@ -59,7 +59,7 @@ page 50020 "Loan List"
                 {
                     Caption = 'Outstanding Loan';
                     Image = "Report";
-                    RunObject = Report "OUTSTANDING LOANS";
+                    // //*** RunObject = Report "OUTSTANDING LOANS";Revisit
                 }
             }
         }

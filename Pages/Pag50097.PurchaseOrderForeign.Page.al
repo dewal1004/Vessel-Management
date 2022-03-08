@@ -12,100 +12,100 @@ page 50097 "Purchase Order Foreign"
     {
         area(content)
         {
-            group(General)
-            {
-                Caption = 'General';
-                field("No."; "No.")
-                {
-                    Importance = Promoted;
-                    Visible = true;
-                }
-                field("Buy-from Vendor No."; "Buy-from Vendor No.")
-                {
-                    Importance = Promoted;
-                    ShowMandatory = true;
-                }
-                field("Buy-from Contact No."; "Buy-from Contact No.")
-                {
-                }
-                field("Buy-from Vendor Name"; "Buy-from Vendor Name")
-                {
-                }
-                field("Buy-from Address"; "Buy-from Address")
-                {
-                    Importance = Additional;
-                }
-                field("Buy-from Address 2"; "Buy-from Address 2")
-                {
-                    Importance = Additional;
-                }
-                field("Buy-from Post Code"; "Buy-from Post Code")
-                {
-                    Importance = Additional;
-                }
-                field("Buy-from City"; "Buy-from City")
-                {
-                }
-                field("Buy-from Contact"; "Buy-from Contact")
-                {
-                    Importance = Additional;
-                }
-                field("No. of Archived Versions"; "No. of Archived Versions")
-                {
-                    Importance = Additional;
-                }
-                field("Posting Date"; "Posting Date")
-                {
-                }
-                field("Order Date"; "Order Date")
-                {
-                    Importance = Promoted;
-                }
-                field("Document Date"; "Document Date")
-                {
-                }
-                field("Quote No."; "Quote No.")
-                {
-                    Importance = Additional;
-                }
-                field("Vendor Order No."; "Vendor Order No.")
-                {
-                }
-                field("Vendor Shipment No."; "Vendor Shipment No.")
-                {
-                }
-                field("Vendor Invoice No."; "Vendor Invoice No.")
-                {
-                    ShowMandatory = VendorInvoiceNoMandatory;
-                }
-                field("Order Address Code"; "Order Address Code")
-                {
-                    Importance = Additional;
-                }
-                field(Status; Status)
-                {
-                    Importance = Promoted;
-                }
-                field("Purchaser Code"; "Purchaser Code")
-                {
-                    Importance = Additional;
-                }
-                field("Responsibility Center"; "Responsibility Center")
-                {
-                    Importance = Additional;
-                }
-                field("Assigned User ID"; "Assigned User ID")
-                {
-                    Importance = Additional;
-                }
-                field("Job Queue Status"; "Job Queue Status")
-                {
-                    Importance = Additional;
-                }
-                field("Order Type"; "Order Type")
-                {
-                }
-            }
+            // group(General)
+            // {
+            //     Caption = 'General';
+            //     field("No."; "No.")
+            //     {
+            //         Importance = Promoted;
+            //         Visible = true;
+            //     }
+            //     field("Buy-from Vendor No."; "Buy-from Vendor No.")
+            //     {
+            //         Importance = Promoted;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Buy-from Contact No."; "Buy-from Contact No.")
+            //     {
+            //     }
+            //     field("Buy-from Vendor Name"; "Buy-from Vendor Name")
+            //     {
+            //     }
+            //     field("Buy-from Address"; "Buy-from Address")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Buy-from Address 2"; "Buy-from Address 2")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Buy-from Post Code"; "Buy-from Post Code")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Buy-from City"; "Buy-from City")
+            //     {
+            //     }
+            //     field("Buy-from Contact"; "Buy-from Contact")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("No. of Archived Versions"; "No. of Archived Versions")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Posting Date"; "Posting Date")
+            //     {
+            //     }
+            //     field("Order Date"; "Order Date")
+            //     {
+            //         Importance = Promoted;
+            //     }
+            //     field("Document Date"; "Document Date")
+            //     {
+            //     }
+            //     field("Quote No."; "Quote No.")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Vendor Order No."; "Vendor Order No.")
+            //     {
+            //     }
+            //     field("Vendor Shipment No."; "Vendor Shipment No.")
+            //     {
+            //     }
+            //     field("Vendor Invoice No."; "Vendor Invoice No.")
+            //     {
+            //         ShowMandatory = VendorInvoiceNoMandatory;
+            //     }
+            //     field("Order Address Code"; "Order Address Code")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field(Status; Status)
+            //     {
+            //         Importance = Promoted;
+            //     }
+            //     field("Purchaser Code"; "Purchaser Code")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Responsibility Center"; "Responsibility Center")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Assigned User ID"; "Assigned User ID")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Job Queue Status"; "Job Queue Status")
+            //     {
+            //         Importance = Additional;
+            //     }
+            //     field("Order Type"; "Order Type")
+            //     {
+            //     }
+            // }
             part(PurchLines; "Purchase Order Subform Foreign")
             {
                 SubPageLink = "Document No." = FIELD ("No.");
@@ -360,76 +360,76 @@ page 50097 "Purchase Order Foreign"
                 }
             }
         }
-        area(factboxes)
-        {
-            part(Control23; "Pending Approval FactBox")
-            {
-                SubPageLink = "Table ID" = CONST (38),
-                              "Document Type" = FIELD ("Document Type"),
-                              "Document No." = FIELD ("No.");
-                Visible = OpenApprovalEntriesExistForCurrUser;
-            }
-            part(Control1903326807; "Item Replenishment FactBox")
-            {
-                Provider = PurchLines;
-                SubPageLink = "No." = FIELD ("No.");
-                Visible = false;
-            }
-            part(Control1906354007; "Approval FactBox")
-            {
-                SubPageLink = "Table ID" = CONST (38),
-                              "Document Type" = FIELD ("Document Type"),
-                              "Document No." = FIELD ("No.");
-                Visible = false;
-            }
-            part(Control1901138007; "Vendor Details FactBox")
-            {
-                SubPageLink = "No." = FIELD ("Buy-from Vendor No.");
-                Visible = false;
-            }
-            part(Control1904651607; "Vendor Statistics FactBox")
-            {
-                SubPageLink = "No." = FIELD ("Pay-to Vendor No.");
-                Visible = true;
-            }
-            part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
-            {
-                ShowFilter = false;
-                Visible = false;
-            }
-            part(Control1903435607; "Vendor Hist. Buy-from FactBox")
-            {
-                SubPageLink = "No." = FIELD ("Buy-from Vendor No.");
-                Visible = true;
-            }
-            part(Control1906949207; "Vendor Hist. Pay-to FactBox")
-            {
-                SubPageLink = "No." = FIELD ("Pay-to Vendor No.");
-                Visible = false;
-            }
-            part(Control3; "Purchase Line FactBox")
-            {
-                Provider = PurchLines;
-                SubPageLink = "Document Type" = FIELD ("Document Type"),
-                              "Document No." = FIELD ("Document No."),
-                              "Line No." = FIELD ("Line No.");
-            }
-            part(WorkflowStatus; "Workflow Status FactBox")
-            {
-                Editable = false;
-                Enabled = false;
-                ShowFilter = false;
-                Visible = ShowWorkflowStatus;
-            }
-            systempart(Control1900383207; Links)
-            {
-                Visible = false;
-            }
-            systempart(Control1905767507; Notes)
-            {
-                Visible = true;
-            }
-        }
+        // area(factboxes)
+        // {
+        //     // part(Control23; "Pending Approval FactBox")
+        //     // {
+        //     //     SubPageLink = "Table ID" = CONST (38),
+        //     //                   "Document Type" = FIELD ("Document Type"),
+        //     //                   "Document No." = FIELD ("No.");
+        //     //     Visible = OpenApprovalEntriesExistForCurrUser;
+        //     // }
+        //     part(Control1903326807; "Item Replenishment FactBox")
+        //     {
+        //         Provider = PurchLines;
+        //         SubPageLink = "No." = FIELD ("No.");
+        //         Visible = false;
+        //     }
+        //     part(Control1906354007; "Approval FactBox")
+        //     {
+        //         SubPageLink = "Table ID" = CONST (38),
+        //                       "Document Type" = FIELD ("Document Type"),
+        //                       "Document No." = FIELD ("No.");
+        //         Visible = false;
+        //     }
+        //     part(Control1901138007; "Vendor Details FactBox")
+        //     {
+        //         SubPageLink = "No." = FIELD ("Buy-from Vendor No.");
+        //         Visible = false;
+        //     }
+        //     part(Control1904651607; "Vendor Statistics FactBox")
+        //     {
+        //         SubPageLink = "No." = FIELD ("Pay-to Vendor No.");
+        //         Visible = true;
+        //     }
+        //     part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
+        //     {
+        //         ShowFilter = false;
+        //         Visible = false;
+        //     }
+        //     part(Control1903435607; "Vendor Hist. Buy-from FactBox")
+        //     {
+        //         SubPageLink = "No." = FIELD ("Buy-from Vendor No.");
+        //         Visible = true;
+        //     }
+        //     part(Control1906949207; "Vendor Hist. Pay-to FactBox")
+        //     {
+        //         SubPageLink = "No." = FIELD ("Pay-to Vendor No.");
+        //         Visible = false;
+        //     }
+        //     part(Control3; "Purchase Line FactBox")
+        //     {
+        //         Provider = PurchLines;
+        //         SubPageLink = "Document Type" = FIELD ("Document Type"),
+        //                       "Document No." = FIELD ("Document No."),
+        //                       "Line No." = FIELD ("Line No.");
+        //     }
+        //     part(WorkflowStatus; "Workflow Status FactBox")
+        //     {
+        //         Editable = false;
+        //         Enabled = false;
+        //         ShowFilter = false;
+        //         Visible = ShowWorkflowStatus;
+        //     }
+        //     systempart(Control1900383207; Links)
+        //     {
+        //         Visible = false;
+        //     }
+        //     systempart(Control1905767507; Notes)
+        //     {
+        //         Visible = true;
+        //     }
+        // }
     }
 
     actions
@@ -580,48 +580,48 @@ page 50097 "Purchase Order Foreign"
         }
         area(processing)
         {
-            group(Approval)
-            {
-                Caption = 'Approval';
-                action(Approve)
-                {
-                    Caption = 'Approve';
-                    Image = Approve;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
-                    Visible = OpenApprovalEntriesExistForCurrUser;
-                }
-                action(Reject)
-                {
-                    Caption = 'Reject';
-                    Image = Reject;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
-                    Visible = OpenApprovalEntriesExistForCurrUser;
-                }
-                action(Delegate)
-                {
-                    Caption = 'Delegate';
-                    Image = Delegate;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    Visible = OpenApprovalEntriesExistForCurrUser;
-                }
-                action(Comment)
-                {
-                    Caption = 'Comments';
-                    Image = ViewComments;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    RunObject = Page "Approval Comments";
-                    RunPageLink = "Table ID" = CONST (38),
-                                  "Document Type" = FIELD ("Document Type"),
-                                  "Document No." = FIELD ("No.");
-                    Visible = OpenApprovalEntriesExistForCurrUser;
-                }
-            }
+            // group(Approval)
+            // {
+            //     Caption = 'Approval';
+            //     action(Approve)
+            //     {
+            //         Caption = 'Approve';
+            //         Image = Approve;
+            //         Promoted = true;
+            //         PromotedCategory = Category4;
+            //         PromotedIsBig = true;
+            //         Visible = OpenApprovalEntriesExistForCurrUser;
+            //     }
+            //     action(Reject)
+            //     {
+            //         Caption = 'Reject';
+            //         Image = Reject;
+            //         Promoted = true;
+            //         PromotedCategory = Category4;
+            //         PromotedIsBig = true;
+            //         Visible = OpenApprovalEntriesExistForCurrUser;
+            //     }
+            //     action(Delegate)
+            //     {
+            //         Caption = 'Delegate';
+            //         Image = Delegate;
+            //         Promoted = true;
+            //         PromotedCategory = Category4;
+            //         Visible = OpenApprovalEntriesExistForCurrUser;
+            //     }
+            //     action(Comment)
+            //     {
+            //         Caption = 'Comments';
+            //         Image = ViewComments;
+            //         Promoted = true;
+            //         PromotedCategory = Category4;
+            //         RunObject = Page "Approval Comments";
+            //         RunPageLink = "Table ID" = CONST (38),
+            //                       "Document Type" = FIELD ("Document Type"),
+            //                       "Document No." = FIELD ("No.");
+            //         Visible = OpenApprovalEntriesExistForCurrUser;
+            //     }
+            // }
             group(Action13)
             {
                 Caption = 'Release';
@@ -724,68 +724,68 @@ page 50097 "Purchase Order Foreign"
                 separator(Action189)
                 {
                 }
-                group(IncomingDocument)
-                {
-                    Caption = 'Incoming Document';
-                    Image = Documents;
-                    action(IncomingDocCard)
-                    {
-                        Caption = 'View Incoming Document';
-                        Enabled = HasIncomingDocument;
-                        Image = ViewOrder;
-                        //The property 'ToolTip' cannot be empty.
-                        //ToolTip = '';
-                    }
-                    action(SelectIncomingDoc)
-                    {
-                        AccessByPermission = TableData "Incoming Document" = R;
-                        Caption = 'Select Incoming Document';
-                        Image = SelectLineToApply;
-                        //The property 'ToolTip' cannot be empty.
-                        //ToolTip = '';
-                    }
-                    action(IncomingDocAttachFile)
-                    {
-                        Caption = 'Create Incoming Document from File';
-                        Ellipsis = true;
-                        Enabled = NOT HasIncomingDocument;
-                        Image = Attach;
-                        //The property 'ToolTip' cannot be empty.
-                        //ToolTip = '';
-                    }
-                    action(RemoveIncomingDoc)
-                    {
-                        Caption = 'Remove Incoming Document';
-                        Enabled = HasIncomingDocument;
-                        Image = RemoveLine;
-                        //The property 'ToolTip' cannot be empty.
-                        //ToolTip = '';
-                    }
-                }
+                // group(IncomingDocument)
+                // {
+                //     Caption = 'Incoming Document';
+                //     Image = Documents;
+                //     action(IncomingDocCard)
+                //     {
+                //         Caption = 'View Incoming Document';
+                //         Enabled = HasIncomingDocument;
+                //         Image = ViewOrder;
+                //         //The property 'ToolTip' cannot be empty.
+                //         //ToolTip = '';
+                //     }
+                //     action(SelectIncomingDoc)
+                //     {
+                //         AccessByPermission = TableData "Incoming Document" = R;
+                //         Caption = 'Select Incoming Document';
+                //         Image = SelectLineToApply;
+                //         //The property 'ToolTip' cannot be empty.
+                //         //ToolTip = '';
+                //     }
+                //     action(IncomingDocAttachFile)
+                //     {
+                //         Caption = 'Create Incoming Document from File';
+                //         Ellipsis = true;
+                //         Enabled = NOT HasIncomingDocument;
+                //         Image = Attach;
+                //         //The property 'ToolTip' cannot be empty.
+                //         //ToolTip = '';
+                //     }
+                //     action(RemoveIncomingDoc)
+                //     {
+                //         Caption = 'Remove Incoming Document';
+                //         Enabled = HasIncomingDocument;
+                //         Image = RemoveLine;
+                //         //The property 'ToolTip' cannot be empty.
+                //         //ToolTip = '';
+                //     }
+                // }
             }
-            group("Request Approval")
-            {
-                Caption = 'Request Approval';
-                action(SendApprovalRequest)
-                {
-                    Caption = 'Send A&pproval Request';
-                    Enabled = NOT OpenApprovalEntriesExist;
-                    Image = SendApprovalRequest;
-                    Promoted = true;
-                    PromotedCategory = Category9;
-                }
-                action(ApprovalsList)
-                {
-                }
-                action(CancelApprovalRequest)
-                {
-                    Caption = 'Cancel Approval Re&quest';
-                    Enabled = OpenApprovalEntriesExist;
-                    Image = Cancel;
-                    Promoted = true;
-                    PromotedCategory = Category9;
-                }
-            }
+            // group("Request Approval")
+            // {
+            //     Caption = 'Request Approval';
+            //     action(SendApprovalRequest)
+            //     {
+            //         Caption = 'Send A&pproval Request';
+            //         Enabled = NOT OpenApprovalEntriesExist;
+            //         Image = SendApprovalRequest;
+            //         Promoted = true;
+            //         PromotedCategory = Category9;
+            //     }
+            //     action(ApprovalsList)
+            //     {
+            //     }
+            //     action(CancelApprovalRequest)
+            //     {
+            //         Caption = 'Cancel Approval Re&quest';
+            //         Enabled = OpenApprovalEntriesExist;
+            //         Image = Cancel;
+            //         Promoted = true;
+            //         PromotedCategory = Category9;
+            //     }
+            // }
             group(Action17)
             {
                 Caption = 'Warehouse';
@@ -854,7 +854,7 @@ page 50097 "Purchase Order Foreign"
                 {
                     Caption = 'Remove From Job Queue';
                     Image = RemoveLine;
-                    Visible = JobQueueVisible;
+                    // Visible = JobQueueVisible; Revisit
                 }
                 separator(Action201)
                 {

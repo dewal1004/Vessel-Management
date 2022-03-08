@@ -2,21 +2,6 @@ pageextension 50204 pageextension50204 extends "Location List"
 {
     layout
     {
-
-        //Unsupported feature: Property Modification (Name) on "Name(Control 4)".
-
-
-        //Unsupported feature: Property Modification (SourceExpr) on "Name(Control 4)".
-
-
-        //Unsupported feature: Property Modification (ImplicitType) on "Name(Control 4)".
-
-        addafter("Code")
-        {
-            field(Name; Name)
-            {
-            }
-        }
         addafter(Name)
         {
             field("Name 2"; "Name 2")

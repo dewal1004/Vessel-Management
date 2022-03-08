@@ -41,10 +41,10 @@ page 50008 "Employee Card."
                 field(State; State)
                 {
                 }
-                field(StateName; StateName)
-                {
-                    Editable = false;
-                }
+                // field(StateName; StateName)
+                // {
+                //     Editable = false;
+                // }
                 field("NPF Number"; "NPF Number")
                 {
                 }
@@ -176,50 +176,50 @@ page 50008 "Employee Card."
                     Caption = 'Co&mments';
                     Image = ViewComments;
                     RunObject = Page "Human Resource Comment Sheet";
-                    RunPageLink = "Table Name" = CONST (Employee),
-                                  "No." = FIELD ("No.");
+                    RunPageLink = "Table Name" = CONST(Employee),
+                                  "No." = FIELD("No.");
                 }
                 action("&Picture")
                 {
                     Caption = '&Picture';
                     RunObject = Page "Employee Picture";
-                    RunPageLink = "No." = FIELD ("No.");
+                    RunPageLink = "No." = FIELD("No.");
                 }
                 action("&Alternative Addresses")
                 {
                     Caption = '&Alternative Addresses';
                     RunObject = Page "Alternative Address List";
-                    RunPageLink = "Employee No." = FIELD ("No.");
+                    RunPageLink = "Employee No." = FIELD("No.");
                 }
                 action("&Relatives")
                 {
                     Caption = '&Relatives';
                     RunObject = Page "Employee Relatives";
-                    RunPageLink = "Employee No." = FIELD ("No.");
+                    RunPageLink = "Employee No." = FIELD("No.");
                 }
                 action("Mi&sc. Article Information")
                 {
                     Caption = 'Mi&sc. Article Information';
                     RunObject = Page "Misc. Article Information";
-                    RunPageLink = "Employee No." = FIELD ("No.");
+                    RunPageLink = "Employee No." = FIELD("No.");
                 }
                 action("&Confidential Information")
                 {
                     Caption = '&Confidential Information';
                     RunObject = Page "Confidential Information";
-                    RunPageLink = "Employee No." = FIELD ("No.");
+                    RunPageLink = "Employee No." = FIELD("No.");
                 }
                 action("Q&ualifications")
                 {
                     Caption = 'Q&ualifications';
                     RunObject = Page "Employee Qualifications";
-                    RunPageLink = "Employee No." = FIELD ("No.");
+                    RunPageLink = "Employee No." = FIELD("No.");
                 }
                 action("A&bsences")
                 {
                     Caption = 'A&bsences';
                     RunObject = Page "Employee Absences";
-                    RunPageLink = "Employee No." = FIELD ("No.");
+                    RunPageLink = "Employee No." = FIELD("No.");
                 }
                 separator(Action117)
                 {
@@ -228,8 +228,8 @@ page 50008 "Employee Card."
                 {
                     Caption = 'Absences by Ca&tegories';
                     RunObject = Page "Empl. Absences by Categories";
-                    RunPageLink = "No." = FIELD ("No."),
-                                  "Employee No. Filter" = FIELD ("No.");
+                    RunPageLink = "No." = FIELD("No."),
+                                  "Employee No. Filter" = FIELD("No.");
                 }
                 action("Misc. Articles &Overview")
                 {
@@ -248,7 +248,7 @@ page 50008 "Employee Card."
                 action("Create New Payslip")
                 {
                     Caption = 'Create New Payslip';
-                    RunObject = Report "Monthly Payslip";
+                    // //*** RunObject = Report "Monthly Payslip";  Revisit
                 }
             }
         }

@@ -16,10 +16,10 @@ page 50041 "Medical Record List"
                 field("Employee No"; "Employee No")
                 {
                 }
-                field(FullName; FullName)
-                {
-                    Caption = 'Full Name';
-                }
+                // field(FullName; FullName) Revisit
+                // {
+                //     Caption = 'Full Name';
+                // }
                 field("Transaction Date"; "Transaction Date")
                 {
                 }

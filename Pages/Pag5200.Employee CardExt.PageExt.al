@@ -19,10 +19,6 @@ pageextension 50302 pageextension50302 extends "Employee Card"
         {
             Editable = false;
         }
-        modify("Application Method")
-        {
-            Visible = false;
-        }
         addafter("Country/Region Code")
         {
             field("Global Dimension 2 Code"; "Global Dimension 2 Code")
@@ -103,10 +99,11 @@ pageextension 50302 pageextension50302 extends "Employee Card"
         }
         addafter("Employee Posting Group")
         {
-            field("Application Method"; "Application Method")
+            field("Application Method1"; "Application Method")
             {
                 ApplicationArea = BasicHR;
                 ToolTip = 'Specifies how to apply payments to entries for this employee.';
+                Visible = true;
             }
         }
     }
@@ -129,31 +126,31 @@ pageextension 50302 pageextension50302 extends "Employee Card"
             {
                 Caption = ' Monthly Payslip';
                 Image = "Report";
-                RunObject = Report "Monthly Payslip";
+                //*** RunObject = Report "Monthly Payslip";
             }
             action("Payroll Report - NSITF")
             {
                 Caption = 'Payroll Report - NSITF';
                 Image = "Report";
-                RunObject = Report "Payroll Report - NSITF";
+                //*** RunObject = Report "Payroll Report - NSITF";
             }
             action("Employee-Bank Acct")
             {
                 Caption = 'Employee-Bank Acct';
                 Image = "Report";
-                RunObject = Report "Employee-Bank Acct";
+                //*** RunObject = Report "Employee-Bank Acct";
             }
             action("Outstanding Loans")
             {
                 Caption = 'Outstanding Loans';
                 Image = "Report";
-                RunObject = Report "OUTSTANDING LOANS";
+                //*** RunObject = Report "OUTSTANDING LOANS";
             }
             action("Payroll Report")
             {
                 Caption = 'Payroll Report';
                 Image = "Report";
-                RunObject = Report "Payroll Report";
+                //*** RunObject = Report "Payroll Report";
             }
         }
     }

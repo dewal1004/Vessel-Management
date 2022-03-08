@@ -7,6 +7,8 @@ https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/upgrade/
 ##2: Upgrade permission sets
 ##2.1: APPLICATION UPGRADE
 ##3: Move code customizations to extensions
+    # Affected Temporary tables 49, 1670, Move data from this table to other table, 
+    # refactor the codes that affects this table.
 ##4: Create empty System, Base, and customization extensions
 ##5: Create table migration extension
 ##5A:Create the first version

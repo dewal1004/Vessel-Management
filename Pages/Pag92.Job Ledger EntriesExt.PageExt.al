@@ -15,6 +15,7 @@ pageextension 50235 pageextension50235 extends "Job Ledger Entries"
             }
             field("ROB By"; "ROB By")
             {
+                
             }
             field("Catch Sea Days"; "Catch Sea Days")
             {

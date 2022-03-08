@@ -538,7 +538,7 @@ page 50053 Reports
                     Image = "report";
                     //*** RunObject = Report Report50027;
                 }
-                action("OUTSTANDING LOANS")
+                action("OUTSTANDING LOANS1")
                 {
                     Image = "report";
                     //*** RunObject = Report "Online loan";

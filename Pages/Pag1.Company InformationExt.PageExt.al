@@ -4,7 +4,7 @@ pageextension 50201 pageextension50201 extends "Company Information"
     {
         modify("VAT Registration No.")
         {
-            Visible = false;
+            Visible = false; //
         }
         modify("Giro No.")
         {

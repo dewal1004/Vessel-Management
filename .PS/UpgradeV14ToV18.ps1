@@ -45,7 +45,7 @@ txt2al --source=C:\export2al\bc14tablesonly\2 --target=C:\export2al\bc14tableson
 ##B.4: Increase the version in the app.json file.
 
 # DATA UPGRADE
-##6: Prepare databases
+##6: Prepare databases, make a copy of the database and restore it as DBName14to18
 # 6.3 Start Business Central Administration Shell for version 14 as an administrator.
 # Uninstall all extensions
 # Get-NAVAppInfo -ServerInstance <server instance name> -Tenant <tenant ID>| % { Uninstall-NAVApp -ServerInstance <server instance name> -Tenant <tenant ID> -Name $_.Name -Version $_.Version -Force}

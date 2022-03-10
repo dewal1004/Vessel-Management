@@ -72,9 +72,6 @@ report 50007 "Daily BreakUp by Vessel Rep 1"
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PageNo)
-            {
-            }
             column(USERID________; UserId + ' :  ')
             {
             }
@@ -2323,7 +2320,7 @@ report 50007 "Daily BreakUp by Vessel Rep 1"
                 else
                     InvtTot := "Inventory total1";
 
-                CurrReport.CreateTotals(InvtTot);
+               // CurrReport.CreateTotals(InvtTot);
                 if "Statistics Group" = 4 then
                     T002 := 'LOCAL PRODUCTS';
             end;
@@ -5139,7 +5136,7 @@ report 50007 "Daily BreakUp by Vessel Rep 1"
                         SeaRangeC[level] := Inventory2
                     else
                         SeaRangeC[level] := Inventory1;
-                    CurrReport.CreateTotals(SeaRangeC[level]);
+                   // CurrReport.CreateTotals(SeaRangeC[level]);
                     level := level - 1;
                 end;
                 //Show Inventory for all location by releasing location filter
@@ -5147,7 +5144,7 @@ report 50007 "Daily BreakUp by Vessel Rep 1"
                 CalcFields("Inventory total1", "Inventory total2");
                 //"Inventory total2" := InventoryTotal2(Code,DateFilter);
                 if ReportBy = 0 then InvtTot := "Inventory total2" else InvtTot := "Inventory total1";
-                CurrReport.CreateTotals(InvtTot);
+               // CurrReport.CreateTotals(InvtTot);
                 if "Statistics Group" = 4 then T002 := 'LOCAL PRODUCTS';
             end;
 

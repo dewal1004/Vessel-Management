@@ -51,9 +51,8 @@ report 50001 "New Daily Points Report Fast"
             column(Consolidated_Daily_Points_Report_As_On_____FORMAT_Workdat_0_4_; 'Consolidated Daily Points Report As On : ' + Format(Workdat, 0, 4))
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PageNo)
-            {
-            }
+            //column(CurrReport_PAGENO; CurrReport.PageNo)
+            
             column(USERID; UserId)
             {
             }

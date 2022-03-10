@@ -18,7 +18,7 @@ codeunit 50001 "General Purpose Codeunit"
         TempDate: Date;
         EDRec: Record "Payroll-E/D Codes.";
 
-    [Scope('Internal')]
+
     procedure Parents2Components(SalesHeader: Record "Sales Header")
     var
         SalesLine: Record "Sales Line";
@@ -213,7 +213,7 @@ codeunit 50001 "General Purpose Codeunit"
                 FromBOMComp.Type::Resource:
                     ToSalesLine.Type := ToSalesLine.Type::Resource;
             end;
-            if ToSalesLine.Type <> 0 then begin
+            if ToSalesLine.Type <> ToSalesLine.Type::" " then begin
                 ToSalesLine.Validate("No.", FromBOMComp."No.");
                 ToSalesLine.Validate("Variant Code", FromBOMComp."Variant Code");
                 if ToSalesLine.Type = ToSalesLine.Type::Item then begin
@@ -243,7 +243,7 @@ codeunit 50001 "General Purpose Codeunit"
         Commit;
     end;
 
-    [Scope('Internal')]
+
     procedure AfterPostSalesDeleteExplode(SalesHeader: Record "Sales Header")
     var
         SalesLineRec: Record "Sales Line";
@@ -290,7 +290,7 @@ codeunit 50001 "General Purpose Codeunit"
         end;
     end;
 
-    [Scope('Internal')]
+   
     procedure GetEndDate(StartD: Date; NoOfDays: Integer): Date
     begin
         TmpDate := StartD - 1;
@@ -302,7 +302,7 @@ codeunit 50001 "General Purpose Codeunit"
         exit(TmpDate);
     end;
 
-    [Scope('Internal')]
+   
     procedure GetStartDate(EndD: Date; NoOfDays: Integer): Date
     begin
         TmpDate := EndD + 1;
@@ -326,7 +326,7 @@ codeunit 50001 "General Purpose Codeunit"
         exit(Cnt);
     end;
 
-    [Scope('Internal')]
+   
     procedure GetGrossED(SearchED: Option " ","NSITF Employee","NSITF Employer","Gross Salary","Pension Employee","Pension Employer"): Code[20]
     begin
         EDRec.SetCurrentKey(EDRec."ED Type");

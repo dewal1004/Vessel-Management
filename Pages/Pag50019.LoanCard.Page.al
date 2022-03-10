@@ -166,8 +166,7 @@ page 50019 "Loan Card."
                 {
                     Caption = 'Outstanding Loan';
                     Image = "Report";
-                    // //*** RunObject = Report "OUTSTANDING LOANS"; Revisit
-                }
+                    RunObject = Report "OUTSTANDING LOANS";                }
             }
         }
     }

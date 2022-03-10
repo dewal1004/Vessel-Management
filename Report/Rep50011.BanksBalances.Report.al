@@ -15,9 +15,6 @@ report 50011 "Banks Balances"
             column(COMPANYNAME; CompanyName)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PageNo)
-            {
-            }
             column(USERID; UserId)
             {
             }
@@ -28,9 +25,6 @@ report 50011 "Banks Balances"
             {
             }
             column(USERID_Control1000000029; UserId)
-            {
-            }
-            column(CurrReport_PAGENO_Control1000000043; CurrReport.PageNo)
             {
             }
             column(FORMAT_TODAY_0_4__Control1000000055; Format(Today, 0, 4))
@@ -351,7 +345,7 @@ report 50011 "Banks Balances"
             begin
 
                 Bank2.CopyFilters("Bank Account");
-                CurrReport.CreateTotals(DEBIT_PERIOD, CREDIT_PERIOD);
+         //       CurrReport.CreateTotals(DEBIT_PERIOD, CREDIT_PERIOD);
             end;
         }
         dataitem(DEPOSIT; DEPOSIT)

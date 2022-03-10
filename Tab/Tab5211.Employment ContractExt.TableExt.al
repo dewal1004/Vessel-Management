@@ -200,7 +200,7 @@ tableextension 50302 tableextension50302 extends "Employment Contract"
         key(Key1; "Unique Cd No")
         {
         }
-        key(Key4; Description)
+        key(KeyA4; Description)
         {
         }
     }

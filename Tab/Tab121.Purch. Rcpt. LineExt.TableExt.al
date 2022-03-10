@@ -103,7 +103,7 @@ tableextension 50235 tableextension50235 extends "Purch. Rcpt. Line"
         {
             //SumIndexFields = Quantity;
         }
-        key(ASLKey2; "Order No.", "No.")
+        key(ASLKeyE2; "Order No.", "No.")
         {
            // SumIndexFields = "Quantity Ordered";
         }

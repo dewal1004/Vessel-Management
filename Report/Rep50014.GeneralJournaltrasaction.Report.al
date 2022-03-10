@@ -353,7 +353,7 @@ report 50014 "General Journal - trasaction"
                                             if ("Gen. Bus. Posting Group" <> '') or ("Gen. Prod. Posting Group" <> '') or
                                                ("VAT Bus. Posting Group" <> '') or ("VAT Prod. Posting Group" <> '')
                                             then begin
-                                                if "Gen. Posting Type" = 0 then
+                                                if "Gen. Posting Type" = "Gen. Posting Type"::" " then
                                                     AddError(StrSubstNo(Text002, FieldCaption("Gen. Posting Type")));
                                             end;
                                             if ("Gen. Posting Type" <> "Gen. Posting Type"::" ") and
@@ -375,7 +375,7 @@ report 50014 "General Journal - trasaction"
                                         end;
                                     "Account Type"::Customer, "Account Type"::Vendor:
                                         begin
-                                            if "Gen. Posting Type" <> 0 then
+                                            if "Gen. Posting Type" <> "Gen. Posting Type"::" " then
                                                 AddError(
                                                   StrSubstNo(
                                                     Text004,
@@ -390,7 +390,7 @@ report 50014 "General Journal - trasaction"
                                                     FieldCaption("VAT Bus. Posting Group"), FieldCaption("VAT Prod. Posting Group"),
                                                     FieldCaption("Account Type"), "Account Type"));
 
-                                            if "Document Type" <> 0 then begin
+                                            if "Document Type" <> "Document Type"::" " then begin
                                                 if "Account Type" = "Account Type"::Customer then
                                                     case "Document Type" of
                                                         "Document Type"::"Credit Memo":
@@ -435,7 +435,7 @@ report 50014 "General Journal - trasaction"
                                         end;
                                     "Account Type"::"Bank Account":
                                         begin
-                                            if "Gen. Posting Type" <> 0 then
+                                            if "Gen. Posting Type" <> "Gen. Posting Type"::" " then
                                                 AddError(
                                                   StrSubstNo(
                                                     Text004,
@@ -467,7 +467,7 @@ report 50014 "General Journal - trasaction"
                                             if ("Bal. Gen. Bus. Posting Group" <> '') or ("Bal. Gen. Prod. Posting Group" <> '') or
                                                ("Bal. VAT Bus. Posting Group" <> '') or ("Bal. VAT Prod. Posting Group" <> '')
                                             then begin
-                                                if "Bal. Gen. Posting Type" = 0 then
+                                                if "Bal. Gen. Posting Type" = "Bal. Gen. Posting Type"::" " then
                                                     AddError(StrSubstNo(Text002, FieldCaption("Bal. Gen. Posting Type")));
                                             end;
                                             if ("Bal. Gen. Posting Type" <> "Bal. Gen. Posting Type"::" ") and
@@ -488,7 +488,7 @@ report 50014 "General Journal - trasaction"
                                         end;
                                     "Bal. Account Type"::Customer, "Bal. Account Type"::Vendor:
                                         begin
-                                            if "Bal. Gen. Posting Type" <> 0 then
+                                            if "Bal. Gen. Posting Type" <> "Bal. Gen. Posting Type"::" " then
                                                 AddError(
                                                   StrSubstNo(
                                                     Text004,
@@ -503,7 +503,7 @@ report 50014 "General Journal - trasaction"
                                                     FieldCaption("Bal. VAT Bus. Posting Group"), FieldCaption("Bal. VAT Prod. Posting Group"),
                                                     FieldCaption("Bal. Account Type"), "Bal. Account Type"));
 
-                                            if "Document Type" <> 0 then begin
+                                            if "Document Type" <> "Document Type"::" " then begin
                                                 if ("Bal. Account Type" = "Bal. Account Type"::Customer) =
                                                    ("Document Type" in ["Document Type"::Payment, "Document Type"::"Credit Memo"])
                                                 then
@@ -521,7 +521,7 @@ report 50014 "General Journal - trasaction"
                                         end;
                                     "Bal. Account Type"::"Bank Account":
                                         begin
-                                            if "Bal. Gen. Posting Type" <> 0 then
+                                            if "Bal. Gen. Posting Type" <> "Bal. Gen. Posting Type"::" " then
                                                 AddError(
                                                   StrSubstNo(
                                                     Text004,
@@ -664,7 +664,7 @@ report 50014 "General Journal - trasaction"
                             if ("Account Type" <> "Account Type"::"Bank Account") and
                                ("Bal. Account Type" <> "Bal. Account Type"::"Bank Account")
                             then
-                                if GenJnlLine2."Bank Payment Type" > 0 then
+                                if GenJnlLine2."Bank Payment Type" > GenJnlLine2."Bank Payment Type"::" " then
                                     AddError(StrSubstNo(Text009, FieldCaption("Bank Payment Type")));
 
                             if ("Account No." <> '') and ("Bal. Account No." <> '') then begin
@@ -776,7 +776,7 @@ report 50014 "General Journal - trasaction"
                         GenJnlLine2.CopyFilters("Gen. Journal Line");
 
                         GLAccNetChange.DeleteAll;
-                        CurrReport.CreateTotals("Amount (LCY)", "Balance (LCY)");
+                        //CurrReport.CreateTotals("Amount (LCY)", "Balance (LCY)");
                     end;
                 }
                 dataitem(ReconcileLoop; "Integer")
@@ -833,7 +833,7 @@ report 50014 "General Journal - trasaction"
             trigger OnAfterGetRecord()
             begin
 
-                CurrReport.PageNo := 1;
+               // CurrReport.PageNo := 1;
 
                 //UNL-ASL3.60.01.009 (Santus) June 14, 2005
                 if "Gen. Journal Batch"."Reason Code" = 'PAYMENT' then
@@ -1065,7 +1065,7 @@ report 50014 "General Journal - trasaction"
     begin
         with GenJnlLine2 do
             if GenJnlTemplate.Recurring then begin
-                if "Recurring Method" = 0 then
+                if "Recurring Method" = "Recurring Method"::" " then
                     AddError(StrSubstNo(Text002, FieldCaption("Recurring Method")));
                 if Format("Recurring Frequency") = '' then
                     AddError(StrSubstNo(Text002, FieldCaption("Recurring Frequency")));

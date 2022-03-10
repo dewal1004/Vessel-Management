@@ -12,7 +12,7 @@ codeunit 50003 Library
         Words: Text[250];
         Ands: Text[10];
 
-    [Scope('Internal')]
+    
     procedure "A-A-A-----------------"()
     begin
     end;

@@ -13,7 +13,7 @@ codeunit 50095 "Code For Approval setup"
         UserSetup: Record "User Setup";
         ApprovalUserSetup: Page "Approval User Setup";
 
-    [Scope('Internal')]
+   
     procedure SendApprovaltoUser(var PurchaseHeader: Record "Purchase Header"; var UserName: Code[20])
     begin
         /*
@@ -26,7 +26,7 @@ codeunit 50095 "Code For Approval setup"
 
     end;
 
-    [Scope('Internal')]
+   
     procedure Approval()
     begin
         Selection := StrMenu(Text000, 3);

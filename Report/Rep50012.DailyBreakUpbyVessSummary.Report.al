@@ -688,7 +688,7 @@ report 50012 "Daily BreakUp by Vess Summary"
                 else
                     InvtTot := "Inventory total1";
 
-                CurrReport.CreateTotals(InvtTot);
+                ////CurrReport.CreateTotals(InvtTot);
                 if "Statistics Group" = 4 then
                     T002 := 'LOCAL PRODUCTS';
             end;
@@ -1631,7 +1631,7 @@ report 50012 "Daily BreakUp by Vess Summary"
                         SeaRangeC[level] := Inventory2
                     else
                         SeaRangeC[level] := Inventory1;
-                    CurrReport.CreateTotals(SeaRangeC[level]);
+                    //CurrReport.CreateTotals(SeaRangeC[level]);
                     level := level - 1;
                 end;
                 //Show Inventory for all location by releasing location filter
@@ -1639,7 +1639,7 @@ report 50012 "Daily BreakUp by Vess Summary"
                 CalcFields("Inventory total1", "Inventory total2");
                 //"Inventory total2" := InventoryTotal2(Code,DateFilter);
                 if ReportBy = 0 then InvtTot := "Inventory total2" else InvtTot := "Inventory total1";
-                CurrReport.CreateTotals(InvtTot);
+                //CurrReport.CreateTotals(InvtTot);
                 //)
             end;
 

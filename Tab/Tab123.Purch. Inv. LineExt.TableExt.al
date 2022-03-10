@@ -102,7 +102,7 @@ tableextension 50237 tableextension50237 extends "Purch. Inv. Line"
     }
     keys
     {
-        key(ASLKey1; "No.")
+        key(ASLKeyF1; "No.")
         {
             SumIndexFields = "Unit Cost (LCY)";
         }

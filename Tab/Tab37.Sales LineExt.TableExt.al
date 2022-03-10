@@ -542,22 +542,22 @@ tableextension 50215 tableextension50215 extends "Sales Line"
     }
     keys
     {
-        key(ASLKey1; "Document Type", Type, "No.", "Variant Code", "Drop Shipment", "Location Code", "Bin Code", "Shipment Date")
+        key(ASLKeyC1; "Document Type", Type, "No.", "Variant Code", "Drop Shipment", "Location Code", "Bin Code", "Shipment Date")
         {
             SumIndexFields = "Outstanding Qty. (Base)";
         }
-        key(ASLKey2; "Document Type", Type, "No.", "Variant Code", "Drop Shipment", "Shipment Date")
+        key(ASLKeyB2; "Document Type", Type, "No.", "Variant Code", "Drop Shipment", "Shipment Date")
         {
           //  SumIndexFields = Quantity, quantity1, TTSkill, TTPerformance;
         }
-        key(ASLKey3; "Document No.", Type)
+        key(ASLKeyB3; "Document No.", Type)
         {
         }
         key(Key4; "Item Category Code Sort", "Pack Size", Brand)
         {
             SumIndexFields = Packing;
         }
-        key(ASLKey5; Explodedline)
+        key(ASLKeyA5; Explodedline)
         {
         }
     }

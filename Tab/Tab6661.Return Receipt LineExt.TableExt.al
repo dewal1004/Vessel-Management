@@ -5,7 +5,7 @@ tableextension 50327 tableextension50327 extends "Return Receipt Line"
 
         //Unsupported feature: Deletion (KeyCollection) on ""Document No.","Line No."(Key)".
 
-        key(ASLKey1; "Document No.", "Line No.", "Return Order No.")
+        key(ASLKeyK1; "Document No.", "Line No.", "Return Order No.")
         {
             //Clustered = true;
         }

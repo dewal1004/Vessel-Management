@@ -3,6 +3,7 @@ https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/upgrade/
 
 import-Module "C:\Program Files\Microsoft Dynamics 365 Business Central\180\Service\navAdminTool.ps1"
 
+
 ##7: Convert version 14 database
 # With BC Admin Shell version 18 (Run as Admin)
 # Invoke-NAVApplicationDatabaseConversion -DatabaseServer <database server name>\<database server instance> -DatabaseName "<database name>"

@@ -1,7 +1,7 @@
 report 50143 "Voy Reconciliation Reprint"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyReconciliationReprint.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyReconciliationReprint.rdlc';
 
     dataset
     {
@@ -64,7 +64,7 @@ report 50143 "Voy Reconciliation Reprint"
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("S/No.", "Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = CONST ('FIS'), "Statistics Group" = FILTER (0 .. 3));
+                DataItemTableView = SORTING("S/No.", "Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = CONST('FIS'), "Statistics Group" = FILTER(0 .. 3));
                 column(Item_Inventory; Inventory)
                 {
                 }
@@ -142,7 +142,7 @@ report 50143 "Voy Reconciliation Reprint"
             }
             dataitem(ItemMrkt; Item)
             {
-                DataItemTableView = SORTING ("S/No.", "Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = CONST ('FIS'), "Statistics Group" = FILTER (4));
+                DataItemTableView = SORTING("S/No.", "Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = CONST('FIS'), "Statistics Group" = FILTER(4));
                 column(ItemMrkt__No__; "No.")
                 {
                 }
@@ -221,7 +221,7 @@ report 50143 "Voy Reconciliation Reprint"
             }
             dataitem("Job Planning Line"; "Job Planning Line")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
+                DataItemLink = "Job No." = FIELD("No.");
                 column(Job_Budget_Line__No__; "No.")
                 {
                 }

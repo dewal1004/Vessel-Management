@@ -2,7 +2,7 @@ report 50223 "Account Schedule PL"
 {
     // Text004
     DefaultLayout = RDLC;
-    RDLCLayout = './AccountSchedulePL.rdlc';
+    RDLCLayout = './Report\Rdlc\AccountSchedulePL.rdlc';
 
     Caption = 'Account Schedule';
 
@@ -15,7 +15,7 @@ report 50223 "Account Schedule PL"
             }
             dataitem(Heading; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(USERID; UserId)
                 {
                 }
@@ -75,7 +75,7 @@ report 50223 "Account Schedule PL"
                 }
                 dataitem(AccScheduleName; "Acc. Schedule Line")
                 {
-                    DataItemTableView = SORTING ("Schedule Name", "Line No.");
+                    DataItemTableView = SORTING("Schedule Name", "Line No.");
                     column(AccSchedLineSpec__Show_Opposite_Sign_; "Show Opposite Sign")
                     {
                     }
@@ -178,7 +178,7 @@ report 50223 "Account Schedule PL"
                 }
                 dataitem(PageBreak; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                    DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
                     trigger OnAfterGetRecord()
                     begin
@@ -193,7 +193,7 @@ report 50223 "Account Schedule PL"
                 }
                 dataitem("Acc. Schedule Line"; "Acc. Schedule Line")
                 {
-                    DataItemTableView = SORTING ("Schedule Name", "Line No.");
+                    DataItemTableView = SORTING("Schedule Name", "Line No.");
                     column(Header_1_; Header[1])
                     {
                     }

@@ -3,7 +3,7 @@ report 50173 "Fish Shop Receipt"
     //  SalesLine.Numbers
     //  "Shipment Text"
     DefaultLayout = RDLC;
-    RDLCLayout = './FishShopReceipt.rdlc';
+    RDLCLayout = './Report\Rdlc\FishShopReceipt.rdlc';
 
     Caption = 'Order Confirmation';
 
@@ -11,7 +11,7 @@ report 50173 "Fish Shop Receipt"
     {
         dataitem("Sales Header"; "Sales Header")
         {
-            DataItemTableView = SORTING ("Document Type", "No.") WHERE ("Document Type" = CONST (Invoice));
+            DataItemTableView = SORTING("Document Type", "No.") WHERE("Document Type" = CONST(Invoice));
             RequestFilterFields = "No.", "Sell-to Customer No.", "No. Printed";
             RequestFilterHeading = 'Sales Order';
             column(Sales_Header_Document_Type; "Document Type")
@@ -22,10 +22,10 @@ report 50173 "Fish Shop Receipt"
             }
             dataitem(CopyLoop; "Integer")
             {
-                DataItemTableView = SORTING (Number);
+                DataItemTableView = SORTING(Number);
                 dataitem(PageLoop; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                    DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                     column(STRSUBSTNO_Text004_CopyText_; StrSubstNo(Text004, CopyText))
                     {
                     }
@@ -35,7 +35,7 @@ report 50173 "Fish Shop Receipt"
                     dataitem(DimensionLoop1; "Integer")
                     {
                         DataItemLinkReference = "Sales Header";
-                        DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                        DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
 
                         trigger OnAfterGetRecord()
                         begin
@@ -74,9 +74,9 @@ report 50173 "Fish Shop Receipt"
                     }
                     dataitem("Sales Line"; "Sales Line")
                     {
-                        DataItemLink = "Document Type" = FIELD ("Document Type"), "Document No." = FIELD ("No.");
+                        DataItemLink = "Document Type" = FIELD("Document Type"), "Document No." = FIELD("No.");
                         DataItemLinkReference = "Sales Header";
-                        DataItemTableView = SORTING ("Document Type", "Document No.", "Line No.");
+                        DataItemTableView = SORTING("Document Type", "Document No.", "Line No.");
 
                         trigger OnPreDataItem()
                         begin
@@ -85,7 +85,7 @@ report 50173 "Fish Shop Receipt"
                     }
                     dataitem(RoundLoop; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
                         column(SalesLine__Line_Amount_; SalesLine."Line Amount")
                         {
                             AutoFormatExpression = "Sales Header"."Currency Code";
@@ -166,7 +166,7 @@ report 50173 "Fish Shop Receipt"
                         }
                         dataitem(DimensionLoop2; "Integer")
                         {
-                            DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                            DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                             column(DimText; DimText)
                             {
                             }
@@ -252,7 +252,7 @@ report 50173 "Fish Shop Receipt"
                     }
                     dataitem(VATCounter; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
 
                         trigger OnAfterGetRecord()
                         begin
@@ -271,7 +271,7 @@ report 50173 "Fish Shop Receipt"
                     }
                     dataitem(Total; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                        DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                         column(Text501; Text501)
                         {
                         }
@@ -281,7 +281,7 @@ report 50173 "Fish Shop Receipt"
                     }
                     dataitem(Total2; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                        DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
                         trigger OnPreDataItem()
                         begin

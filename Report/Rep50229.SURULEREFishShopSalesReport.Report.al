@@ -2,7 +2,7 @@ report 50229 "SURULERE Fish Shop SalesReport"
 {
     //  "Sea Food categories"
     DefaultLayout = RDLC;
-    RDLCLayout = './SURULEREFishShopSalesReport.rdlc';
+    RDLCLayout = './Report\Rdlc\SURULEREFishShopSalesReport.rdlc';
 
 
     dataset

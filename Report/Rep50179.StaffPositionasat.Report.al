@@ -6,14 +6,14 @@ report 50179 "Staff Position as at"
     // 3 : Employed in Period
     // 4 : Termination in Period
     DefaultLayout = RDLC;
-    RDLCLayout = './StaffPositionasat.rdlc';
+    RDLCLayout = './Report\Rdlc\StaffPositionasat.rdlc';
 
 
     dataset
     {
         dataitem(PPG; "Payroll-Posting Group Header.")
         {
-            DataItemTableView = WHERE ("Posting Group Code" = FILTER ('E*'));
+            DataItemTableView = WHERE("Posting Group Code" = FILTER('E*'));
             column(COMPANYNAME; CompanyName)
             {
             }
@@ -126,7 +126,7 @@ report 50179 "Staff Position as at"
         }
         dataitem(Employee; Employee)
         {
-            DataItemTableView = SORTING ("Global Dimension 1 Code", "Emplymt. Contract Code", Blocked) WHERE ("Global Dimension 1 Code" = CONST ('FLST'), Status = FILTER (<> Terminated), Blocked = CONST (false), "Emplymt. Contract Code" = FILTER (<> 'TRAINEE' & <> 'INDUSTRIAL TRAINEE'));
+            DataItemTableView = SORTING("Global Dimension 1 Code", "Emplymt. Contract Code", Blocked) WHERE("Global Dimension 1 Code" = CONST('FLST'), Status = FILTER(<> Terminated), Blocked = CONST(false), "Emplymt. Contract Code" = FILTER(<> 'TRAINEE' & <> 'INDUSTRIAL TRAINEE'));
             RequestFilterFields = "Global Dimension 1 Code", "Emplymt. Contract Code";
             column(Empl_COUNT; Empl.Count)
             {

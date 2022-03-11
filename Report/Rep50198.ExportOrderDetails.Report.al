@@ -2,14 +2,14 @@ report 50198 "Export Order Details"
 {
     // "Source No. Filter" is used for Customer Filter
     DefaultLayout = RDLC;
-    RDLCLayout = './ExportOrderDetails.rdlc';
+    RDLCLayout = './Report\Rdlc\ExportOrderDetails.rdlc';
 
 
     dataset
     {
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code") ORDER(Descending);
+            DataItemTableView = SORTING("Sea food code") ORDER(Descending);
             column(USERID; UserId)
             {
             }
@@ -66,7 +66,7 @@ report 50198 "Export Order Details"
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("SF Cat", "No. 2") WHERE ("Gen. Prod. Posting Group" = FILTER ('FIS'), "Sales (Qty.)" = FILTER (<> 0), "Location Filter" = FILTER ('CRM-ASL'), "Global Dimension 1 Filter" = FILTER ('EXPT'));
+                DataItemTableView = SORTING("SF Cat", "No. 2") WHERE("Gen. Prod. Posting Group" = FILTER('FIS'), "Sales (Qty.)" = FILTER(<> 0), "Location Filter" = FILTER('CRM-ASL'), "Global Dimension 1 Filter" = FILTER('EXPT'));
                 RequestFilterFields = "Date Filter", "Source No. Filter";
                 column(Item__Item_Category_Code_; "Item Category Code")
                 {

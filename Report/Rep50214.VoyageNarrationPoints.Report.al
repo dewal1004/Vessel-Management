@@ -1,13 +1,13 @@
 report 50214 "Voyage Narration (Points)"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageNarrationPoints.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageNarrationPoints.rdlc';
 
     dataset
     {
         dataitem(Date; Date)
         {
-            DataItemTableView = SORTING ("Period Type", "Period Start") WHERE ("Period Type" = CONST (Date));
+            DataItemTableView = SORTING("Period Type", "Period Start") WHERE("Period Type" = CONST(Date));
             RequestFilterFields = "Period Start";
             column(COMPANYNAME; CompanyName)
             {
@@ -168,7 +168,7 @@ report 50214 "Voyage Narration (Points)"
                     UpdateCell(Xr, 4, 'Sea Days', Bold, not Italic, not UnderLine, FontSize + 1);
                     UpdateCell(Xr, 5, Format(Job."Sea Days"), Bold, not Italic, not UnderLine, FontSize + 1);
 
-                   // xlSheet.Range(GetCol(1) + Format(Xr) + ':' + GetCol(9) + Format(Xr)).Borders.LineStyle := 1;
+                    // xlSheet.Range(GetCol(1) + Format(Xr) + ':' + GetCol(9) + Format(Xr)).Borders.LineStyle := 1;
                     //xlSheet.Range(GetCol(1) + Format(Xr) + ':' + GetCol(9) + Format(Xr)).Interior.ColorIndex := 27;
                 end;
 
@@ -287,8 +287,8 @@ report 50214 "Voyage Narration (Points)"
 
     trigger OnPostReport()
     begin
-       // if Send2Excel then
-           // Clear(xlApp);
+        // if Send2Excel then
+        // Clear(xlApp);
     end;
 
     var
@@ -338,15 +338,15 @@ report 50214 "Voyage Narration (Points)"
 
     procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[200]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
     begin
-       /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
-        */
+        /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+         if Bold then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+         if Italic then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+         if Underline then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+         xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
+         */
     end;
 
 

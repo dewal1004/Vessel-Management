@@ -1,14 +1,14 @@
 report 50175 "New Historical Daily Points R"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './NewHistoricalDailyPointsR.rdlc';
+    RDLCLayout = './Report\Rdlc\NewHistoricalDailyPointsR.rdlc';
     Caption = 'New Daily Points Report';
 
     dataset
     {
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
             trigger OnAfterGetRecord()
             begin
@@ -32,7 +32,7 @@ report 50175 "New Historical Daily Points R"
         dataitem(Job; Job)
         {
             CalcFields = Points;
-            DataItemTableView = SORTING ("Points Sort Bay", Status) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Points Sort Bay", Status) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
@@ -378,7 +378,7 @@ report 50175 "New Historical Daily Points R"
         dataitem(Job2; Job)
         {
             CalcFields = Points;
-            DataItemTableView = SORTING ("Fishing Country Code", AvgPtSortBay) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Fishing Country Code", AvgPtSortBay) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(Job2__Fishing_Country_Code_; "Fishing Country Code")
             {
             }
@@ -577,7 +577,7 @@ report 50175 "New Historical Daily Points R"
         }
         dataitem(VoyMedian; Job)
         {
-            DataItemTableView = SORTING ("Points Sort Bay", Status) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Points Sort Bay", Status) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(Desc_Control1000000077; Desc)
             {
             }

@@ -3,7 +3,7 @@ report 50073 "Proforma Invoice"
     //  SalesLine.Numbers
     //  "Shipment Text"
     DefaultLayout = RDLC;
-    RDLCLayout = './ProformaInvoice.rdlc';
+    RDLCLayout = './Report\Rdlc\ProformaInvoice.rdlc';
 
     Caption = 'Order Confirmation';
 
@@ -11,7 +11,7 @@ report 50073 "Proforma Invoice"
     {
         dataitem("Sales Header"; "Sales Header")
         {
-            DataItemTableView = SORTING ("Document Type", "No.") WHERE ("Document Type" = CONST (Invoice));
+            DataItemTableView = SORTING("Document Type", "No.") WHERE("Document Type" = CONST(Invoice));
             RequestFilterFields = "No.", "Sell-to Customer No.", "No. Printed";
             RequestFilterHeading = 'Sales Order';
             column(Sales_Header_Document_Type; "Document Type")
@@ -28,10 +28,10 @@ report 50073 "Proforma Invoice"
             }
             dataitem(CopyLoop; "Integer")
             {
-                DataItemTableView = SORTING (Number);
+                DataItemTableView = SORTING(Number);
                 dataitem(PageLoop; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                    DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                     column(STRSUBSTNO_Text004_CopyText_; StrSubstNo(Text004, CopyText))
                     {
                     }
@@ -143,7 +143,7 @@ report 50073 "Proforma Invoice"
                     dataitem(DimensionLoop1; "Integer")
                     {
                         DataItemLinkReference = "Sales Header";
-                        DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                        DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                         column(DimText; DimText)
                         {
                         }
@@ -194,9 +194,9 @@ report 50073 "Proforma Invoice"
                     }
                     dataitem("Sales Line"; "Sales Line")
                     {
-                        DataItemLink = "Document Type" = FIELD ("Document Type"), "Document No." = FIELD ("No.");
+                        DataItemLink = "Document Type" = FIELD("Document Type"), "Document No." = FIELD("No.");
                         DataItemLinkReference = "Sales Header";
-                        DataItemTableView = SORTING ("Document Type", "Document No.", "Line No.");
+                        DataItemTableView = SORTING("Document Type", "Document No.", "Line No.");
 
                         trigger OnAfterGetRecord()
                         begin
@@ -210,7 +210,7 @@ report 50073 "Proforma Invoice"
                     }
                     dataitem(RoundLoop; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
                         column(S_No; S_No)
                         {
                         }
@@ -375,7 +375,7 @@ report 50073 "Proforma Invoice"
                         }
                         dataitem(DimensionLoop2; "Integer")
                         {
-                            DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                            DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                             column(DimText_Control82; DimText)
                             {
                             }
@@ -461,7 +461,7 @@ report 50073 "Proforma Invoice"
                     }
                     dataitem(VATCounter; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
                         column(VATAmountLine__VAT_Base_; VATAmountLine."VAT Base")
                         {
                             AutoFormatExpression = "Sales Header"."Currency Code";
@@ -644,7 +644,7 @@ report 50073 "Proforma Invoice"
                     }
                     dataitem(Total; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                        DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                         column(PaymentTerms_Description; PaymentTerms.Description)
                         {
                         }
@@ -672,7 +672,7 @@ report 50073 "Proforma Invoice"
                     }
                     dataitem(Total2; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                        DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                         column(Sales_Header___Sell_to_Customer_No__; "Sales Header"."Sell-to Customer No.")
                         {
                         }

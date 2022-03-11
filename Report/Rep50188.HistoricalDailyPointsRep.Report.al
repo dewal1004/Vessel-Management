@@ -1,13 +1,13 @@
 report 50188 "Historical Daily Points Rep!"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './HistoricalDailyPointsRep.rdlc';
+    RDLCLayout = './Report\Rdlc\HistoricalDailyPointsRep.rdlc';
 
     dataset
     {
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
             trigger OnAfterGetRecord()
             begin
@@ -31,7 +31,7 @@ report 50188 "Historical Daily Points Rep!"
         }
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("Points Sort Bay", Status) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Points Sort Bay", Status) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }

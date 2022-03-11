@@ -1,13 +1,13 @@
 report 50020 "Purchase Returns Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PurchaseReturnsRegister.rdlc';
+    RDLCLayout = './Report\Rdlc\PurchaseReturnsRegister.rdlc';
 
     dataset
     {
         dataitem("Purch. Cr. Memo Hdr."; "Purch. Cr. Memo Hdr.")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Buy-from Vendor No.", "No.", "Posting Date";
             column(COMPANYNAME; CompanyName)
             {
@@ -113,8 +113,8 @@ report 50020 "Purchase Returns Register"
             }
             dataitem("Purch. Cr. Memo Line"; "Purch. Cr. Memo Line")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Line No.") WHERE ("Amount Including VAT" = FILTER (> 0));
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Line No.") WHERE("Amount Including VAT" = FILTER(> 0));
                 column(Purch__Cr__Memo_Line__No__; "No.")
                 {
                 }

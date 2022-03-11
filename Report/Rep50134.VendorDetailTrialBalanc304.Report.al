@@ -1,14 +1,14 @@
 report 50134 "Vendor-Detail Trial Balanc-304"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VendorDetailTrialBalanc304.rdlc';
+    RDLCLayout = './Report\Rdlc\VendorDetailTrialBalanc304.rdlc';
     Caption = 'Vendor - Detail Trial Balance';
 
     dataset
     {
         dataitem(Vendor; Vendor)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             PrintOnlyIfDetail = true;
             RequestFilterFields = "No.", "Search Name", "Vendor Posting Group", "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
@@ -123,8 +123,8 @@ report 50134 "Vendor-Detail Trial Balanc-304"
             }
             dataitem("Vendor Ledger Entry"; "Vendor Ledger Entry")
             {
-                DataItemLink = "Vendor No." = FIELD ("No."), "Posting Date" = FIELD ("Date Filter"), "Global Dimension 1 Code" = FIELD ("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD ("Global Dimension 2 Filter"), "Date Filter" = FIELD ("Date Filter");
-                DataItemTableView = SORTING ("Vendor No.", "Posting Date") WHERE ("Purchaser Code" = FILTER (<> 'VK'));
+                DataItemLink = "Vendor No." = FIELD("No."), "Posting Date" = FIELD("Date Filter"), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"), "Date Filter" = FIELD("Date Filter");
+                DataItemTableView = SORTING("Vendor No.", "Posting Date") WHERE("Purchaser Code" = FILTER(<> 'VK'));
                 column(StartBalanceLCY____Amount__LCY__; StartBalanceLCY + "Amount (LCY)")
                 {
                     AutoFormatType = 1;
@@ -222,7 +222,7 @@ report 50134 "Vendor-Detail Trial Balanc-304"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(Vendor_Name_Control27; Vendor.Name)
                 {
                 }

@@ -1,13 +1,13 @@
 report 50144 "Journal Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './JournalRegister.rdlc';
+    RDLCLayout = './Report\Rdlc\JournalRegister.rdlc';
 
     dataset
     {
         dataitem("G/L Entry"; "G/L Entry")
         {
-            DataItemTableView = SORTING ("Document No.", "Posting Date");
+            DataItemTableView = SORTING("Document No.", "Posting Date");
             RequestFilterFields = "Journal Batch Name", "Posting Date";
             RequestFilterHeading = 'GL Filter';
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))

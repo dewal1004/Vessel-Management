@@ -5,7 +5,7 @@ report 50140 "Vessel Perf Grpg OLD VJ2"
     // XVal[3]::NairaVal
     // XVal[4]::AGVal
     DefaultLayout = RDLC;
-    RDLCLayout = './VesselPerfGrpgOLDVJ2.rdlc';
+    RDLCLayout = './Report\Rdlc\VesselPerfGrpgOLDVJ2.rdlc';
 
 
     dataset
@@ -539,7 +539,7 @@ report 50140 "Vessel Perf Grpg OLD VJ2"
         "-------": Integer;
         //xlApp: Automation;
         //xlBook: Automation;
-       // xlSheet: Automation;
+        // xlSheet: Automation;
         Send2Excel: Boolean;
         TopPage: Boolean;
         Xr: Integer;
@@ -615,15 +615,15 @@ report 50140 "Vessel Perf Grpg OLD VJ2"
     [Scope('Internal')]
     procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[200]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
     begin
-       /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
-        */
+        /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+         if Bold then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+         if Italic then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+         if Underline then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+         xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
+         */
     end;
 
     [Scope('Internal')]

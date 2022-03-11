@@ -1,13 +1,13 @@
 report 50169 "Consumptions Vessel Wise VJ"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ConsumptionsVesselWiseVJ.rdlc';
+    RDLCLayout = './Report\Rdlc\ConsumptionsVesselWiseVJ.rdlc';
 
     dataset
     {
         dataitem("Value Entry"; "Value Entry")
         {
-            DataItemTableView = SORTING ("Location Code", "Item No.", "Item Ledger Entry Type") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+            DataItemTableView = SORTING("Location Code", "Item No.", "Item Ledger Entry Type") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
             RequestFilterFields = "Location Code", "Item No.", "Item Ledger Entry Type";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

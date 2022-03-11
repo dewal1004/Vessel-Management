@@ -6,7 +6,7 @@ report 50176 "New Daily Points by Capt Rep"
     // IF GCountCum[k]<>0 THEN GTotPtsA[k]:= GTotPts[k]/GCountCum[k] ELSE GTotPtsA[k]:=0;
     // SeaDaysTot:=0;SeaDayA:=0;
     DefaultLayout = RDLC;
-    RDLCLayout = './NewDailyPointsbyCaptRep.rdlc';
+    RDLCLayout = './Report\Rdlc\NewDailyPointsbyCaptRep.rdlc';
 
     Caption = 'New Daily Points Report';
 
@@ -14,7 +14,7 @@ report 50176 "New Daily Points by Capt Rep"
     {
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             RequestFilterFields = Number;
             column(Day_of_Tide____DOT; 'Day of Tide: ' + DOT)
             {
@@ -86,7 +86,7 @@ report 50176 "New Daily Points by Capt Rep"
         }
         dataitem(Res; Resource)
         {
-            DataItemTableView = SORTING ("Points Average Sort Bay") ORDER(Descending) WHERE ("Resource Group No." = CONST ('PCAP'));
+            DataItemTableView = SORTING("Points Average Sort Bay") ORDER(Descending) WHERE("Resource Group No." = CONST('PCAP'));
             column(Res__No__; "No.")
             {
             }
@@ -245,8 +245,8 @@ report 50176 "New Daily Points by Capt Rep"
             }
             dataitem(Job; Job)
             {
-                DataItemLink = Captain = FIELD ("No.");
-                DataItemTableView = SORTING ("Points Sort Bay", Status) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+                DataItemLink = Captain = FIELD("No.");
+                DataItemTableView = SORTING("Points Sort Bay", Status) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
                 column(FORMAT_TODAY_0_4__Control2; Format(Today, 0, 4))
                 {
                 }

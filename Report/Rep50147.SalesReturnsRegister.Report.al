@@ -1,13 +1,13 @@
 report 50147 "Sales Returns Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './SalesReturnsRegister.rdlc';
+    RDLCLayout = './Report\Rdlc\SalesReturnsRegister.rdlc';
 
     dataset
     {
         dataitem("Sales Cr.Memo Header"; "Sales Cr.Memo Header")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Sell-to Customer No.", "No.", "Posting Date";
             RequestFilterHeading = 'Sales Returns Filter';
             column(COMPANYNAME; CompanyName)
@@ -114,8 +114,8 @@ report 50147 "Sales Returns Register"
             }
             dataitem("Sales Cr.Memo Line"; "Sales Cr.Memo Line")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Line No.");
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Line No.");
                 column(Sales_Cr_Memo_Line__No__; "No.")
                 {
                 }

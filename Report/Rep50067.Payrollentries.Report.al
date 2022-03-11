@@ -2,14 +2,14 @@ report 50067 "Payroll entries"
 {
     // This report prints ALL the entries for an employee for the requested periods.
     DefaultLayout = RDLC;
-    RDLCLayout = './Payrollentries.rdlc';
+    RDLCLayout = './Report\Rdlc\Payrollentries.rdlc';
 
 
     dataset
     {
         dataitem("Payroll-Payslip Header."; "Payroll-Payslip Header.")
         {
-            DataItemTableView = SORTING ("Payroll Period", "Employee No");
+            DataItemTableView = SORTING("Payroll Period", "Employee No");
             RequestFilterFields = "Payroll Period", "Employee No", "Closed?";
             RequestFilterHeading = 'Parameters for payslips';
             column(CompanyData_Name; CompanyData.Name)
@@ -44,8 +44,8 @@ report 50067 "Payroll entries"
             }
             dataitem("Payroll-Payslip Lines."; "Payroll-Payslip Lines.")
             {
-                DataItemLink = "Payroll Period" = FIELD ("Payroll Period"), "Employee No" = FIELD ("Employee No");
-                DataItemTableView = SORTING ("Payroll Period", "Employee No", "Payslip Group ID", "Pos. In Payslip Grp.");
+                DataItemLink = "Payroll Period" = FIELD("Payroll Period"), "Employee No" = FIELD("Employee No");
+                DataItemTableView = SORTING("Payroll Period", "Employee No", "Payslip Group ID", "Pos. In Payslip Grp.");
                 column(Payroll_Payslip_Lines___E_D_Code_; "E/D Code")
                 {
                 }

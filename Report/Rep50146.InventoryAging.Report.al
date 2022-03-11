@@ -2,14 +2,14 @@ report 50146 "Inventory Aging"
 {
     //  Item."CRM / STR"
     DefaultLayout = RDLC;
-    RDLCLayout = './InventoryAging.rdlc';
+    RDLCLayout = './Report\Rdlc\InventoryAging.rdlc';
 
 
     dataset
     {
         dataitem("item upd"; Item)
         {
-            DataItemTableView = SORTING ("Statistics Group", "Inventory Posting Group") WHERE ("Gen. Prod. Posting Group" = CONST ('DK'), "No." = FILTER ('DK-001' .. 'E0001'));
+            DataItemTableView = SORTING("Statistics Group", "Inventory Posting Group") WHERE("Gen. Prod. Posting Group" = CONST('DK'), "No." = FILTER('DK-001' .. 'E0001'));
 
             trigger OnAfterGetRecord()
             begin
@@ -23,7 +23,7 @@ report 50146 "Inventory Aging"
         }
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("Oldest Stock") ORDER(Descending) WHERE ("Gen. Prod. Posting Group" = CONST ('DK'), "No." = FILTER ('DK-001' .. 'E0001'));
+            DataItemTableView = SORTING("Oldest Stock") ORDER(Descending) WHERE("Gen. Prod. Posting Group" = CONST('DK'), "No." = FILTER('DK-001' .. 'E0001'));
             RequestFilterFields = "Inventory Posting Group";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

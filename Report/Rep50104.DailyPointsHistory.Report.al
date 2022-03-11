@@ -3,14 +3,14 @@ report 50104 "Daily Points History"
     // UNL-ASL3.60.01.004 (Santus) May 11, 2005
     // -> new reoprt, to retrieve historical daily points information
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyPointsHistory.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyPointsHistory.rdlc';
 
 
     dataset
     {
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
@@ -89,7 +89,7 @@ report 50104 "Daily Points History"
         }
         dataitem(AllPoints; "Entry/Exit Point")
         {
-            DataItemTableView = SORTING ("Entry No.") WHERE (Type = CONST (" "), "Report Type" = CONST (Points));
+            DataItemTableView = SORTING("Entry No.") WHERE(Type = CONST(" "), "Report Type" = CONST(Points));
             column(FORMAT_TODAY_0_4__Control1000000168; Format(Today, 0, 4))
             {
             }
@@ -263,7 +263,7 @@ report 50104 "Daily Points History"
         }
         dataitem(AvePoint; "Entry/Exit Point")
         {
-            DataItemTableView = SORTING ("Entry No.") WHERE (Type = CONST (Average), "Report Type" = CONST (Points));
+            DataItemTableView = SORTING("Entry No.") WHERE(Type = CONST(Average), "Report Type" = CONST(Points));
             column(AvePoint_AvePoint_Type; AvePoint.Type)
             {
             }
@@ -323,7 +323,7 @@ report 50104 "Daily Points History"
         }
         dataitem(MedianPoint; "Entry/Exit Point")
         {
-            DataItemTableView = SORTING ("Entry No.") WHERE (Type = CONST (Median), "Report Type" = CONST (Points));
+            DataItemTableView = SORTING("Entry No.") WHERE(Type = CONST(Median), "Report Type" = CONST(Points));
             column(MedianPoint_MedianPoint_Type; MedianPoint.Type)
             {
             }

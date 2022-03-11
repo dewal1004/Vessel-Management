@@ -1,7 +1,7 @@
 report 50246 "Location by Inv. Postg Groups"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './LocationbyInvPostgGroups.rdlc';
+    RDLCLayout = './Report\Rdlc\LocationbyInvPostgGroups.rdlc';
 
     dataset
     {
@@ -19,7 +19,7 @@ report 50246 "Location by Inv. Postg Groups"
             }
             dataitem("Inventory Posting Group"; "Inventory Posting Group")
             {
-                DataItemTableView = SORTING ("S/No.") ORDER(Ascending) WHERE ("S/No." = FILTER (0 .. 180));
+                DataItemTableView = SORTING("S/No.") ORDER(Ascending) WHERE("S/No." = FILTER(0 .. 180));
                 column(TodayFormatted; Format(Today, 0, 4))
                 {
                 }

@@ -1,13 +1,13 @@
 report 50145 "Sales Register old"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './SalesRegisterold.rdlc';
+    RDLCLayout = './Report\Rdlc\SalesRegisterold.rdlc';
 
     dataset
     {
         dataitem("Sales Invoice Header"; "Sales Invoice Header")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Sell-to Customer No.", "No.", "Posting Date";
             RequestFilterHeading = 'Sales Invoice Filter';
             column(COMPANYNAME; CompanyName)
@@ -120,8 +120,8 @@ report 50145 "Sales Register old"
             }
             dataitem("Sales Invoice Line"; "Sales Invoice Line")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Line No.");
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Line No.");
                 column(Sales_Invoice_Line__No__; "No.")
                 {
                 }

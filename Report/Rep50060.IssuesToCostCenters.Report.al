@@ -1,13 +1,13 @@
 report 50060 "Issues To Cost Centers"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './IssuesToCostCenters.rdlc';
+    RDLCLayout = './Report\Rdlc\IssuesToCostCenters.rdlc';
 
     dataset
     {
         dataitem("Value Entry"; "Value Entry")
         {
-            DataItemTableView = SORTING ("Reason Code", "External Document No.", "Gen. Prod. Posting Group", "Posting Date", "Item Ledger Entry Type");
+            DataItemTableView = SORTING("Reason Code", "External Document No.", "Gen. Prod. Posting Group", "Posting Date", "Item Ledger Entry Type");
             RequestFilterFields = "Reason Code", "External Document No.", "Gen. Prod. Posting Group", "Posting Date";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

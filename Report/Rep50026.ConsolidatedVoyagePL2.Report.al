@@ -1,7 +1,7 @@
 report 50026 "Consolidated Voyage P&L2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ConsolidatedVoyagePL2.rdlc';
+    RDLCLayout = './Report\Rdlc\ConsolidatedVoyagePL2.rdlc';
     Caption = 'Consolidated Voyage P&L2';
     Permissions = TableData "Job Ledger Entry" = rimd,
                   TableData "Value Entry" = rimd;
@@ -10,7 +10,7 @@ report 50026 "Consolidated Voyage P&L2"
     {
         dataitem(Jobss; Job)
         {
-            DataItemTableView = SORTING ("Ending Date") WHERE ("Voyage Ended" = CONST (true));
+            DataItemTableView = SORTING("Ending Date") WHERE("Voyage Ended" = CONST(true));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
@@ -556,7 +556,7 @@ report 50026 "Consolidated Voyage P&L2"
         }
         dataitem(Jb; Job)
         {
-            DataItemTableView = SORTING ("Ending Date");
+            DataItemTableView = SORTING("Ending Date");
             column(Jb__No__; "No.")
             {
             }
@@ -595,8 +595,8 @@ report 50026 "Consolidated Voyage P&L2"
             }
             dataitem("Job Ledger Entry"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Job No.", "Location Code", "Work Type Code") WHERE ("Location Code" = CONST ('CRM-ASL'));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Job No.", "Location Code", "Work Type Code") WHERE("Location Code" = CONST('CRM-ASL'));
                 column(FirstDataItem; 1)
                 {
                 }
@@ -999,8 +999,8 @@ report 50026 "Consolidated Voyage P&L2"
             }
             dataitem("Value Entry"; "Value Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Gen. Prod. Posting Group", "Document No.", "Marked Rec") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'), "Marked Rec" = CONST (true));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Gen. Prod. Posting Group", "Document No.", "Marked Rec") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'), "Marked Rec" = CONST(true));
                 column(Table_ValueEntry; 1)
                 {
                 }
@@ -1116,8 +1116,8 @@ report 50026 "Consolidated Voyage P&L2"
             }
             dataitem(JobcatchMarked; "Job catch Default")
             {
-                DataItemLink = "No." = FIELD ("No.");
-                DataItemTableView = SORTING ("No.", GroupSort);
+                DataItemLink = "No." = FIELD("No.");
+                DataItemTableView = SORTING("No.", GroupSort);
 
                 trigger OnAfterGetRecord()
                 begin
@@ -1127,8 +1127,8 @@ report 50026 "Consolidated Voyage P&L2"
             }
             dataitem(ValueEntryMarked; "Value Entry")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
 
                 trigger OnAfterGetRecord()
                 begin
@@ -1150,7 +1150,7 @@ report 50026 "Consolidated Voyage P&L2"
         }
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code");
+            DataItemTableView = SORTING("Sea food code");
             PrintOnlyIfDetail = false;
             column(SeaFoodData; 1)
             {
@@ -1169,8 +1169,8 @@ report 50026 "Consolidated Voyage P&L2"
             }
             dataitem("Job Ledger Entry Rep"; "Job Ledger Entry")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING ("Job No.", "Location Code", GroupSort) WHERE ("Location Code" = CONST ('CRM-ASL'), "Marked Rec" = CONST (true));
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING("Job No.", "Location Code", GroupSort) WHERE("Location Code" = CONST('CRM-ASL'), "Marked Rec" = CONST(true));
                 column(SeaFood_Cat_2; CopyStr("Sea Food categories"."Sea food code", 5))
                 {
                 }
@@ -1358,7 +1358,7 @@ report 50026 "Consolidated Voyage P&L2"
                     Qty := Quantity * -1;
                     PrdPrc := Qty * GetItPrice("Job No.", "No.", "Posting Date");
                     //CurrReport.ShowOutput := true;
-                      //CurrReport.TotalsCausedBy := "Job Ledger Entry".FieldNo(GroupSort);
+                    //CurrReport.TotalsCausedBy := "Job Ledger Entry".FieldNo(GroupSort);
 
 
                     ExportTotal := 0;
@@ -1409,8 +1409,8 @@ report 50026 "Consolidated Voyage P&L2"
             }
             dataitem("Job catch Default"; "Job catch Default")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING (GroupSort, "Marked Rec") WHERE ("Marked Rec" = CONST (true));
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING(GroupSort, "Marked Rec") WHERE("Marked Rec" = CONST(true));
                 column(A2_1_; A2[1])
                 {
                 }
@@ -1566,7 +1566,7 @@ report 50026 "Consolidated Voyage P&L2"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             column(Text03; Text03)
             {
             }
@@ -1913,7 +1913,7 @@ report 50026 "Consolidated Voyage P&L2"
         Cycledays: Integer;
         TotalPrice: Decimal;
 
-    
+
     procedure Syntesis2(Cd: Code[10]; Pk: Code[10]; Br: Code[10]) Itemno: Code[10]
     begin
         //Syntesis Item Code Name
@@ -1922,7 +1922,7 @@ report 50026 "Consolidated Voyage P&L2"
         "No.B" := ItemVar;
     end;
 
-    
+
     procedure GetItPrice(JNos: Code[20]; Nos: Code[20]; PDays: Date): Decimal
     var
         job3: Record Job;

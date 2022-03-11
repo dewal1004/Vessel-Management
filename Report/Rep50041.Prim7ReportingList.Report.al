@@ -1,13 +1,13 @@
 report 50041 "Prim7* Reporting List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Prim7ReportingList.rdlc';
+    RDLCLayout = './Report\Rdlc\Prim7ReportingList.rdlc';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("Statistics Group", "Inventory Posting Group") WHERE ("Gen. Prod. Posting Group" = CONST ('FIS'));
+            DataItemTableView = SORTING("Statistics Group", "Inventory Posting Group") WHERE("Gen. Prod. Posting Group" = CONST('FIS'));
             RequestFilterFields = "Statistics Group", "Inventory Posting Group", "Date Filter", "Variant Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

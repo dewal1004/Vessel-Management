@@ -1,14 +1,14 @@
 report 50235 "Local Sales Rep-Need Stat Grp"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './LocalSalesRepNeedStatGrp.rdlc';
+    RDLCLayout = './Report\Rdlc\LocalSalesRepNeedStatGrp.rdlc';
     Caption = 'Inventory - Top 10 List';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("No.") WHERE ("Gen. Prod. Posting Group" = FILTER ('FIS'), "Location Filter" = FILTER ('CRM-ASL'), "Sales (LCY)" = FILTER (<> 0));
+            DataItemTableView = SORTING("No.") WHERE("Gen. Prod. Posting Group" = FILTER('FIS'), "Location Filter" = FILTER('CRM-ASL'), "Sales (LCY)" = FILTER(<> 0));
             RequestFilterFields = "No.", "Inventory Posting Group", "Statistics Group", "Date Filter";
 
             trigger OnAfterGetRecord()
@@ -53,7 +53,7 @@ report 50235 "Local Sales Rep-Need Stat Grp"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+            DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }

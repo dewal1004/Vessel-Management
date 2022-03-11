@@ -1,14 +1,14 @@
 report 50133 "Detail Trial Balance-4"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './DetailTrialBalance4.rdlc';
+    RDLCLayout = './Report\Rdlc\DetailTrialBalance4.rdlc';
     Caption = 'Detail Trial Balance';
 
     dataset
     {
         dataitem("G/L Account"; "G/L Account")
         {
-            DataItemTableView = WHERE ("Account Type" = CONST (Posting));
+            DataItemTableView = WHERE("Account Type" = CONST(Posting));
             PrintOnlyIfDetail = true;
             RequestFilterFields = "No.", "Search Name", "Income/Balance", "Debit/Credit", "Date Filter";
             column(CompName; CompName)
@@ -94,7 +94,7 @@ report 50133 "Detail Trial Balance-4"
             }
             dataitem(PageCounter; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(G_L_Account___No__; "G/L Account"."No.")
                 {
                 }
@@ -110,9 +110,9 @@ report 50133 "Detail Trial Balance-4"
                 }
                 dataitem("G/L Entry"; "G/L Entry")
                 {
-                    DataItemLink = "G/L Account No." = FIELD ("No."), "Posting Date" = FIELD ("Date Filter"), "Global Dimension 1 Code" = FIELD ("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD ("Global Dimension 2 Filter"), "Business Unit Code" = FIELD ("Business Unit Filter");
+                    DataItemLink = "G/L Account No." = FIELD("No."), "Posting Date" = FIELD("Date Filter"), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"), "Business Unit Code" = FIELD("Business Unit Filter");
                     DataItemLinkReference = "G/L Account";
-                    DataItemTableView = SORTING ("G/L Account No.", "Posting Date") WHERE ("Prod. Order No." = FILTER (<> 'AG'));
+                    DataItemTableView = SORTING("G/L Account No.", "Posting Date") WHERE("Prod. Order No." = FILTER(<> 'AG'));
                     column(G_L_Entry__Debit_Amount_; "Debit Amount")
                     {
                     }
@@ -188,7 +188,7 @@ report 50133 "Detail Trial Balance-4"
                         if ("Posting Date" = ClosingDate("Posting Date")) and
                            not PrintClosingEntries
                         then begin
-                          //  CurrReport.ShowOutput := false;
+                            //  CurrReport.ShowOutput := false;
                             "Debit Amount" := 0;
                             "Credit Amount" := 0;
                         end;
@@ -221,7 +221,7 @@ report 50133 "Detail Trial Balance-4"
                 }
                 dataitem("Integer"; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                    DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                     column(G_L_Account__Name_Control42; "G/L Account".Name)
                     {
                     }

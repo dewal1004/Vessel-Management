@@ -3,7 +3,7 @@ report 50243 "Inventory-Trans.Detail-barge"
     // Item."Unit Cost"
     // "Print Bin Card"
     DefaultLayout = RDLC;
-    RDLCLayout = './InventoryTransDetailbarge.rdlc';
+    RDLCLayout = './Report\Rdlc\InventoryTransDetailbarge.rdlc';
 
     Caption = 'Inventory - Transaction Detail';
     Permissions = TableData "Sales Shipment Header" = rimd;
@@ -104,7 +104,7 @@ report 50243 "Inventory-Trans.Detail-barge"
             }
             dataitem(PageCounter; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(Item__No__; Item."No.")
                 {
                 }
@@ -126,9 +126,9 @@ report 50243 "Inventory-Trans.Detail-barge"
                 }
                 dataitem("Item Ledger Entry"; "Item Ledger Entry")
                 {
-                    DataItemLink = "Item No." = FIELD ("No."), "Variant Code" = FIELD ("Variant Filter"), "Posting Date" = FIELD ("Date Filter"), "Location Code" = FIELD ("Location Filter"), "Global Dimension 1 Code" = FIELD ("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD ("Global Dimension 2 Filter");
+                    DataItemLink = "Item No." = FIELD("No."), "Variant Code" = FIELD("Variant Filter"), "Posting Date" = FIELD("Date Filter"), "Location Code" = FIELD("Location Filter"), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter");
                     DataItemLinkReference = Item;
-                    DataItemTableView = SORTING ("Item No.", "Variant Code", "Drop Shipment", "Location Code", "Posting Date");
+                    DataItemTableView = SORTING("Item No.", "Variant Code", "Drop Shipment", "Location Code", "Posting Date");
                     column(StartOnHand___Quantity; StartOnHand + Quantity)
                     {
                         DecimalPlaces = 0 : 5;
@@ -250,7 +250,7 @@ report 50243 "Inventory-Trans.Detail-barge"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 .. 35));
+                DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 .. 35));
                 column(Integer_Number; Number)
                 {
                 }

@@ -2,14 +2,14 @@ report 50197 "Voy Revenue By Sea Day"
 {
     // HdrStore.Description
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyRevenueBySeaDay.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyRevenueBySeaDay.rdlc';
 
 
     dataset
     {
         dataitem("Vessel Performance By Sea Day"; "Vessel Performance By Sea Day")
         {
-            DataItemTableView = SORTING ("Voyage Sea Days", "Revenue Per Sea Day") ORDER(Descending);
+            DataItemTableView = SORTING("Voyage Sea Days", "Revenue Per Sea Day") ORDER(Descending);
             RequestFilterFields = "Voyage Sea Days";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

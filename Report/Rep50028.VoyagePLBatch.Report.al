@@ -1,14 +1,14 @@
 report 50028 "Voyage P&L Batch"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyagePLBatch.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyagePLBatch.rdlc';
     Permissions = TableData "Job Ledger Entry" = rimd;
 
     dataset
     {
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Ending Date", "Fishing Country Code", Vessel, "Person Responsible";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -69,8 +69,8 @@ report 50028 "Voyage P&L Batch"
             }
             dataitem("Job Ledger Entry"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Posting Date") WHERE ("Document No." = FILTER ('J*'));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Posting Date") WHERE("Document No." = FILTER('J*'));
                 column(Job_Ledger_Entry__Entry_No__; "Job Ledger Entry"."Entry No.")
                 {
                 }

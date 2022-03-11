@@ -7,7 +7,7 @@ report 50101 "Customer Balance At Dates"
     // Customer.SETFILTER(Customer."Customer Posting Group",'STAFF');
     // Customer."Date Filter":=0D;
     DefaultLayout = RDLC;
-    RDLCLayout = './CustomerBalanceAtDates.rdlc';
+    RDLCLayout = './Report\Rdlc\CustomerBalanceAtDates.rdlc';
 
 
     dataset
@@ -15,7 +15,7 @@ report 50101 "Customer Balance At Dates"
         dataitem(Customer; Customer)
         {
             CalcFields = "Net Change", "Net Change (LCY)";
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Customer Posting Group", "Date Filter", "Gen. Bus. Posting Group";
             column(No_; Customer."No.")
             {

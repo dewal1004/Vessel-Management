@@ -1,7 +1,7 @@
 report 50227 "Vesselwise Consumption 3years"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VesselwiseConsumption3years.rdlc';
+    RDLCLayout = './Report\Rdlc\VesselwiseConsumption3years.rdlc';
 
     dataset
     {

@@ -6,7 +6,7 @@ report 50177 "Purchase Requisition Approval"
     // "Requisition Line"."Worksheet Template Name"
     // Item."CRM / STR"
     DefaultLayout = RDLC;
-    RDLCLayout = './PurchaseRequisitionApproval.rdlc';
+    RDLCLayout = './Report\Rdlc\PurchaseRequisitionApproval.rdlc';
 
 
     dataset
@@ -24,8 +24,8 @@ report 50177 "Purchase Requisition Approval"
             }
             dataitem("Requisition Line"; "Requisition Line")
             {
-                DataItemLink = "Worksheet Template Name" = FIELD ("Worksheet Template Name"), "Journal Batch Name" = FIELD (Name);
-                DataItemTableView = SORTING ("Worksheet Template Name", "Journal Batch Name", "Line No.");
+                DataItemLink = "Worksheet Template Name" = FIELD("Worksheet Template Name"), "Journal Batch Name" = FIELD(Name);
+                DataItemTableView = SORTING("Worksheet Template Name", "Journal Batch Name", "Line No.");
                 RequestFilterFields = "Worksheet Template Name", "Journal Batch Name", "Gen. Prod. Posting Group", "Print Line";
                 column(Requisition_Line__Requisition_Line___Worksheet_Template_Name_; "Requisition Line"."Worksheet Template Name")
                 {

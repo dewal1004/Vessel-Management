@@ -1,13 +1,13 @@
 report 50083 "Daily BreakUp by Vessel"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyBreakUpbyVessel.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyBreakUpbyVessel.rdlc';
 
     dataset
     {
         dataitem("Inventory Posting G Cat Tot"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE ("In Use" = CONST (true), "Statistics Group" = FILTER (> 0));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE("In Use" = CONST(true), "Statistics Group" = FILTER(> 0));
             RequestFilterFields = "Statistics Group", Category, "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -2858,7 +2858,7 @@ report 50083 "Daily BreakUp by Vessel"
         }
         dataitem("Inventory Posting Group"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE ("In Use" = CONST (true), "Statistics Group" = FILTER (> 0));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE("In Use" = CONST(true), "Statistics Group" = FILTER(> 0));
             column(VesselPoint_1__Control1000001208; VesselPoint[1])
             {
                 DecimalPlaces = 0 : 0;

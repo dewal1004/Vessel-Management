@@ -4,14 +4,14 @@ report 50049 "Skipper/Vessel Performance"
     // Consd_Deductible_Days
     // NetSeaDay
     DefaultLayout = RDLC;
-    RDLCLayout = './SkipperVesselPerformance.rdlc';
+    RDLCLayout = './Report\Rdlc\SkipperVesselPerformance.rdlc';
 
 
     dataset
     {
         dataitem("Jobs Point Validate"; Job)
         {
-            DataItemTableView = SORTING ("No.") WHERE ("Sea Days" = FILTER (> 0), "Voyage Ended" = CONST (true));
+            DataItemTableView = SORTING("No.") WHERE("Sea Days" = FILTER(> 0), "Voyage Ended" = CONST(true));
             RequestFilterFields = "No.";
             column(Jobs_Point_Validate__No__; "No.")
             {
@@ -42,8 +42,8 @@ report 50049 "Skipper/Vessel Performance"
             }
             dataitem(Job; Job)
             {
-                DataItemLink = "No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Fishing Country Code", AvgPtSortBay) ORDER(Descending) WHERE ("Sea Days" = FILTER (> 0), "Voyage Ended" = CONST (true));
+                DataItemLink = "No." = FIELD("No.");
+                DataItemTableView = SORTING("Fishing Country Code", AvgPtSortBay) ORDER(Descending) WHERE("Sea Days" = FILTER(> 0), "Voyage Ended" = CONST(true));
                 RequestFilterFields = "Voyage No.", "Ending Date";
                 column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
                 {

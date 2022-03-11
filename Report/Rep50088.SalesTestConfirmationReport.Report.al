@@ -2,14 +2,14 @@ report 50088 "Sales Test/Confirmation Report"
 {
     // "Sales Line"."Line Amount"
     DefaultLayout = RDLC;
-    RDLCLayout = './SalesTestConfirmationReport.rdlc';
+    RDLCLayout = './Report\Rdlc\SalesTestConfirmationReport.rdlc';
 
 
     dataset
     {
         dataitem("Sales Header"; "Sales Header")
         {
-            DataItemTableView = SORTING ("Document Type", "Customer Posting Group");
+            DataItemTableView = SORTING("Document Type", "Customer Posting Group");
             PrintOnlyIfDetail = true;
             RequestFilterFields = "Posting Date", "Location Code";
             column(Sales_Header__Customer_Posting_Group_; "Customer Posting Group")
@@ -83,8 +83,8 @@ report 50088 "Sales Test/Confirmation Report"
             }
             dataitem("Sales Line"; "Sales Line")
             {
-                DataItemLink = "Document Type" = FIELD ("Document Type"), "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document Type", "Document No.", "Line No.") WHERE ("Document Type" = CONST (Invoice));
+                DataItemLink = "Document Type" = FIELD("Document Type"), "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document Type", "Document No.", "Line No.") WHERE("Document Type" = CONST(Invoice));
                 RequestFilterFields = "Document Type", "Document No.";
                 column(Sales_Line__Document_Type_; "Document Type")
                 {
@@ -184,7 +184,7 @@ report 50088 "Sales Test/Confirmation Report"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             column(COMPANYNAME; CompanyName)
             {
             }

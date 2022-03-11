@@ -1,13 +1,13 @@
 report 50093 "Personal Record List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PersonalRecordList.rdlc';
+    RDLCLayout = './Report\Rdlc\PersonalRecordList.rdlc';
 
     dataset
     {
         dataitem(Employee; Employee)
         {
-            DataItemTableView = SORTING ("Global Dimension 1 Code", "Global Dimension 2 Code");
+            DataItemTableView = SORTING("Global Dimension 1 Code", "Global Dimension 2 Code");
             RequestFilterFields = "Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -226,7 +226,7 @@ report 50093 "Personal Record List"
         Employees_In_DepartmentCaptionLbl: Label 'Employees In Department';
         Employees_In_Business_UnitCaptionLbl: Label 'Employees In Business Unit';
 
-  
+
     procedure FormatDate(Dt: Date): Text[20]
     begin
         /*

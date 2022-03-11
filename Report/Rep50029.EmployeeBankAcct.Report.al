@@ -9,14 +9,14 @@ report 50029 "Employee-Bank Acct"
     // The user can specify that the ED.Descriptions appear in the column headers
     // instead of the ED.Codes.
     DefaultLayout = RDLC;
-    RDLCLayout = './EmployeeBankAcct.rdlc';
+    RDLCLayout = './Report\Rdlc\EmployeeBankAcct.rdlc';
 
 
     dataset
     {
         dataitem("Payroll-Payslip Lines."; "Payroll-Payslip Lines.")
         {
-            DataItemTableView = SORTING ("Payroll Period", "Employee No", "E/D Code") WHERE (Amount = FILTER (<> 0));
+            DataItemTableView = SORTING("Payroll Period", "Employee No", "E/D Code") WHERE(Amount = FILTER(<> 0));
             RequestFilterFields = "Payroll Period", "Postg Group", "Employee No";
             RequestFilterHeading = 'Payroll Period && Employees';
             column(sno1; Sno1)

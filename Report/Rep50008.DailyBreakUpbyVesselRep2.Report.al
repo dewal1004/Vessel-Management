@@ -1,13 +1,13 @@
 report 50008 "Daily BreakUp by Vessel Rep 2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyBreakUpbyVesselRep2.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyBreakUpbyVesselRep2.rdlc';
 
     dataset
     {
         dataitem("Inventory Posting G Cat Tot"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE ("In Use" = CONST (true), "Statistics Group" = FILTER (> 0), Category = FILTER (<> ''));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE("In Use" = CONST(true), "Statistics Group" = FILTER(> 0), Category = FILTER(<> ''));
             RequestFilterFields = "Statistics Group", Category, "Date Filter";
             column(test; Test)
             {
@@ -72,7 +72,7 @@ report 50008 "Daily BreakUp by Vessel Rep 2"
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
-           column(USERID________; UserId + ' :  ')
+            column(USERID________; UserId + ' :  ')
             {
             }
             column(STRSUBSTNO_Text001_DateFilter_; StrSubstNo(Text001, DateFilter))
@@ -2356,7 +2356,7 @@ report 50008 "Daily BreakUp by Vessel Rep 2"
                 else
                     InvtTot := "Inventory total1";
 
-               // CurrReport.CreateTotals(InvtTot);
+                // CurrReport.CreateTotals(InvtTot);
                 if "Statistics Group" = 4 then
                     T002 := 'LOCAL PRODUCTS';
 
@@ -2436,14 +2436,14 @@ report 50008 "Daily BreakUp by Vessel Rep 2"
                         else
                             VesselCounter += 1;
                         Countx := Countx + 1;
-                        //END;
+                    //END;
                     until locate.Next = 0;
 
             end;
         }
         dataitem("Inventory Posting Group"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE ("In Use" = CONST (true), "Statistics Group" = FILTER (> 0));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE("In Use" = CONST(true), "Statistics Group" = FILTER(> 0));
             column(testing123; testing123)
             {
             }
@@ -5188,7 +5188,7 @@ report 50008 "Daily BreakUp by Vessel Rep 2"
                         SeaRangeC[level] := Inventory2
                     else
                         SeaRangeC[level] := Inventory1;
-                  //  CurrReport.CreateTotals(SeaRangeC[level]);
+                    //  CurrReport.CreateTotals(SeaRangeC[level]);
                     level := level - 1;
                 end;
                 //Show Inventory for all location by releasing location filter

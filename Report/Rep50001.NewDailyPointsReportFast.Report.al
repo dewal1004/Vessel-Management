@@ -3,7 +3,7 @@ report 50001 "New Daily Points Report Fast"
     // UNL-ASL3.60.01.004 (Santus) May 11, 2005
     // -> modified report to write output data to the Entry/Exit Table. the data will be stored as historical data.
     DefaultLayout = RDLC;
-    RDLCLayout = './NewDailyPointsReportFast.rdlc';
+    RDLCLayout = './Report\Rdlc\NewDailyPointsReportFast.rdlc';
 
     Caption = 'New Daily Points Report';
 
@@ -11,7 +11,7 @@ report 50001 "New Daily Points Report Fast"
     {
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
             trigger OnAfterGetRecord()
             begin
@@ -44,7 +44,7 @@ report 50001 "New Daily Points Report Fast"
         }
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("Points Sort Bay", Status) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Points Sort Bay", Status) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
@@ -52,7 +52,7 @@ report 50001 "New Daily Points Report Fast"
             {
             }
             //column(CurrReport_PAGENO; CurrReport.PageNo)
-            
+
             column(USERID; UserId)
             {
             }
@@ -588,7 +588,7 @@ report 50001 "New Daily Points Report Fast"
                         TotPts[I] := TotPts[I] + pts[I];
                         if pts[I] <> 0 then
                             CountCum[I] := CountCum[I] + 1;
-                        //MESSAGE('Value for row %1 Col %2 is %3',Countz,I,CountCum[I]);
+                    //MESSAGE('Value for row %1 Col %2 is %3',Countz,I,CountCum[I]);
                     until I = 9;
                 end;
 
@@ -608,7 +608,7 @@ report 50001 "New Daily Points Report Fast"
         }
         dataitem(Job2; Job)
         {
-            DataItemTableView = SORTING ("Fishing Country Code", AvgPtSortBay) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Fishing Country Code", AvgPtSortBay) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(Job2__Fishing_Country_Code_; "Fishing Country Code")
             {
             }
@@ -870,7 +870,7 @@ report 50001 "New Daily Points Report Fast"
         }
         dataitem(VoyMedian; Job)
         {
-            DataItemTableView = SORTING ("Points Sort Bay", Status) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Points Sort Bay", Status) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(Desc_Control1000000077; Desc)
             {
             }
@@ -1256,6 +1256,6 @@ report 50001 "New Daily Points Report Fast"
         g_NoTot: array[10] of Integer;
         g_NewCount: array[10] of Integer;
 
-    
+
 
 }

@@ -1,14 +1,14 @@
 report 50230 "Inventory(Value) - Top 10 List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './InventoryValueTop10List.rdlc';
+    RDLCLayout = './Report\Rdlc\InventoryValueTop10List.rdlc';
     Caption = 'Inventory - Top 10 List';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Inventory Posting Group", "Statistics Group", "Date Filter", "Gen. Prod. Posting Group";
 
             trigger OnAfterGetRecord()
@@ -50,7 +50,7 @@ report 50230 "Inventory(Value) - Top 10 List"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+            DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }

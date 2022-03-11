@@ -3,14 +3,14 @@ report 50015 "Vessel Daily Log"
     // "Operation Daily Radio".GETFILTERS
     // Jobs."Voyage No."
     DefaultLayout = RDLC;
-    RDLCLayout = './VesselDailyLog.rdlc';
+    RDLCLayout = './Report\Rdlc\VesselDailyLog.rdlc';
 
 
     dataset
     {
         dataitem("Operation Daily Radio"; "Operation Daily Radio")
         {
-            DataItemTableView = SORTING (Name, "Job No.") WHERE (Date = FILTER (<> 0D));
+            DataItemTableView = SORTING(Name, "Job No.") WHERE(Date = FILTER(<> 0D));
             RequestFilterFields = Date, "Job No.";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

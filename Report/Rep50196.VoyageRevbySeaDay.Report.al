@@ -1,7 +1,7 @@
 report 50196 "Voyage Rev by Sea Day"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageRevbySeaDay.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageRevbySeaDay.rdlc';
 
     dataset
     {

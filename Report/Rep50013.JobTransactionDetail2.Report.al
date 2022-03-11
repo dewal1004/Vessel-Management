@@ -1,14 +1,14 @@
 report 50013 "Job - Transaction Detail 2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './JobTransactionDetail2.rdlc';
+    RDLCLayout = './Report\Rdlc\JobTransactionDetail2.rdlc';
     Caption = 'Job - Transaction Detail';
 
     dataset
     {
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -63,8 +63,8 @@ report 50013 "Job - Transaction Detail 2"
             }
             dataitem("Value Entry"; "Value Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Source No.", "Gen. Prod. Posting Group");
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Source No.", "Gen. Prod. Posting Group");
                 RequestFilterFields = "Posting Date", "Gen. Prod. Posting Group", "Item Ledger Entry Type";
                 column(Value_Entry__Value_Entry___Gen__Prod__Posting_Group_; "Value Entry"."Gen. Prod. Posting Group")
                 {
@@ -113,8 +113,8 @@ report 50013 "Job - Transaction Detail 2"
             }
             dataitem("Job Ledger Entry"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING (Type, "Country/Region Code", "Source Code", "Posting Date") WHERE ("Source Code" = CONST ('PURCHASES'));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING(Type, "Country/Region Code", "Source Code", "Posting Date") WHERE("Source Code" = CONST('PURCHASES'));
                 column(Job_Ledger_Entry__Amt__Posted_to_G_L_; "Amt. Posted to G/L")
                 {
                 }

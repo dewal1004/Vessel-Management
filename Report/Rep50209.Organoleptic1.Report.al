@@ -3,14 +3,14 @@ report 50209 Organoleptic1
     // "Comment Line"."Loose Shells%"
     // "Comment Line"."Loose Neck%"
     DefaultLayout = RDLC;
-    RDLCLayout = './Organoleptic1.rdlc';
+    RDLCLayout = './Report\Rdlc\Organoleptic1.rdlc';
 
 
     dataset
     {
         dataitem("Comment Line"; "Comment Line")
         {
-            DataItemTableView = SORTING ("Table Name", "No.", Type, "Line No.") WHERE ("Table Name" = CONST (Job), Type = CONST (Organoleptic));
+            DataItemTableView = SORTING("Table Name", "No.", Type, "Line No.") WHERE("Table Name" = CONST(Job), Type = CONST(Organoleptic));
             RequestFilterFields = "No.", Vessel, Voyage, Captain, "Date Code", "Frozen Weight W/O I/C", "Drained Weight (KGS)", "Count/Kg", "TTL No. Pcs/Slab", "Upper Grade Count", "Lower Grade Count", "Uniformity Ratio", "Dehydration%", "Discolouration%", "Black Spot%", "Broken%", "Mech Damage%", "Foreign Matter", Odour;
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

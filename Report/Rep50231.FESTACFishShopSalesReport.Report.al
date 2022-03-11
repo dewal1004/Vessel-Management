@@ -2,14 +2,14 @@ report 50231 "FESTAC Fish Shop Sales Report"
 {
     //   "Sea Food categories"
     DefaultLayout = RDLC;
-    RDLCLayout = './FESTACFishShopSalesReport.rdlc';
+    RDLCLayout = './Report\Rdlc\FESTACFishShopSalesReport.rdlc';
 
 
     dataset
     {
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code");
+            DataItemTableView = SORTING("Sea food code");
             PrintOnlyIfDetail = true;
             column(USERID; UserId)
             {
@@ -73,7 +73,7 @@ report 50231 "FESTAC Fish Shop Sales Report"
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("SF Cat", "No. 2") WHERE ("Gen. Prod. Posting Group" = FILTER ('FIS'), "Sales (Qty.)" = FILTER (<> 0), "Location Filter" = FILTER ('FESTACFS'));
+                DataItemTableView = SORTING("SF Cat", "No. 2") WHERE("Gen. Prod. Posting Group" = FILTER('FIS'), "Sales (Qty.)" = FILTER(<> 0), "Location Filter" = FILTER('FESTACFS'));
                 RequestFilterFields = "Date Filter";
                 column(Item__Item_Category_Code_; "Item Category Code")
                 {

@@ -2,14 +2,14 @@ report 50234 "Institutional Sales Report"
 {
     //   "Sea Food categories"
     DefaultLayout = RDLC;
-    RDLCLayout = './InstitutionalSalesReport.rdlc';
+    RDLCLayout = './Report\Rdlc\InstitutionalSalesReport.rdlc';
 
 
     dataset
     {
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code");
+            DataItemTableView = SORTING("Sea food code");
             PrintOnlyIfDetail = true;
             column(USERID; UserId)
             {
@@ -74,7 +74,7 @@ report 50234 "Institutional Sales Report"
             dataitem(Item; Item)
             {
                 CalcFields = "Sales (Qty.)", "Sales (LCY)";
-                DataItemTableView = SORTING ("SF Cat", "No. 2") WHERE ("Gen. Prod. Posting Group" = FILTER ('FIS'), "Sales (Qty.)" = FILTER (<> 0), "Location Filter" = FILTER ('FS-INSTI'));
+                DataItemTableView = SORTING("SF Cat", "No. 2") WHERE("Gen. Prod. Posting Group" = FILTER('FIS'), "Sales (Qty.)" = FILTER(<> 0), "Location Filter" = FILTER('FS-INSTI'));
                 RequestFilterFields = "Date Filter";
                 column(Item__Item_Category_Code_; "Item Category Code")
                 {
@@ -112,26 +112,26 @@ report 50234 "Institutional Sales Report"
 
                 trigger OnAfterGetRecord()
                 begin
-/*
-                    //CurrReport.SHOWOUTPUT := FooterPrinted;
-                    //FooterPrinted := FALSE;
+                    /*
+                                        //CurrReport.SHOWOUTPUT := FooterPrinted;
+                                        //FooterPrinted := FALSE;
 
-                    CurrReport.ShowOutput :=
-                      CurrReport.TotalsCausedBy = Item.FieldNo("SF Cat");
-                    CurrReport.ShowOutput(false);
+                                        CurrReport.ShowOutput :=
+                                          CurrReport.TotalsCausedBy = Item.FieldNo("SF Cat");
+                                        CurrReport.ShowOutput(false);
 
-                    CurrReport.ShowOutput :=
-                      CurrReport.TotalsCausedBy = LastFieldNo;
-                    TotSales := TotSales + "Sales (LCY)";
+                                        CurrReport.ShowOutput :=
+                                          CurrReport.TotalsCausedBy = LastFieldNo;
+                                        TotSales := TotSales + "Sales (LCY)";
 
-                    if not FooterPrinted then
-                        LastFieldNo := CurrReport.TotalsCausedBy;
-                    CurrReport.ShowOutput := not FooterPrinted;
-                    FooterPrinted := true;
+                                        if not FooterPrinted then
+                                            LastFieldNo := CurrReport.TotalsCausedBy;
+                                        CurrReport.ShowOutput := not FooterPrinted;
+                                        FooterPrinted := true;
 
-                    CurrReport.ShowOutput :=
-                      CurrReport.TotalsCausedBy = Item.FieldNo("SF Cat");
-                      */
+                                        CurrReport.ShowOutput :=
+                                          CurrReport.TotalsCausedBy = Item.FieldNo("SF Cat");
+                                          */
                 end;
 
                 trigger OnPreDataItem()

@@ -4,14 +4,14 @@ report 50066 "E/D-Employee-period"
     // an employee, for each of this periods. The total amount for the periods is
     // also printed for each employee.
     DefaultLayout = RDLC;
-    RDLCLayout = './EDEmployeeperiod.rdlc';
+    RDLCLayout = './Report\Rdlc\EDEmployeeperiod.rdlc';
 
 
     dataset
     {
         dataitem("Payroll-E/D Codes."; "Payroll-E/D Codes.")
         {
-            DataItemTableView = SORTING ("E/D Code");
+            DataItemTableView = SORTING("E/D Code");
             PrintOnlyIfDetail = false;
             RequestFilterFields = "E/D Code";
             column(CompanyData_Name; CompanyData.Name)
@@ -55,8 +55,8 @@ report 50066 "E/D-Employee-period"
             }
             dataitem("Payroll-Payslip Lines."; "Payroll-Payslip Lines.")
             {
-                DataItemLink = "E/D Code" = FIELD ("E/D Code");
-                DataItemTableView = SORTING ("E/D Code", "Employee No", "Payroll Period");
+                DataItemLink = "E/D Code" = FIELD("E/D Code");
+                DataItemTableView = SORTING("E/D Code", "Employee No", "Payroll Period");
                 PrintOnlyIfDetail = false;
                 RequestFilterFields = "Employee No";
                 RequestFilterHeading = 'Employees';

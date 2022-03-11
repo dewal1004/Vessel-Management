@@ -3,14 +3,14 @@ report 50076 "Short Supply by Vessel"
     // "Transfer Line".GETFILTERS
     // "Transfer Line"."Qty. Reqd."
     DefaultLayout = RDLC;
-    RDLCLayout = './ShortSupplybyVessel.rdlc';
+    RDLCLayout = './Report\Rdlc\ShortSupplybyVessel.rdlc';
 
 
     dataset
     {
         dataitem("Transfer Line"; "Transfer Line")
         {
-            DataItemTableView = SORTING ("Transfer-to Code", "Item No.", "Shipment Date");
+            DataItemTableView = SORTING("Transfer-to Code", "Item No.", "Shipment Date");
             RequestFilterFields = "Transfer-to Code", "Item No.", "Shipment Date";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

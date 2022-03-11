@@ -9,14 +9,14 @@ report 50064 "PAYE Report"
     // The user can specify that the ED.Descriptions appear in the column headers
     // instead of the ED.Codes.
     DefaultLayout = RDLC;
-    RDLCLayout = './PAYEReport.rdlc';
+    RDLCLayout = './Report\Rdlc\PAYEReport.rdlc';
 
 
     dataset
     {
         dataitem("Payroll-Payslip Lines."; "Payroll-Payslip Lines.")
         {
-            DataItemTableView = SORTING ("Employee No");
+            DataItemTableView = SORTING("Employee No");
             PrintOnlyIfDetail = false;
             RequestFilterFields = "Payroll Period", "Employee No";
             RequestFilterHeading = 'Period for PAYE';

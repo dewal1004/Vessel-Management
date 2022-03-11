@@ -3,7 +3,7 @@ report 50137 "Inventory - BINCARD 704 B"
     // Item."Unit Cost"
     // "Print Bin Card"
     DefaultLayout = RDLC;
-    RDLCLayout = './InventoryBINCARD704B.rdlc';
+    RDLCLayout = './Report\Rdlc\InventoryBINCARD704B.rdlc';
 
     Caption = 'Inventory - Transaction Detail';
     Permissions = TableData "Sales Shipment Header" = rimd;
@@ -82,7 +82,7 @@ report 50137 "Inventory - BINCARD 704 B"
             }
             dataitem(PageCounter; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(Item__No__; Item."No.")
                 {
                 }
@@ -105,7 +105,7 @@ report 50137 "Inventory - BINCARD 704 B"
                 dataitem("Item Ledger Entry"; "Item Ledger Entry")
                 {
                     DataItemLinkReference = Item;
-                    DataItemTableView = SORTING ("Item No.", "Posting Date") WHERE ("Transport Method" = FILTER (<> '10'));
+                    DataItemTableView = SORTING("Item No.", "Posting Date") WHERE("Transport Method" = FILTER(<> '10'));
                     column(StartOnHand___Quantity; StartOnHand + Quantity)
                     {
                         DecimalPlaces = 0 : 5;
@@ -206,7 +206,7 @@ report 50137 "Inventory - BINCARD 704 B"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 .. 35));
+                DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 .. 35));
                 column(Integer_Number; Number)
                 {
                 }

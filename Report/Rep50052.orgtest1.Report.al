@@ -1,7 +1,7 @@
 report 50052 org_test1
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './orgtest1.rdlc';
+    RDLCLayout = './Report\Rdlc\orgtest1.rdlc';
 
     dataset
     {

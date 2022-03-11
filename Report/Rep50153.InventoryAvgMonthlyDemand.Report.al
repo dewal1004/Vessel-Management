@@ -1,7 +1,7 @@
 report 50153 "Inventory Avg. Monthly Demand"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './InventoryAvgMonthlyDemand.rdlc';
+    RDLCLayout = './Report\Rdlc\InventoryAvgMonthlyDemand.rdlc';
 
     dataset
     {
@@ -32,7 +32,7 @@ report 50153 "Inventory Avg. Monthly Demand"
         }
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("Statistics Group", "Inventory Posting Group", "Cover Period") ORDER(Descending) WHERE ("Statistics Group" = CONST (0));
+            DataItemTableView = SORTING("Statistics Group", "Inventory Posting Group", "Cover Period") ORDER(Descending) WHERE("Statistics Group" = CONST(0));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }

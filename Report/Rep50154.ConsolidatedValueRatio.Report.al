@@ -1,7 +1,7 @@
 report 50154 "Consolidated Value  & Ratio"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ConsolidatedValueRatio.rdlc';
+    RDLCLayout = './Report\Rdlc\ConsolidatedValueRatio.rdlc';
     Permissions = TableData "Job Ledger Entry" = rimd,
                   TableData "Value Entry" = rimd;
 
@@ -9,7 +9,7 @@ report 50154 "Consolidated Value  & Ratio"
     {
         dataitem(Jobss; Job)
         {
-            DataItemTableView = SORTING ("Ending Date") WHERE ("Voyage Ended" = CONST (true));
+            DataItemTableView = SORTING("Ending Date") WHERE("Voyage Ended" = CONST(true));
             column(No_Jobss; Jobss."No.")
             {
             }
@@ -521,7 +521,7 @@ report 50154 "Consolidated Value  & Ratio"
         }
         dataitem(Jb; Job)
         {
-            DataItemTableView = SORTING ("Ending Date");
+            DataItemTableView = SORTING("Ending Date");
             column(Jb__No__; "No.")
             {
             }
@@ -560,7 +560,7 @@ report 50154 "Consolidated Value  & Ratio"
             }
             dataitem(JbLedMark; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
+                DataItemLink = "Job No." = FIELD("No.");
                 column(JbLedMark__Entry_No__; "Entry No.")
                 {
                 }
@@ -608,7 +608,7 @@ report 50154 "Consolidated Value  & Ratio"
         }
         dataitem(Location; Location)
         {
-            DataItemTableView = SORTING (Code) WHERE ("Location Type" = CONST (Vessel));
+            DataItemTableView = SORTING(Code) WHERE("Location Type" = CONST(Vessel));
             column(COPYSTR_SeaVH_1__5_; CopyStr(SeaVH[1], 5))
             {
             }
@@ -781,7 +781,7 @@ report 50154 "Consolidated Value  & Ratio"
             }
             dataitem("Sea Food categories"; "Sea Food categories")
             {
-                DataItemTableView = SORTING ("Sea food code");
+                DataItemTableView = SORTING("Sea food code");
                 column(Sea_Food_categories__Sea_food_code_; "Sea food code")
                 {
                 }
@@ -1002,7 +1002,7 @@ report 50154 "Consolidated Value  & Ratio"
                 }
                 dataitem("Job Ledger Entry Rep"; "Job Ledger Entry")
                 {
-                    DataItemLink = GroupSort = FIELD ("Sea food code");
+                    DataItemLink = GroupSort = FIELD("Sea food code");
                     column(Job_Ledger_Entry_Rep_GroupSort; GroupSort)
                     {
                     }
@@ -1331,7 +1331,7 @@ report 50154 "Consolidated Value  & Ratio"
         "No.B" := ItemVar;
     end;
 
-    
+
     procedure GetItPrice(JNos: Code[20]; Nos: Code[20]; PDays: Date): Decimal
     var
         Job3: Record Job;

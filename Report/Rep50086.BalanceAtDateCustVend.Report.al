@@ -7,7 +7,7 @@ report 50086 "Balance At Date (Cust/Vend)"
     // Customer.SETFILTER(Customer."Customer Posting Group",'STAFF');
     // Customer."Date Filter":=0D;
     DefaultLayout = RDLC;
-    RDLCLayout = './BalanceAtDateCustVend.rdlc';
+    RDLCLayout = './Report\Rdlc\BalanceAtDateCustVend.rdlc';
 
 
     dataset
@@ -15,7 +15,7 @@ report 50086 "Balance At Date (Cust/Vend)"
         dataitem(Customer; Customer)
         {
             CalcFields = "Net Change", "Net Change (LCY)";
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Customer Posting Group", "Date Filter", "Gen. Bus. Posting Group";
             column(Company_Name; Company_Info.Name)
             {
@@ -300,7 +300,7 @@ report 50086 "Balance At Date (Cust/Vend)"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             column(Output; Data)
             {
             }

@@ -1,13 +1,13 @@
 report 50011 "Banks Balances"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './BanksBalances.rdlc';
+    RDLCLayout = './Report\Rdlc\BanksBalances.rdlc';
 
     dataset
     {
         dataitem("Bank Account"; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Currency Code", "Date Filter", Category;
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -209,7 +209,7 @@ report 50011 "Banks Balances"
         }
         dataitem(Bank2; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             PrintOnlyIfDetail = true;
             column(Bank2_Name; Bank2.Name)
             {
@@ -270,8 +270,8 @@ report 50011 "Banks Balances"
             }
             dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
             {
-                DataItemLink = "Bank Account No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Bank Account No.", "Posting Date");
+                DataItemLink = "Bank Account No." = FIELD("No.");
+                DataItemTableView = SORTING("Bank Account No.", "Posting Date");
                 column(Bank_Account_Ledger_Entry__Credit_Amount_; "Credit Amount")
                 {
                 }
@@ -345,7 +345,7 @@ report 50011 "Banks Balances"
             begin
 
                 Bank2.CopyFilters("Bank Account");
-         //       CurrReport.CreateTotals(DEBIT_PERIOD, CREDIT_PERIOD);
+                //       CurrReport.CreateTotals(DEBIT_PERIOD, CREDIT_PERIOD);
             end;
         }
         dataitem(DEPOSIT; DEPOSIT)

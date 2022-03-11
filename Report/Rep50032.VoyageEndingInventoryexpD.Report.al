@@ -1,7 +1,7 @@
 report 50032 "Voyage Ending Inventory expD"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageEndingInventoryexpD.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageEndingInventoryexpD.rdlc';
 
     dataset
     {
@@ -64,8 +64,8 @@ report 50032 "Voyage Ending Inventory expD"
             }
             dataitem(Item; Item)
             {
-                DataItemLink = "Location Filter" = FIELD (Vessel);
-                DataItemTableView = SORTING ("S/No.", "Gen. Prod. Posting Group") WHERE ("Statistics Group" = FILTER (0 .. 3), "Gen. Prod. Posting Group" = CONST ('FIS'), Inventory = FILTER (<> 0));
+                DataItemLink = "Location Filter" = FIELD(Vessel);
+                DataItemTableView = SORTING("S/No.", "Gen. Prod. Posting Group") WHERE("Statistics Group" = FILTER(0 .. 3), "Gen. Prod. Posting Group" = CONST('FIS'), Inventory = FILTER(<> 0));
                 RequestFilterFields = "No.";
                 column(Item_No; "No.")
                 {
@@ -97,8 +97,8 @@ report 50032 "Voyage Ending Inventory expD"
             }
             dataitem(ItemMrkt; Item)
             {
-                DataItemLink = "Location Filter" = FIELD (Vessel);
-                DataItemTableView = SORTING ("S/No.", "Gen. Prod. Posting Group") WHERE ("Statistics Group" = FILTER (4), "Gen. Prod. Posting Group" = CONST ('FIS'));
+                DataItemLink = "Location Filter" = FIELD(Vessel);
+                DataItemTableView = SORTING("S/No.", "Gen. Prod. Posting Group") WHERE("Statistics Group" = FILTER(4), "Gen. Prod. Posting Group" = CONST('FIS'));
                 column(ItemMrkt__No__; "No.")
                 {
                 }
@@ -130,8 +130,8 @@ report 50032 "Voyage Ending Inventory expD"
             }
             dataitem("Job Planning Line"; "Job Planning Line")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Allocation %", "Resource Group") ORDER(Descending) WHERE (Type = CONST (Resource));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Allocation %", "Resource Group") ORDER(Descending) WHERE(Type = CONST(Resource));
                 column(Job_Planing_Line__No__; "Job Planning Line"."No.")
                 {
                 }
@@ -264,7 +264,7 @@ report 50032 "Voyage Ending Inventory expD"
                 JobJL."Work Type Code Sort" := InvPostGrp.Category;
     end;
 
-    
+
     procedure MakeBatch(CatchType: Integer)
     begin
         JobJB.Init;

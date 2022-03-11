@@ -2,7 +2,7 @@ report 50187 "Sales Packing List"
 {
     // SalesHeader."Ship-to City"
     DefaultLayout = RDLC;
-    RDLCLayout = './SalesPackingList.rdlc';
+    RDLCLayout = './Report\Rdlc\SalesPackingList.rdlc';
 
     Caption = 'Sales Document - Test';
 
@@ -10,7 +10,7 @@ report 50187 "Sales Packing List"
     {
         dataitem("Sales Header"; "Sales Header")
         {
-            DataItemTableView = WHERE ("Document Type" = FILTER (<> Quote));
+            DataItemTableView = WHERE("Document Type" = FILTER(<> Quote));
             RequestFilterFields = "Document Type", "No.";
             RequestFilterHeading = 'Sales Document';
             column(FORMAT__Sales_Header___Document_Date__0_4_; Format("Sales Header"."Document Date", 0, 4))
@@ -27,7 +27,7 @@ report 50187 "Sales Packing List"
             }
             dataitem(PageCounter; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(STRSUBSTNO_Text041_CopyText_; StrSubstNo(Text041, CopyText))
                 {
                 }
@@ -261,7 +261,7 @@ report 50187 "Sales Packing List"
                 }
                 dataitem(DimensionLoop1; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                    DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
 
                     trigger OnAfterGetRecord()
                     begin
@@ -298,7 +298,7 @@ report 50187 "Sales Packing List"
                 }
                 dataitem(HeaderErrorCounter; "Integer")
                 {
-                    DataItemTableView = SORTING (Number);
+                    DataItemTableView = SORTING(Number);
 
                     trigger OnPostDataItem()
                     begin
@@ -312,9 +312,9 @@ report 50187 "Sales Packing List"
                 }
                 dataitem("Sales Line"; "Sales Line")
                 {
-                    DataItemLink = "Document Type" = FIELD ("Document Type"), "Document No." = FIELD ("No.");
+                    DataItemLink = "Document Type" = FIELD("Document Type"), "Document No." = FIELD("No.");
                     DataItemLinkReference = "Sales Header";
-                    DataItemTableView = SORTING ("Document Type", "Document No.", "Line No.");
+                    DataItemTableView = SORTING("Document Type", "Document No.", "Line No.");
                     column(Quantity_1000; Quantity / 1000)
                     {
                         DecimalPlaces = 3 :;
@@ -346,7 +346,7 @@ report 50187 "Sales Packing List"
                     }
                     dataitem(DimensionLoop2; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                        DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
 
                         trigger OnAfterGetRecord()
                         begin
@@ -383,7 +383,7 @@ report 50187 "Sales Packing List"
                     }
                     dataitem(LineErrorCounter; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
 
                         trigger OnPostDataItem()
                         begin
@@ -656,7 +656,7 @@ report 50187 "Sales Packing List"
                 }
                 dataitem(VATCounter; "Integer")
                 {
-                    DataItemTableView = SORTING (Number);
+                    DataItemTableView = SORTING(Number);
 
                     trigger OnAfterGetRecord()
                     begin
@@ -676,9 +676,9 @@ report 50187 "Sales Packing List"
                 }
                 dataitem("Item Charge Assignment (Sales)"; "Item Charge Assignment (Sales)")
                 {
-                    DataItemLink = "Document Type" = FIELD ("Document Type"), "Document No." = FIELD ("Document No.");
+                    DataItemLink = "Document Type" = FIELD("Document Type"), "Document No." = FIELD("Document No.");
                     DataItemLinkReference = "Sales Line";
-                    DataItemTableView = SORTING ("Document Type", "Document No.", "Document Line No.", "Line No.");
+                    DataItemTableView = SORTING("Document Type", "Document No.", "Document Line No.", "Line No.");
 
                     trigger OnAfterGetRecord()
                     begin

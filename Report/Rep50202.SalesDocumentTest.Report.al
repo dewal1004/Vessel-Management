@@ -1,14 +1,14 @@
 report 50202 "!Sales Document - Test"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './SalesDocumentTest.rdlc';
+    RDLCLayout = './Report\Rdlc\SalesDocumentTest.rdlc';
     Caption = 'Sales Document - Test';
 
     dataset
     {
         dataitem("Sales Header"; "Sales Header")
         {
-            DataItemTableView = WHERE ("Document Type" = FILTER (<> Quote));
+            DataItemTableView = WHERE("Document Type" = FILTER(<> Quote));
             RequestFilterFields = "Document Type", "No.";
             RequestFilterHeading = 'Sales Document';
             column(Sales_Header_Document_Type; "Document Type")
@@ -19,7 +19,7 @@ report 50202 "!Sales Document - Test"
             }
             dataitem(PageCounter; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(STRSUBSTNO_Text041_CopyText_; StrSubstNo(Text041, CopyText))
                 {
                 }
@@ -520,7 +520,7 @@ report 50202 "!Sales Document - Test"
                 }
                 dataitem(DimensionLoop1; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                    DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                     column(DimText; DimText)
                     {
                     }
@@ -569,7 +569,7 @@ report 50202 "!Sales Document - Test"
                 }
                 dataitem(HeaderErrorCounter; "Integer")
                 {
-                    DataItemTableView = SORTING (Number);
+                    DataItemTableView = SORTING(Number);
                     column(ErrorText_Number_; ErrorText[Number])
                     {
                     }
@@ -592,9 +592,9 @@ report 50202 "!Sales Document - Test"
                 }
                 dataitem("Sales Line"; "Sales Line")
                 {
-                    DataItemLink = "Document Type" = FIELD ("Document Type"), "Document No." = FIELD ("No.");
+                    DataItemLink = "Document Type" = FIELD("Document Type"), "Document No." = FIELD("No.");
                     DataItemLinkReference = "Sales Header";
-                    DataItemTableView = SORTING ("Document Type", "Document No.", Type, "Item Category Code", "Posting Group");
+                    DataItemTableView = SORTING("Document Type", "Document No.", Type, "Item Category Code", "Posting Group");
                     column(ItcatDesc; ItcatDesc)
                     {
                     }
@@ -728,7 +728,7 @@ report 50202 "!Sales Document - Test"
                     }
                     dataitem(DimensionLoop2; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                        DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                         column(DimText_Control159; DimText)
                         {
                         }
@@ -777,7 +777,7 @@ report 50202 "!Sales Document - Test"
                     }
                     dataitem(LineErrorCounter; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
                         column(ErrorText_Number__Control97; ErrorText[Number])
                         {
                         }
@@ -1061,7 +1061,7 @@ report 50202 "!Sales Document - Test"
                 }
                 dataitem(VATCounter; "Integer")
                 {
-                    DataItemTableView = SORTING (Number);
+                    DataItemTableView = SORTING(Number);
                     column(VATAmountLine__VAT_Amount_; VATAmountLine."VAT Amount")
                     {
                         AutoFormatExpression = "Sales Header"."Currency Code";
@@ -1224,9 +1224,9 @@ report 50202 "!Sales Document - Test"
                 }
                 dataitem("Item Charge Assignment (Sales)"; "Item Charge Assignment (Sales)")
                 {
-                    DataItemLink = "Document Type" = FIELD ("Document Type"), "Document No." = FIELD ("Document No.");
+                    DataItemLink = "Document Type" = FIELD("Document Type"), "Document No." = FIELD("Document No.");
                     DataItemLinkReference = "Sales Line";
-                    DataItemTableView = SORTING ("Document Type", "Document No.", "Document Line No.", "Line No.");
+                    DataItemTableView = SORTING("Document Type", "Document No.", "Document Line No.", "Line No.");
                     column(Item_Charge_Assignment__Sales___Qty__to_Assign_; "Qty. to Assign")
                     {
                     }

@@ -5,7 +5,7 @@ report 50182 "Catch Reconciliatn Posted"
     // U need only do this once or whenevever there is a change in
     // GroupSort.
     DefaultLayout = RDLC;
-    RDLCLayout = './CatchReconciliatnPosted.rdlc';
+    RDLCLayout = './Report\Rdlc\CatchReconciliatnPosted.rdlc';
 
 
     dataset
@@ -78,8 +78,8 @@ report 50182 "Catch Reconciliatn Posted"
             }
             dataitem("Job Ledger Entry"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No."), "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Job No.", GroupSort, "No.") WHERE ("Gen. Prod. Posting Group" = CONST ('FIS'));
+                DataItemLink = "Job No." = FIELD("No."), "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Job No.", GroupSort, "No.") WHERE("Gen. Prod. Posting Group" = CONST('FIS'));
                 RequestFilterFields = "Job No.", "Location Code", "Work Type Code";
                 column(HD1; HD1)
                 {

@@ -1,13 +1,13 @@
 report 50106 "Daily Break Up By Vessel"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyBreakUpByVessel.50106.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyBreakUpByVessel.50106.rdlc';
 
     dataset
     {
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             column(Report_Generation_Completed__; 'Report Generation Completed!')
             {
             }

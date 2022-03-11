@@ -1,14 +1,14 @@
 report 50017 "Local Sales Report1"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './LocalSalesReport1.rdlc';
+    RDLCLayout = './Report\Rdlc\LocalSalesReport1.rdlc';
     Caption = 'Local Sales Report1';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("No.") WHERE ("Gen. Prod. Posting Group" = CONST ('FIS'));
+            DataItemTableView = SORTING("No.") WHERE("Gen. Prod. Posting Group" = CONST('FIS'));
             RequestFilterFields = "No.", "Inventory Posting Group", "Statistics Group", "Date Filter";
 
             trigger OnAfterGetRecord()
@@ -56,7 +56,7 @@ report 50017 "Local Sales Report1"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+            DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
             column(STRSUBSTNO_Text001_ItemDateFilter_; StrSubstNo(Text001, ItemDateFilter))
             {
             }

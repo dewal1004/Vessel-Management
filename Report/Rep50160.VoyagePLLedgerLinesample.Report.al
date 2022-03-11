@@ -1,7 +1,7 @@
 report 50160 "Voyage P&L Ledger Line sample"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyagePLLedgerLinesample.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyagePLLedgerLinesample.rdlc';
     Permissions = TableData "Job Ledger Entry" = rimd;
 
     dataset

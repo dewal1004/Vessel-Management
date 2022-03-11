@@ -1,13 +1,13 @@
 report 50068 "Payroll Tax Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PayrollTaxReport.rdlc';
+    RDLCLayout = './Report\Rdlc\PayrollTaxReport.rdlc';
 
     dataset
     {
         dataitem("Payroll-Payslip Header."; "Payroll-Payslip Header.")
         {
-            DataItemTableView = SORTING (Company, "Employee No", "Payroll Period");
+            DataItemTableView = SORTING(Company, "Employee No", "Payroll Period");
             PrintOnlyIfDetail = false;
             RequestFilterFields = "Employee No", "Payroll Period";
             column(COMPANYNAME; CompanyName)

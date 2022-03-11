@@ -1,13 +1,13 @@
 report 50109 "Local Banks Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './LocalBanksReport.rdlc';
+    RDLCLayout = './Report\Rdlc\LocalBanksReport.rdlc';
 
     dataset
     {
         dataitem("Bank Account"; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.") WHERE (Category = CONST ("Local Bank"));
+            DataItemTableView = SORTING("No.") WHERE(Category = CONST("Local Bank"));
             RequestFilterFields = "No.", "Currency Code", "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -129,7 +129,7 @@ report 50109 "Local Banks Report"
         }
         dataitem(Bank2; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             PrintOnlyIfDetail = true;
             column(Bank2_Bank2_Name; Bank2.Name)
             {
@@ -163,8 +163,8 @@ report 50109 "Local Banks Report"
             }
             dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
             {
-                DataItemLink = "Bank Account No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Bank Account No.", "Posting Date");
+                DataItemLink = "Bank Account No." = FIELD("No.");
+                DataItemTableView = SORTING("Bank Account No.", "Posting Date");
                 column(Bank_Account_Ledger_Entry__Credit_Amount_; "Credit Amount")
                 {
                 }
@@ -222,7 +222,7 @@ report 50109 "Local Banks Report"
         dataitem(DEPOSIT; DEPOSIT)
         {
             CalcFields = "Deposit Balance";
-            DataItemTableView = SORTING ("Bank Acc. No.", "Maturity Date") WHERE ("Deposit Balance" = FILTER (<> 0));
+            DataItemTableView = SORTING("Bank Acc. No.", "Maturity Date") WHERE("Deposit Balance" = FILTER(<> 0));
             column(DEPOSIT__Bank_Name_; "Bank Name")
             {
             }

@@ -1,13 +1,13 @@
 report 50216 "Item Age Composition Qty"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ItemAgeCompositionQty.rdlc';
+    RDLCLayout = './Report\Rdlc\ItemAgeCompositionQty.rdlc';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Inventory Posting Group", "Statistics Group", "Location Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

@@ -2,7 +2,7 @@ report 50222 "ABUJA Fish Shop Sales Report"
 {
     //   "Sea Food categories"
     DefaultLayout = RDLC;
-    RDLCLayout = './ABUJAFishShopSalesReport.rdlc';
+    RDLCLayout = './Report\Rdlc\ABUJAFishShopSalesReport.rdlc';
 
 
     dataset
@@ -71,7 +71,7 @@ report 50222 "ABUJA Fish Shop Sales Report"
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("SF Cat", "No. 2") WHERE ("Gen. Prod. Posting Group" = FILTER ('FIS'), "Sales (Qty.)" = FILTER (<> 0), "Location Filter" = FILTER ('ABFISHSHOP'));
+                DataItemTableView = SORTING("SF Cat", "No. 2") WHERE("Gen. Prod. Posting Group" = FILTER('FIS'), "Sales (Qty.)" = FILTER(<> 0), "Location Filter" = FILTER('ABFISHSHOP'));
                 RequestFilterFields = "Date Filter";
                 column(Item__Item_Category_Code_; "Item Category Code")
                 {

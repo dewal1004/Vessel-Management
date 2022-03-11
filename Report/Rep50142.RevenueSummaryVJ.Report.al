@@ -1,13 +1,13 @@
 report 50142 "Revenue Summary VJ"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './RevenueSummaryVJ.rdlc';
+    RDLCLayout = './Report\Rdlc\RevenueSummaryVJ.rdlc';
 
     dataset
     {
         dataitem("Revenue Table VJ"; "Revenue Table VJ")
         {
-            DataItemTableView = SORTING ("Job No.");
+            DataItemTableView = SORTING("Job No.");
             RequestFilterFields = "Job No.", ETA, Vessel;
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

@@ -6,14 +6,14 @@ report 50149 "Skipper/Vessel Performance XC"
     // NetSeaDay
     // CurrReport.SHOWOUTPUT(FALSE);
     DefaultLayout = RDLC;
-    RDLCLayout = './SkipperVesselPerformanceXC.rdlc';
+    RDLCLayout = './Report\Rdlc\SkipperVesselPerformanceXC.rdlc';
 
 
     dataset
     {
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
             trigger OnAfterGetRecord()
             begin
@@ -37,7 +37,7 @@ report 50149 "Skipper/Vessel Performance XC"
         }
         dataitem("Jobs Point Validate"; Job)
         {
-            DataItemTableView = WHERE ("Sea Days" = FILTER (> 0), "Voyage Ended" = CONST (true));
+            DataItemTableView = WHERE("Sea Days" = FILTER(> 0), "Voyage Ended" = CONST(true));
             column(Jobs_Point_Validate__No__; "No.")
             {
             }
@@ -78,7 +78,7 @@ report 50149 "Skipper/Vessel Performance XC"
         }
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING (AvgPtSortBay) ORDER(Descending) WHERE ("Sea Days" = FILTER (> 0), "Voyage Ended" = CONST (true));
+            DataItemTableView = SORTING(AvgPtSortBay) ORDER(Descending) WHERE("Sea Days" = FILTER(> 0), "Voyage Ended" = CONST(true));
             RequestFilterFields = "Voyage No.", "Ending Date";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

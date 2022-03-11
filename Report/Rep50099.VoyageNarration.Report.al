@@ -1,7 +1,7 @@
 report 50099 "Voyage Narration"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageNarration.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageNarration.rdlc';
 
     dataset
     {
@@ -73,8 +73,8 @@ report 50099 "Voyage Narration"
             }
             dataitem("Comment Line"; "Comment Line")
             {
-                DataItemLink = "No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Table Name", "No.", Type, "Line No.") ORDER(Ascending) WHERE ("Table Name" = CONST (Job), Type = FILTER (Narration));
+                DataItemLink = "No." = FIELD("No.");
+                DataItemTableView = SORTING("Table Name", "No.", Type, "Line No.") ORDER(Ascending) WHERE("Table Name" = CONST(Job), Type = FILTER(Narration));
                 column(Comment_Line_Date; Date)
                 {
                 }
@@ -178,14 +178,14 @@ report 50099 "Voyage Narration"
     [Scope('Internal')]
     procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[200]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
     begin
-      /*  xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize; */
+        /*  xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+          if Bold then
+              xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+          if Italic then
+              xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+          if Underline then
+              xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+          xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize; */
     end;
 
     [Scope('Internal')]

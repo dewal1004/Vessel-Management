@@ -2,7 +2,7 @@ report 50047 "Voyage Ending Inv Cons exp3"
 {
     // ItemUOV== Items Used On Vessel
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageEndingInvConsexp3.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageEndingInvConsexp3.rdlc';
 
 
     dataset
@@ -69,7 +69,7 @@ report 50047 "Voyage Ending Inv Cons exp3"
             }
             dataitem(ItemUOV; Item)
             {
-                DataItemTableView = SORTING ("No.");
+                DataItemTableView = SORTING("No.");
                 RequestFilterFields = "No.";
                 column(ItemUOV__Inventory_Total_; "Inventory Total")
                 {

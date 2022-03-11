@@ -1,13 +1,13 @@
 report 50110 "Foreign Banks Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ForeignBanksReport.rdlc';
+    RDLCLayout = './Report\Rdlc\ForeignBanksReport.rdlc';
 
     dataset
     {
         dataitem("Bank Account"; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.") WHERE (Category = CONST ("Foreign Bank"));
+            DataItemTableView = SORTING("No.") WHERE(Category = CONST("Foreign Bank"));
             RequestFilterFields = "No.", "Currency Code", "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -129,7 +129,7 @@ report 50110 "Foreign Banks Report"
         }
         dataitem(Bank2; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             PrintOnlyIfDetail = true;
             column(Bank2_Bank2_Name; Bank2.Name)
             {
@@ -163,8 +163,8 @@ report 50110 "Foreign Banks Report"
             }
             dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
             {
-                DataItemLink = "Bank Account No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Bank Account No.", "Posting Date");
+                DataItemLink = "Bank Account No." = FIELD("No.");
+                DataItemTableView = SORTING("Bank Account No.", "Posting Date");
                 column(Bank_Account_Ledger_Entry__Credit_Amount_; "Credit Amount")
                 {
                 }

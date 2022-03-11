@@ -1,13 +1,13 @@
 report 50034 "Purchase Import Status"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PurchaseImportStatus.rdlc';
+    RDLCLayout = './Report\Rdlc\PurchaseImportStatus.rdlc';
 
     dataset
     {
         dataitem("Purchase Header"; "Purchase Header")
         {
-            DataItemTableView = SORTING ("Document Type", "No.") WHERE ("Document Type" = CONST (Order), "Currency Code" = FILTER (<> ''));
+            DataItemTableView = SORTING("Document Type", "No.") WHERE("Document Type" = CONST(Order), "Currency Code" = FILTER(<> ''));
             RequestFilterFields = "No.", "Document Date";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

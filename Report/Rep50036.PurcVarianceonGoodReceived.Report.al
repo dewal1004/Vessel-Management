@@ -2,7 +2,7 @@ report 50036 "Purc Variance on Good Received"
 {
     //  "Quantity Ordered"
     DefaultLayout = RDLC;
-    RDLCLayout = './PurcVarianceonGoodReceived.rdlc';
+    RDLCLayout = './Report\Rdlc\PurcVarianceonGoodReceived.rdlc';
 
     Caption = 'Purchase - Receipt';
 
@@ -10,7 +10,7 @@ report 50036 "Purc Variance on Good Received"
     {
         dataitem("Purch. Rcpt. Header"; "Purch. Rcpt. Header")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Buy-from Vendor No.", "No. Printed";
             RequestFilterHeading = 'Posted Purchase Receipt';
             column(Purch__Rcpt__Header_No_; "No.")
@@ -18,10 +18,10 @@ report 50036 "Purc Variance on Good Received"
             }
             dataitem(CopyLoop; "Integer")
             {
-                DataItemTableView = SORTING (Number);
+                DataItemTableView = SORTING(Number);
                 dataitem(PageLoop; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                    DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                     column(STRSUBSTNO_Text002_CopyText_; StrSubstNo(Text002, CopyText))
                     {
                     }
@@ -85,7 +85,7 @@ report 50036 "Purc Variance on Good Received"
                     dataitem(DimensionLoop1; "Integer")
                     {
                         DataItemLinkReference = "Purch. Rcpt. Header";
-                        DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                        DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                         column(DimText; DimText)
                         {
                         }
@@ -136,9 +136,9 @@ report 50036 "Purc Variance on Good Received"
                     }
                     dataitem("Purch. Rcpt. Line"; "Purch. Rcpt. Line")
                     {
-                        DataItemLink = "Document No." = FIELD ("No.");
+                        DataItemLink = "Document No." = FIELD("No.");
                         DataItemLinkReference = "Purch. Rcpt. Header";
-                        DataItemTableView = SORTING ("Document No.", "Line No.");
+                        DataItemTableView = SORTING("Document No.", "Line No.");
                         column(Purch__Rcpt__Line_Description; Description)
                         {
                         }
@@ -186,7 +186,7 @@ report 50036 "Purc Variance on Good Received"
                         }
                         dataitem(DimensionLoop2; "Integer")
                         {
-                            DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                            DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                             column(DimText_Control65; DimText)
                             {
                             }
@@ -267,7 +267,7 @@ report 50036 "Purc Variance on Good Received"
                     }
                     dataitem(Total; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                        DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
                         trigger OnPreDataItem()
                         begin
@@ -277,7 +277,7 @@ report 50036 "Purc Variance on Good Received"
                     }
                     dataitem(Total2; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                        DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                     }
                 }
 

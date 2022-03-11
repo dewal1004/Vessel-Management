@@ -1,7 +1,7 @@
 report 50033 Update
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Update.rdlc';
+    RDLCLayout = './Report\Rdlc\Update.rdlc';
 
     dataset
     {

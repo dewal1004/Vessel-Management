@@ -3,14 +3,14 @@ report 50116 "IOU Status Report"
     // IOU.EmployeeName
     // StartBalanceLCY
     DefaultLayout = RDLC;
-    RDLCLayout = './IOUStatusReport.rdlc';
+    RDLCLayout = './Report\Rdlc\IOUStatusReport.rdlc';
 
 
     dataset
     {
         dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
         {
-            DataItemTableView = SORTING ("Bank Account No.", "Posting Date", Positive) ORDER(Descending);
+            DataItemTableView = SORTING("Bank Account No.", "Posting Date", Positive) ORDER(Descending);
             RequestFilterFields = "Bank Account No.", "Posting Date", Positive;
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -53,7 +53,7 @@ report 50116 "IOU Status Report"
         }
         dataitem("Cust. Ledger Entry"; "Cust. Ledger Entry")
         {
-            DataItemTableView = SORTING ("Customer No.", Open, Positive, "Due Date", "Currency Code") WHERE ("Customer No." = FILTER ('D' .. 'F'), Positive = FILTER (true), Open = FILTER (true));
+            DataItemTableView = SORTING("Customer No.", Open, Positive, "Due Date", "Currency Code") WHERE("Customer No." = FILTER('D' .. 'F'), Positive = FILTER(true), Open = FILTER(true));
             column(Cust__Ledger_Entry__Document_No__; "Document No.")
             {
             }
@@ -115,7 +115,7 @@ report 50116 "IOU Status Report"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = WHERE (Number = CONST (1));
+            DataItemTableView = WHERE(Number = CONST(1));
         }
     }
 

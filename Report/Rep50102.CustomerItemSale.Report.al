@@ -1,7 +1,7 @@
 report 50102 "Customer/Item Sale"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './CustomerItemSale.rdlc';
+    RDLCLayout = './Report\Rdlc\CustomerItemSale.rdlc';
     Caption = 'Customer/Item Sales';
 
     dataset
@@ -72,8 +72,8 @@ report 50102 "Customer/Item Sale"
             }
             dataitem("Value Entry"; "Value Entry")
             {
-                DataItemLink = "Source No." = FIELD ("No."), "Global Dimension 1 Code" = FIELD ("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD ("Global Dimension 2 Filter");
-                DataItemTableView = SORTING ("Source Type", "Source No.", "Item Ledger Entry Type", "Item No.", "Posting Date") WHERE ("Source Type" = CONST (Customer), "Item Ledger Entry Type" = CONST (Sale), "Expected Cost" = CONST (false));
+                DataItemLink = "Source No." = FIELD("No."), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter");
+                DataItemTableView = SORTING("Source Type", "Source No.", "Item Ledger Entry Type", "Item No.", "Posting Date") WHERE("Source Type" = CONST(Customer), "Item Ledger Entry Type" = CONST(Sale), "Expected Cost" = CONST(false));
                 RequestFilterFields = "Item No.", "Inventory Posting Group", "Posting Date";
                 column(Value_Entry__Item_No__; "Item No.")
                 {

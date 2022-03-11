@@ -1,13 +1,13 @@
 report 50213 "Stock On Board"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './StockOnBoard.rdlc';
+    RDLCLayout = './Report\Rdlc\StockOnBoard.rdlc';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("Item Category Code", "No. 2");
+            DataItemTableView = SORTING("Item Category Code", "No. 2");
             RequestFilterFields = "No.", "Item Category Code", "Statistics Group", "Location Filter", "Source No. Filter";
             column(COMPANYNAME; CompanyName)
             {
@@ -153,15 +153,15 @@ report 50213 "Stock On Board"
 
     procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[200]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
     begin
-       /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
-        */
+        /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+         if Bold then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+         if Italic then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+         if Underline then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+         xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
+         */
     end;
 
     [Scope('Internal')]

@@ -11,7 +11,7 @@ report 50039 "New Trial Balance"
     //  "Debit Amount (LCY)"
     //  "Credit Amount (LCY)"
     DefaultLayout = RDLC;
-    RDLCLayout = './NewTrialBalance.rdlc';
+    RDLCLayout = './Report\Rdlc\NewTrialBalance.rdlc';
 
 
     dataset
@@ -19,7 +19,7 @@ report 50039 "New Trial Balance"
         dataitem("G/L Account"; "G/L Account")
         {
             CalcFields = "Net Change";
-            DataItemTableView = SORTING ("No.") WHERE ("Account Type" = CONST (Posting));
+            DataItemTableView = SORTING("No.") WHERE("Account Type" = CONST(Posting));
             RequestFilterFields = "No.", "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

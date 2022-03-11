@@ -2,7 +2,7 @@ report 50089 "Catch Incentive"
 {
     // "Inventory Posting Group"."Inventory Incentive"
     DefaultLayout = RDLC;
-    RDLCLayout = './CatchIncentive.rdlc';
+    RDLCLayout = './Report\Rdlc\CatchIncentive.rdlc';
 
 
     dataset
@@ -15,7 +15,7 @@ report 50089 "Catch Incentive"
             }
             dataitem("Job Planning Line"; "Job Planning Line")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
+                DataItemLink = "Job No." = FIELD("No.");
                 column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
                 {
                 }
@@ -294,26 +294,26 @@ report 50089 "Catch Incentive"
                     if Jobs.Get("Job Planning Line"."Job No.") then
                         if DimVal.Get('BUSINESS UNIT', Jobs."Global Dimension 2 Code") then
                             COMPTitle := DimVal.Name;
-                   /* CurrReport.ShowOutput := FooterPrinted;
-                    FooterPrinted := false;
+                    /* CurrReport.ShowOutput := FooterPrinted;
+                     FooterPrinted := false;
 
-                    CurrReport.ShowOutput :=
-                      CurrReport.TotalsCausedBy = "Job Planning Line".FieldNo("Job No.");
-                    CurrReport.ShowOutput(not CrewList);
+                     CurrReport.ShowOutput :=
+                       CurrReport.TotalsCausedBy = "Job Planning Line".FieldNo("Job No.");
+                     CurrReport.ShowOutput(not CrewList);
 
-                    CurrReport.ShowOutput :=
-                      CurrReport.TotalsCausedBy = LastFieldNo;
+                     CurrReport.ShowOutput :=
+                       CurrReport.TotalsCausedBy = LastFieldNo;
 
-                    if not FooterPrinted then
-                        LastFieldNo := CurrReport.TotalsCausedBy;
-                    CurrReport.ShowOutput := not FooterPrinted;
-                    FooterPrinted := true;*/
-                end; 
+                     if not FooterPrinted then
+                         LastFieldNo := CurrReport.TotalsCausedBy;
+                     CurrReport.ShowOutput := not FooterPrinted;
+                     FooterPrinted := true;*/
+                end;
             }
             dataitem("Inventory Posting Group"; "Inventory Posting Group")
             {
-                DataItemLink = "Source No. Filter" = FIELD ("No.");
-                DataItemTableView = SORTING ("Statistics Group", Category) WHERE ("Location Filter" = CONST ('CRM-ASL'), "Inventory Incentive" = FILTER (<> 0));
+                DataItemLink = "Source No. Filter" = FIELD("No.");
+                DataItemTableView = SORTING("Statistics Group", Category) WHERE("Location Filter" = CONST('CRM-ASL'), "Inventory Incentive" = FILTER(<> 0));
                 RequestFilterFields = "Location Filter";
                 column(T001; T001)
                 {
@@ -434,24 +434,24 @@ report 50089 "Catch Incentive"
                     //SETFILTER("Source No.  Filter","Job Budget Line"."Job No.");
                     //SETFILTER("Source Filter",Job.Vessel);
 
-                   /* CurrReport.ShowOutput := FooterPrinted;
-                    FooterPrinted := false;
+                    /* CurrReport.ShowOutput := FooterPrinted;
+                     FooterPrinted := false;
 
-                    CurrReport.ShowOutput :=
-                      CurrReport.TotalsCausedBy = "Inventory Posting Group".FieldNo(Category);
-                    Cat1 := CopyStr(Category, 3);
+                     CurrReport.ShowOutput :=
+                       CurrReport.TotalsCausedBy = "Inventory Posting Group".FieldNo(Category);
+                     Cat1 := CopyStr(Category, 3);
 
-                    CurrReport.ShowOutput :=
-                      CurrReport.TotalsCausedBy = LastFieldNo;
+                     CurrReport.ShowOutput :=
+                       CurrReport.TotalsCausedBy = LastFieldNo;
 
-                    if not FooterPrinted then
-                        LastFieldNo := CurrReport.TotalsCausedBy;
-                    CurrReport.ShowOutput := not FooterPrinted;
-                    FooterPrinted := true;
+                     if not FooterPrinted then
+                         LastFieldNo := CurrReport.TotalsCausedBy;
+                     CurrReport.ShowOutput := not FooterPrinted;
+                     FooterPrinted := true;
 
-                    CurrReport.ShowOutput :=
-                      CurrReport.TotalsCausedBy = "Inventory Posting Group".FieldNo("Statistics Group");
-*/
+                     CurrReport.ShowOutput :=
+                       CurrReport.TotalsCausedBy = "Inventory Posting Group".FieldNo("Statistics Group");
+ */
                     //AAA-JUNE 2002
                 end;
             }

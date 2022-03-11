@@ -2,14 +2,14 @@ report 50069 "OUTSTANDING LOANS"
 {
     // UNL-ASL3.60.01.007 (Santus) May 24, 2005
     DefaultLayout = RDLC;
-    RDLCLayout = './OUTSTANDINGLOANS.rdlc';
+    RDLCLayout = './Report\Rdlc\OUTSTANDINGLOANS.rdlc';
 
 
     dataset
     {
         dataitem("Loan."; "Loan.")
         {
-            DataItemTableView = SORTING ("Loan Type", "Posting Date for Loan", "Voucher No. for Loan", "Staff No.");
+            DataItemTableView = SORTING("Loan Type", "Posting Date for Loan", "Voucher No. for Loan", "Staff No.");
             RequestFilterFields = "Loan Type", "Staff No.", "Posting Date for Loan";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

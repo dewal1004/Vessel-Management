@@ -3,14 +3,14 @@ report 50170 "Receipt Report"
     // GJLINE."Posting Date"
     // NUm2Words.ToWords("Amount (LCY)",CurrencyName,CurrencyUnit,100,'')+'
     DefaultLayout = RDLC;
-    RDLCLayout = './ReceiptReport.rdlc';
+    RDLCLayout = './Report\Rdlc\ReceiptReport.rdlc';
 
 
     dataset
     {
         dataitem("Gen. Journal Batch"; "Gen. Journal Batch")
         {
-            DataItemTableView = SORTING ("Journal Template Name", Name);
+            DataItemTableView = SORTING("Journal Template Name", Name);
             RequestFilterFields = "Journal Template Name", Name;
             column(Gen__Journal_Batch_Journal_Template_Name; "Journal Template Name")
             {
@@ -20,7 +20,7 @@ report 50170 "Receipt Report"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 PrintOnlyIfDetail = true;
                 column(COMPANYNAME; CompanyName)
                 {
@@ -195,9 +195,9 @@ report 50170 "Receipt Report"
                 }
                 dataitem("Gen. Journal Line"; "Gen. Journal Line")
                 {
-                    DataItemLink = "Journal Template Name" = FIELD ("Journal Template Name"), "Journal Batch Name" = FIELD (Name);
+                    DataItemLink = "Journal Template Name" = FIELD("Journal Template Name"), "Journal Batch Name" = FIELD(Name);
                     DataItemLinkReference = "Gen. Journal Batch";
-                    DataItemTableView = SORTING ("Journal Template Name", "Journal Batch Name", "Line No.");
+                    DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Line No.");
                     RequestFilterFields = "Posting Date";
                     column(Gen__Journal_Line__Posting_Date_; "Posting Date")
                     {
@@ -303,7 +303,7 @@ report 50170 "Receipt Report"
                     }
                     dataitem(ErrorLoop; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
                         column(ErrorText_Number_; ErrorText[Number])
                         {
                         }
@@ -719,7 +719,7 @@ report 50170 "Receipt Report"
                 }
                 dataitem(ReconcileLoop; "Integer")
                 {
-                    DataItemTableView = SORTING (Number);
+                    DataItemTableView = SORTING(Number);
                     column(GLAccNetChange__No__; GLAccNetChange."No.")
                     {
                     }

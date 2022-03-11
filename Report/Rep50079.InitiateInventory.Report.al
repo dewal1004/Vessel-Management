@@ -3,7 +3,7 @@ report 50079 "Initiate Inventory"
     // {"Item Journal Batch"."Transfer From"
     // //
     DefaultLayout = RDLC;
-    RDLCLayout = './InitiateInventory.rdlc';
+    RDLCLayout = './Report\Rdlc\InitiateInventory.rdlc';
 
     Caption = 'Inventory Posting - Test';
 
@@ -11,7 +11,7 @@ report 50079 "Initiate Inventory"
     {
         dataitem("Item Journal Batch"; "Item Journal Batch")
         {
-            DataItemTableView = SORTING ("Journal Template Name", Name);
+            DataItemTableView = SORTING("Journal Template Name", Name);
             RequestFilterFields = "Journal Template Name", Name;
             column(Item_Journal_Batch_Journal_Template_Name; "Journal Template Name")
             {
@@ -24,8 +24,8 @@ report 50079 "Initiate Inventory"
             }
             dataitem("Item Journal Line"; "Item Journal Line")
             {
-                DataItemLink = "Journal Template Name" = FIELD ("Journal Template Name"), "Journal Batch Name" = FIELD (Name);
-                DataItemTableView = SORTING ("Journal Template Name", "Journal Batch Name", "Line No.");
+                DataItemLink = "Journal Template Name" = FIELD("Journal Template Name"), "Journal Batch Name" = FIELD(Name);
+                DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Line No.");
                 RequestFilterFields = "Posting Date";
                 column(CurrReport_PAGENO; CurrReport.PageNo)
                 {
@@ -210,7 +210,7 @@ report 50079 "Initiate Inventory"
                 }
                 dataitem(DimensionLoop; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                    DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                     column(DimText; DimText)
                     {
                     }
@@ -265,7 +265,7 @@ report 50079 "Initiate Inventory"
                 }
                 dataitem(ErrorLoop; "Integer")
                 {
-                    DataItemTableView = SORTING (Number);
+                    DataItemTableView = SORTING(Number);
                     column(ErrorText_Number_Caption; ErrorText_Number_CaptionLbl)
                     {
                     }

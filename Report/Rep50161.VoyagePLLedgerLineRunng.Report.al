@@ -4,7 +4,7 @@ report 50161 "Voyage P&L Ledger Line Runng"
     // A1[2]:=PrdPrc2;
     // A1[3]:=NairaVal2;
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyagePLLedgerLineRunng.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyagePLLedgerLineRunng.rdlc';
 
     Permissions = TableData "Job Ledger Entry" = rimd;
 
@@ -139,7 +139,7 @@ report 50161 "Voyage P&L Ledger Line Runng"
         }
         dataitem("Job Ledger Entry"; "Job Ledger Entry")
         {
-            DataItemTableView = SORTING ("Job No.", "Location Code", "Work Type Code") WHERE ("Location Code" = FILTER ('CRM-ASL'));
+            DataItemTableView = SORTING("Job No.", "Location Code", "Work Type Code") WHERE("Location Code" = FILTER('CRM-ASL'));
             column(Job_Ledger_Entry__No__; "No.")
             {
             }
@@ -179,7 +179,7 @@ report 50161 "Voyage P&L Ledger Line Runng"
         }
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code");
+            DataItemTableView = SORTING("Sea food code");
             column(Sea_Food_categories__Sea_food_code_; "Sea food code")
             {
             }
@@ -287,8 +287,8 @@ report 50161 "Voyage P&L Ledger Line Runng"
             }
             dataitem("Job Ledger Entry Rep"; "Job Ledger Entry")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING ("Job No.", "Location Code", GroupSort) WHERE ("Location Code" = CONST ('CRM-ASL'));
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING("Job No.", "Location Code", GroupSort) WHERE("Location Code" = CONST('CRM-ASL'));
                 column(Job_Ledger_Entry_Rep_GroupSort; GroupSort)
                 {
                 }
@@ -350,8 +350,8 @@ report 50161 "Voyage P&L Ledger Line Runng"
             }
             dataitem("Job catch Default"; "Job catch Default")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING ("No.", GroupSort);
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING("No.", GroupSort);
                 column(No_B_; "No.B")
                 {
                 }

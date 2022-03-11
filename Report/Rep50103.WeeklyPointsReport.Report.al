@@ -7,14 +7,14 @@ report 50103 "Weekly Points Report"
     // -> modified report to kep track of hours lost and average voyage points,
     //   block report from checking for sea days less than 8 or 9, added functionality for sending report results to excel.
     DefaultLayout = RDLC;
-    RDLCLayout = './WeeklyPointsReport.rdlc';
+    RDLCLayout = './Report\Rdlc\WeeklyPointsReport.rdlc';
 
 
     dataset
     {
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING (Captain, Vessel, "Points Sort Bay", Status) WHERE (Status = FILTER (Open), "No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING(Captain, Vessel, "Points Sort Bay", Status) WHERE(Status = FILTER(Open), "No." = FILTER('I' .. 'K'));
             RequestFilterFields = "No.", Captain;
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -270,7 +270,7 @@ report 50103 "Weekly Points Report"
     trigger OnPostReport()
     begin
         //if Send2Excel then
-          //  Clear(xlApp);
+        //  Clear(xlApp);
     end;
 
     trigger OnPreReport()
@@ -302,9 +302,9 @@ report 50103 "Weekly Points Report"
         StartDate: Date;
         EndDate: Date;
         Ave: array[7] of Decimal;
-       // xlApp: Automation;
+        // xlApp: Automation;
         //xlBook: Automation;
-       // xlSheet: Automation;
+        // xlSheet: Automation;
         Send2Excel: Boolean;
         TopPage: Boolean;
         Xr: Integer;
@@ -330,18 +330,18 @@ report 50103 "Weekly Points Report"
         TOTALCaptionLbl: Label 'TOTAL';
         Res: Record Resource;
 
-    
+
     procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[200]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
     begin
-      /*  xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
-        */
+        /*  xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+          if Bold then
+              xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+          if Italic then
+              xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+          if Underline then
+              xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+          xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
+          */
     end;
 
     [Scope('Internal')]

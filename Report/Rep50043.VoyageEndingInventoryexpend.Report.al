@@ -3,7 +3,7 @@ report 50043 "Voyage Ending Inventory expend"
     // Item.Inventory
     // ItemUOV== Items Used On Vessel
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageEndingInventoryexpend.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageEndingInventoryexpend.rdlc';
 
 
     dataset
@@ -67,7 +67,7 @@ report 50043 "Voyage Ending Inventory expend"
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("S/No.") WHERE ("Statistics Group" = FILTER (0 .. 3));
+                DataItemTableView = SORTING("S/No.") WHERE("Statistics Group" = FILTER(0 .. 3));
                 column(Item_Inventory; Inventory)
                 {
                 }
@@ -152,7 +152,7 @@ report 50043 "Voyage Ending Inventory expend"
             }
             dataitem(ItemMrkt; Item)
             {
-                DataItemTableView = SORTING ("S/No.") WHERE ("Statistics Group" = FILTER (4));
+                DataItemTableView = SORTING("S/No.") WHERE("Statistics Group" = FILTER(4));
                 column(ItemMrkt__No__; "No.")
                 {
                 }
@@ -236,8 +236,8 @@ report 50043 "Voyage Ending Inventory expend"
             }
             dataitem("Job Ledger Entry"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Allocation %", "Resource Group") ORDER(Descending) WHERE (Type = CONST (Resource));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Allocation %", "Resource Group") ORDER(Descending) WHERE(Type = CONST(Resource));
                 column(Job_Budget_Line__No__; "No.")
                 {
                 }

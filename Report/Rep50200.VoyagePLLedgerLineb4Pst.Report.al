@@ -1,7 +1,7 @@
 report 50200 "Voyage P&L Ledger Line b4 Pst"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyagePLLedgerLineb4Pst.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyagePLLedgerLineb4Pst.rdlc';
     Permissions = TableData "Job Ledger Entry" = rimd;
 
     dataset
@@ -290,8 +290,8 @@ report 50200 "Voyage P&L Ledger Line b4 Pst"
             }
             dataitem("Job Ledger Entry"; "Job Ledger Entry")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING ("Job No.", GroupSort, "No.") WHERE (Type = CONST (Item), "Gen. Prod. Posting Group" = CONST ('FIS'));
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING("Job No.", GroupSort, "No.") WHERE(Type = CONST(Item), "Gen. Prod. Posting Group" = CONST('FIS'));
                 column(Job_Ledger_Entry_GroupSort; GroupSort)
                 {
                 }
@@ -383,8 +383,8 @@ report 50200 "Voyage P&L Ledger Line b4 Pst"
             }
             dataitem("Job catch Default"; "Job catch Default")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING ("No.", GroupSort);
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING("No.", GroupSort);
                 column(No_B_; "No.B")
                 {
                 }

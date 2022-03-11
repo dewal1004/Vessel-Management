@@ -1,13 +1,13 @@
 report 50152 "Employeee Absence Total"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './EmployeeeAbsenceTotal.rdlc';
+    RDLCLayout = './Report\Rdlc\EmployeeeAbsenceTotal.rdlc';
 
     dataset
     {
         dataitem("Employee Absence"; "Employee Absence")
         {
-            DataItemTableView = SORTING ("Employee No.", "Cause of Absence Code", "From Date");
+            DataItemTableView = SORTING("Employee No.", "Cause of Absence Code", "From Date");
             RequestFilterFields = "Employee No.", "Cause of Absence Code";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

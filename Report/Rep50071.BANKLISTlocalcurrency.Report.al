@@ -1,13 +1,13 @@
 report 50071 "BANK LIST local currency"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './BANKLISTlocalcurrency.rdlc';
+    RDLCLayout = './Report\Rdlc\BANKLISTlocalcurrency.rdlc';
 
     dataset
     {
         dataitem("Bank Account"; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

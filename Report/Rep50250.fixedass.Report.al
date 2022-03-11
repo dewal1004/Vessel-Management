@@ -5,7 +5,7 @@ report 50250 "fixed ass"
     // StartingDate:=010103D;
     // EndingDate:=013103D;
     DefaultLayout = RDLC;
-    RDLCLayout = './fixedass.rdlc';
+    RDLCLayout = './Report\Rdlc\fixedass.rdlc';
 
 
     dataset
@@ -224,8 +224,8 @@ report 50250 "fixed ass"
                         SetCurrentKey("Global Dimension 2 Code");
                     GroupTotals::"FA Posting Group":
                         SetCurrentKey("FA Posting Group");
-                        /*GroupTotals::" ":
-                          SETCURRENTKEY("Maintenance Amt");*/
+                /*GroupTotals::" ":
+                  SETCURRENTKEY("Maintenance Amt");*/
                 end;
 
             end;

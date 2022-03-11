@@ -1,13 +1,13 @@
 report 50228 "Itemwise Yearly Consumption"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ItemwiseYearlyConsumption.rdlc';
+    RDLCLayout = './Report\Rdlc\ItemwiseYearlyConsumption.rdlc';
 
     dataset
     {
         dataitem(Location; Location)
         {
-            DataItemTableView = SORTING (Code) WHERE ("Location Type" = CONST (Vessel));
+            DataItemTableView = SORTING(Code) WHERE("Location Type" = CONST(Vessel));
             RequestFilterFields = "Code";
             RequestFilterHeading = 'Vessel Filter';
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))

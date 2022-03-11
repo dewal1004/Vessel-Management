@@ -1,14 +1,14 @@
 report 50132 "Bank Acc-Detail Trial Bal-1404"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './BankAccDetailTrialBal1404.rdlc';
+    RDLCLayout = './Report\Rdlc\BankAccDetailTrialBal1404.rdlc';
     Caption = 'Bank Acc. - Detail Trial Bal.';
 
     dataset
     {
         dataitem("Bank Account"; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             PrintOnlyIfDetail = true;
             RequestFilterFields = "No.", "Search Name", "Bank Acc. Posting Group", "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
@@ -100,8 +100,8 @@ report 50132 "Bank Acc-Detail Trial Bal-1404"
             }
             dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
             {
-                DataItemLink = "Bank Account No." = FIELD ("No."), "Posting Date" = FIELD ("Date Filter"), "Global Dimension 2 Code" = FIELD ("Global Dimension 2 Filter"), "Global Dimension 1 Code" = FIELD ("Global Dimension 1 Filter");
-                DataItemTableView = SORTING ("Bank Account No.", "Posting Date") WHERE ("Our Contact Code" = FILTER (<> 'KOT'));
+                DataItemLink = "Bank Account No." = FIELD("No."), "Posting Date" = FIELD("Date Filter"), "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter");
+                DataItemTableView = SORTING("Bank Account No.", "Posting Date") WHERE("Our Contact Code" = FILTER(<> 'KOT'));
                 column(StartBalance____Bank_Account_Ledger_Entry__Amount; StartBalance + "Bank Account Ledger Entry".Amount)
                 {
                     AutoFormatExpression = "Bank Account Ledger Entry"."Currency Code";
@@ -203,7 +203,7 @@ report 50132 "Bank Acc-Detail Trial Bal-1404"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(Bank_Account__Name; "Bank Account".Name)
                 {
                 }
@@ -246,7 +246,7 @@ report 50132 "Bank Acc-Detail Trial Bal-1404"
                         StartBalanceLCY := "Net Change (LCY)";
                         SetFilter("Date Filter", BankAccDateFilter);
                     end;
-               // CurrReport.PrintOnlyIfDetail := not (PrintAllHavingBal and (StartBalance <> 0));
+                // CurrReport.PrintOnlyIfDetail := not (PrintAllHavingBal and (StartBalance <> 0));
                 BankAccBalance := StartBalance;
                 BankAccBalanceLCY := StartBalanceLCY;
                 BankTotal_Debit := 0;

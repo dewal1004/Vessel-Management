@@ -3,7 +3,7 @@ report 50046 "Voyage Ended Expense"
     // Item.Inventory
     // ItemUOV== Items Used On Vessel
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageEndedExpense.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageEndedExpense.rdlc';
 
 
     dataset
@@ -63,7 +63,7 @@ report 50046 "Voyage Ended Expense"
             }
             dataitem(ItemUOV; Item)
             {
-                DataItemTableView = SORTING ("No.");
+                DataItemTableView = SORTING("No.");
                 RequestFilterFields = "No.";
                 column(ItemUOV_Inventory; Inventory)
                 {

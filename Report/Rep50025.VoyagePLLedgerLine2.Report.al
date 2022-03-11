@@ -1,14 +1,14 @@
 report 50025 "Voyage P&L Ledger Line 2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyagePLLedgerLine2.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyagePLLedgerLine2.rdlc';
     Permissions = TableData "Job Ledger Entry" = rimd;
 
     dataset
     {
         dataitem("Job Ledger Entry"; "Job Ledger Entry")
         {
-            DataItemTableView = SORTING ("Job No.", "Location Code", "Work Type Code") WHERE ("Location Code" = CONST ('CRM-ASL'));
+            DataItemTableView = SORTING("Job No.", "Location Code", "Work Type Code") WHERE("Location Code" = CONST('CRM-ASL'));
             RequestFilterFields = "Job No.", "Work Type Code";
             column(FirstDataItem; 1)
             {
@@ -519,10 +519,10 @@ report 50025 "Voyage P&L Ledger Line 2"
                     GroupSort := InvtPostGrp.Category;
                 end;
                 Modify;
-               /* CurrReport.ShowOutput :=
-                  CurrReport.TotalsCausedBy = "Job Ledger Entry".FieldNo("Work Type Code");
-                CurrReport.ShowOutput(false);
-*/
+                /* CurrReport.ShowOutput :=
+                   CurrReport.TotalsCausedBy = "Job Ledger Entry".FieldNo("Work Type Code");
+                 CurrReport.ShowOutput(false);
+ */
             end;
 
             trigger OnPreDataItem()
@@ -533,7 +533,7 @@ report 50025 "Voyage P&L Ledger Line 2"
         }
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code");
+            DataItemTableView = SORTING("Sea food code");
             PrintOnlyIfDetail = false;
             column(SeaFoodData; 1)
             {
@@ -552,8 +552,8 @@ report 50025 "Voyage P&L Ledger Line 2"
             }
             dataitem("Job Ledger Entry Rep"; "Job Ledger Entry")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING ("Job No.", "Location Code", GroupSort) WHERE ("Location Code" = CONST ('CRM-ASL'));
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING("Job No.", "Location Code", GroupSort) WHERE("Location Code" = CONST('CRM-ASL'));
                 column(ExportTotal; ExportTotal)
                 {
                 }
@@ -734,7 +734,7 @@ report 50025 "Voyage P&L Ledger Line 2"
                     Qty := Quantity * -1;
                     PrdPrc := Qty * GetItPrice("Job No.", "No.", "Posting Date");
 
-                   // CurrReport.ShowOutput := CurrReport.TotalsCausedBy = "Job Ledger Entry".FieldNo(GroupSort);
+                    // CurrReport.ShowOutput := CurrReport.TotalsCausedBy = "Job Ledger Entry".FieldNo(GroupSort);
 
 
                     ExportTotal := 0;
@@ -779,8 +779,8 @@ report 50025 "Voyage P&L Ledger Line 2"
             }
             dataitem("Job catch Default"; "Job catch Default")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING ("No.", GroupSort);
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING("No.", GroupSort);
                 column(A2_1_; A2[1])
                 {
                 }
@@ -951,7 +951,7 @@ report 50025 "Voyage P&L Ledger Line 2"
         }
         dataitem("Value Entry"; "Value Entry")
         {
-            DataItemTableView = SORTING ("Document No.", "Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+            DataItemTableView = SORTING("Document No.", "Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
             column(Table_ValueEntry; 1)
             {
             }
@@ -1000,12 +1000,12 @@ report 50025 "Voyage P&L Ledger Line 2"
 
             trigger OnAfterGetRecord()
             begin
-              /** CurrReport.ShowOutput :=
-                  CurrReport.TotalsCausedBy = "Value Entry".FieldNo("Document No.");
-                CurrReport.ShowOutput(false);
+                /** CurrReport.ShowOutput :=
+                    CurrReport.TotalsCausedBy = "Value Entry".FieldNo("Document No.");
+                  CurrReport.ShowOutput(false);
 
-                CurrReport.ShowOutput :=
-                  CurrReport.TotalsCausedBy = "Value Entry".FieldNo("Gen. Prod. Posting Group");
+                  CurrReport.ShowOutput :=
+                    CurrReport.TotalsCausedBy = "Value Entry".FieldNo("Gen. Prod. Posting Group");
 */
 
                 //"Value Entry".SETFILTER("Value Entry"."Gen. Prod. Posting Group",ProdPostGrp.Code);
@@ -1047,7 +1047,7 @@ report 50025 "Voyage P&L Ledger Line 2"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             column(DataStor_3_; DataStor[3])
             {
             }
@@ -1351,7 +1351,7 @@ report 50025 "Voyage P&L Ledger Line 2"
         "No.B" := ItemVar;
     end;
 
-   
+
     procedure GetItPrice(JNos: Code[20]; Nos: Code[20]; PDays: Date): Decimal
     var
         job3: Record Job;

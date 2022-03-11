@@ -1,14 +1,14 @@
 report 50118 "Group Inventory Valuatn By IPG"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './GroupInventoryValuatnByIPG.rdlc';
+    RDLCLayout = './Report\Rdlc\GroupInventoryValuatnByIPG.rdlc';
 
     dataset
     {
         dataitem(InvtPG; "Inventory Posting Group")
         {
             CalcFields = Value;
-            DataItemTableView = SORTING ("Statistics Group") WHERE ("Statistics Group" = CONST (0), "In Use" = CONST (true));
+            DataItemTableView = SORTING("Statistics Group") WHERE("Statistics Group" = CONST(0), "In Use" = CONST(true));
             RequestFilterFields = "Code", "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

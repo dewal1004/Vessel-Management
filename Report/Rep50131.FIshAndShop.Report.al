@@ -1,7 +1,7 @@
 report 50131 "FIsh And Shop"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './FIshAndShop.rdlc';
+    RDLCLayout = './Report\Rdlc\FIshAndShop.rdlc';
 
     dataset
     {

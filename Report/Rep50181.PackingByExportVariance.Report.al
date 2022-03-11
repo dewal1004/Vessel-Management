@@ -11,14 +11,14 @@ report 50181 "Packing By Export Variance"
     // 5  :: Variance
     // 10 :: Inventory
     DefaultLayout = RDLC;
-    RDLCLayout = './PackingByExportVariance.rdlc';
+    RDLCLayout = './Report\Rdlc\PackingByExportVariance.rdlc';
 
 
     dataset
     {
         dataitem(Location; Location)
         {
-            DataItemTableView = SORTING (Code) WHERE ("Location Type" = FILTER (Vessel));
+            DataItemTableView = SORTING(Code) WHERE("Location Type" = FILTER(Vessel));
             column(COMPANYNAME; CompanyName)
             {
             }
@@ -142,7 +142,7 @@ report 50181 "Packing By Export Variance"
             }
             dataitem("Inventory Posting Group"; "Inventory Posting Group")
             {
-                DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE (Code = FILTER ('PK' | '0' .. '200'));
+                DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE(Code = FILTER('PK' | '0' .. '200'));
                 RequestFilterFields = "Statistics Group";
                 column(Inventory_Posting_Group__Statistics_Group_; "Statistics Group")
                 {
@@ -204,7 +204,7 @@ report 50181 "Packing By Export Variance"
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("Item Category Code") WHERE ("Item Category Code" = FILTER ('PK'), "Inventory Entry Type Filter" = CONST (Transfer));
+                DataItemTableView = SORTING("Item Category Code") WHERE("Item Category Code" = FILTER('PK'), "Inventory Entry Type Filter" = CONST(Transfer));
                 column(Item__No__; "No.")
                 {
                 }

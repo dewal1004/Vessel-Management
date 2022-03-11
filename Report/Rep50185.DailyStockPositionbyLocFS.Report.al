@@ -1,13 +1,13 @@
 report 50185 "Daily Stock Position by Loc-FS"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyStockPositionbyLocFS.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyStockPositionbyLocFS.rdlc';
 
     dataset
     {
         dataitem(Location; Location)
         {
-            DataItemTableView = WHERE ("Location Type" = FILTER (Store), Code = FILTER (<> 'GNRL ASL'));
+            DataItemTableView = WHERE("Location Type" = FILTER(Store), Code = FILTER(<> 'GNRL ASL'));
             column(Item_TABLECAPTION__________ItemFilter; Item.TableCaption + ': ' + ItemFilter)
             {
             }
@@ -108,7 +108,7 @@ report 50185 "Daily Stock Position by Loc-FS"
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("S/No.", "Gen. Prod. Posting Group") WHERE ("Statistics Group" = FILTER (1 .. 4), Inventory = FILTER (<> 0));
+                DataItemTableView = SORTING("S/No.", "Gen. Prod. Posting Group") WHERE("Statistics Group" = FILTER(1 .. 4), Inventory = FILTER(<> 0));
                 RequestFilterFields = "No.", "Statistics Group", "Location Filter";
                 column(Item__Statistics_Group_; "Statistics Group")
                 {
@@ -414,8 +414,8 @@ report 50185 "Daily Stock Position by Loc-FS"
                 }
                 dataitem("Value Entry"; "Value Entry")
                 {
-                    DataItemLink = "Item No." = FIELD ("No.");
-                    DataItemTableView = SORTING ("Location Code", "Posting Date", "Source Code") WHERE ("Source Code" = CONST ('SALES'));
+                    DataItemLink = "Item No." = FIELD("No.");
+                    DataItemTableView = SORTING("Location Code", "Posting Date", "Source Code") WHERE("Source Code" = CONST('SALES'));
                     column(Value_Entry__Entry_No__; "Entry No.")
                     {
                     }

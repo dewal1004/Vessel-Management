@@ -1,13 +1,13 @@
 report 50139 "Periodic Stock Position VJ"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PeriodicStockPositionVJ.rdlc';
+    RDLCLayout = './Report\Rdlc\PeriodicStockPositionVJ.rdlc';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("Statistics Group", "Inventory Posting Group", "Cover Period");
+            DataItemTableView = SORTING("Statistics Group", "Inventory Posting Group", "Cover Period");
             RequestFilterFields = "No.", "Statistics Group", "Location Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

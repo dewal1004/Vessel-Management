@@ -2,7 +2,7 @@ report 50225 "LEKKI Fish Shop Sales Report"
 {
     // "Sea Food categories"
     DefaultLayout = RDLC;
-    RDLCLayout = './LEKKIFishShopSalesReport.rdlc';
+    RDLCLayout = './Report\Rdlc\LEKKIFishShopSalesReport.rdlc';
 
 
     dataset

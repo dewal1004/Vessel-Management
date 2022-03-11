@@ -1,13 +1,13 @@
 report 50091 "Convert Applicant to Staff"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ConvertApplicanttoStaff.rdlc';
+    RDLCLayout = './Report\Rdlc\ConvertApplicanttoStaff.rdlc';
 
     dataset
     {
         dataitem(ApplicantsX; Applicants)
         {
-            DataItemTableView = SORTING ("No.") WHERE ("Application Status" = CONST (Accepted), Blocked = CONST (false), Staffed = CONST (false), "Posting Group" = FILTER (<> ''), "Employee Group" = FILTER (<> ''));
+            DataItemTableView = SORTING("No.") WHERE("Application Status" = CONST(Accepted), Blocked = CONST(false), Staffed = CONST(false), "Posting Group" = FILTER(<> ''), "Employee Group" = FILTER(<> ''));
             RequestFilterFields = "No.", "Region Code", "Global Dimension 1 Code", Class;
             column(USERID; UserId)
             {

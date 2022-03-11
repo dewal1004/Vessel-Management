@@ -4,14 +4,14 @@ report 50031 Organoleptic0809
     // "Comment Line"."Loose Shells%"
     // "Comment Line"."Loose Neck%"
     DefaultLayout = RDLC;
-    RDLCLayout = './Organoleptic0809.rdlc';
+    RDLCLayout = './Report\Rdlc\Organoleptic0809.rdlc';
 
 
     dataset
     {
         dataitem("Comment Line"; "Comment Line")
         {
-            DataItemTableView = SORTING ("Table Name", "No.", Type, "Line No.") WHERE ("Table Name" = CONST (Job), Type = CONST (Organoleptic));
+            DataItemTableView = SORTING("Table Name", "No.", Type, "Line No.") WHERE("Table Name" = CONST(Job), Type = CONST(Organoleptic));
             RequestFilterFields = "No.";
             column(USERID; UserId)
             {
@@ -126,8 +126,8 @@ report 50031 Organoleptic0809
             }
             dataitem(Item; Item)
             {
-                DataItemLink = "No." = FIELD ("No.");
-                DataItemTableView = SORTING ("No.");
+                DataItemLink = "No." = FIELD("No.");
+                DataItemTableView = SORTING("No.");
                 RequestFilterFields = "No.";
                 column(Description_Item; Item.Description)
                 {

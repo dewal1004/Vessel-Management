@@ -13,14 +13,14 @@ report 50114 "Voyage Comparison"
     // 
     // UNL-ASL3.60.01.010 (Santus) June 21, 2005
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageComparison.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageComparison.rdlc';
 
 
     dataset
     {
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("Fishing Country Code", "Ending Date") ORDER(Descending) WHERE ("Voyage Ended" = CONST (true));
+            DataItemTableView = SORTING("Fishing Country Code", "Ending Date") ORDER(Descending) WHERE("Voyage Ended" = CONST(true));
             RequestFilterFields = "No.";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -430,18 +430,18 @@ report 50114 "Voyage Comparison"
     [Scope('Internal')]
     procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[200]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
     begin
-       /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
-        */
+        /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+         if Bold then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+         if Italic then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+         if Underline then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+         xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
+         */
     end;
 
-    
+
     procedure GetCol(CN: Integer): Text[30]
     var
         xlColID: Text[10];

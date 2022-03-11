@@ -1,7 +1,7 @@
 report 50217 "Request For Quotation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './RequestForQuotation.rdlc';
+    RDLCLayout = './Report\Rdlc\RequestForQuotation.rdlc';
 
     dataset
     {
@@ -67,8 +67,8 @@ report 50217 "Request For Quotation"
                 }
                 dataitem("Requisition Line"; "Requisition Line")
                 {
-                    DataItemLink = "Worksheet Template Name" = FIELD ("Worksheet Template Name"), "Journal Batch Name" = FIELD (Name);
-                    DataItemTableView = SORTING ("Worksheet Template Name", "Journal Batch Name", "Line No.");
+                    DataItemLink = "Worksheet Template Name" = FIELD("Worksheet Template Name"), "Journal Batch Name" = FIELD(Name);
+                    DataItemTableView = SORTING("Worksheet Template Name", "Journal Batch Name", "Line No.");
                     RequestFilterFields = "Worksheet Template Name", "Journal Batch Name", "Gen. Prod. Posting Group", "Print Line";
                     column(No_RequisitionLine; "Requisition Line"."No.")
                     {

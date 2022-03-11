@@ -8,7 +8,7 @@ report 50157 "Short Supply thru Posted Trans"
     // 
     // Shame shipment shout not have item counted twice;
     DefaultLayout = RDLC;
-    RDLCLayout = './ShortSupplythruPostedTrans.rdlc';
+    RDLCLayout = './Report\Rdlc\ShortSupplythruPostedTrans.rdlc';
 
 
     dataset

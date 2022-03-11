@@ -12,14 +12,14 @@ report 50059 "Transfer Processing/Fish Shop"
     // UNL-ASL3.60.01.007 (Santus) July 15, 2014
     // -> modified report to add all Fish Shop locations (total 9 as of this editing).
     DefaultLayout = RDLC;
-    RDLCLayout = './TransferProcessingFishShop.rdlc';
+    RDLCLayout = './Report\Rdlc\TransferProcessingFishShop.rdlc';
 
 
     dataset
     {
         dataitem("Value Entry"; "Value Entry")
         {
-            DataItemTableView = SORTING ("Inventory Posting Group", "Item No.", "Posting Date", "Location Code", "External Document No.");
+            DataItemTableView = SORTING("Inventory Posting Group", "Item No.", "Posting Date", "Location Code", "External Document No.");
             RequestFilterFields = "Posting Date", "Item No.", "Inventory Posting Group";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -283,20 +283,20 @@ report 50059 "Transfer Processing/Fish Shop"
         Test1: Boolean;
         Test2: Boolean;
         ValQty: Decimal;
-/*
-    [Scope('Internal')]
-    procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[1024]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
-    begin
-        xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
-    end;
-*/
+    /*
+        [Scope('Internal')]
+        procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[1024]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
+        begin
+            xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+            if Bold then
+                xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+            if Italic then
+                xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+            if Underline then
+                xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
+        end;
+    */
     [Scope('Internal')]
     procedure GetCol(CN: Integer): Text[30]
     var

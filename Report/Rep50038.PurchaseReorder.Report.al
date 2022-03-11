@@ -1,13 +1,13 @@
 report 50038 "Purchase Re-order"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PurchaseReorder.rdlc';
+    RDLCLayout = './Report\Rdlc\PurchaseReorder.rdlc';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = WHERE (Blocked = CONST (false));
+            DataItemTableView = WHERE(Blocked = CONST(false));
             RequestFilterFields = "No.", "Inventory Posting Group", "Gen. Prod. Posting Group";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

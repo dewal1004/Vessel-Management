@@ -1,13 +1,13 @@
 report 50051 "Monthly Payslip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './MonthlyPayslip.rdlc';
+    RDLCLayout = './Report\Rdlc\MonthlyPayslip.rdlc';
 
     dataset
     {
         dataitem(Employee; Employee)
         {
-            DataItemTableView = SORTING ("Global Dimension 1 Code", "Global Dimension 2 Code");
+            DataItemTableView = SORTING("Global Dimension 1 Code", "Global Dimension 2 Code");
             PrintOnlyIfDetail = true;
             RequestFilterFields = "No.", "Employee Group", "Period Filter", "Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code";
             RequestFilterHeading = 'Payslip Filters';
@@ -52,8 +52,8 @@ report 50051 "Monthly Payslip"
             }
             dataitem("Payroll-Payslip Header."; "Payroll-Payslip Header.")
             {
-                DataItemLink = "Employee No" = FIELD ("No."), "Payroll Period" = FIELD ("Period Filter");
-                DataItemTableView = SORTING ("Payroll Period", "Employee No");
+                DataItemLink = "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Period Filter");
+                DataItemTableView = SORTING("Payroll Period", "Employee No");
                 RequestFilterHeading = 'Parameters for payslips';
                 column(Payroll_Payslip_Header__Payroll_Period; "Payroll Period")
                 {
@@ -66,8 +66,8 @@ report 50051 "Monthly Payslip"
                 }
                 dataitem("Payroll-Payslip Lines."; "Payroll-Payslip Lines.")
                 {
-                    DataItemLink = "Payroll Period" = FIELD ("Payroll Period"), "Employee No" = FIELD ("Employee No");
-                    DataItemTableView = SORTING ("Payslip Print Column", "E/D Code");
+                    DataItemLink = "Payroll Period" = FIELD("Payroll Period"), "Employee No" = FIELD("Employee No");
+                    DataItemTableView = SORTING("Payslip Print Column", "E/D Code");
                     PrintOnlyIfDetail = false;
                     RequestFilterFields = "E/D Code";
                     column(Payslipappearance; "Payslip appearance")
@@ -223,7 +223,7 @@ report 50051 "Monthly Payslip"
                 }
                 dataitem(PaySlipPage; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                    DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                     column(DELCHR__Payroll_Payslip_Header____Employee_No____________________Payroll_Payslip_Header____Employee_Name__; DelChr("Payroll-Payslip Header."."Employee No", '<>') + ':   ' + ("Payroll-Payslip Header."."Employee Name"))
                     {
                     }
@@ -298,7 +298,7 @@ report 50051 "Monthly Payslip"
                     }
                     dataitem(PaySlipLoop; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = FILTER (< 101), Number = FILTER (> 0));
+                        DataItemTableView = SORTING(Number) WHERE(Number = FILTER(< 101), Number = FILTER(> 0));
                         column(EDTextTable_i_1_; EDTextTable[i, 1])
                         {
                         }

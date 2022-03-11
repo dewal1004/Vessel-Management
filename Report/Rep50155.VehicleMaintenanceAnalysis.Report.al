@@ -5,7 +5,7 @@ report 50155 "Vehicle Maintenance - Analysis"
     // StartingDate:=010103D;
     // EndingDate:=013103D;
     DefaultLayout = RDLC;
-    RDLCLayout = './VehicleMaintenanceAnalysis.rdlc';
+    RDLCLayout = './Report\Rdlc\VehicleMaintenanceAnalysis.rdlc';
 
     Caption = 'Vehicle Maintenance - Analysis';
 
@@ -13,7 +13,7 @@ report 50155 "Vehicle Maintenance - Analysis"
     {
         dataitem("Fixed Asset"; "Fixed Asset")
         {
-            DataItemTableView = SORTING ("FA Class Code") ORDER(Ascending) WHERE ("FA Class Code" = CONST ('MOVE'));
+            DataItemTableView = SORTING("FA Class Code") ORDER(Ascending) WHERE("FA Class Code" = CONST('MOVE'));
             RequestFilterFields = "No.", "FA Class Code", "FA Subclass Code";
             column(COMPANYNAME; CompanyName)
             {
@@ -194,15 +194,15 @@ report 50155 "Vehicle Maintenance - Analysis"
                         SetCurrentKey("Global Dimension 2 Code");
                     GroupTotals::"FA Posting Group":
                         SetCurrentKey("FA Posting Group");
-                        /*GroupTotals::" ":
-                          SETCURRENTKEY("Maintenance Amt");*/
+                /*GroupTotals::" ":
+                  SETCURRENTKEY("Maintenance Amt");*/
                 end;
 
             end;
         }
         dataitem(fa; "Fixed Asset")
         {
-            DataItemTableView = SORTING ("Maintenance Amt") ORDER(Descending) WHERE ("FA Class Code" = CONST ('MOVE'));
+            DataItemTableView = SORTING("Maintenance Amt") ORDER(Descending) WHERE("FA Class Code" = CONST('MOVE'));
             column(T3_Control1000000017; T3)
             {
             }
@@ -286,7 +286,7 @@ report 50155 "Vehicle Maintenance - Analysis"
             }
             dataitem("Maintenance Ledger Entry"; "Maintenance Ledger Entry")
             {
-                DataItemLink = "FA No." = FIELD ("No.");
+                DataItemLink = "FA No." = FIELD("No.");
                 RequestFilterFields = "Posting Date";
                 column(MAAmt; MAAmt)
                 {

@@ -2,14 +2,14 @@ report 50021 "ALL Fish Shop Sales Report"
 {
     //   "Sea Food categories"
     DefaultLayout = RDLC;
-    RDLCLayout = './ALLFishShopSalesReport.rdlc';
+    RDLCLayout = './Report\Rdlc\ALLFishShopSalesReport.rdlc';
 
 
     dataset
     {
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code");
+            DataItemTableView = SORTING("Sea food code");
             column(USERID; UserId)
             {
             }
@@ -73,7 +73,7 @@ report 50021 "ALL Fish Shop Sales Report"
             dataitem(Item; Item)
             {
                 CalcFields = "Sales (Qty.)", "Sales (LCY)";
-                DataItemTableView = SORTING ("SF Cat", "No. 2") WHERE ("Gen. Prod. Posting Group" = FILTER ('FIS'), "Sales (Qty.)" = FILTER (<> 0), "Location Filter" = FILTER ('ABFISHSHOP' | 'APFISHSHOP' | 'FESTACFS' | 'FISH-SHOP' | 'IBADANFS' | 'IKFISHSHOP' | 'LEKKIFSHOP' | 'SUFISHSHOP' | 'VIFISHSHOP' | 'FS-INSTI'));
+                DataItemTableView = SORTING("SF Cat", "No. 2") WHERE("Gen. Prod. Posting Group" = FILTER('FIS'), "Sales (Qty.)" = FILTER(<> 0), "Location Filter" = FILTER('ABFISHSHOP' | 'APFISHSHOP' | 'FESTACFS' | 'FISH-SHOP' | 'IBADANFS' | 'IKFISHSHOP' | 'LEKKIFSHOP' | 'SUFISHSHOP' | 'VIFISHSHOP' | 'FS-INSTI'));
                 RequestFilterFields = "No.", "Location Filter", "Date Filter";
                 column(Item__Item_Category_Code_; "Item Category Code")
                 {

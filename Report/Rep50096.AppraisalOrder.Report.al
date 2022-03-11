@@ -3,7 +3,7 @@ report 50096 "Appraisal Order"
     // {
     // "Sales Header"."Shortcut Dimension 1 Code"
     DefaultLayout = RDLC;
-    RDLCLayout = './AppraisalOrder.rdlc';
+    RDLCLayout = './Report\Rdlc\AppraisalOrder.rdlc';
 
 
     dataset
@@ -139,8 +139,8 @@ report 50096 "Appraisal Order"
             }
             dataitem("Sales Line"; "Sales Line")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document Type", Type, "No.", "Variant Code", "Drop Shipment", "Shipment Date") ORDER(Descending);
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document Type", Type, "No.", "Variant Code", "Drop Shipment", "Shipment Date") ORDER(Descending);
                 RequestFilterFields = "Document Type", Type;
                 column(Sales_Line__Document_Type_; "Document Type")
                 {

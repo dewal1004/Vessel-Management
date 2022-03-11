@@ -1,13 +1,13 @@
 report 50201 "Vessel Performance Comparison"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VesselPerformanceComparison.rdlc';
+    RDLCLayout = './Report\Rdlc\VesselPerformanceComparison.rdlc';
 
     dataset
     {
         dataitem("Inventory Posting Group"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING (Category) WHERE ("Statistics Group" = FILTER (<> 0), "Source Filter" = FILTER (<> 'PHYSINVJNL' & <> 'TRANSFER' & <> 'ITEMJNL' & <> 'SALES' & <> 'PURCHASES' & <> 'PURCHJNL' & <> 'SALESJNL' & <> 'JOBJNL'));
+            DataItemTableView = SORTING(Category) WHERE("Statistics Group" = FILTER(<> 0), "Source Filter" = FILTER(<> 'PHYSINVJNL' & <> 'TRANSFER' & <> 'ITEMJNL' & <> 'SALES' & <> 'PURCHASES' & <> 'PURCHJNL' & <> 'SALESJNL' & <> 'JOBJNL'));
             RequestFilterFields = Category, "Date Filter";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

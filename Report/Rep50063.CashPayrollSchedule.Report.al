@@ -2,14 +2,14 @@ report 50063 "Cash Payroll Schedule"
 {
     // This report prints the amounts for the required E/D;
     DefaultLayout = RDLC;
-    RDLCLayout = './CashPayrollSchedule.rdlc';
+    RDLCLayout = './Report\Rdlc\CashPayrollSchedule.rdlc';
 
 
     dataset
     {
         dataitem(Employee; Employee)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Period Filter", "Mode of payment";
             RequestFilterHeading = 'Period';
             column(GETFILTER__Period_Filter__; GetFilter("Period Filter"))

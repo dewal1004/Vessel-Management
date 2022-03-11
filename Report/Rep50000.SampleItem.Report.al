@@ -1,7 +1,7 @@
 report 50000 Sample_Item
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './SampleItem.rdlc';
+    RDLCLayout = './Report\Rdlc\SampleItem.rdlc';
 
     dataset
     {
@@ -22,8 +22,8 @@ report 50000 Sample_Item
 
             trigger OnAfterGetRecord()
             begin
-               // if PrintToExcel then
-                 //   ExcelBuff.CreateBook('Item', 'Test');
+                // if PrintToExcel then
+                //   ExcelBuff.CreateBook('Item', 'Test');
             end;
         }
     }

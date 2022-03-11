@@ -1,7 +1,7 @@
 report 50100 "Staff Login Count"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './StaffLoginCount.rdlc';
+    RDLCLayout = './Report\Rdlc\StaffLoginCount.rdlc';
 
     dataset
     {
@@ -43,8 +43,8 @@ report 50100 "Staff Login Count"
             }
             dataitem("Staff Log In"; "Monthly Variables Lines.")
             {
-                DataItemLink = "Employee No" = FIELD ("No."), "Payroll Period" = FIELD ("Bar Code ID");
-                DataItemTableView = SORTING ("Payroll Period", Units, Rate) WHERE (Quantity = CONST (0));
+                DataItemLink = "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Bar Code ID");
+                DataItemTableView = SORTING("Payroll Period", Units, Rate) WHERE(Quantity = CONST(0));
                 RequestFilterFields = Units;
                 column(AIN_1_; AIN[1])
                 {
@@ -84,8 +84,8 @@ report 50100 "Staff Login Count"
             }
             dataitem("Staff Log Out"; "Monthly Variables Lines.")
             {
-                DataItemLink = "Employee No" = FIELD ("No."), "Payroll Period" = FIELD ("Bar Code ID");
-                DataItemTableView = SORTING ("Payroll Period", Units, Rate) WHERE (Quantity = CONST (1));
+                DataItemLink = "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Bar Code ID");
+                DataItemTableView = SORTING("Payroll Period", Units, Rate) WHERE(Quantity = CONST(1));
                 column(BOUT_1_; BOUT[1])
                 {
                 }

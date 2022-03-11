@@ -9,14 +9,14 @@ report 50062 "Payroll Report"
     // The user can specify that the ED.Descriptions appear in the column headers
     // instead of the ED.Codes.
     DefaultLayout = RDLC;
-    RDLCLayout = './PayrollReport.rdlc';
+    RDLCLayout = './Report\Rdlc\PayrollReport.rdlc';
 
 
     dataset
     {
         dataitem("Payroll-Payslip Lines."; "Payroll-Payslip Lines.")
         {
-            DataItemTableView = SORTING ("Payroll Period", "Employee No", "E/D Code") WHERE (Amount = FILTER (<> 0));
+            DataItemTableView = SORTING("Payroll Period", "Employee No", "E/D Code") WHERE(Amount = FILTER(<> 0));
             RequestFilterFields = "Payroll Period", "Postg Group", "Employee No";
             column(S_No; S_no)
             {

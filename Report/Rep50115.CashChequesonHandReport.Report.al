@@ -1,7 +1,7 @@
 report 50115 "Cash/Cheques on Hand Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './CashChequesonHandReport.rdlc';
+    RDLCLayout = './Report\Rdlc\CashChequesonHandReport.rdlc';
 
     dataset
     {
@@ -127,7 +127,7 @@ report 50115 "Cash/Cheques on Hand Report"
         }
         dataitem(Bank2; "Bank Account")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             PrintOnlyIfDetail = true;
             column(Bank2_Bank2_Name; Bank2.Name)
             {
@@ -161,8 +161,8 @@ report 50115 "Cash/Cheques on Hand Report"
             }
             dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
             {
-                DataItemLink = "Bank Account No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Bank Account No.", "Posting Date");
+                DataItemLink = "Bank Account No." = FIELD("No.");
+                DataItemTableView = SORTING("Bank Account No.", "Posting Date");
                 column(Bank_Account_Ledger_Entry__Credit_Amount_; "Credit Amount")
                 {
                 }

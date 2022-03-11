@@ -1,7 +1,7 @@
 report 50174 "Import for a period 2 VJ"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Importforaperiod2VJ.rdlc';
+    RDLCLayout = './Report\Rdlc\Importforaperiod2VJ.rdlc';
 
     dataset
     {

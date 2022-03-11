@@ -1,13 +1,13 @@
 report 50172 "Update Transfer Source NO."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './UpdateTransferSourceNO.rdlc';
+    RDLCLayout = './Report\Rdlc\UpdateTransferSourceNO.rdlc';
 
     dataset
     {
         dataitem("Value Entry"; "Value Entry")
         {
-            DataItemTableView = SORTING ("Location Code", "Item No.", "Item Ledger Entry Type") WHERE ("Item Ledger Entry Type" = CONST (Transfer));
+            DataItemTableView = SORTING("Location Code", "Item No.", "Item Ledger Entry Type") WHERE("Item Ledger Entry Type" = CONST(Transfer));
             RequestFilterFields = "Location Code";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

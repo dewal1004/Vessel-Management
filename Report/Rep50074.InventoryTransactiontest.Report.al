@@ -3,7 +3,7 @@ report 50074 "Inventory - Transaction -test"
     // //Item."Unit Cost"
     // "Print Bin Card"
     DefaultLayout = RDLC;
-    RDLCLayout = './InventoryTransactiontest.rdlc';
+    RDLCLayout = './Report\Rdlc\InventoryTransactiontest.rdlc';
 
     Caption = 'Inventory - Transaction Detail';
 
@@ -67,9 +67,9 @@ report 50074 "Inventory - Transaction -test"
             }
             dataitem("Item Ledger Entry"; "Item Ledger Entry")
             {
-                DataItemLink = "Item No." = FIELD ("No."), "Variant Code" = FIELD ("Variant Filter"), "Posting Date" = FIELD ("Date Filter"), "Location Code" = FIELD ("Location Filter"), "Global Dimension 1 Code" = FIELD ("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD ("Global Dimension 2 Filter");
+                DataItemLink = "Item No." = FIELD("No."), "Variant Code" = FIELD("Variant Filter"), "Posting Date" = FIELD("Date Filter"), "Location Code" = FIELD("Location Filter"), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"), "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter");
                 DataItemLinkReference = Item;
-                DataItemTableView = SORTING ("Item No.", "Variant Code", "Drop Shipment", "Location Code", "Posting Date");
+                DataItemTableView = SORTING("Item No.", "Variant Code", "Drop Shipment", "Location Code", "Posting Date");
                 column(IncreasesQty; IncreasesQty)
                 {
                     DecimalPlaces = 0 : 5;
@@ -222,11 +222,11 @@ report 50074 "Inventory - Transaction -test"
             }
             dataitem(PageCounter1; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 .. 35));
+                DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 .. 35));
             }
             dataitem(PageCounter; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(Description_Item; Item.Description)
                 {
                 }

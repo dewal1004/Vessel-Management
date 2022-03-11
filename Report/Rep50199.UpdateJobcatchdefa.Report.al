@@ -1,7 +1,7 @@
 report 50199 "Update Job catch defa"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './UpdateJobcatchdefa.rdlc';
+    RDLCLayout = './Report\Rdlc\UpdateJobcatchdefa.rdlc';
 
     dataset
     {

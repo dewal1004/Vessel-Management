@@ -3,14 +3,14 @@ report 50016 "Periodic Landing Report"
     // UNL-ASL3.60.01.012 (Santus) 05 July, 2005
     // -> new report
     DefaultLayout = RDLC;
-    RDLCLayout = './PeriodicLandingReport.rdlc';
+    RDLCLayout = './Report\Rdlc\PeriodicLandingReport.rdlc';
 
 
     dataset
     {
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Starting Date", "Ending Date";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -77,8 +77,8 @@ report 50016 "Periodic Landing Report"
             }
             dataitem("Job Ledger Entry"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Job No.", "Job Task No.", "Entry Type", "Posting Date") WHERE ("Location Code" = CONST ('CRM-ASL'), "Gen. Prod. Posting Group" = CONST ('FIS'), "Reason Code" = CONST ('CATCH'));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Job No.", "Job Task No.", "Entry Type", "Posting Date") WHERE("Location Code" = CONST('CRM-ASL'), "Gen. Prod. Posting Group" = CONST('FIS'), "Reason Code" = CONST('CATCH'));
                 RequestFilterFields = "Posting Date";
                 column(Job_Ledger_Entry__Posting_Date_; "Posting Date")
                 {
@@ -156,7 +156,7 @@ report 50016 "Periodic Landing Report"
                         UpdateCell(Xr, 12, 'Job Posting Grp', Bold, not Italic, not UnderLine, FontSize + 1);
                         UpdateCell(Xr, 13, 'GroupSort', Bold, not Italic, not UnderLine, FontSize + 1);
 
-                       // xlSheet.Range(GetCol(1) + Format(Xr - 1) + ':' + GetCol(13) + Format(Xr)).Borders.LineStyle := 1;
+                        // xlSheet.Range(GetCol(1) + Format(Xr - 1) + ':' + GetCol(13) + Format(Xr)).Borders.LineStyle := 1;
                         //xlSheet.Range(GetCol(1) + Format(Xr - 1) + ':' + GetCol(13) + Format(Xr)).Interior.ColorIndex := 27;
                         TopPage := false;
                     end;
@@ -222,16 +222,16 @@ report 50016 "Periodic Landing Report"
     [Scope('Internal')]
     procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[200]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
     begin
-/*
-        xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
-        */
+        /*
+                xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+                if Bold then
+                    xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+                if Italic then
+                    xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+                if Underline then
+                    xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+                xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
+                */
     end;
 
     [Scope('Internal')]

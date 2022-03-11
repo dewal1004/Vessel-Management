@@ -3,14 +3,14 @@ report 50087 "Container By Month Shipment"
     // LastFieldNo := FIELDNO(Category);
     // "Sales Shipment Header".GETFILTERS
     DefaultLayout = RDLC;
-    RDLCLayout = './ContainerByMonthShipment.rdlc';
+    RDLCLayout = './Report\Rdlc\ContainerByMonthShipment.rdlc';
 
 
     dataset
     {
         dataitem("Sales Shipment Header"; "Sales Shipment Header")
         {
-            DataItemTableView = SORTING ("Shipment Month", "Order No.") WHERE ("Currency Code" = FILTER (<> ''));
+            DataItemTableView = SORTING("Shipment Month", "Order No.") WHERE("Currency Code" = FILTER(<> ''));
             RequestFilterFields = "Shipment Month", "Order No.", "Shipment Date";
             column(SelltoCustomerNo; "Sales Shipment Header"."Sell-to Customer No.")
             {

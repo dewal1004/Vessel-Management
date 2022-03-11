@@ -5,7 +5,7 @@ report 50193 "Vessel Update Job Rev/FS day"
     // XVal[3]::NairaVal
     // XVal[4]::AGVal
     DefaultLayout = RDLC;
-    RDLCLayout = './VesselUpdateJobRevFSday.rdlc';
+    RDLCLayout = './Report\Rdlc\VesselUpdateJobRevFSday.rdlc';
 
 
     dataset
@@ -41,7 +41,7 @@ report 50193 "Vessel Update Job Rev/FS day"
         }
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("Voyage Sea Days", Vessel);
+            DataItemTableView = SORTING("Voyage Sea Days", Vessel);
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
@@ -540,8 +540,8 @@ report 50193 "Vessel Update Job Rev/FS day"
             }
             dataitem("<Job Ledger Entry>"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Job No.", "Location Code", "Work Type Code") WHERE ("Location Code" = CONST ('CRM-ASL'));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Job No.", "Location Code", "Work Type Code") WHERE("Location Code" = CONST('CRM-ASL'));
                 column(Qty; Qty)
                 {
                 }
@@ -637,8 +637,8 @@ report 50193 "Vessel Update Job Rev/FS day"
             }
             dataitem("Job catch Default"; "Job catch Default")
             {
-                DataItemLink = "No." = FIELD ("No.");
-                DataItemTableView = SORTING ("No.", GroupSort);
+                DataItemLink = "No." = FIELD("No.");
+                DataItemTableView = SORTING("No.", GroupSort);
                 column(NairaValB; NairaValB)
                 {
                 }
@@ -691,8 +691,8 @@ report 50193 "Vessel Update Job Rev/FS day"
             }
             dataitem("Value Entry"; "Value Entry")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
                 column(AGVal_Control1000000098; AGVal)
                 {
                     DecimalPlaces = 0 : 0;
@@ -733,7 +733,7 @@ report 50193 "Vessel Update Job Rev/FS day"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(GLStrT; GLStrT)
                 {
                     DecimalPlaces = 0 : 0;

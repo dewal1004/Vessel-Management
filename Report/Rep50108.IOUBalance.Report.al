@@ -1,7 +1,7 @@
 report 50108 "IOU Balance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './IOUBalance.rdlc';
+    RDLCLayout = './Report\Rdlc\IOUBalance.rdlc';
 
     dataset
     {

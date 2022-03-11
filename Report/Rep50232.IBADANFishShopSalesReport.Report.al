@@ -2,7 +2,7 @@ report 50232 "IBADAN Fish Shop Sales Report"
 {
     // "Sea Food categories"
     DefaultLayout = RDLC;
-    RDLCLayout = './IBADANFishShopSalesReport.rdlc';
+    RDLCLayout = './Report\Rdlc\IBADANFishShopSalesReport.rdlc';
 
 
     dataset

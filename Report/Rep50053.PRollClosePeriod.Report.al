@@ -1,13 +1,13 @@
 report 50053 "PRoll; Close Period"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PRollClosePeriod.rdlc';
+    RDLCLayout = './Report\Rdlc\PRollClosePeriod.rdlc';
 
     dataset
     {
         dataitem("Payroll-Payslip Header."; "Payroll-Payslip Header.")
         {
-            DataItemTableView = SORTING ("Payroll Period", "Employee No");
+            DataItemTableView = SORTING("Payroll Period", "Employee No");
             RequestFilterFields = "Payroll Period", "Employee No";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

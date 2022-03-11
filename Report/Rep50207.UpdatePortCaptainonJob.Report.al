@@ -1,13 +1,13 @@
 report 50207 "Update Port Captain on Job"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './UpdatePortCaptainonJob.rdlc';
+    RDLCLayout = './Report\Rdlc\UpdatePortCaptainonJob.rdlc';
 
     dataset
     {
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("No.") WHERE (Status = CONST (Open));
+            DataItemTableView = SORTING("No.") WHERE(Status = CONST(Open));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }

@@ -3,14 +3,14 @@ report 50023 "Daily Cash Summary"
     // IOU.EmployeeName
     // StartBalanceLCY
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyCashSummary.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyCashSummary.rdlc';
 
 
     dataset
     {
         dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
         {
-            DataItemTableView = SORTING ("Bank Account No.", "Posting Date", Positive) ORDER(Descending);
+            DataItemTableView = SORTING("Bank Account No.", "Posting Date", Positive) ORDER(Descending);
             RequestFilterFields = "Bank Account No.", "Posting Date", Positive;
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -134,7 +134,7 @@ report 50023 "Daily Cash Summary"
         }
         dataitem("Cust. Ledger Entry"; "Cust. Ledger Entry")
         {
-            DataItemTableView = SORTING ("Customer No.", Open, Positive, "Due Date", "Currency Code") WHERE ("Customer No." = FILTER ('D' .. 'F'), Positive = FILTER (true), Open = FILTER (true));
+            DataItemTableView = SORTING("Customer No.", Open, Positive, "Due Date", "Currency Code") WHERE("Customer No." = FILTER('D' .. 'F'), Positive = FILTER(true), Open = FILTER(true));
             column(Cust__Ledger_Entry__Document_No__; "Document No.")
             {
             }
@@ -196,7 +196,7 @@ report 50023 "Daily Cash Summary"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = WHERE (Number = CONST (1));
+            DataItemTableView = WHERE(Number = CONST(1));
             column(Prepared_By_Caption; Prepared_By_CaptionLbl)
             {
             }

@@ -1,7 +1,7 @@
 report 50150 "Consolidated Voyage P&L"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ConsolidatedVoyagePL.rdlc';
+    RDLCLayout = './Report\Rdlc\ConsolidatedVoyagePL.rdlc';
     Permissions = TableData "Job Ledger Entry" = rimd,
                   TableData "Value Entry" = rimd;
 
@@ -9,7 +9,7 @@ report 50150 "Consolidated Voyage P&L"
     {
         dataitem(Jobss; Job)
         {
-            DataItemTableView = SORTING ("Ending Date") WHERE ("Voyage Ended" = CONST (true));
+            DataItemTableView = SORTING("Ending Date") WHERE("Voyage Ended" = CONST(true));
             RequestFilterFields = "No.";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -506,7 +506,7 @@ report 50150 "Consolidated Voyage P&L"
         }
         dataitem(Jb; Job)
         {
-            DataItemTableView = SORTING ("Ending Date");
+            DataItemTableView = SORTING("Ending Date");
             column(Jb__No__; "No.")
             {
             }
@@ -545,8 +545,8 @@ report 50150 "Consolidated Voyage P&L"
             }
             dataitem(JbLedMark; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Job No.", "Posting Date", Type, "No.", "Location Code", "Gen. Prod. Posting Group") WHERE ("Location Code" = CONST ('CRM-ASL'), "Gen. Prod. Posting Group" = FILTER ('FIS' | ''));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Job No.", "Posting Date", Type, "No.", "Location Code", "Gen. Prod. Posting Group") WHERE("Location Code" = CONST('CRM-ASL'), "Gen. Prod. Posting Group" = FILTER('FIS' | ''));
                 column(JbLedMark__Entry_No__; "Entry No.")
                 {
                 }
@@ -586,8 +586,8 @@ report 50150 "Consolidated Voyage P&L"
             }
             dataitem(JbCatchMark; "Job catch Default")
             {
-                DataItemLink = "No." = FIELD ("No.");
-                DataItemTableView = SORTING ("No.", GroupSort);
+                DataItemLink = "No." = FIELD("No.");
+                DataItemTableView = SORTING("No.", GroupSort);
                 column(JbCatchMark__Table_Name_; "Table Name")
                 {
                 }
@@ -633,8 +633,8 @@ report 50150 "Consolidated Voyage P&L"
             }
             dataitem(ValEntMark; "Value Entry")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
                 column(ValEntMark__Entry_No__; "Entry No.")
                 {
                 }
@@ -687,7 +687,7 @@ report 50150 "Consolidated Voyage P&L"
         }
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code");
+            DataItemTableView = SORTING("Sea food code");
             column(Sea_Food_categories__Sea_food_code_; "Sea food code")
             {
             }
@@ -795,8 +795,8 @@ report 50150 "Consolidated Voyage P&L"
             }
             dataitem("Job Ledger Entry Rep"; "Job Ledger Entry")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING (GroupSort, "Location Code", "Gen. Prod. Posting Group", "Marked Rec") WHERE ("Location Code" = CONST ('CRM-ASL'), "Gen. Prod. Posting Group" = FILTER ('FIS' | ''), "Marked Rec" = CONST (true));
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING(GroupSort, "Location Code", "Gen. Prod. Posting Group", "Marked Rec") WHERE("Location Code" = CONST('CRM-ASL'), "Gen. Prod. Posting Group" = FILTER('FIS' | ''), "Marked Rec" = CONST(true));
                 column(Job_Ledger_Entry_Rep_GroupSort; GroupSort)
                 {
                 }
@@ -860,8 +860,8 @@ report 50150 "Consolidated Voyage P&L"
             }
             dataitem("Job catch Default"; "Job catch Default")
             {
-                DataItemLink = GroupSort = FIELD ("Sea food code");
-                DataItemTableView = SORTING (GroupSort, "Marked Rec") WHERE ("Marked Rec" = CONST (true));
+                DataItemLink = GroupSort = FIELD("Sea food code");
+                DataItemTableView = SORTING(GroupSort, "Marked Rec") WHERE("Marked Rec" = CONST(true));
                 column(No_B_; "No.B")
                 {
                 }
@@ -945,7 +945,7 @@ report 50150 "Consolidated Voyage P&L"
         }
         dataitem("Value Entry"; "Value Entry")
         {
-            DataItemTableView = SORTING ("Gen. Prod. Posting Group", "Document No.", "Marked Rec") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'), "Marked Rec" = CONST (true));
+            DataItemTableView = SORTING("Gen. Prod. Posting Group", "Document No.", "Marked Rec") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'), "Marked Rec" = CONST(true));
             column(Value_Entry__Document_No__; "Document No.")
             {
             }
@@ -985,7 +985,7 @@ report 50150 "Consolidated Voyage P&L"
         }
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             column(DataStor_3_; DataStor[3])
             {
             }
@@ -1305,7 +1305,7 @@ report 50150 "Consolidated Voyage P&L"
         exit(Prc);
     end;
 
-    
+
     procedure JBDate(var JbNos: Code[20]): Date
     var
         JobJob: Record Job;

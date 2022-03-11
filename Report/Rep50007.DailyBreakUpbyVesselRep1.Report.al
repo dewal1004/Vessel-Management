@@ -1,13 +1,13 @@
 report 50007 "Daily BreakUp by Vessel Rep 1"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyBreakUpbyVesselRep1.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyBreakUpbyVesselRep1.rdlc';
 
     dataset
     {
         dataitem("Inventory Posting G Cat Tot"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE ("In Use" = CONST (true), "Statistics Group" = FILTER (> 0), Category = FILTER (<> ''));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE("In Use" = CONST(true), "Statistics Group" = FILTER(> 0), Category = FILTER(<> ''));
             RequestFilterFields = "Statistics Group", Category, "Date Filter";
             column(test; Test)
             {
@@ -2320,7 +2320,7 @@ report 50007 "Daily BreakUp by Vessel Rep 1"
                 else
                     InvtTot := "Inventory total1";
 
-               // CurrReport.CreateTotals(InvtTot);
+                // CurrReport.CreateTotals(InvtTot);
                 if "Statistics Group" = 4 then
                     T002 := 'LOCAL PRODUCTS';
             end;
@@ -2391,7 +2391,7 @@ report 50007 "Daily BreakUp by Vessel Rep 1"
         }
         dataitem("Inventory Posting Group"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE ("In Use" = CONST (true), "Statistics Group" = FILTER (> 0));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE("In Use" = CONST(true), "Statistics Group" = FILTER(> 0));
             column(testing123; testing123)
             {
             }
@@ -5136,7 +5136,7 @@ report 50007 "Daily BreakUp by Vessel Rep 1"
                         SeaRangeC[level] := Inventory2
                     else
                         SeaRangeC[level] := Inventory1;
-                   // CurrReport.CreateTotals(SeaRangeC[level]);
+                    // CurrReport.CreateTotals(SeaRangeC[level]);
                     level := level - 1;
                 end;
                 //Show Inventory for all location by releasing location filter
@@ -5144,7 +5144,7 @@ report 50007 "Daily BreakUp by Vessel Rep 1"
                 CalcFields("Inventory total1", "Inventory total2");
                 //"Inventory total2" := InventoryTotal2(Code,DateFilter);
                 if ReportBy = 0 then InvtTot := "Inventory total2" else InvtTot := "Inventory total1";
-               // CurrReport.CreateTotals(InvtTot);
+                // CurrReport.CreateTotals(InvtTot);
                 if "Statistics Group" = 4 then T002 := 'LOCAL PRODUCTS';
             end;
 

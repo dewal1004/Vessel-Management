@@ -2,7 +2,7 @@ report 50081 "Crew List"
 {
     // {Comp."Ship-to City"
     DefaultLayout = RDLC;
-    RDLCLayout = './CrewList.rdlc';
+    RDLCLayout = './Report\Rdlc\CrewList.rdlc';
 
 
     dataset
@@ -33,7 +33,7 @@ report 50081 "Crew List"
             }
             dataitem("Job Planning Line"; "Job Planning Line")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
+                DataItemLink = "Job No." = FIELD("No.");
                 column(VessNam; VessNam)
                 {
                 }
@@ -108,7 +108,7 @@ report 50081 "Crew List"
                 }
                 dataitem(Resource; Resource)
                 {
-                    DataItemLink = "No." = FIELD ("No.");
+                    DataItemLink = "No." = FIELD("No.");
                     column(Nationality; Resource.Nationality)
                     {
                     }

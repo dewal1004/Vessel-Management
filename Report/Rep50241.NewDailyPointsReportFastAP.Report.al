@@ -3,7 +3,7 @@ report 50241 "NewDailyPointsReport Fast-AP"
     // {UNL-ASL3.60.01.004 (Santus) May 11, 2005
     // -> modified report to write output data to the Entry/Exit Table. the data will be stored as historical data.
     DefaultLayout = RDLC;
-    RDLCLayout = './NewDailyPointsReportFastAP.rdlc';
+    RDLCLayout = './Report\Rdlc\NewDailyPointsReportFastAP.rdlc';
 
     Caption = 'New Daily Points Report';
 
@@ -11,7 +11,7 @@ report 50241 "NewDailyPointsReport Fast-AP"
     {
         dataitem("Integer"; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
             trigger OnAfterGetRecord()
             begin
@@ -42,7 +42,7 @@ report 50241 "NewDailyPointsReport Fast-AP"
         }
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("Points Sort Bay", Status) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Points Sort Bay", Status) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
@@ -404,7 +404,7 @@ report 50241 "NewDailyPointsReport Fast-AP"
         }
         dataitem(Job2; Job)
         {
-            DataItemTableView = SORTING ("Fishing Country Code", AvgPtSortBay) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Fishing Country Code", AvgPtSortBay) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(Job2__Fishing_Country_Code_; "Fishing Country Code")
             {
             }
@@ -608,7 +608,7 @@ report 50241 "NewDailyPointsReport Fast-AP"
         }
         dataitem(VoyMedian; Job)
         {
-            DataItemTableView = SORTING ("Points Sort Bay", Status) ORDER(Descending) WHERE ("No." = FILTER ('I' .. 'K'));
+            DataItemTableView = SORTING("Points Sort Bay", Status) ORDER(Descending) WHERE("No." = FILTER('I' .. 'K'));
             column(Desc_Control1000000077; Desc)
             {
             }

@@ -1,13 +1,13 @@
 report 50171 "Issued Consumed to Vesse"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './IssuedConsumedtoVesse.rdlc';
+    RDLCLayout = './Report\Rdlc\IssuedConsumedtoVesse.rdlc';
 
     dataset
     {
         dataitem("Value Entry"; "Value Entry")
         {
-            DataItemTableView = SORTING ("Location Code", "Item No.", "Item Ledger Entry Type") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+            DataItemTableView = SORTING("Location Code", "Item No.", "Item Ledger Entry Type") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
             RequestFilterFields = "Location Code", "Item No.", "Item Ledger Entry Type";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

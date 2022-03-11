@@ -1,13 +1,13 @@
 report 50335 "Periodic Landing Report1"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PeriodicLandingReport1.rdlc';
+    RDLCLayout = './Report\Rdlc\PeriodicLandingReport1.rdlc';
 
     dataset
     {
         dataitem("Job Ledger Entry"; "Job Ledger Entry")
         {
-            DataItemTableView = SORTING ("Job No.", "Posting Date", Type, "No.", "Location Code", "Gen. Prod. Posting Group") WHERE ("Location Code" = CONST ('CRM-ASL'), "Gen. Prod. Posting Group" = CONST ('FIS'), "Reason Code" = CONST ('CATCH'));
+            DataItemTableView = SORTING("Job No.", "Posting Date", Type, "No.", "Location Code", "Gen. Prod. Posting Group") WHERE("Location Code" = CONST('CRM-ASL'), "Gen. Prod. Posting Group" = CONST('FIS'), "Reason Code" = CONST('CATCH'));
             RequestFilterFields = "Posting Date";
             column(GroupSort_JobLedgerEntry; "Job Ledger Entry".GroupSort)
             {

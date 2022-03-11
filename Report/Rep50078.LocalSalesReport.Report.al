@@ -1,7 +1,7 @@
 report 50078 "Local Sales Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './LocalSalesReport.rdlc';
+    RDLCLayout = './Report\Rdlc\LocalSalesReport.rdlc';
     Caption = 'Inventory - Top 10 List';
 
     dataset

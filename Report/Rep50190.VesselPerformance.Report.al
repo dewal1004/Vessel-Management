@@ -2,14 +2,14 @@ report 50190 "Vessel Performance"
 {
     // Job.GETFILTERS
     DefaultLayout = RDLC;
-    RDLCLayout = './VesselPerformance.rdlc';
+    RDLCLayout = './Report\Rdlc\VesselPerformance.rdlc';
 
 
     dataset
     {
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Starting Date", "Ending Date", Vessel, "Fishing Country Code", "No.", Captain;
             column(S_No; "S.No")
             {
@@ -267,8 +267,8 @@ report 50190 "Vessel Performance"
             }
             dataitem("<Job Ledger Entry>"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Job No.", "Location Code", "Work Type Code") WHERE ("Location Code" = CONST ('CRM-ASL'));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Job No.", "Location Code", "Work Type Code") WHERE("Location Code" = CONST('CRM-ASL'));
                 column(Job_No; Job."No.")
                 {
                 }
@@ -363,7 +363,7 @@ report 50190 "Vessel Performance"
             }
             dataitem("Job catch Default"; "Job catch Default")
             {
-                DataItemLink = "No." = FIELD ("No.");
+                DataItemLink = "No." = FIELD("No.");
                 column(NairaValB_Control1000000032; NairaValB)
                 {
                 }
@@ -411,8 +411,8 @@ report 50190 "Vessel Performance"
             }
             dataitem("Value Entry"; "Value Entry")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
                 column(AGVal_Control1000000098; AGVal)
                 {
                     DecimalPlaces = 0 : 0;
@@ -453,7 +453,7 @@ report 50190 "Vessel Performance"
             }
             dataitem("<Value Entry>"; "Integer")
             {
-                DataItemTableView = WHERE (Number = CONST (1));
+                DataItemTableView = WHERE(Number = CONST(1));
                 column(GLStrT; GLStrT)
                 {
                     DecimalPlaces = 0 : 0;
@@ -729,7 +729,7 @@ report 50190 "Vessel Performance"
         "No.B" := Format(Cd) + UOMCd + CopyStr(Br, 1, 1);    //Requip Code Name
     end;
 
-    
+
     procedure GetItPrice(JNos: Code[20]; Nos: Code[20]; PDays: Date): Decimal
     var
         job3: Record Job;

@@ -1,13 +1,13 @@
 report 50010 "Daily BreakUp by Vessel Rep 4"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyBreakUpbyVesselRep4.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyBreakUpbyVesselRep4.rdlc';
 
     dataset
     {
         dataitem("Inventory Posting G Cat Tot"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE ("In Use" = CONST (true), "Statistics Group" = FILTER (> 0), Category = FILTER (<> ''));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE("In Use" = CONST(true), "Statistics Group" = FILTER(> 0), Category = FILTER(<> ''));
             RequestFilterFields = "Statistics Group", Category, "Date Filter";
             column(test; Test)
             {
@@ -2353,7 +2353,7 @@ report 50010 "Daily BreakUp by Vessel Rep 4"
                 else
                     InvtTot := "Inventory total1";
 
-               // CurrReport.CreateTotals(InvtTot);
+                // CurrReport.CreateTotals(InvtTot);
                 if "Statistics Group" = 4 then
                     T002 := 'LOCAL PRODUCTS';
 
@@ -2435,14 +2435,14 @@ report 50010 "Daily BreakUp by Vessel Rep 4"
                         else
                             VesselCounter += 1;
                         Countx := Countx + 1;
-                        //END;
+                    //END;
                     until locate.Next = 0;
 
             end;
         }
         dataitem("Inventory Posting Group"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") WHERE ("In Use" = CONST (true), "Statistics Group" = FILTER (> 0));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") WHERE("In Use" = CONST(true), "Statistics Group" = FILTER(> 0));
             column(testing123; testing123)
             {
             }
@@ -5187,7 +5187,7 @@ report 50010 "Daily BreakUp by Vessel Rep 4"
                         SeaRangeC[level] := Inventory2
                     else
                         SeaRangeC[level] := Inventory1;
-                   // CurrReport.CreateTotals(SeaRangeC[level]);
+                    // CurrReport.CreateTotals(SeaRangeC[level]);
                     level := level - 1;
                 end;
                 //Show Inventory for all location by releasing location filter

@@ -2,7 +2,7 @@ report 50024 "Account Schedule BS"
 {
     //  Text004
     DefaultLayout = RDLC;
-    RDLCLayout = './AccountScheduleBS.rdlc';
+    RDLCLayout = './Report\Rdlc\AccountScheduleBS.rdlc';
 
     Caption = 'Account Schedule';
 
@@ -10,13 +10,13 @@ report 50024 "Account Schedule BS"
     {
         dataitem(AccScheduleName; "Acc. Schedule Name")
         {
-            DataItemTableView = SORTING (Name);
+            DataItemTableView = SORTING(Name);
             column(AccScheduleName_Name; Name)
             {
             }
             dataitem(Heading; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 column(USERID; UserId)
                 {
                 }
@@ -79,9 +79,9 @@ report 50024 "Account Schedule BS"
                 }
                 dataitem(AccSchedLineSpec; "Acc. Schedule Line")
                 {
-                    DataItemLink = "Schedule Name" = FIELD (Name);
+                    DataItemLink = "Schedule Name" = FIELD(Name);
                     DataItemLinkReference = AccScheduleName;
-                    DataItemTableView = SORTING ("Schedule Name", "Line No.");
+                    DataItemTableView = SORTING("Schedule Name", "Line No.");
                     RequestFilterFields = "Date Filter", "G/L Budget Filter", "Dimension 1 Filter", "Dimension 2 Filter";
                     column(AccSchedLineSpec__Show_Opposite_Sign_; "Show Opposite Sign")
                     {
@@ -185,7 +185,7 @@ report 50024 "Account Schedule BS"
                 }
                 dataitem(PageBreak; "Integer")
                 {
-                    DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                    DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
 
                     trigger OnAfterGetRecord()
                     begin
@@ -200,9 +200,9 @@ report 50024 "Account Schedule BS"
                 }
                 dataitem("Acc. Schedule Line"; "Acc. Schedule Line")
                 {
-                    DataItemLink = "Schedule Name" = FIELD (Name);
+                    DataItemLink = "Schedule Name" = FIELD(Name);
                     DataItemLinkReference = AccScheduleName;
-                    DataItemTableView = SORTING ("Schedule Name", "Line No.");
+                    DataItemTableView = SORTING("Schedule Name", "Line No.");
                     column(Header_1_; Header[1])
                     {
                     }
@@ -559,7 +559,7 @@ report 50024 "Account Schedule BS"
         ColumnLayoutNameCaptionLbl: Label 'Column Layout';
         AnalysisView__Dimension_1_Code_CaptionLbl: Label 'Dimension Code';
 
-    
+
     procedure InitAccSched()
     begin
         StDat := Format(CalcDate('CM-2M+1D'));
@@ -612,7 +612,7 @@ report 50024 "Account Schedule BS"
         ColumnLayoutNameHidden := ColLayoutName;
     end;
 
-    
+
     procedure CalcColumns(): Boolean
     var
         NonZero: Boolean;

@@ -1,13 +1,13 @@
 report 50070 "Increment Employee Earnings"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './IncrementEmployeeEarnings.rdlc';
+    RDLCLayout = './Report\Rdlc\IncrementEmployeeEarnings.rdlc';
 
     dataset
     {
         dataitem("Payroll-Employee Group Header."; "Payroll-Employee Group Header.")
         {
-            DataItemTableView = SORTING (Code) WHERE (Management = CONST (false));
+            DataItemTableView = SORTING(Code) WHERE(Management = CONST(false));
             PrintOnlyIfDetail = true;
             RequestFilterFields = "Code";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
@@ -33,8 +33,8 @@ report 50070 "Increment Employee Earnings"
             }
             dataitem("Payroll-Employee Group Lines."; "Payroll-Employee Group Lines.")
             {
-                DataItemLink = "Employee Group" = FIELD (Code);
-                DataItemTableView = SORTING ("Employee Group", "E/D Code");
+                DataItemLink = "Employee Group" = FIELD(Code);
+                DataItemTableView = SORTING("Employee Group", "E/D Code");
                 RequestFilterFields = "Employee Group", "E/D Code", "ED Category";
                 column(Payroll_Employee_Group_Lines___Employee_Group_; "Employee Group")
                 {

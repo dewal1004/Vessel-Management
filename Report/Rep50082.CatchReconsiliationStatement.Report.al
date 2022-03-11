@@ -5,7 +5,7 @@ report 50082 "Catch Reconsiliation Statement"
     // "Job."Ending Date"
     // Job."Sea Days"
     DefaultLayout = RDLC;
-    RDLCLayout = './CatchReconsiliationStatement.rdlc';
+    RDLCLayout = './Report\Rdlc\CatchReconsiliationStatement.rdlc';
 
     Caption = 'Job Journal - Test';
 
@@ -13,7 +13,7 @@ report 50082 "Catch Reconsiliation Statement"
     {
         dataitem("Job Journal Batch"; "Job Journal Batch")
         {
-            DataItemTableView = SORTING ("Journal Template Name", Name);
+            DataItemTableView = SORTING("Journal Template Name", Name);
             column(Job_Journal_Batch_Journal_Template_Name; "Journal Template Name")
             {
             }
@@ -22,7 +22,7 @@ report 50082 "Catch Reconsiliation Statement"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 PrintOnlyIfDetail = true;
                 column(COMPANYNAME; CompanyName)
                 {
@@ -101,9 +101,9 @@ report 50082 "Catch Reconsiliation Statement"
                 }
                 dataitem("Job Journal Line"; "Job Journal Line")
                 {
-                    DataItemLink = "Journal Template Name" = FIELD ("Journal Template Name"), "Journal Batch Name" = FIELD (Name);
+                    DataItemLink = "Journal Template Name" = FIELD("Journal Template Name"), "Journal Batch Name" = FIELD(Name);
                     DataItemLinkReference = "Job Journal Batch";
-                    DataItemTableView = SORTING ("Journal Template Name", "Journal Batch Name", "Statistics Group", "Work Type Code Sort") ORDER(Ascending);
+                    DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Statistics Group", "Work Type Code Sort") ORDER(Ascending);
                     RequestFilterFields = "No.", "Journal Batch Name", "Posting Date", "Journal Template Name";
                     column(Job_Journal_Line__Work_Type_Code_; "Work Type Code")
                     {
@@ -179,7 +179,7 @@ report 50082 "Catch Reconsiliation Statement"
                     }
                     column(Capt0; Capt0)
                     {
-                      //  DecimalPlaces = 2 : 5;
+                        //  DecimalPlaces = 2 : 5;
                     }
                     column(Control1000000009Caption; Control1000000009CaptionLbl)
                     {
@@ -231,7 +231,7 @@ report 50082 "Catch Reconsiliation Statement"
                     }
                     dataitem(DimensionLoop; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                        DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                         column(DimText; DimText)
                         {
                         }
@@ -286,7 +286,7 @@ report 50082 "Catch Reconsiliation Statement"
                     }
                     dataitem(ErrorLoop; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
                         column(ErrorText_Number_; ErrorText[Number])
                         {
                         }

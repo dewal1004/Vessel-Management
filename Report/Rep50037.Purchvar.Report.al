@@ -7,18 +7,18 @@ report 50037 "Purch var"
     // Trecev
     // "Purch. Rcpt. Header"."Waybill No."
     DefaultLayout = RDLC;
-    RDLCLayout = './Purchvar.rdlc';
+    RDLCLayout = './Report\Rdlc\Purchvar.rdlc';
 
 
     dataset
     {
         dataitem(PageLoop; "Integer")
         {
-            DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
         }
         dataitem("Purchase Variance (Item)"; "Purchase Variance (Item)")
         {
-            DataItemTableView = SORTING (OrderNo, ItemNo);
+            DataItemTableView = SORTING(OrderNo, ItemNo);
             RequestFilterFields = OrderNo;
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

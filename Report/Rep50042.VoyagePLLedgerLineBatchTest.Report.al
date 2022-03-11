@@ -1,13 +1,13 @@
 report 50042 "Voyage P&L LedgerLineBatchTest"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyagePLLedgerLineBatchTest.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyagePLLedgerLineBatchTest.rdlc';
 
     dataset
     {
         dataitem("Main Job"; Job)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Ending Date";
             column(Main_Job_No_; "No.")
             {
@@ -23,8 +23,8 @@ report 50042 "Voyage P&L LedgerLineBatchTest"
             }
             dataitem("Job Ledger Entry"; "Job Ledger Entry")
             {
-                DataItemLink = "Job No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Job No.", "Location Code", "Work Type Code") WHERE ("Location Code" = CONST ('CRM-ASL'));
+                DataItemLink = "Job No." = FIELD("No.");
+                DataItemTableView = SORTING("Job No.", "Location Code", "Work Type Code") WHERE("Location Code" = CONST('CRM-ASL'));
                 column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
                 {
                 }
@@ -252,7 +252,7 @@ report 50042 "Voyage P&L LedgerLineBatchTest"
             }
             dataitem("Sea Food categories"; "Sea Food categories")
             {
-                DataItemTableView = SORTING ("Sea food code");
+                DataItemTableView = SORTING("Sea food code");
                 column(Sea_Food_categories__Sea_food_code_; "Sea food code")
                 {
                 }
@@ -360,8 +360,8 @@ report 50042 "Voyage P&L LedgerLineBatchTest"
                 }
                 dataitem("Job Ledger Entry Rep"; "Job Ledger Entry")
                 {
-                    DataItemLink = GroupSort = FIELD ("Sea food code");
-                    DataItemTableView = SORTING ("Job No.", "Location Code", GroupSort) WHERE ("Location Code" = CONST ('CRM-ASL'));
+                    DataItemLink = GroupSort = FIELD("Sea food code");
+                    DataItemTableView = SORTING("Job No.", "Location Code", GroupSort) WHERE("Location Code" = CONST('CRM-ASL'));
                     column(Job_Ledger_Entry_Rep_GroupSort; GroupSort)
                     {
                     }
@@ -431,8 +431,8 @@ report 50042 "Voyage P&L LedgerLineBatchTest"
                 }
                 dataitem("Job catch Default"; "Job catch Default")
                 {
-                    DataItemLink = GroupSort = FIELD ("Sea food code");
-                    DataItemTableView = SORTING ("No.", GroupSort);
+                    DataItemLink = GroupSort = FIELD("Sea food code");
+                    DataItemTableView = SORTING("No.", GroupSort);
                     column(No_B_; "No.B")
                     {
                     }
@@ -499,7 +499,7 @@ report 50042 "Voyage P&L LedgerLineBatchTest"
             }
             dataitem("Value Entry"; "Value Entry")
             {
-                DataItemTableView = SORTING ("Document No.", "Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+                DataItemTableView = SORTING("Document No.", "Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
 
                 trigger OnPreDataItem()
                 begin
@@ -511,7 +511,7 @@ report 50042 "Voyage P&L LedgerLineBatchTest"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
             }
 
             trigger OnAfterGetRecord()

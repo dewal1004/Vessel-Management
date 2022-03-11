@@ -1,13 +1,13 @@
 report 50005 "Points Summary VJ"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PointsSummaryVJ.rdlc';
+    RDLCLayout = './Report\Rdlc\PointsSummaryVJ.rdlc';
 
     dataset
     {
         dataitem("Job Ledger Entry"; "Job Ledger Entry")
         {
-            DataItemTableView = SORTING ("Posting Date", "Job No.") ORDER(Ascending) WHERE ("Location Code" = FILTER (<> 'CRM-ASL'), "Reason Code" = FILTER ('CATCH'), "Gen. Prod. Posting Group" = FILTER ('FIS'));
+            DataItemTableView = SORTING("Posting Date", "Job No.") ORDER(Ascending) WHERE("Location Code" = FILTER(<> 'CRM-ASL'), "Reason Code" = FILTER('CATCH'), "Gen. Prod. Posting Group" = FILTER('FIS'));
             RequestFilterFields = "Posting Date";
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
@@ -308,7 +308,7 @@ report 50005 "Points Summary VJ"
         WTQty: Decimal;
         "------------------------------": Integer;
         //xlApp: Automation;
-       // xlBook: Automation;
+        // xlBook: Automation;
         //xlSheet: Automation;
         Send2Excel: Boolean;
         TopPage: Boolean;
@@ -342,15 +342,15 @@ report 50005 "Points Summary VJ"
 
     procedure UpdateCell(Row: Integer; Col: Integer; ValueText: Text[200]; Bold: Boolean; Italic: Boolean; Underline: Boolean; FontSize: Integer)
     begin
-       /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
-        if Bold then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
-        if Italic then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
-        if Underline then
-            xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
-        xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
-        */
+        /* xlSheet.Range(GetCol(Col) + Format(Row)).Value := ValueText;
+         if Bold then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Bold := Bold;
+         if Italic then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Italic := Italic;
+         if Underline then
+             xlSheet.Range(GetCol(Col) + Format(Row)).Font.Underline := Underline;
+         xlSheet.Range(GetCol(Col) + Format(Row)).Font.Size := FontSize;
+         */
     end;
 
     [Scope('Internal')]

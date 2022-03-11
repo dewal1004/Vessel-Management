@@ -1,13 +1,13 @@
 report 50004 "Consolidated Narration_"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ConsolidatedNarration.rdlc';
+    RDLCLayout = './Report\Rdlc\ConsolidatedNarration.rdlc';
 
     dataset
     {
         dataitem("Comment Line"; "Comment Line")
         {
-            DataItemTableView = SORTING ("Hours Lost") ORDER(Descending) WHERE (Type = CONST (Narration));
+            DataItemTableView = SORTING("Hours Lost") ORDER(Descending) WHERE(Type = CONST(Narration));
             RequestFilterFields = Voyage, "Operation No.", Vessel, Type;
             column(No; "Comment Line"."No.")
             {
@@ -163,7 +163,7 @@ report 50004 "Consolidated Narration_"
                                         CHORx := CHORx + CommentLine."Hours Lost";
                                 end;
                             end;
-                            //TotHrsLost := TotHrsLost + CommentLine."Hours Lost";
+                        //TotHrsLost := TotHrsLost + CommentLine."Hours Lost";
                         until CommentLine.Next = 0;
 
                     for i := 1 to 3 do begin

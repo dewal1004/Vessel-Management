@@ -2,14 +2,14 @@ report 50044 "Daily BreakUp by Fishing Area"
 {
     // T001
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyBreakUpbyFishingArea.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyBreakUpbyFishingArea.rdlc';
 
 
     dataset
     {
         dataitem("Inventory Posting Group"; "Inventory Posting Group")
         {
-            DataItemTableView = SORTING ("Statistics Group", Category, "S/No.") ORDER(Ascending) WHERE ("Statistics Group" = FILTER (<> 0), "In Use" = CONST (true));
+            DataItemTableView = SORTING("Statistics Group", Category, "S/No.") ORDER(Ascending) WHERE("Statistics Group" = FILTER(<> 0), "In Use" = CONST(true));
             RequestFilterFields = "Statistics Group", Category;
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {

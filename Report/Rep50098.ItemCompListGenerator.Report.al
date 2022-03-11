@@ -2,21 +2,21 @@ report 50098 "Item Comp List Generator"
 {
     // Caught Item category= C
     DefaultLayout = RDLC;
-    RDLCLayout = './ItemCompListGenerator.rdlc';
+    RDLCLayout = './Report\Rdlc\ItemCompListGenerator.rdlc';
 
 
     dataset
     {
         dataitem("Unit of Measure"; "Unit of Measure")
         {
-            DataItemTableView = WHERE ("Catch Code" = FILTER (<> ''));
+            DataItemTableView = WHERE("Catch Code" = FILTER(<> ''));
             RequestFilterFields = "Code";
             column(Unit_of_Measure_Code; Code)
             {
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("No.");
+                DataItemTableView = SORTING("No.");
                 RequestFilterFields = "No.";
                 column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
                 {

@@ -1,14 +1,14 @@
 report 50014 "General Journal - trasaction"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './GeneralJournaltrasaction.rdlc';
+    RDLCLayout = './Report\Rdlc\GeneralJournaltrasaction.rdlc';
     Caption = 'General Journal - Test';
 
     dataset
     {
         dataitem("Gen. Journal Batch"; "Gen. Journal Batch")
         {
-            DataItemTableView = SORTING ("Journal Template Name", Name);
+            DataItemTableView = SORTING("Journal Template Name", Name);
             column(JnlTmplName_GenJnlBatch; "Journal Template Name")
             {
             }
@@ -23,7 +23,7 @@ report 50014 "General Journal - trasaction"
             }
             dataitem("Integer"; "Integer")
             {
-                DataItemTableView = SORTING (Number) WHERE (Number = CONST (1));
+                DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
                 PrintOnlyIfDetail = true;
                 column(JnlTemplateName_GenJnlBatch; "Gen. Journal Batch"."Journal Template Name")
                 {
@@ -93,9 +93,9 @@ report 50014 "General Journal - trasaction"
                 }
                 dataitem("Gen. Journal Line"; "Gen. Journal Line")
                 {
-                    DataItemLink = "Journal Template Name" = FIELD ("Journal Template Name"), "Journal Batch Name" = FIELD (Name);
+                    DataItemLink = "Journal Template Name" = FIELD("Journal Template Name"), "Journal Batch Name" = FIELD(Name);
                     DataItemLinkReference = "Gen. Journal Batch";
-                    DataItemTableView = SORTING ("Journal Template Name", "Journal Batch Name", "Line No.");
+                    DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Line No.");
                     RequestFilterFields = "Posting Date";
                     column(PostingDate_GenJnlLine; Format("Posting Date"))
                     {
@@ -186,7 +186,7 @@ report 50014 "General Journal - trasaction"
                     }
                     dataitem(DimensionLoop; "Integer")
                     {
-                        DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                        DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                         column(DimText; DimText)
                         {
                         }
@@ -219,8 +219,8 @@ report 50014 "General Journal - trasaction"
                     }
                     dataitem("Gen. Jnl. Allocation"; "Gen. Jnl. Allocation")
                     {
-                        DataItemLink = "Journal Template Name" = FIELD ("Journal Template Name"), "Journal Batch Name" = FIELD ("Journal Batch Name"), "Journal Line No." = FIELD ("Line No.");
-                        DataItemTableView = SORTING ("Journal Template Name", "Journal Batch Name", "Journal Line No.", "Line No.");
+                        DataItemLink = "Journal Template Name" = FIELD("Journal Template Name"), "Journal Batch Name" = FIELD("Journal Batch Name"), "Journal Line No." = FIELD("Line No.");
+                        DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Journal Line No.", "Line No.");
                         column(AccountNo_GenJnlAllocation; "Account No.")
                         {
                         }
@@ -265,7 +265,7 @@ report 50014 "General Journal - trasaction"
                         }
                         dataitem(DimensionLoopAllocations; "Integer")
                         {
-                            DataItemTableView = SORTING (Number) WHERE (Number = FILTER (1 ..));
+                            DataItemTableView = SORTING(Number) WHERE(Number = FILTER(1 ..));
                             column(AllocationDimText; AllocationDimText)
                             {
                             }
@@ -299,7 +299,7 @@ report 50014 "General Journal - trasaction"
                     }
                     dataitem(ErrorLoop; "Integer")
                     {
-                        DataItemTableView = SORTING (Number);
+                        DataItemTableView = SORTING(Number);
                         column(ErrorTextNumber; ErrorText[Number])
                         {
                         }
@@ -781,7 +781,7 @@ report 50014 "General Journal - trasaction"
                 }
                 dataitem(ReconcileLoop; "Integer")
                 {
-                    DataItemTableView = SORTING (Number);
+                    DataItemTableView = SORTING(Number);
                     column(GLAccNetChangeNo; GLAccNetChange."No.")
                     {
                     }
@@ -833,7 +833,7 @@ report 50014 "General Journal - trasaction"
             trigger OnAfterGetRecord()
             begin
 
-               // CurrReport.PageNo := 1;
+                // CurrReport.PageNo := 1;
 
                 //UNL-ASL3.60.01.009 (Santus) June 14, 2005
                 if "Gen. Journal Batch"."Reason Code" = 'PAYMENT' then

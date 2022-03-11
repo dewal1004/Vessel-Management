@@ -1,7 +1,7 @@
 report 50212 "Quote Compare"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './QuoteCompare.rdlc';
+    RDLCLayout = './Report\Rdlc\QuoteCompare.rdlc';
 
     dataset
     {

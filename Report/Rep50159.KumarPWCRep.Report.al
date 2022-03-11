@@ -1,7 +1,7 @@
 report 50159 "Kumar PWC Rep"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './KumarPWCRep.rdlc';
+    RDLCLayout = './Report\Rdlc\KumarPWCRep.rdlc';
 
     dataset
     {

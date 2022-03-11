@@ -1,13 +1,13 @@
 report 50117 "Cummulative Payroll Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './CummulativePayrollReport.rdlc';
+    RDLCLayout = './Report\Rdlc\CummulativePayrollReport.rdlc';
 
     dataset
     {
         dataitem("Payroll-Payslip Lines."; "Payroll-Payslip Lines.")
         {
-            DataItemTableView = SORTING ("Employee No", "Payroll Period") ORDER(Ascending);
+            DataItemTableView = SORTING("Employee No", "Payroll Period") ORDER(Ascending);
             RequestFilterFields = "Payroll Period", "Employee No";
             column(filters; filters)
             {

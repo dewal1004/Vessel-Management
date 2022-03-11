@@ -2,7 +2,7 @@ report 50242 "Daily BreakUp by Vessel 1"
 {
     // //
     DefaultLayout = RDLC;
-    RDLCLayout = './DailyBreakUpbyVessel1.rdlc';
+    RDLCLayout = './Report\Rdlc\DailyBreakUpbyVessel1.rdlc';
 
 
     dataset

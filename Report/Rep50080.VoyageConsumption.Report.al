@@ -1,7 +1,7 @@
 report 50080 "Voyage Consumption"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageConsumption.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageConsumption.rdlc';
 
     dataset
     {
@@ -61,7 +61,7 @@ report 50080 "Voyage Consumption"
 
                 Operatn.Get("Job No.");
                 //CurrReport.ShowOutput :=
-                 // CurrReport.TotalsCausedBy = "Job Ledger Entry".FieldNo("Job No.");
+                // CurrReport.TotalsCausedBy = "Job Ledger Entry".FieldNo("Job No.");
                 if Locatn.Get(Operatn.Vessel) then;
                 if Resour.Get(Operatn."Person Responsible") then;
             end;

@@ -4,14 +4,14 @@ report 50148 Organoleptic
     // "Comment Line"."Loose Shells%"
     // "Comment Line"."Loose Neck%"
     DefaultLayout = RDLC;
-    RDLCLayout = './Organoleptic.rdlc';
+    RDLCLayout = './Report\Rdlc\Organoleptic.rdlc';
 
 
     dataset
     {
         dataitem("Comment Line"; "Comment Line")
         {
-            DataItemTableView = SORTING ("Table Name", "No.", "Line No.") WHERE ("Table Name" = CONST (Job));
+            DataItemTableView = SORTING("Table Name", "No.", "Line No.") WHERE("Table Name" = CONST(Job));
             RequestFilterFields = "No.", Vessel, Voyage, Captain, "Date Code", "Frozen Weight W/O I/C", "Drained Weight (KGS)", "Count/Kg", "TTL No. Pcs/Slab", "Upper Grade Count", "Lower Grade Count", "Uniformity Ratio", "Dehydration%", "Discolouration%", "Black Spot%", "Broken%", "Mech Damage%", "Foreign Matter", Odour;
             column(USERID; UserId)
             {
@@ -120,8 +120,8 @@ report 50148 Organoleptic
             }
             dataitem(Item; Item)
             {
-                DataItemLink = "No." = FIELD ("No.");
-                DataItemTableView = SORTING ("No.");
+                DataItemLink = "No." = FIELD("No.");
+                DataItemTableView = SORTING("No.");
                 RequestFilterFields = "No.";
                 column(Description_Item; Item.Description)
                 {

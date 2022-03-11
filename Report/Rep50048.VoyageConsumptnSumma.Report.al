@@ -1,7 +1,7 @@
 report 50048 "Voyage Consumptn Summa"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './VoyageConsumptnSumma.rdlc';
+    RDLCLayout = './Report\Rdlc\VoyageConsumptnSumma.rdlc';
 
     dataset
     {
@@ -13,7 +13,7 @@ report 50048 "Voyage Consumptn Summa"
             }
             dataitem("Item Ledger Entry"; "Item Ledger Entry")
             {
-                DataItemTableView = SORTING ("Entry Type", "Item No.", "Posting Date", "Location Code") WHERE ("Item No." = FILTER ('A' .. 'Z'), "Remaining Quantity" = FILTER (<> 0));
+                DataItemTableView = SORTING("Entry Type", "Item No.", "Posting Date", "Location Code") WHERE("Item No." = FILTER('A' .. 'Z'), "Remaining Quantity" = FILTER(<> 0));
                 RequestFilterFields = "Entry Type", "Item No.";
                 column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
                 {

@@ -1,7 +1,7 @@
 report 50163 "Online loan"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Onlineloan.rdlc';
+    RDLCLayout = './Report\Rdlc\Onlineloan.rdlc';
 
     dataset
     {

@@ -2,14 +2,14 @@ report 50194 "Fish Shop Sales Rep"
 {
     //   "Sea Food categories"
     DefaultLayout = RDLC;
-    RDLCLayout = './FishShopSalesRep.rdlc';
+    RDLCLayout = './Report\Rdlc\FishShopSalesRep.rdlc';
 
 
     dataset
     {
         dataitem("Sea Food categories"; "Sea Food categories")
         {
-            DataItemTableView = SORTING ("Sea food code");
+            DataItemTableView = SORTING("Sea food code");
             RequestFilterFields = "Sea food code";
             column(USERID; UserId)
             {
@@ -74,7 +74,7 @@ report 50194 "Fish Shop Sales Rep"
             dataitem(Item; Item)
             {
                 CalcFields = "Sales (Qty.)", "Sales (LCY)";
-                DataItemTableView = SORTING ("SF Cat", "No. 2") WHERE ("Gen. Prod. Posting Group" = FILTER ('FIS'), "Sales (Qty.)" = FILTER (<> 0), "Location Filter" = FILTER ('FISH-SHOP' | 'MOBILE-FS'));
+                DataItemTableView = SORTING("SF Cat", "No. 2") WHERE("Gen. Prod. Posting Group" = FILTER('FIS'), "Sales (Qty.)" = FILTER(<> 0), "Location Filter" = FILTER('FISH-SHOP' | 'MOBILE-FS'));
                 RequestFilterFields = "No.", "Item Category Code";
                 column(Item__Item_Category_Code_; "Item Category Code")
                 {

@@ -1,13 +1,13 @@
 report 50019 "Purchase Register(LCY)"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PurchaseRegisterLCY.rdlc';
+    RDLCLayout = './Report\Rdlc\PurchaseRegisterLCY.rdlc';
 
     dataset
     {
         dataitem("Purch. Inv. Header"; "Purch. Inv. Header")
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Buy-from Vendor No.", "No.", "Posting Date";
             RequestFilterHeading = 'Purchase Invoice Filter';
             column(COMPANYNAME; CompanyName)
@@ -117,8 +117,8 @@ report 50019 "Purchase Register(LCY)"
             }
             dataitem("Purch. Inv. Line"; "Purch. Inv. Line")
             {
-                DataItemLink = "Document No." = FIELD ("No.");
-                DataItemTableView = SORTING ("Document No.", "Line No.");
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document No.", "Line No.");
                 RequestFilterFields = Type, "No.";
                 column(Purch__Inv__Line__No__; "No.")
                 {

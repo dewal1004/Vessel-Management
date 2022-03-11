@@ -2,21 +2,21 @@ report 50178 "Vessel budget per item"
 {
     // Item."Gen. Prod. Posting Group"
     DefaultLayout = RDLC;
-    RDLCLayout = './Vesselbudgetperitem.rdlc';
+    RDLCLayout = './Report\Rdlc\Vesselbudgetperitem.rdlc';
 
 
     dataset
     {
         dataitem(Location; Location)
         {
-            DataItemTableView = WHERE ("Location Type" = CONST (Vessel));
+            DataItemTableView = WHERE("Location Type" = CONST(Vessel));
             RequestFilterFields = "Code";
             column(Location_Code; Code)
             {
             }
             dataitem(Item; Item)
             {
-                DataItemTableView = SORTING ("Gen. Prod. Posting Group") WHERE ("Gen. Prod. Posting Group" = FILTER (<> 'FIS'));
+                DataItemTableView = SORTING("Gen. Prod. Posting Group") WHERE("Gen. Prod. Posting Group" = FILTER(<> 'FIS'));
                 RequestFilterFields = "Gen. Prod. Posting Group";
                 column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
                 {

@@ -4,14 +4,14 @@ report 50065 "Amounts for one E/D"
     // The amounts are listed per Employee. Employees without this E/D within the
     // selected period will not be listed in the report
     DefaultLayout = RDLC;
-    RDLCLayout = './AmountsforoneED.rdlc';
+    RDLCLayout = './Report\Rdlc\AmountsforoneED.rdlc';
 
 
     dataset
     {
         dataitem(Employee; Employee)
         {
-            DataItemTableView = SORTING ("No.");
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Period Filter", "ED Filter";
             RequestFilterHeading = 'Period and E/D Code ';
             column(CompanyData_Name; CompanyData.Name)

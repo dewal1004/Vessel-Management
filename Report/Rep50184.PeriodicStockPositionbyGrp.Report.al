@@ -1,13 +1,13 @@
 report 50184 "Periodic Stock Position by Grp"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PeriodicStockPositionbyGrp.rdlc';
+    RDLCLayout = './Report\Rdlc\PeriodicStockPositionbyGrp.rdlc';
 
     dataset
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING ("Item Category Code", "No. 2");
+            DataItemTableView = SORTING("Item Category Code", "No. 2");
             RequestFilterFields = "No.", "Item Category Code", "Statistics Group", "Location Filter";
             column(COMPANYNAME; CompanyName)
             {
@@ -196,36 +196,36 @@ report 50184 "Periodic Stock Position by Grp"
                 if PeriodLength = '' then
                     PeriodLength := Text003;
 
-               /* CurrReport.ShowOutput := FooterPrinted;
-                FooterPrinted := false;
+                /* CurrReport.ShowOutput := FooterPrinted;
+                 FooterPrinted := false;
 
-                CurrReport.ShowOutput :=
-                  CurrReport.TotalsCausedBy = Item.FieldNo("Item Category Code");
-                CurrReport.ShowOutput(false);
+                 CurrReport.ShowOutput :=
+                   CurrReport.TotalsCausedBy = Item.FieldNo("Item Category Code");
+                 CurrReport.ShowOutput(false);
 
-                CurrReport.ShowOutput :=
-                  CurrReport.TotalsCausedBy = Item.FieldNo("Inventory Posting Group");
-                CurrReport.ShowOutput(false);
+                 CurrReport.ShowOutput :=
+                   CurrReport.TotalsCausedBy = Item.FieldNo("Inventory Posting Group");
+                 CurrReport.ShowOutput(false);
 
-                CurrReport.ShowOutput :=
-                  CurrReport.TotalsCausedBy = LastFieldNo;
+                 CurrReport.ShowOutput :=
+                   CurrReport.TotalsCausedBy = LastFieldNo;
 
-                CurrReport.ShowOutput(PrintLine);
-                CurrReport.ShowOutput(false);
+                 CurrReport.ShowOutput(PrintLine);
+                 CurrReport.ShowOutput(false);
 
-                if not FooterPrinted then
-                    LastFieldNo := CurrReport.TotalsCausedBy;
-                CurrReport.ShowOutput := not FooterPrinted;
-                FooterPrinted := true;
+                 if not FooterPrinted then
+                     LastFieldNo := CurrReport.TotalsCausedBy;
+                 CurrReport.ShowOutput := not FooterPrinted;
+                 FooterPrinted := true;
 
-                CurrReport.ShowOutput :=
-                  CurrReport.TotalsCausedBy = Item.FieldNo("Inventory Posting Group");
-                CurrReport.ShowOutput(false);
+                 CurrReport.ShowOutput :=
+                   CurrReport.TotalsCausedBy = Item.FieldNo("Inventory Posting Group");
+                 CurrReport.ShowOutput(false);
 
-                CurrReport.ShowOutput :=
-                  CurrReport.TotalsCausedBy = Item.FieldNo("Item Category Code");
-                //CurrReport.SHOWOUTPUT(FALSE);
-*/
+                 CurrReport.ShowOutput :=
+                   CurrReport.TotalsCausedBy = Item.FieldNo("Item Category Code");
+                 //CurrReport.SHOWOUTPUT(FALSE);
+ */
                 SetFilter("Date Filter", '');
                 CalcFields(Inventory);
                 Stk[7] := Inventory;

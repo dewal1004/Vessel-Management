@@ -1,13 +1,13 @@
 report 50138 "Monthly PC Wise Report VJ"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './MonthlyPCWiseReportVJ.rdlc';
+    RDLCLayout = './Report\Rdlc\MonthlyPCWiseReportVJ.rdlc';
 
     dataset
     {
         dataitem(Job; Job)
         {
-            DataItemTableView = SORTING (Captain, Vessel, "Points Sort Bay", Status) ORDER(Descending) WHERE ("Voyage Ended" = FILTER (true));
+            DataItemTableView = SORTING(Captain, Vessel, "Points Sort Bay", Status) ORDER(Descending) WHERE("Voyage Ended" = FILTER(true));
             RequestFilterFields = Captain, "Ending Date";
             column(GETFILTERS; GetFilters)
             {

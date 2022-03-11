@@ -42,7 +42,7 @@ page 50007 "Payroll Periods."
                 Caption = '&Create Pay Period';
                 Promoted = true;
                 PromotedCategory = Process;
-                // //*** RunObject = Report "ASL Create New payslips - New";
+                //  RunObject = Report "ASL Create New payslips - New";
             }
         }
     }

@@ -1,6 +1,13 @@
 https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/upgrade/upgrade-to-microsoft-base-app-v19
 https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/upgrade/devenv-code-conversion
 
+In Power Shell (Admin)
+Run this is not already existing;
+Find-Module | where author -eq waldo | install-module
+
+Import-NAVModules
+Select Version of NAv Dev shell to load
+
 # Upgrading Customized C/AL Application to Microsoft Base Application Version 19
 
 ##1: Install version 19

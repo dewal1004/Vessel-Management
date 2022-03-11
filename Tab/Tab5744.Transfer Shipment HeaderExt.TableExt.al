@@ -61,10 +61,10 @@ tableextension 50313 tableextension50313 extends "Transfer Shipment Header"
     }
     keys
     {
-        key(ASLKey1; "Transfer Order No.")
+        key(ASLKeyH1; "Transfer Order No.")
         {
         }
-        key(ASLKey2; "Transfer-to Code", "Shipment Date")
+        key(ASLKeyF2; "Transfer-to Code", "Shipment Date")
         {
         }
     }

@@ -36,15 +36,15 @@ tableextension 50231 tableextension50231 extends "Sales Invoice Line"
     }
     keys
     {
-        key(ASLKey1; "Document No.", Type, "No.")
+        key(ASLKeyE1; "Document No.", Type, "No.")
         {
             SumIndexFields = Quantity;
         }
-        key(ASLKey2; "Document No.", Type, "Item Category Code", "Posting Group")
+        key(ASLKeyD2; "Document No.", Type, "Item Category Code", "Posting Group")
         {
             SumIndexFields = Quantity;
         }
-        key(ASLKey3; "Location Code", "Shipment Date", "No.")
+        key(ASLKeyC3; "Location Code", "Shipment Date", "No.")
         {
             SumIndexFields = Amount;
         }

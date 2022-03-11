@@ -131,7 +131,7 @@ page 50099 "Dry Docking list"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                //*** RunObject = Report "Transfer To Vessel";
+                RunObject = Report "Transfer To Vessel";
             }
             action("Job - Transaction Detail 2")
             {
@@ -140,7 +140,7 @@ page 50099 "Dry Docking list"
                 Promoted = false;
                 //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
                 //PromotedCategory = "Report";
-                //*** RunObject = Report "Job - Transaction Detail 2";
+                RunObject = Report "Job - Transaction Detail 2";
             }
         }
     }

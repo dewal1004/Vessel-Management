@@ -51,7 +51,7 @@ page 50067 "Sales Packing Sheet"
                 {
                     Caption = 'Print';
                     Image = Print;
-                    //*** RunObject = Report "Sales Packing List";
+                    RunObject = Report "Sales Packing List";
                 }
             }
         }

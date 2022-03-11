@@ -32,41 +32,41 @@ pageextension 50216 pageextension50216 extends "General Journal"
         //end;
         addafter("Incoming Document Entry No.")
         {
-            field("Depreciation Book Code"; "Depreciation Book Code")
+            field("Depreciation Book Code"; rec."Depreciation Book Code")
             {
             }
         }
         addafter(Description)
         {
-            field(Description1; Description1)
+            field(Description1; rec.Description1)
             {
             }
         }
         addafter(Quantity)
         {
-            field("Line No."; "Line No.")
+            field("Line No."; rec."Line No.")
             {
             }
         }
         addafter("Direct Debit Mandate ID")
         {
-            field("FA Posting Type"; "FA Posting Type")
+            field("FA Posting Type"; rec."FA Posting Type")
             {
                 Visible = false;
             }
-            field("FA Posting Date"; "FA Posting Date")
+            field("FA Posting Date"; rec."FA Posting Date")
             {
                 Visible = false;
             }
-            field("Loan ID"; "Loan ID")
+            field("Loan ID"; rec."Loan ID")
             {
                 Visible = false;
             }
-            field("Maintenance Code"; "Maintenance Code")
+            field("Maintenance Code"; rec."Maintenance Code")
             {
                 Visible = false;
             }
-            field("Job No."; "Job No.")
+            field("Job No."; rec."Job No.")
             {
             }
         }

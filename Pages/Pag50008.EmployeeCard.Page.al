@@ -248,8 +248,8 @@ page 50008 "Employee Card."
                 action("Create New Payslip")
                 {
                     Caption = 'Create New Payslip';
-                    // //*** RunObject = Report "Monthly Payslip";  Revisit
-                }
+                     RunObject = Report "Monthly Payslip"; 
+                                     }
             }
         }
     }

@@ -2,7 +2,7 @@
   "id": "d80cff52-177a-4e84-9cc5-68c3b9022e86",
   "name": "Vessel Management",
   "publisher": "SSNL",
-  "version": "14.0.0.1",
+  "version": "14.5.1.1",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -20,5 +20,6 @@
       "to": 59999
     }
   ],  
-  "runtime": "7.0"
+  "runtime": "7.0",
+  "target": "OnPrem"
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <AutoRefresh>0</AutoRefresh>
@@ -11,217 +11,6 @@
       <rd:SecurityType>None</rd:SecurityType>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="FORMAT_TODAY_0_4_">
-          <DataField>FORMAT_TODAY_0_4_</DataField>
-        </Field>
-        <Field Name="Weekly_Points_Report___Port_Captain_Wise________FORMAT_StartDate_0___day_2___month_text_3___year4________to_____FORMAT_EndDate_0___day_2___month_text_3___year4___">
-          <DataField>Weekly_Points_Report___Port_Captain_Wise________FORMAT_StartDate_0___day_2___month_text_3___year4________to_____FORMAT_EndDate_0___day_2___month_text_3___year4___</DataField>
-        </Field>
-        <Field Name="CurrReport_PAGENO">
-          <DataField>CurrReport_PAGENO</DataField>
-        </Field>
-        <Field Name="USERID">
-          <DataField>USERID</DataField>
-        </Field>
-        <Field Name="Job_Captain">
-          <DataField>Job_Captain</DataField>
-        </Field>
-        <Field Name="Job_Vessel">
-          <DataField>Job_Vessel</DataField>
-        </Field>
-        <Field Name="Job__Fishing_Country_Code_">
-          <DataField>Job__Fishing_Country_Code_</DataField>
-        </Field>
-        <Field Name="SerialNo">
-          <DataField>SerialNo</DataField>
-        </Field>
-        <Field Name="Skipper">
-          <DataField>Skipper</DataField>
-        </Field>
-        <Field Name="SeaDays">
-          <DataField>SeaDays</DataField>
-        </Field>
-        <Field Name="SeaDaysFormat">
-          <DataField>SeaDaysFormat</DataField>
-        </Field>
-        <Field Name="pts_1_">
-          <DataField>pts_1_</DataField>
-        </Field>
-        <Field Name="pts_1_Format">
-          <DataField>pts_1_Format</DataField>
-        </Field>
-        <Field Name="pts_2_">
-          <DataField>pts_2_</DataField>
-        </Field>
-        <Field Name="pts_2_Format">
-          <DataField>pts_2_Format</DataField>
-        </Field>
-        <Field Name="pts_3_">
-          <DataField>pts_3_</DataField>
-        </Field>
-        <Field Name="pts_3_Format">
-          <DataField>pts_3_Format</DataField>
-        </Field>
-        <Field Name="pts_4_">
-          <DataField>pts_4_</DataField>
-        </Field>
-        <Field Name="pts_4_Format">
-          <DataField>pts_4_Format</DataField>
-        </Field>
-        <Field Name="HoursLost">
-          <DataField>HoursLost</DataField>
-        </Field>
-        <Field Name="HoursLostFormat">
-          <DataField>HoursLostFormat</DataField>
-        </Field>
-        <Field Name="pts_5_">
-          <DataField>pts_5_</DataField>
-        </Field>
-        <Field Name="pts_5_Format">
-          <DataField>pts_5_Format</DataField>
-        </Field>
-        <Field Name="pts_4__Control1000000083">
-          <DataField>pts_4__Control1000000083</DataField>
-        </Field>
-        <Field Name="pts_4__Control1000000083Format">
-          <DataField>pts_4__Control1000000083Format</DataField>
-        </Field>
-        <Field Name="pts_3__Control1000000085">
-          <DataField>pts_3__Control1000000085</DataField>
-        </Field>
-        <Field Name="pts_3__Control1000000085Format">
-          <DataField>pts_3__Control1000000085Format</DataField>
-        </Field>
-        <Field Name="pts_2__Control1000000087">
-          <DataField>pts_2__Control1000000087</DataField>
-        </Field>
-        <Field Name="pts_2__Control1000000087Format">
-          <DataField>pts_2__Control1000000087Format</DataField>
-        </Field>
-        <Field Name="pts_1__Control1000000088">
-          <DataField>pts_1__Control1000000088</DataField>
-        </Field>
-        <Field Name="pts_1__Control1000000088Format">
-          <DataField>pts_1__Control1000000088Format</DataField>
-        </Field>
-        <Field Name="SeaDays_Control1000000091">
-          <DataField>SeaDays_Control1000000091</DataField>
-        </Field>
-        <Field Name="SeaDays_Control1000000091Format">
-          <DataField>SeaDays_Control1000000091Format</DataField>
-        </Field>
-        <Field Name="Ave_4_">
-          <DataField>Ave_4_</DataField>
-        </Field>
-        <Field Name="Ave_4_Format">
-          <DataField>Ave_4_Format</DataField>
-        </Field>
-        <Field Name="Ave_3_">
-          <DataField>Ave_3_</DataField>
-        </Field>
-        <Field Name="Ave_3_Format">
-          <DataField>Ave_3_Format</DataField>
-        </Field>
-        <Field Name="Ave_2_">
-          <DataField>Ave_2_</DataField>
-        </Field>
-        <Field Name="Ave_2_Format">
-          <DataField>Ave_2_Format</DataField>
-        </Field>
-        <Field Name="Ave_1_">
-          <DataField>Ave_1_</DataField>
-        </Field>
-        <Field Name="Ave_1_Format">
-          <DataField>Ave_1_Format</DataField>
-        </Field>
-        <Field Name="Ave_5_">
-          <DataField>Ave_5_</DataField>
-        </Field>
-        <Field Name="Ave_5_Format">
-          <DataField>Ave_5_Format</DataField>
-        </Field>
-        <Field Name="pts_5__Control1000000056">
-          <DataField>pts_5__Control1000000056</DataField>
-        </Field>
-        <Field Name="pts_5__Control1000000056Format">
-          <DataField>pts_5__Control1000000056Format</DataField>
-        </Field>
-        <Field Name="Ave_6_">
-          <DataField>Ave_6_</DataField>
-        </Field>
-        <Field Name="Ave_6_Format">
-          <DataField>Ave_6_Format</DataField>
-        </Field>
-        <Field Name="HoursLost_Control1000000058">
-          <DataField>HoursLost_Control1000000058</DataField>
-        </Field>
-        <Field Name="HoursLost_Control1000000058Format">
-          <DataField>HoursLost_Control1000000058Format</DataField>
-        </Field>
-        <Field Name="Ave_7_">
-          <DataField>Ave_7_</DataField>
-        </Field>
-        <Field Name="Ave_7_Format">
-          <DataField>Ave_7_Format</DataField>
-        </Field>
-        <Field Name="OperationCaption">
-          <DataField>OperationCaption</DataField>
-        </Field>
-        <Field Name="CurrReport_PAGENOCaption">
-          <DataField>CurrReport_PAGENOCaption</DataField>
-        </Field>
-        <Field Name="Job_VesselCaption">
-          <DataField>Job_VesselCaption</DataField>
-        </Field>
-        <Field Name="Job__Fishing_Country_Code_Caption">
-          <DataField>Job__Fishing_Country_Code_Caption</DataField>
-        </Field>
-        <Field Name="SeaDaysCaption">
-          <DataField>SeaDaysCaption</DataField>
-        </Field>
-        <Field Name="SerialNoCaption">
-          <DataField>SerialNoCaption</DataField>
-        </Field>
-        <Field Name="SkipperCaption">
-          <DataField>SkipperCaption</DataField>
-        </Field>
-        <Field Name="pts_1_Caption">
-          <DataField>pts_1_Caption</DataField>
-        </Field>
-        <Field Name="pts_2_Caption">
-          <DataField>pts_2_Caption</DataField>
-        </Field>
-        <Field Name="Day_PtsCaption">
-          <DataField>Day_PtsCaption</DataField>
-        </Field>
-        <Field Name="pts_4_Caption">
-          <DataField>pts_4_Caption</DataField>
-        </Field>
-        <Field Name="Hours_LostCaption">
-          <DataField>Hours_LostCaption</DataField>
-        </Field>
-        <Field Name="Avg__Voyage_PointsCaption">
-          <DataField>Avg__Voyage_PointsCaption</DataField>
-        </Field>
-        <Field Name="AVERAGECaption">
-          <DataField>AVERAGECaption</DataField>
-        </Field>
-        <Field Name="TOTALCaption">
-          <DataField>TOTALCaption</DataField>
-        </Field>
-        <Field Name="Job_No_">
-          <DataField>Job_No_</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2317,4 +2106,215 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="DataItem1000000003">
+          <DataField>DataItem1000000003</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Job_Captain">
+          <DataField>Job_Captain</DataField>
+        </Field>
+        <Field Name="Job_Vessel">
+          <DataField>Job_Vessel</DataField>
+        </Field>
+        <Field Name="Job__Fishing_Country_Code_">
+          <DataField>Job__Fishing_Country_Code_</DataField>
+        </Field>
+        <Field Name="SerialNo">
+          <DataField>SerialNo</DataField>
+        </Field>
+        <Field Name="Skipper">
+          <DataField>Skipper</DataField>
+        </Field>
+        <Field Name="SeaDays">
+          <DataField>SeaDays</DataField>
+        </Field>
+        <Field Name="SeaDaysFormat">
+          <DataField>SeaDaysFormat</DataField>
+        </Field>
+        <Field Name="pts_1_">
+          <DataField>pts_1_</DataField>
+        </Field>
+        <Field Name="pts_1_Format">
+          <DataField>pts_1_Format</DataField>
+        </Field>
+        <Field Name="pts_2_">
+          <DataField>pts_2_</DataField>
+        </Field>
+        <Field Name="pts_2_Format">
+          <DataField>pts_2_Format</DataField>
+        </Field>
+        <Field Name="pts_3_">
+          <DataField>pts_3_</DataField>
+        </Field>
+        <Field Name="pts_3_Format">
+          <DataField>pts_3_Format</DataField>
+        </Field>
+        <Field Name="pts_4_">
+          <DataField>pts_4_</DataField>
+        </Field>
+        <Field Name="pts_4_Format">
+          <DataField>pts_4_Format</DataField>
+        </Field>
+        <Field Name="HoursLost">
+          <DataField>HoursLost</DataField>
+        </Field>
+        <Field Name="HoursLostFormat">
+          <DataField>HoursLostFormat</DataField>
+        </Field>
+        <Field Name="pts_5_">
+          <DataField>pts_5_</DataField>
+        </Field>
+        <Field Name="pts_5_Format">
+          <DataField>pts_5_Format</DataField>
+        </Field>
+        <Field Name="pts_4__Control1000000083">
+          <DataField>pts_4__Control1000000083</DataField>
+        </Field>
+        <Field Name="pts_4__Control1000000083Format">
+          <DataField>pts_4__Control1000000083Format</DataField>
+        </Field>
+        <Field Name="pts_3__Control1000000085">
+          <DataField>pts_3__Control1000000085</DataField>
+        </Field>
+        <Field Name="pts_3__Control1000000085Format">
+          <DataField>pts_3__Control1000000085Format</DataField>
+        </Field>
+        <Field Name="pts_2__Control1000000087">
+          <DataField>pts_2__Control1000000087</DataField>
+        </Field>
+        <Field Name="pts_2__Control1000000087Format">
+          <DataField>pts_2__Control1000000087Format</DataField>
+        </Field>
+        <Field Name="pts_1__Control1000000088">
+          <DataField>pts_1__Control1000000088</DataField>
+        </Field>
+        <Field Name="pts_1__Control1000000088Format">
+          <DataField>pts_1__Control1000000088Format</DataField>
+        </Field>
+        <Field Name="SeaDays_Control1000000091">
+          <DataField>SeaDays_Control1000000091</DataField>
+        </Field>
+        <Field Name="SeaDays_Control1000000091Format">
+          <DataField>SeaDays_Control1000000091Format</DataField>
+        </Field>
+        <Field Name="Ave_4_">
+          <DataField>Ave_4_</DataField>
+        </Field>
+        <Field Name="Ave_4_Format">
+          <DataField>Ave_4_Format</DataField>
+        </Field>
+        <Field Name="Ave_3_">
+          <DataField>Ave_3_</DataField>
+        </Field>
+        <Field Name="Ave_3_Format">
+          <DataField>Ave_3_Format</DataField>
+        </Field>
+        <Field Name="Ave_2_">
+          <DataField>Ave_2_</DataField>
+        </Field>
+        <Field Name="Ave_2_Format">
+          <DataField>Ave_2_Format</DataField>
+        </Field>
+        <Field Name="Ave_1_">
+          <DataField>Ave_1_</DataField>
+        </Field>
+        <Field Name="Ave_1_Format">
+          <DataField>Ave_1_Format</DataField>
+        </Field>
+        <Field Name="Ave_5_">
+          <DataField>Ave_5_</DataField>
+        </Field>
+        <Field Name="Ave_5_Format">
+          <DataField>Ave_5_Format</DataField>
+        </Field>
+        <Field Name="pts_5__Control1000000056">
+          <DataField>pts_5__Control1000000056</DataField>
+        </Field>
+        <Field Name="pts_5__Control1000000056Format">
+          <DataField>pts_5__Control1000000056Format</DataField>
+        </Field>
+        <Field Name="Ave_6_">
+          <DataField>Ave_6_</DataField>
+        </Field>
+        <Field Name="Ave_6_Format">
+          <DataField>Ave_6_Format</DataField>
+        </Field>
+        <Field Name="HoursLost_Control1000000058">
+          <DataField>HoursLost_Control1000000058</DataField>
+        </Field>
+        <Field Name="HoursLost_Control1000000058Format">
+          <DataField>HoursLost_Control1000000058Format</DataField>
+        </Field>
+        <Field Name="Ave_7_">
+          <DataField>Ave_7_</DataField>
+        </Field>
+        <Field Name="Ave_7_Format">
+          <DataField>Ave_7_Format</DataField>
+        </Field>
+        <Field Name="OperationCaption">
+          <DataField>OperationCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Job_VesselCaption">
+          <DataField>Job_VesselCaption</DataField>
+        </Field>
+        <Field Name="Job__Fishing_Country_Code_Caption">
+          <DataField>Job__Fishing_Country_Code_Caption</DataField>
+        </Field>
+        <Field Name="SeaDaysCaption">
+          <DataField>SeaDaysCaption</DataField>
+        </Field>
+        <Field Name="SerialNoCaption">
+          <DataField>SerialNoCaption</DataField>
+        </Field>
+        <Field Name="SkipperCaption">
+          <DataField>SkipperCaption</DataField>
+        </Field>
+        <Field Name="pts_1_Caption">
+          <DataField>pts_1_Caption</DataField>
+        </Field>
+        <Field Name="pts_2_Caption">
+          <DataField>pts_2_Caption</DataField>
+        </Field>
+        <Field Name="Day_PtsCaption">
+          <DataField>Day_PtsCaption</DataField>
+        </Field>
+        <Field Name="pts_4_Caption">
+          <DataField>pts_4_Caption</DataField>
+        </Field>
+        <Field Name="Hours_LostCaption">
+          <DataField>Hours_LostCaption</DataField>
+        </Field>
+        <Field Name="Avg__Voyage_PointsCaption">
+          <DataField>Avg__Voyage_PointsCaption</DataField>
+        </Field>
+        <Field Name="AVERAGECaption">
+          <DataField>AVERAGECaption</DataField>
+        </Field>
+        <Field Name="TOTALCaption">
+          <DataField>TOTALCaption</DataField>
+        </Field>
+        <Field Name="Job_No_">
+          <DataField>Job_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

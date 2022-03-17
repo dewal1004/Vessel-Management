@@ -19,17 +19,21 @@ $LicenseFilePath = "C:\LIC\ssnl365v19.flf"
 
 ##7,8&9
 Invoke-NAVApplicationDatabaseConversion -DatabaseServer NAV365TEST\ASLHO2016 -DatabaseName "Atlantic ASL BDG V18fromV14"
-# Mount Database on BC180 server instace
-Mount-NAVTenantDatabase -ServerInstance BC180 -Id -DatabaseName "Atlantic ASL BDG V18fromV14"
+# Mount Database on BC180 server instace (On asingle tenant)
+Set-NAVServerConfiguration -ServerInstance bc180 -KeyName DatabaseName -KeyValue "Atlantic ASL BDG V18fromV14"
 # Set-NAVServerConfiguration -ServerInstance <server instance name?> -KeyName DatabaseName -KeyValue "<database name>"
-Set-NAVServerConfiguration -ServerInstance BC180 -KeyName DatabaseName -KeyValue "Atlantic ASL BDG V18fromV14"
 Set-NAVServerConfiguration -ServerInstance BC180 -KeyName "DestinationAppsForMigration" -KeyValue '[{"appId": "9cb1232b-94cb-4aa6-bab3-c15ec6ea7bc0", "name":"bc14baseapptablesonly", "publisher": "SSNL"}]'
 Set-NavServerConfiguration -ServerInstance BC180 -KeyName "EnableTaskScheduler" -KeyValue false
-
 Import-NAVServerLicense -ServerInstance BC180 -LicenseFile "C:\LIC\SSNL365V19.flf"
 Restart-NAVServerInstance -ServerInstance BC180
 
 ##10: Publish DestinationAppsForMigrations extensions
+# To Unpublish conflicting apps previously published
+#$SrvrInst = 'BC180'
+#Get-NAVAppInfo -ServerInstance $SrvrInst | % { Uninstall-NAVApp -ServerInstance $SrvrInst -Name $_.Name -Version $_.Version -Force}
+#Get-NAVAppInfo -ServerInstance $SrvrInst | % { Unpublish-NAVApp -ServerInstance $SrvrInst -Name $_.Name -Version $_.Version }
+#Get-NAVAppInfo -ServerInstance $SrvrInst -SymbolsOnly | % { Unpublish-NAVApp -ServerInstance $SrvrInst -Name $_.Name -Version $_.Version }
+
 # Publish the first version of the table migration extension, which is the version that contains the table objects.
 Publish-NAVApp -ServerInstance bc180 -Path "C:\ALs\BDG\MSMigrationExtCus\SSNL_bc14baseapptablesonly_14.0.0.0.app" -skipverification
 
@@ -40,11 +44,11 @@ Publish-NAVApp -ServerInstance bc180 -Path "C:\ALs\BDG\EmptyMSCustApp\SSNL_Vesse
 Restart-NAVServerInstance -ServerInstance BC180
 
 ##11: Synchronize tenant
-# Mount-NAVTenant -ServerInstance <server instance name?> -DatabaseName <database name> -DatabaseServer <database server>\<database instance> -Tenant <tenant ID?> -AllowAppDatabaseWrite
+# (Multi-Tenant)Mount-NAVTenant -ServerInstance <server instance name?> -DatabaseName <database name> -DatabaseServer <database server>\<database instance> -Tenant <tenant ID?> -AllowAppDatabaseWrite
 Sync-NAVTenant -ServerInstance BC180 -Mode Sync 
 Sync-NAVApp -ServerInstance BC180 -Name "bc14baseapptablesonly" -Version 14.0.0.0
 Get-NAVTenant BC180  -ForceRefresh
-# Synchronize the empty versions of system application, base application, and customization extensions that you published in#8.
+# #4Synchronize the empty versions of system application, base application, and customization extensions that you published in#8.
 Sync-NAVApp -ServerInstance BC180 -Name "System Application" -Version 14.0.0.0
 Sync-NAVApp -ServerInstance BC180 -Name "Base Application" -Version 14.0.0.0
 Sync-NAVApp -ServerInstance BC180 -Name "Vessel Management" -Version 14.0.0.0
@@ -52,7 +56,7 @@ Sync-NAVApp -ServerInstance BC180 -Name "Vessel Management" -Version 14.0.0.0
 ##12: Install DestinationAppsForMigration and move tables
 Start-NAVDataUpgrade -ServerInstance BC180 -Tenant default -FunctionExecutionMode Serial -SkipAppVersionCheck
 Get-NavDataUpgrade  -Progress
-
+7
 # Install the empty versions of the system, base, and custom extensions that you published in Task 8.
 Install-NAVApp -ServerInstance BC180 -Name "System Application" -Version 14.0.0.0
 Install-NAVApp -ServerInstance BC180 -Name "Base Application" -Version 14.0.0.0
@@ -63,7 +67,8 @@ Install-NAVApp -ServerInstance BC180 -Name "Vessel Management" -Version 14.0.0.0
 Publish-NAVApp -ServerInstance bc180 -Path "C:\ALs\BDG\MSMigrationExtCus\SSNL_bc14baseapptablesonly_14.0.0.1.app" -skipverification
 Publish-NAVApp -ServerInstance bc180 -Path "C:\BC365V185\Applications\system application\source\Microsoft_System Application.app"
 Publish-NAVApp -ServerInstance bc180 -Path "C:\BC365V185\Applications\BaseApp\Source\Microsoft_Base Application.app"
-Publish-NAVApp -ServerInstance bc180 -Path "C:\ALs\ASLPROJECTNEW-1\SSNL_Vessel Management_14.5.1.1.app"  -SkipVerification
+Publish-NAVApp -ServerInstance bc180 -Path "C:\BC365V185\Applications\Application\Source\Microsoft_Application.app"
+Publish-NAVApp -ServerInstance bc180 -Path "C:\ALs\BDG\Vessel-Management\SSNL_Vessel Management_14.5.1.1.app"  -SkipVerification
 
 ##13.5: Application extension.
 Publish-NAVApp -ServerInstance bc180 -Path "C:\BC365V185\Applications\Application\Source\Microsoft_Application.app"
@@ -102,10 +107,10 @@ Sync-NAVApp -ServerInstance bc180 -Name "bc14baseapptablesonly" -Version 14.0.0.
 Start-NAVAppDataUpgrade -ServerInstance BC180 -Name "bc14baseapptablesonly" -version 14.0.0.1
 
 ##16: Clean sync and unpublish table migration extensions
-Uninstall-NAVApp -ServerInstance BC180 -Tenant default -Name "<table migration extension>" -Version 14.0.0.1
-Sync-NAVApp -ServerInstance BC180 -Tenant default -Name "<table migration extension>" -Version 14.0.0.1 -Mode clean
-Unpublish-NAVApp -ServerInstance BC180 -Tenant default -Name "<table migration extension>" -Version 14.0.0.1
-Unpublish-NAVApp -ServerInstance BC180 -Tenant default -Name "<table migration extension>" -Version 14.0.0.0
+Uninstall-NAVApp -ServerInstance BC180 -Tenant default -Name "bc14baseapptablesonly" -Version 14.0.0.1
+Sync-NAVApp -ServerInstance BC180 -Tenant default -Name "bc14baseapptablesonly" -Version 14.0.0.1 -Mode clean
+Unpublish-NAVApp -ServerInstance BC180 -Tenant default -Name "bc14baseapptablesonly" -Version 14.0.0.1
+Unpublish-NAVApp -ServerInstance BC180 -Tenant default -Name "bc14baseapptablesonly" -Version 14.0.0.0
 
 # Task 17: Upgrade and install final extensions
 #  Use the Start-NAVAppDataUpgrade or Install-NAVApp cmdlets

@@ -22,7 +22,7 @@ pageextension 50232 pageextension50232 extends "Resource List"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                //*** RunObject = Report "Catch Incentive";
+                RunObject = Report "Catch Incentive";
             }
             action("Crew List Report")
             {
@@ -30,7 +30,7 @@ pageextension 50232 pageextension50232 extends "Resource List"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                //*** RunObject = Report "Crew List";
+                RunObject = Report "Crew List";
             }
         }
     }

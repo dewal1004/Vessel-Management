@@ -169,31 +169,31 @@ pageextension 50303 pageextension50303 extends "Employee List"
             {
                 Caption = ' Monthly Payslip';
                 Image = "Report";
-                //*** RunObject = Report "Monthly Payslip";
+                RunObject = Report "Monthly Payslip";
             }
             action("Payroll Report - NSITF")
             {
                 Caption = 'Payroll Report - NSITF';
                 Image = "Report";
-                //*** RunObject = Report "Payroll Report - NSITF";
+                RunObject = Report "Payroll Report - NSITF";
             }
             action("Employee-Bank Acct")
             {
                 Caption = 'Employee-Bank Acct';
                 Image = "Report";
-                //*** RunObject = Report "Employee-Bank Acct";
+                RunObject = Report "Employee-Bank Acct";
             }
             action("Outstanding Loans")
             {
                 Caption = 'Outstanding Loans';
                 Image = "Report";
-                //*** RunObject = Report "OUTSTANDING LOANS";
+                RunObject = Report "OUTSTANDING LOANS";
             }
             action("Payroll Report")
             {
                 Caption = 'Payroll Report';
                 Image = "Report";
-                //*** RunObject = Report "Payroll Report";
+                RunObject = Report "Payroll Report";
             }
         }
     }

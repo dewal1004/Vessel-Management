@@ -68,7 +68,7 @@ page 50005 "Payslip Header Card."
                     Caption = 'Print Payslip';
                     Ellipsis = true;
                     Image = "Report";
-                    // //*** RunObject = Report "Monthly Payslip"; revisit
+                    RunObject = Report "Monthly Payslip"; 
                     ShortCutKey = 'Shift+F7';
                 }
             }
@@ -78,7 +78,7 @@ page 50005 "Payslip Header Card."
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = Process;
-                // //*** RunObject = Report "ASL Create New payslips - New"; //Revisit
+                RunObject = Report "ASL Create New payslips - New"; 
             }
         }
     }

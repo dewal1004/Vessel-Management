@@ -270,10 +270,10 @@ tableextension 50223 tableextension50223 extends "Item Journal Line"
     }
     keys
     {
-        key(ASLKey1; "Document No.")
+        key(ASLKeyD1; "Document No.")
         {
         }
-        key(ASLKey2; "Item No.")
+        key(ASLKeyC2; "Item No.")
         {
         }
     }

@@ -326,7 +326,7 @@ tableextension 50212 tableextension50212 extends Item
 
         //Unsupported feature: Deletion (KeyCollection) on ""Service Item Group"(Key)".
 
-        key(ASLKey1; "Item Category Code", "No. 2")
+        key(ASLKeyA1; "Item Category Code", "No. 2")
         {
         }
         key(Key2; "SF Cat")

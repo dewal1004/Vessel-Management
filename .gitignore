@@ -3,5 +3,5 @@
 .alpackages/*.*
 .snapshots/*.*
 cache_*.*
-# app*.*
+app*.*
 *.app

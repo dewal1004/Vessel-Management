@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <AutoRefresh>0</AutoRefresh>
@@ -11,130 +11,6 @@
       <rd:SecurityType>None</rd:SecurityType>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="FORMAT_TODAY_0_4_">
-          <DataField>FORMAT_TODAY_0_4_</DataField>
-        </Field>
-        <Field Name="COMPANYNAME">
-          <DataField>COMPANYNAME</DataField>
-        </Field>
-        <Field Name="CurrReport_PAGENO">
-          <DataField>CurrReport_PAGENO</DataField>
-        </Field>
-        <Field Name="USERID">
-          <DataField>USERID</DataField>
-        </Field>
-        <Field Name="Filters_______Employee_GETFILTERS__">
-          <DataField>Filters_______Employee_GETFILTERS__</DataField>
-        </Field>
-        <Field Name="Employee__Global_Dimension_2_Code_">
-          <DataField>Employee__Global_Dimension_2_Code_</DataField>
-        </Field>
-        <Field Name="Employee__Global_Dimension_1_Code_">
-          <DataField>Employee__Global_Dimension_1_Code_</DataField>
-        </Field>
-        <Field Name="BCName">
-          <DataField>BCName</DataField>
-        </Field>
-        <Field Name="CCName">
-          <DataField>CCName</DataField>
-        </Field>
-        <Field Name="Employee__No__">
-          <DataField>Employee__No__</DataField>
-        </Field>
-        <Field Name="EmpName">
-          <DataField>EmpName</DataField>
-        </Field>
-        <Field Name="FormatDate__Employment_Date__">
-          <DataField>FormatDate__Employment_Date__</DataField>
-        </Field>
-        <Field Name="DesigName">
-          <DataField>DesigName</DataField>
-        </Field>
-        <Field Name="Grd">
-          <DataField>Grd</DataField>
-        </Field>
-        <Field Name="StateName">
-          <DataField>StateName</DataField>
-        </Field>
-        <Field Name="FormatDate__Birth_Date__">
-          <DataField>FormatDate__Birth_Date__</DataField>
-        </Field>
-        <Field Name="Employee_Gender">
-          <DataField>Employee_Gender</DataField>
-        </Field>
-        <Field Name="Stp">
-          <DataField>Stp</DataField>
-        </Field>
-        <Field Name="BasicPay">
-          <DataField>BasicPay</DataField>
-        </Field>
-        <Field Name="BasicPayFormat">
-          <DataField>BasicPayFormat</DataField>
-        </Field>
-        <Field Name="BCCount">
-          <DataField>BCCount</DataField>
-        </Field>
-        <Field Name="CCCount">
-          <DataField>CCCount</DataField>
-        </Field>
-        <Field Name="PERSONAL_RECORD_LISTCaption">
-          <DataField>PERSONAL_RECORD_LISTCaption</DataField>
-        </Field>
-        <Field Name="CurrReport_PAGENOCaption">
-          <DataField>CurrReport_PAGENOCaption</DataField>
-        </Field>
-        <Field Name="Employee__No__Caption">
-          <DataField>Employee__No__Caption</DataField>
-        </Field>
-        <Field Name="EmpNameCaption">
-          <DataField>EmpNameCaption</DataField>
-        </Field>
-        <Field Name="Emp__DateCaption">
-          <DataField>Emp__DateCaption</DataField>
-        </Field>
-        <Field Name="DesignationCaption">
-          <DataField>DesignationCaption</DataField>
-        </Field>
-        <Field Name="GradeCaption">
-          <DataField>GradeCaption</DataField>
-        </Field>
-        <Field Name="StateCaption">
-          <DataField>StateCaption</DataField>
-        </Field>
-        <Field Name="Birth_DateCaption">
-          <DataField>Birth_DateCaption</DataField>
-        </Field>
-        <Field Name="Employee_GenderCaption">
-          <DataField>Employee_GenderCaption</DataField>
-        </Field>
-        <Field Name="StepCaption">
-          <DataField>StepCaption</DataField>
-        </Field>
-        <Field Name="Monthly_BasicCaption">
-          <DataField>Monthly_BasicCaption</DataField>
-        </Field>
-        <Field Name="Employee__Global_Dimension_2_Code_Caption">
-          <DataField>Employee__Global_Dimension_2_Code_Caption</DataField>
-        </Field>
-        <Field Name="Employee__Global_Dimension_1_Code_Caption">
-          <DataField>Employee__Global_Dimension_1_Code_Caption</DataField>
-        </Field>
-        <Field Name="Employees_In_DepartmentCaption">
-          <DataField>Employees_In_DepartmentCaption</DataField>
-        </Field>
-        <Field Name="Employees_In_Business_UnitCaption">
-          <DataField>Employees_In_Business_UnitCaption</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2448,4 +2324,128 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Filters_______Employee_GETFILTERS__">
+          <DataField>Filters_______Employee_GETFILTERS__</DataField>
+        </Field>
+        <Field Name="Employee__Global_Dimension_2_Code_">
+          <DataField>Employee__Global_Dimension_2_Code_</DataField>
+        </Field>
+        <Field Name="Employee__Global_Dimension_1_Code_">
+          <DataField>Employee__Global_Dimension_1_Code_</DataField>
+        </Field>
+        <Field Name="BCName">
+          <DataField>BCName</DataField>
+        </Field>
+        <Field Name="CCName">
+          <DataField>CCName</DataField>
+        </Field>
+        <Field Name="Employee__No__">
+          <DataField>Employee__No__</DataField>
+        </Field>
+        <Field Name="EmpName">
+          <DataField>EmpName</DataField>
+        </Field>
+        <Field Name="FormatDate__Employment_Date__">
+          <DataField>FormatDate__Employment_Date__</DataField>
+        </Field>
+        <Field Name="DesigName">
+          <DataField>DesigName</DataField>
+        </Field>
+        <Field Name="Grd">
+          <DataField>Grd</DataField>
+        </Field>
+        <Field Name="StateName">
+          <DataField>StateName</DataField>
+        </Field>
+        <Field Name="FormatDate__Birth_Date__">
+          <DataField>FormatDate__Birth_Date__</DataField>
+        </Field>
+        <Field Name="Employee_Gender">
+          <DataField>Employee_Gender</DataField>
+        </Field>
+        <Field Name="Stp">
+          <DataField>Stp</DataField>
+        </Field>
+        <Field Name="BasicPay">
+          <DataField>BasicPay</DataField>
+        </Field>
+        <Field Name="BasicPayFormat">
+          <DataField>BasicPayFormat</DataField>
+        </Field>
+        <Field Name="BCCount">
+          <DataField>BCCount</DataField>
+        </Field>
+        <Field Name="CCCount">
+          <DataField>CCCount</DataField>
+        </Field>
+        <Field Name="PERSONAL_RECORD_LISTCaption">
+          <DataField>PERSONAL_RECORD_LISTCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Employee__No__Caption">
+          <DataField>Employee__No__Caption</DataField>
+        </Field>
+        <Field Name="EmpNameCaption">
+          <DataField>EmpNameCaption</DataField>
+        </Field>
+        <Field Name="Emp__DateCaption">
+          <DataField>Emp__DateCaption</DataField>
+        </Field>
+        <Field Name="DesignationCaption">
+          <DataField>DesignationCaption</DataField>
+        </Field>
+        <Field Name="GradeCaption">
+          <DataField>GradeCaption</DataField>
+        </Field>
+        <Field Name="StateCaption">
+          <DataField>StateCaption</DataField>
+        </Field>
+        <Field Name="Birth_DateCaption">
+          <DataField>Birth_DateCaption</DataField>
+        </Field>
+        <Field Name="Employee_GenderCaption">
+          <DataField>Employee_GenderCaption</DataField>
+        </Field>
+        <Field Name="StepCaption">
+          <DataField>StepCaption</DataField>
+        </Field>
+        <Field Name="Monthly_BasicCaption">
+          <DataField>Monthly_BasicCaption</DataField>
+        </Field>
+        <Field Name="Employee__Global_Dimension_2_Code_Caption">
+          <DataField>Employee__Global_Dimension_2_Code_Caption</DataField>
+        </Field>
+        <Field Name="Employee__Global_Dimension_1_Code_Caption">
+          <DataField>Employee__Global_Dimension_1_Code_Caption</DataField>
+        </Field>
+        <Field Name="Employees_In_DepartmentCaption">
+          <DataField>Employees_In_DepartmentCaption</DataField>
+        </Field>
+        <Field Name="Employees_In_Business_UnitCaption">
+          <DataField>Employees_In_Business_UnitCaption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

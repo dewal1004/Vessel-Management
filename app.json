@@ -20,5 +20,6 @@
       "to": 59999
     }
   ],  
-  "runtime": "7.0"
+  "runtime": "7.0",
+  "target": "OnPrem"
 }

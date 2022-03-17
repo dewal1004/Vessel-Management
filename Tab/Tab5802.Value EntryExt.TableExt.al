@@ -34,23 +34,23 @@ tableextension 50317 tableextension50317 extends "Value Entry"
     }
     keys
     {
-        key(ASLKey1; "Location Code", "Inventory Posting Group", "Posting Date", "Source Code")
+        key(ASLKeyI1; "Location Code", "Inventory Posting Group", "Posting Date", "Source Code")
         {
             SumIndexFields = "Valued Quantity";
         }
-        key(ASLKey2; "Inventory Posting Group", "Item No.", "Posting Date", "Location Code", "External Document No.")
+        key(ASLKeyG2; "Inventory Posting Group", "Item No.", "Posting Date", "Location Code", "External Document No.")
         {
         }
-        key(ASLKey3; "Document No.", "Gen. Prod. Posting Group")
+        key(ASLKeyD3; "Document No.", "Gen. Prod. Posting Group")
         {
         }
-        key(ASLKey4; "Item Ledger Entry Type", "Location Code", "External Document No.", "Gen. Prod. Posting Group", "Item No.", "Posting Date")
+        key(ASLKeyC4; "Item Ledger Entry Type", "Location Code", "External Document No.", "Gen. Prod. Posting Group", "Item No.", "Posting Date")
         {
         }
-        key(ASLKey5; "Reason Code", "External Document No.", "Gen. Prod. Posting Group", "Posting Date", "Item Ledger Entry Type")
+        key(ASLKeyB5; "Reason Code", "External Document No.", "Gen. Prod. Posting Group", "Posting Date", "Item Ledger Entry Type")
         {
         }
-        key(ASLKey6; "External Document No.")
+        key(ASLKeyA6; "External Document No.")
         {
         }
     }

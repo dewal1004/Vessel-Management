@@ -7,6 +7,7 @@ tableextension 50201 tableextension50201 extends Currency
         }
         field(50202; Text; Text[30])
         {
+            //
         }
         field(50203; CurrUnit; Text[30])
         {

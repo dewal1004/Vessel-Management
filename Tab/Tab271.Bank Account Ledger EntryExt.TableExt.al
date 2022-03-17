@@ -9,7 +9,7 @@ tableextension 50260 tableextension50260 extends "Bank Account Ledger Entry"
     }
     keys
     {
-        key(ASLKey1; "Bank Account No.", "Posting Date", Positive)
+        key(ASLKeyG1; "Bank Account No.", "Posting Date", Positive)
         {
             SumIndexFields = Amount, "Amount (LCY)", "Debit Amount", "Credit Amount", "Debit Amount (LCY)", "Credit Amount (LCY)";
         }

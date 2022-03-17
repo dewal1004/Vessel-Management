@@ -228,6 +228,9 @@ table 50018 Applicants
         {
         //    TableRelation = Table50055.Field2;
         }
+        field(53014;FullName;Text[100])
+        {            
+        }
     }
 
     keys

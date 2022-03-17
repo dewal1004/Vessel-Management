@@ -42,14 +42,14 @@ tableextension 50213 tableextension50213 extends "Item Ledger Entry"
     }
     keys
     {
-        key(ASLKey1; "Document No.", "Posting Date", "Entry Type")
+        key(ASLKeyB1; "Document No.", "Posting Date", "Entry Type")
         {
             SumIndexFields = Quantity;
         }
-        key(ASLKey2; "Entry Type", Nonstock, "Item No.", "Posting Date", "Location Code")
+        key(ASLKeyA2; "Entry Type", Nonstock, "Item No.", "Posting Date", "Location Code")
         {
         }
-        key(ASLKey3; "Entry Type", "Item No.", "Posting Date", "Location Code")
+        key(ASLKeyA3; "Entry Type", "Item No.", "Posting Date", "Location Code")
         {
         }
         key(ASLKey4; "Item No.", "Location Code", "Posting Date", "Entry Type")

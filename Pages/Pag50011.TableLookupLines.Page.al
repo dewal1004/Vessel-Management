@@ -1,6 +1,6 @@
 page 50011 "Table Lookup Lines."
 {
-    PageType = List;
+    PageType = ListPart;
     SaveValues = true;
     SourceTable = "Payroll-Lookup Lines.";
     SourceTableView = SORTING (TableId, "Lower Amount", "Lower Code");

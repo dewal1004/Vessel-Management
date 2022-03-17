@@ -10,8 +10,10 @@ https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/upgrade/
     # Affected Temporary tables 49, 1670, Move data from this table to other table, 
     # refactor the codes that affects this table.
 ##4: Create empty System, Base, and customization extensions
+
 ##5: Create table migration extension
 ##5A:Create the first version
+# **** Load/Start the Dynamics NAV Development Shell for version 14.
 ## 5.3.1 Make target path if not existing:  C:\export2al\bc14tablesonly
 mkdir C:\export2al\bc14tablesonly
 # 5.3.2 Export tables e.g. 
@@ -37,19 +39,23 @@ txt2al --source=C:\export2al\bc14tablesonly\2 --target=C:\export2al\bc14tableson
 
 ##5.6: Create an APP project for Table Migration Extesion
 ##5.9 copy the version 19 system symbols extension (System.app file) to the .alpackage folder
+# 5.9a By default, the folder path is C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\180\AL Development Environment. This package contains the symbols for all the system tables and codeunits.
 ##5.11 Create apps from the converted AL
 
 # ****  Create the second version (of Table3 Migration Extension)
 ##B.1: In Visual Studio Code, create a new file called migration.json file and add it to the project's root folder.
 ##B.2: Add the migration rule
+# B.3. Delete the AL table object files except for the following tables: 7330,265,338,1754,1670
 ##B.4: Increase the version in the app.json file.
 
 # DATA UPGRADE
-##6: Prepare databases, make a copy of the database and restore it as DBName14to18
+##6: Prepare databases, make a copy of the database and restore it as DBNameV18fromV14
 # 6.3 Start Business Central Administration Shell for version 14 as an administrator.
+# Mount the database on BC140 Server
 # Uninstall all extensions
 # Get-NAVAppInfo -ServerInstance <server instance name> -Tenant <tenant ID>| % { Uninstall-NAVApp -ServerInstance <server instance name> -Tenant <tenant ID> -Name $_.Name -Version $_.Version -Force}
 
+import-Module "C:\Program Files\Microsoft Dynamics 365 Business Central\140\Service\navAdminTool.ps1"
 $SrvrInst = 'BC140'
 Get-NAVAppInfo -ServerInstance $SrvrInst | % { Uninstall-NAVApp -ServerInstance $SrvrInst -Name $_.Name -Version $_.Version -Force}
 Get-NAVAppInfo -ServerInstance $SrvrInst | % { Unpublish-NAVApp -ServerInstance $SrvrInst -Name $_.Name -Version $_.Version }
